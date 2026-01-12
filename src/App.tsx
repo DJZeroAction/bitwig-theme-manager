@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useBitwigInstallations } from "./hooks/useBitwig";
+import type { BitwigInstallation } from "./api/types";
 
 type View = "browse" | "editor" | "patch" | "settings";
 
@@ -158,27 +160,80 @@ function EditorView() {
 }
 
 function PatchView() {
-  const installations = [
-    { path: "/opt/bitwig-studio/5.2", version: "5.2", patched: true },
-    { path: "/opt/bitwig-studio/5.1", version: "5.1", patched: false },
-  ];
+  const { installations, loading, error, addManualPath, patchInstallation, restoreInstallation, refresh } = useBitwigInstallations();
+  const [manualPath, setManualPath] = useState("");
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+
+  const handlePatch = async (installation: BitwigInstallation) => {
+    setActionLoading(installation.jar_path);
+    await patchInstallation(installation.jar_path);
+    setActionLoading(null);
+  };
+
+  const handleRestore = async (installation: BitwigInstallation) => {
+    setActionLoading(installation.jar_path);
+    await restoreInstallation(installation.jar_path);
+    setActionLoading(null);
+  };
+
+  const handleAddManual = async () => {
+    if (!manualPath) return;
+    const success = await addManualPath(manualPath);
+    if (success) {
+      setManualPath("");
+    }
+  };
 
   return (
     <div className="space-y-4">
       <div className="bg-gray-800 rounded-lg p-4">
-        <h3 className="font-semibold mb-4">Detected Bitwig Installations</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold">Detected Bitwig Installations</h3>
+          <button
+            onClick={refresh}
+            className="px-3 py-1 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg"
+          >
+            Refresh
+          </button>
+        </div>
+
+        {loading && (
+          <div className="text-gray-400 text-center py-8">Scanning for Bitwig installations...</div>
+        )}
+
+        {error && (
+          <div className="text-red-400 text-center py-4">{error}</div>
+        )}
+
+        {!loading && installations.length === 0 && (
+          <div className="text-gray-400 text-center py-8">
+            No Bitwig installations detected. Add one manually below.
+          </div>
+        )}
+
         <div className="space-y-3">
           {installations.map((install) => (
-            <div key={install.path} className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg">
+            <div key={install.jar_path} className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg">
               <div className="flex-1">
                 <div className="font-medium">Bitwig Studio {install.version}</div>
-                <div className="text-sm text-gray-400 font-mono">{install.path}</div>
+                <div className="text-sm text-gray-400 font-mono truncate">{install.path}</div>
               </div>
-              <div className={`px-3 py-1 rounded-full text-sm ${install.patched ? "bg-green-600" : "bg-gray-600"}`}>
-                {install.patched ? "Patched" : "Not Patched"}
+              <div className={`px-3 py-1 rounded-full text-sm ${install.is_patched ? "bg-green-600" : "bg-gray-600"}`}>
+                {install.is_patched ? "Patched" : "Not Patched"}
               </div>
-              <button className={`px-4 py-2 rounded-lg ${install.patched ? "bg-red-600 hover:bg-red-700" : "bg-purple-600 hover:bg-purple-700"}`}>
-                {install.patched ? "Restore" : "Patch"}
+              <button
+                onClick={() => install.is_patched ? handleRestore(install) : handlePatch(install)}
+                disabled={actionLoading === install.jar_path}
+                className={`px-4 py-2 rounded-lg disabled:opacity-50 ${
+                  install.is_patched
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-purple-600 hover:bg-purple-700"
+                }`}
+              >
+                {actionLoading === install.jar_path
+                  ? "Processing..."
+                  : install.is_patched ? "Restore" : "Patch"
+                }
               </button>
             </div>
           ))}
@@ -191,10 +246,17 @@ function PatchView() {
         <div className="flex gap-2">
           <input
             type="text"
+            value={manualPath}
+            onChange={(e) => setManualPath(e.target.value)}
             placeholder="/path/to/bitwig-studio"
             className="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500"
           />
-          <button className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg">Add</button>
+          <button
+            onClick={handleAddManual}
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg"
+          >
+            Add
+          </button>
         </div>
       </div>
     </div>
