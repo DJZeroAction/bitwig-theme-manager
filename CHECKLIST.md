@@ -4,29 +4,29 @@
 - [x] Study reference implementations
 - [x] Document architecture decisions (DESIGN.md)
 - [x] Create progress checklist (CHECKLIST.md)
-- [ ] Initialize Tauri + React project
-- [ ] Configure TypeScript
-- [ ] Set up Tailwind CSS
+- [x] Initialize Tauri + React project
+- [x] Configure TypeScript
+- [x] Set up Tailwind CSS
 - [ ] Configure ESLint & Prettier
-- [ ] Set up GitHub Actions CI
-- [ ] Create minimal UI spike (window with basic layout)
+- [x] Set up GitHub Actions CI
+- [x] Create minimal UI spike (window with basic layout)
 
 ## Phase 1: Bitwig Detection & Theme Files
-- [ ] Implement OS-specific path detection (Windows/macOS/Linux)
-- [ ] Auto-detect Bitwig installations
-- [ ] Support multiple Bitwig versions
-- [ ] Manual path override in settings
-- [ ] Read/write .bte theme files
-- [ ] Parse theme color definitions
-- [ ] Create theme file watcher for live updates
+- [x] Implement OS-specific path detection (Windows/macOS/Linux)
+- [x] Auto-detect Bitwig installations
+- [x] Support multiple Bitwig versions
+- [x] Manual path override in settings
+- [x] Read/write .bte theme files
+- [x] Parse theme color definitions
+- [x] Create theme file watcher for live updates
 
 ## Phase 2: JAR Patching
 - [ ] Analyze original bitwig-theme-editor patching logic
-- [ ] Implement patch verification (detect if already patched)
-- [ ] Create backup before patching
-- [ ] Implement JAR patching in Rust
-- [ ] Implement restore from backup
-- [ ] Add SHA256 checksum verification
+- [x] Implement patch verification (detect if already patched)
+- [x] Create backup before patching
+- [ ] Implement JAR patching in Rust (placeholder created)
+- [x] Implement restore from backup
+- [x] Add SHA256 checksum verification
 - [ ] Test patching on Bitwig 5.x
 
 ## Phase 3: Repository Integration
@@ -77,4 +77,4 @@
 - [ ] Documentation included
 
 ---
-*Last updated: Phase 0 in progress*
+*Last updated: Phase 2 in progress*
