@@ -1,0 +1,931 @@
+Sternenherz — 10/16/24, 8:11 PM
+Bitwig meets Cubase Theme - aka Cubasewig 😄
+Inspired by Cubase 13s Interface. Download it here: https://github.com/Sternenherz/Themes
+This Theme was made by color-picking most of the Cubase 13 interface Elements, then editing Bitwigs theme via berikais awesome Editor.
+
+I made two versions of this theme. The main version folder is called "Cubase 13", the alternative version "Cubase 13 greyblue".
+In the alternative Version, the PLAY Transport Button, Mute Buttons, Track-Volume-Faders, and other Button Elements are colored in grey-blue for better visible distinction between elements.
+If you want them in a more neutral white, choose the "Cubase 13" Theme. Above mentioned elements are the only differences between the themes.
+
+Favorite Darkmode Settings for me: Bitwig -> User Interface -> Contrast -> Midtones: 35, Black Level 35, Grid Lines 80.
+
+If you want the default Cubase Color Palette for coloring Clips, you can load "Sternenherz Cubase Colors.png" [which you find in the "Cubase 13 Color Palette" folder on Github] inside of Bitwig.
+
+I also created a new Bitwig Desktop Icon just for fun, representing the new artstyle, feel free to download that from the "Cubase 13 Desktop Icon for Bitwig" Folder.
+
+IMPORTANT NOTE ABOUT THE PIANO ROLL NOTE HIGHLIGHTING: Since Cubase does not have any kind of visual background-light-highlighting, when selecting notes, and no distracting vertical lines left and right from selected notes, i deleted this visual mess out of the Bitwig Theme. If you want it back, you have to adjust the Theme yourself, sorry! So go to https://bitwig.berikai.dev/, load my theme, click on 'Arranger', type "inactive" into the search bar, and look at the parameter to change called: "Time Selection Inactive Fill" - simply make it less transparent to make it visible again. The vertical lines should be "Time Selection Inactive Stroke". If you're new to theming, visit ⁠theming !
+
+Have fun! 🙂
+Image
+Image
+Image
+Image
+Image
+Image
+xbitz — 10/19/24, 7:19 AM
+reimagined dark/elegant variant of the original one, 50/50/ 30?, with the still necessary compromise between the piano roll and the arranger, these are the default meters, in case if anyone misses them
+
+    "Meter Hitech": "#23d1d4",
+    "Meter Clipping": "#ff0000",
+    "Meter Gain Reduction": "#5386b6",
+    "Meter Red": "#ff8b00",
+    "Meter Hitech Background": "#23343e",
+    "Meter Yellow": "#ffde42",
+    "Meter Muted": "#979797",
+    "Meter Normal": "#8ccb2a",
+
+scrollbars are the ... try
+"Medium Light Text": "#a0a0a0" if you find it obtrusive, price is less readability (it gonna change zillions other things too)
+Image
+Image
+{
+  "window": {
+    "Modern Scrollbar Background (active)": "#262626",
+    "Active Toggle Icon (Playing)": "#e0e0e0",
+    "Close button mouse over background": "#303030",
+    "Emboss Shadow": "#0000003c",
+Expand
+blackwig.json
+11 KB
+dsnvs — 10/19/24, 10:20 AM
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#ffffff"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+dsnvs.json
+11 KB
+xbitz — 10/20/24, 2:42 PM
+forked one, so window hotpxl, me arranger 🙂  ...50/50/60 (palette: Studio One)
+Image
+Image
+Image
+{
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+    "Abstract Button Selected Background": "#404040",
+    "Abstract Button Stroke": "#2a2a2a",
+    "Abstract Button Unselected Background": "#4a4a4a",
+Expand
+message.txt
+11 KB
+xbitz — 10/21/24, 6:53 AM
+another by night and eye friendly pallete to the prev one
+Image
+Image
+Dark Headyy
+
+ — 10/29/24, 7:48 PM
+aqui tienen mi tema de color amarillo. acabdito de sacar del horno xd
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#ffffff"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+THEYELLOWSTUDIOTHEME.json
+11 KB
+dsnvs — 10/30/24, 9:40 AM
+Macchiato by @Rashomakuin : https://github.com/lenninst/Macchiato_BitwigTheme
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#494d64",
+Expand
+macchiato.json
+11 KB
+GitHub
+GitHub - lenninst/Macchiato_BitwigTheme
+Contribute to lenninst/Macchiato_BitwigTheme development by creating an account on GitHub.
+GitHub - lenninst/Macchiato_BitwigTheme
+xbitz — 10/30/24, 8:15 PM
+was curious about how much the design could be flattened and whether the devices could be made as sleek as in Cubase, to tasty black ones, yummie 😋, It definitely has a pretty interesting vibe with the flat arranger together the real hardware like devices  (the base was the dark one, second from the top)
+Image
+{
+  "window": {
+    "Abstract Button Pressed Background": "#2a2a2a",
+    "Abstract Button Selected Background": "#2a2a2a",
+    "Abstract Button Stroke": "#3a3a3a",
+    "Abstract Button Unselected Background": "#101010",
+Expand
+message.txt
+11 KB
+you know to these ones
+Image
+Dark Headyy
+
+ — 10/31/24, 5:27 AM
+whats is the operative system?
+IRVNG — 11/10/24, 11:13 AM
+Looks like Linux to me
+b
+
+ — 11/12/24, 1:50 AM
+dark purple theme: https://github.com/Merlin04/bitwig-theme-dark-purple
+Image
+hotpxl — 11/26/24, 1:26 AM
+Just re-posting my theme in this thread, my "Dark Red" theme
+Most everything follows a muted red/orange/yellow color scheme
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#ffffff"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+dark_red.json
+11 KB
+FuncK — 11/27/24, 5:03 AM
+Halloween based theme. The Grid lines are white/high contrast and you'll probably want to jack the Grid Lines parameter way down in settings to get them to be more subtle.
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#00ff8f"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+Halloween Theme.json
+11 KB
+chimi — 11/29/24, 2:16 PM
+Rustwig: a not so dark theme (but not bright either?)
+
+Ive included an alternative desktop icon(.ico file is in the 7z archive.)
+2 additional versions of this theme are also included there.
+Ive used this theme quite a bit , if you notice anything that could be improved please ping me in ⁠theming and let me know!!
+
+Optional:
+Use the resources in the 7z archive folder to change the icons that appear inside bitwigs browser, the filepath for that is:
+WIN:
+C:\Program Files\Bitwig Studio\resources
+
+MAC:
+/Applications/Bitwig\ Studio.app/Contents/Resources/images/library/XXX.webp
+/Applications/Bitwig\ Studio.app/Contents/Resources/icons/browser/XXX.svg
+
+Hope you guys like the theme 🐈
+Image
+Image
+Image
+Image
+Attachment file type: archive
+Rustwig Resources.7z
+374.79 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+RUSTWIG (Pastelle).json
+11 KB
+Bitwetlon Stlive Twelvix
+
+ — 11/30/24, 4:26 PM
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+Darkfault.json
+11 KB
+X3no — 12/1/24, 5:09 AM
+Awesome. Digging those palettes too. Thanks for sharing!
+kalifrn — 12/2/24, 7:24 PM
+how do you install this one?
+Rashomakuin
+
+ — 12/3/24, 5:14 PM
+Well,🤔 I think it can be used now, let me know what you think. 😊  https://github.com/lenninst/RosePineMoon_Bitwig.git
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#e0def4"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#393552",
+Expand
+rosePineMoon.json
+11 KB
+GitHub
+GitHub - lenninst/RosePineMoon_Bitwig
+Contribute to lenninst/RosePineMoon_Bitwig development by creating an account on GitHub.
+GitHub - lenninst/RosePineMoon_Bitwig
+chimi — 12/9/24, 11:16 AM
+Greenwig:Its green (also w colourful logo you can use as a desktop icon🤷 )
+
+
+Optional:
+Use the resources in the 7z archive folder to change the icons that appear inside the bitwig browsers
+
+WIN:
+C:\Program Files\Bitwig Studio\resources
+
+MAC:
+/Applications/Bitwig\ Studio.app/Contents/Resources/images/library/XXX.webp
+/Applications/Bitwig\ Studio.app/Contents/Resources/icons/browser/XXX.svg
+Image
+Image
+Image
+Attachment file type: unknown
+FRUITYWIG.ico
+179.91 KB
+Attachment file type: archive
+resources.zip
+531.96 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+GREENWIG - CHIMI.json
+11 KB
+xbitz — 12/16/24, 5:01 PM
+Enter the M..Grid 30/60/25 ... just playing with C2077 and missed a musical "hacking" tool 😄
+Image
+{
+  "arranger": {
+    "Add Modulation Button Color": "#00ff00",
+    "Audio connection in modular environment": "#b14524",
+    "Audio64 connection in modular environment": "#00ff00",
+    "Automation button glow color": "#93ff9280",
+Expand
+message.txt
+11 KB
+Image
+Image
+Pirapsy — 12/31/24, 8:49 PM
+Hello people at list ive tried hope you like it 🙂
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+Grey Cloud.json
+11 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+Purpla Shape.json
+11 KB
+rbd — 1/4/25, 9:50 PM
+UAD inspired theme
+Image
+Image
+Bitwetlon Stlive Twelvix
+
+ — 1/6/25, 11:49 AM
+So since I finally managed to make a bunch of music with it, I deleted my previous messages and uploaded my Darkfault theme to Github, reposting here the version with the latest edits.
+
+This is my take of what an official Dark theme could be.
+
+Link: https://github.com/dariolupo/darkfault_bitwig/blob/main/README.md
+Image
+myst
+
+ — 1/7/25, 9:42 PM
+Hello everyone, I'm sharing my Bitwig theme with you all. It's called 'Oxide' and features a dark brown color palette with accents of deep red. I find the color combination to be very soothing, at least for my eyes, and I hope you do too. 🙂
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#FB516ECE"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#705d5d",
+Expand
+Oxide.json
+11 KB
+dsnvs — 1/27/25, 5:44 PM
+Here is the current flat icon set I teased a while back in ⁠theming, follow the link below to download it:
+https://gitlab.com/yioannides/bitwig-flat-icons
+Image
+chimi — 2/12/25, 8:23 AM
+New theme: Purplwig+ (idk what to call it)
+
+Main colour is purple(#D58EFF) which replaces the Orange colour that you all seem to really love.
+There is also a lot of lime green used, mainly for the modulation envelopes and stuff.
+Everything else is close to the default theme , with very minor adjustments to make it appear slightly more uniform.
+Hope you enjoy it.  If you end up using it and have any feedback or improvements please feel free to DM me : )
+
+
+If you would like to use the icons that I have for the native devices you can obtain them from my previous post:
+⁠your-themes⁠
+
+WIN:
+C:\Program Files\Bitwig Studio\resources
+
+MAC:
+/Applications/Bitwig\ Studio.app/Contents/Resources/images/library/XXX.webp
+/Applications/Bitwig\ Studio.app/Contents/Resources/icons/browser/XXX.svg
+Image
+Image
+chimi — 2/12/25, 8:34 AM
+Image
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+    "Abstract Button Selected Background": "#404040",
+    "Abstract Button Stroke": "#2a2a2a",
+Expand
+BitwigTheme (Sizzurp Edition).json
+11 KB
+JadeCicada — 2/19/25, 11:21 PM
+how did you get the devices to be all the same color, and the header that red color when the device is selected?
+rbd — 2/20/25, 6:52 PM
+Hello, everyone, as promised I am sending the final version of my UAD-inspired theme with the latest corrections, fully compatible with the latest release of Bitwig 5.3.1. The original UAD Luna color palette is also attached:)
+I am sending the final version with the last corrections, which is compatible with the latest version of Bitwig 5.3.1.
+Image
+Image
+original color palette
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+    "Abstract Button Selected Background": "#474747",
+    "Abstract Button Stroke": "#323232",
+Expand
+UAD FINAL.json
+11 KB
+C4p/\c4 — 2/20/25, 9:13 PM
+This is the only custom theme Ive been able to use. Very nice one! Thanks bro!
+rbd — 2/21/25, 7:23 AM
+thank you
+Bitwetlon Stlive Twelvix
+
+ — 2/23/25, 9:26 PM
+Inspired by Studio One dark mode... but then kinda went in another direction. Best settings imho are very dark ones (25/25 or less).
+As a bonus I also made a Minimeters skin matching the meters of the theme (view top of the screenshot).
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+dark_one.json
+11 KB
+
+color: 90, 180, 255
+selection: 97, 190, 255
+text: 255,255,255
+accent: 113, 112, 124
+bg: 19,19,21
+Expand
+Dark One.txt
+1 KB
+Extra Edge — 2/27/25, 1:09 AM
+I'm very sorry, but someone just had to do this.
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#1c6c3d"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#c999b9",
+Expand
+Desolate.json
+11 KB
+Helia Vox — 2/27/25, 1:23 AM
+MY EYES
+xbitz — 3/1/25, 1:35 PM
+Tweaked the red one, tried to rebalance usability (bit more contrast, non-black arranger) with a good look. (50/50/30-35?), just as beautiful as an AL, but it says 'get to work' – at least to me 😄 (just replace ffffff > dedede everywhere if it hurts your eyes)
+Image
+Image
+{
+  "window": {
+    "Abstract Button Pressed Background": "#282828",
+    "Abstract Button Selected Background": "#3a3a3a",
+    "Abstract Button Stroke": "#212121",
+    "Abstract Button Unselected Background": "#454545",
+Expand
+redblack_for_work.json
+11 KB
+Derpcat
+
+ — 3/7/25, 1:17 PM
+made a bitwig color palette generator for those who love colors 🗣️
+https://github.com/DerpcatMusic/bitwigcolorpalletegen
+GitHub
+GitHub - DerpcatMusic/bitwigcolorpalletegen: Bitwig Color Pallete G...
+Bitwig Color Pallete Generator. Contribute to DerpcatMusic/bitwigcolorpalletegen development by creating an account on GitHub.
+GitHub - DerpcatMusic/bitwigcolorpalletegen: Bitwig Color Pallete G...
+Derpcat
+
+ — 3/8/25, 3:16 PM
+https://github.com/DerpcatMusic/Derpcat-Bitwig-Theme/tree/main
+https://i.imgur.com/gL6y1Lg.png
+GitHub
+GitHub - DerpcatMusic/Derpcat-Bitwig-Theme: my aweseom Bitwig Theme
+my aweseom Bitwig Theme. Contribute to DerpcatMusic/Derpcat-Bitwig-Theme development by creating an account on GitHub.
+GitHub - DerpcatMusic/Derpcat-Bitwig-Theme: my aweseom Bitwig Theme
+Image
+Derpcat
+
+ — 3/8/25, 4:37 PM
+updated the bitwig color theme generator, the generated palettes go directly to bitwig folder, and they look quite nice
+Image
+Image
+updated the bitwig color theme generator
+18 Messages ›
+There are no recent messages in this thread.
+chimi.bwproject.save — 3/12/25, 6:20 AM
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+Chimi Greenish .json
+11 KB
+x.iso
+ started a thread: updated the bitwig color theme generator. See all threads. — 3/20/25, 5:15 PM
+ArcAdeExp
+
+ — 3/26/25, 9:57 PM
+Attachment file type: archive
+serum2v3-bitwig-theme.zip
+12.11 KB
+ArcAdeExp
+
+ — 3/26/25, 11:00 PM
+Image
+Igro — 3/31/25, 4:26 PM
+It is very nice theme, but what's that with the mute buttons (and some others?)
+Image
+xbitz — 4/1/25, 9:25 AM
+Serum and My Awesome — remixed and reworked... For a more serious look, with a bit more of a Cubase-S1 like vibe (50/50/50)
+Image
+Image
+{
+
+  "window": {
+    "Abstract Button Pressed Background": "#202026",
+    "Abstract Button Selected Background": "#2d2d33",
+    "Abstract Button Stroke": "#1a1a20",
+Expand
+message.txt
+11 KB
+Ibsen Producer — 4/8/25, 7:43 PM
+LogWig Theme for Bitwig.
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+LogWig_theme.json
+11 KB
+xbitz — 4/10/25, 10:04 AM
+Addendum to my S1 theme above (xbitz — 2025. 04. 01. 9:25) the re-inverted  piano roll rows fix, with all the affected Timeline keys (basically all of them) , the black rows are the "Timeline Background Pattern": "#00000014" one if need further tweaking ... preview image is there (Grid lines 50>30 looks better for me) https://www.reddit.com/r/Bitwig/comments/1jsduk6/comment/mmcj27o/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
+"Timeline Background Pattern": "#00000014",
+"Timeline Cue Marker": "#535353",
+"Timeline Header Background Pattern": "#ffffff0a",
+"Timeline Header Cue Marker": "#545454",
+"Timeline Header Primary Grid": "#828282",
+"Timeline Header Secondary Grid": "#565656",
+"Timeline Header Tooltip Background": "#484848c8",
+"Timeline Header Tooltip Text": "#aaaaaa",
+"Timeline Primary Grid": "#00000064",
+"Timeline Secondary Grid": "#00000014",
+"Timeline Tooltip Background": "#998e8ec8",
+"Timeline Tooltip Text": "#2a2a2a"
+Reddit
+Free_Swimmer_2212's comment on "An S1 inspired theme"
+Explore this conversation and more from the Bitwig community
+Bitwig community on Reddit: Free_Swimmer_2212 commented "needs an alternative timeline :) ... end part of the arranger section, all the Timeline keys in the JSON should be replaced with > "Timeline Background Pattern": "#00000014", "Timeline Cue Marker": "#535353", "Timeline Header Background Pattern": "#ffffff0a", "Timeline Header Cue Marker": "#545454", "Timeline Header Primary Grid": "#828282", "Timeline Header Secondary Grid": "#565656", "Timeline Header Tooltip Background": "#484848c8", "Timeline Header Tooltip Text": "#aaaaaa", "Timeline Primary Grid": "#00000064", "Timeline Secondary Grid": "#00000014", "Timeline Tooltip Background": "#998e8ec8", "Timeline Tooltip Text": "#2a2a2a" the black keys itself is the Timeline Background Pattern if you need further tweaking, #00000014 last two digits are the alpha channel the opacity it should be raised if needed "
+chezburgerleaf — 4/13/25, 3:35 PM
+Hi, first theme :)
+This is a Sytrus inspired theme. The idea came from a Sytrus kHs plugin theme on the kHs discord that I use. - Image coming in 10 mins
+{
+  "advanced": {
+    "Timeline Playhead": "#ffb13a"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#3b3b3b",
+Expand
+sytruswig.json
+11 KB
+chezburgerleaf — 4/13/25, 3:46 PM
+Image
+Hiramatsu — 4/14/25, 7:34 PM
+hello, could someone please explain to me how to put the bitwig themes on mac
+hotpxl — 4/15/25, 6:54 PM
+Hey all, Just wanted to share the updated version of my Dark Red theme, colored some previously unaltered parameters and added some more contrast and visibility to a majority of the windows
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#f96a6a"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+darkred_2025.json
+11 KB
+hotpxl — 4/15/25, 7:13 PM
+heres a "dark blue" varient. color pallete focuses on purples, blues, teal and white
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#6acbf9"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+dark_blue.json
+11 KB
+Ibsen Producer — 4/15/25, 7:16 PM
+i will test both today bro 🙌
+hotpxl — 4/15/25, 8:00 PM
+There's a couple things I still want to color but I can't find the parameters for the life of me
+Ibsen Producer — 4/16/25, 8:19 PM
+Don't worried about that I tested the red one and worked nice ✌️
+Ibsen Producer — 4/22/25, 7:56 PM
+Frost Theme, I did my best to make a Light theme. https://github.com/ibsenproducer/Frost-bitwig-theme
+Image
+GitHub
+GitHub - ibsenproducer/Frost-bitwig-theme
+Contribute to ibsenproducer/Frost-bitwig-theme development by creating an account on GitHub.
+Contribute to ibsenproducer/Frost-bitwig-theme development by creating an account on GitHub.
+C4p/\c4 — 4/23/25, 7:40 AM
+Will try out immediately
+myst
+
+ — 5/2/25, 11:42 PM
+A retro-inspired blue Bitwig theme channels the nostalgic aesthetic of the unforgettable Amiga era. For me, it’s a personal favorite, infusing Bitwig with a uniquely distinctive style that stands out effortlessly..
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#ff6200"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#42a3b5",
+Expand
+Retronia.json
+11 KB
+chezburgerleaf — 5/5/25, 5:45 PM
+https://www.reddit.com/r/Bitwig/comments/1dci40f/comment/l8u9jlu/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+Reddit
+nClearMusic's comment on "Hi, I've created a Bitwig Theme Editor!"
+Explore this conversation and more from the Bitwig community
+Bitwig community on Reddit: nClearMusic commented "I'll explain how I got this running on macOS: First, I installed HomeBrew. This can be done in the terminal with the command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" Or by installing it through a pkg ( https://github.com/Homebrew/brew/releases/tag/4.3.5 ). Then, I installed JRE. For this, I ran this in Terminal: brew install openjdk Next, I created a symbolic link with command: sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk. After that, I added Java to the Path: echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc source ~/.zshrc Now, it can be launched. Since I have " bitwig-theme-editor-1.3.0.jar " and the themes on my desktop, I launched it like this: java -jar ~/Desktop/bitwig-theme-editor-1.3.0.jar /Applications/Bitwig\ Studio.app/Contents/Java/bitwig.jar apply ~/Desktop/themes/nctheme.json But first, I recommend saving the current theme: java -jar ~/Desktop/bitwig-theme-editor-1.3.0.jar /Applications/Bitwig\ Studio.app/Contents/Java/bitwig.jar export ~/Desktop/themes/backup-current.json P.S. I'm not a super expert in this, but in my case, it worked. P.P.S. If you hear the "SOS im cracked" melody, just restart Bitwig ;) Visual Editor in progress — https://nclear.pro/bitwig-theme-editor.mp4"
+Koldunya
+
+ — 5/9/25, 11:49 PM
+Unofficial Minimal Audio-based theme
+Image
+Unofficial Minimal Audio-based theme
+9 Messages ›
+There are no recent messages in this thread.
+Koldunya
+
+ — 5/10/25, 12:04 AM
+Attachment file type: archive
+MinimalAudioBitwigThemeAndPalette.zip
+4.53 KB
+chimi.bwproject.save
+ started a thread: Unofficial Minimal Audio-based theme. See all threads. — 5/10/25, 10:15 AM
+Ibsen Producer — 5/13/25, 11:00 PM
+Testing testing ✌️
+Image
+ArcAdeExp
+
+ — 5/29/25, 12:47 AM
+I really want a theme similar to the Abelton killihu Theme: https://killihu.vstskins.com/killihu-theme/
+killihu
+killihu
+killihu Theme
+dsnvs — 5/29/25, 10:47 AM
+This channel is for showcasing custom themes, discussions and troubleshooting are over at ⁠theming
+Cyoon — 6/1/25, 5:23 PM
+wouldbe nice to have an image import and generate a pallete from it
+Derpcat
+
+ — 6/1/25, 5:28 PM
+bitwig does that actually :)
+you can drag any image and itll turn into a pallete
+Cyoon — 6/1/25, 5:39 PM
+oh wow, didnt know
+Cyoon — 6/1/25, 5:53 PM
+looks great 😄
+Image
+Image
+Balaram💀🕉
+
+ — 6/6/25, 1:03 PM
+That would look great as a wallpaper for the arranger view as well
+Cyoon — 6/6/25, 2:47 PM
+Not sure I’d want that, I think in FL Studio it’s a bit too much tbh
+chimi.bwproject.save — 6/8/25, 9:08 AM
+This channel is for showcasing custom themes, discussion and troubleshooting are over at ⁠theming
+https://i.ibb.co/v4XBVQn8/image.png
+Image
+Image
+chimi.bwproject.save — 6/8/25, 9:22 AM
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+Overcast Theme(Not Quite Nightmode , Not quite daymode either).json
+11 KB
+Vogu — 7/9/25, 10:00 AM
+PSX inspired theme (50/50/50) fixed some minor issues.
+Image
+{
+  "window": {
+    "Abstract Button Pressed Background": "#4a4a4a",
+    "Abstract Button Selected Background": "#6e6e6e",
+    "Abstract Button Stroke": "#282828",
+    "Abstract Button Unselected Background": "#5e5e5e",
+Expand
+psx.json
+11 KB
+Vogu — 7/10/25, 2:20 PM
+Bitwig live theme - Closest i could get to Ableton theme.  Fixed minor issues with colours. (50/50/50)
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#4a4a4a",
+Expand
+bitwig_live.json
+11 KB
+chimi — 7/10/25, 8:13 PM
+Greenwig+ (idk what else to call it )
+(35/25/80)
+
+This one should be pretty balanced and functional  i spent quite some time on it and ive used it a lot myself too . If you would like the icons for the browser too you can grab them from:
+⁠your-themes⁠
+
+Hope you like it
+Image
+Image
+Image
+Image
+Image
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+    "Abstract Button Selected Background": "#403d43",
+    "Abstract Button Stroke": "#25252d",
+Expand
+Greenwig+ .json
+11 KB
+chimi — 7/12/25, 5:12 PM
+Made a darker variant(s) of the previous one I posted.
+Image
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+Dark Greenwig.json
+11 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+Darkest Greenwig.json
+11 KB
+PMHN — 8/30/25, 4:03 PM
+LightNordish Theme for Bitwig 6 Beta/Bitwig 5
+Image
+Image
+{
+  "window": {
+    "Abstract Button Pressed Background": "#d8dee9",
+    "Abstract Button Selected Background": "#e5e9f0",
+    "Abstract Button Stroke": "#eceff4",
+    "Abstract Button Unselected Background": "#eceff4",
+Expand
+light-nordish-bitwig5-v1.0.3.json
+11 KB
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#d8dee9",
+    "Abstract Button Selected Background": "#e5e9f0",
+    "Abstract Button Stroke": "#eceff4",
+Expand
+light-nordish-bitwig6-v0.0.5.json
+11 KB
+chimi — 9/13/25, 5:16 AM
+60/45/100
+https://i.postimg.cc/pL6spLtF/image.png
+https://i.postimg.cc/XqLZXqtS/image.png
+
+WONT WORK ON BW6 (probably)
+Theres a version with pink automation lanes but ive included one with the original colour too if u prefer that.
+Also included an orange one for the lunatics
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+GreenON-OriginalBluAutomation-IDK.json
+11 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+GreenON-PinkPurpAutomation2-IDK.json
+11 KB
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+OrangeON&Automation.json
+11 KB
+Image
+Image
+chimi — 9/13/25, 5:56 AM
+60/45/100
+
+Less colourful , more minimal theme.
+https://i.postimg.cc/PqRScrq4/image.png
+Image
+{
+  "advanced": {
+    "Timeline Playhead": "#000000"
+  },
+  "window": {
+    "Abstract Button Pressed Background": "#303030",
+Expand
+lo-ki.json
+11 KB
+Image
+xbitz — 9/28/25, 2:14 PM
+put here too, S1like BW6b3 30/50 first iteration
+Image
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#2B3A4E",
+    "Abstract Button Selected Background": "#3A4D67",
+    "Abstract Button Stroke": "#334158",
+Expand
+message.txt
+9 KB
+xbitz — 9/28/25, 4:15 PM
+^^^ AL 12 dark defaul variant (by mr. ChatGTP)
+Image
+Image
+{
+  "advanced": {},
+  "window": {
+    "Abstract Button Pressed Background": "#2C3440",
+    "Abstract Button Selected Background": "#3A4552",
+    "Abstract Button Stroke": "#404854",
+Expand
+message.txt
+9 KB
+xbitz — 10/3/25, 7:09 AM
+BlackWig BW6b4, this is in the new theme format (so there is no JSON anymore), MID/Black 50/50, but can be tweaked with the Black level nicely
+Image
+Image
+Image
+Image
+Abstract Button Pressed Background: #2A2D33
+Abstract Button Selected Background: #353A41
+Abstract Button Stroke: #20242A
+Abstract Button Unselected Background: #1A1E24
+Accent (default): #4F8D98
+Accent (hitech): #6BA9B3
+Expand
+message.txt
+7 KB
+xbitz — 10/15/25, 8:18 PM
+Blackfire, with the most important the Grid 😄
+https://github.com/csabacsaba/bw6themes/tree/main/bw6b4/blackfire
+Image
+GitHub
+bw6themes/bw6b4/blackfire at main · csabacsaba/bw6themes
+Contribute to csabacsaba/bw6themes development by creating an account on GitHub.
+bw6themes/bw6b4/blackfire at main · csabacsaba/bw6themes
+dsnvs — 10/24/25, 8:12 PM
+My day/night themes for Bitwig 6 beta
+INSTRUCTIONS: manually copy the contents of (themename).txt  directly onto theme.bte (the UI editor will not work)
+Image
+Image
+// dsnvs light
+// main
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #a9a9fe
+Expand
+dsnvs-light.txt
+10 KB
+// dsnvs dark
+// main
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #a9a9fe
+Expand
+dsnvs-dark.txt
+9 KB
+rbd — 11/3/25, 10:37 AM
+Hey everyone! My UAD-inspired theme has now been adapted/converted and is fully compatible with Bitwig v6 Beta 5.
+Image
+Image
+Image
+Attachment file type: unknown
+UAD CONVERTED.bte
+8.53 KB
+cafebabe
+
+ — 11/4/25, 2:32 PM
+i tried yours, i really like the screenshot but it doesnt seem to work in 6 beta 5 😔
+Daryl — 11/4/25, 3:51 PM
+Ahhh I thought it was just me doing it wrong haha, doesnt work me either
+TuningJJ — 11/7/25, 2:55 PM
+I have tweaked the Purple Wig theme from github and I  share it here. If you like it you can use it. (load it with the Bitwig Theme Editor v2 from Berikai on Github) Have fun! 👍
+Image
+Attachment file type: unknown
+Purple_wig_green_sliders_v14_FINAL.bte
+17.55 KB
+dsnvs — 11/16/25, 8:41 AM
+[v2] DSNVS LIGHT / DARK
+Image
+Image
+Attachment file type: unknown
+dsnvs-dark.bte
+8.79 KB
+Attachment file type: unknown
+dsnvs-light.bte
+8.84 KB
+Opale — 11/26/25, 5:10 PM
+dont pay attention to the random grid modules its mostly to show off colors. hope you enjoy this theme. might update it in the future if somethings dont work or arent usable properly let me know if you find anything !
+Image
+Image
+Image
+Attachment file type: unknown
+Infosphere.bte
+8.93 KB
+Tekm — 12/13/25, 1:56 AM
+@Moderators
+Nico
+
+ — 12/31/25, 1:26 PM
+I see lots of themes here, but I thought Bitwig didn't have support for theming? How does it work and is there documentation for creating and installing themes?
+dsnvs — 12/31/25, 1:46 PM
+We do theming discussions over at ⁠theming (this channel is for showcasing only), but here's how to get started: ⁠theming⁠
+Nico
+
+ — 12/31/25, 1:56 PM
+Thanks! (And sorry for misusing this channel)
+dsnvs — 1/10/26, 9:22 AM
+@Moderators ^

@@ -6,6 +6,12 @@ use thiserror::Error;
 const AWESOME_THEMES_URL: &str =
     "https://raw.githubusercontent.com/Berikai/awesome-bitwig-themes/main/README.md";
 
+const COMMUNITY_THEMES_BASE: &str =
+    "https://raw.githubusercontent.com/DJZeroAction/bitwig-theme-manager/main/community-themes";
+
+const COMMUNITY_THEMES_INDEX: &str =
+    "https://raw.githubusercontent.com/DJZeroAction/bitwig-theme-manager/main/community-themes/index.json";
+
 #[derive(Error, Debug)]
 pub enum FetchError {
     #[error("HTTP request failed: {0}")]
@@ -16,6 +22,9 @@ pub enum FetchError {
 
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
+
+    #[error("JSON parse error: {0}")]
+    Json(#[from] serde_json::Error),
 }
 
 /// A theme entry from the awesome-bitwig-themes repository
@@ -27,6 +36,28 @@ pub struct RepositoryTheme {
     pub repo_url: String,
     pub preview_url: Option<String>,
     pub description: Option<String>,
+    /// Direct download URL (for community themes that don't need repo scraping)
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub download_url: Option<String>,
+}
+
+/// A theme entry from the community-themes index.json
+#[derive(Debug, Clone, Deserialize)]
+struct CommunityThemeEntry {
+    id: String,
+    name: String,
+    author: String,
+    file: String,
+    preview: Option<String>,
+    description: Option<String>,
+}
+
+/// The community themes index file structure
+#[derive(Debug, Clone, Deserialize)]
+struct CommunityThemesIndex {
+    #[allow(dead_code)]
+    version: u32,
+    themes: Vec<CommunityThemeEntry>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -370,6 +401,7 @@ pub fn parse_readme(content: &str) -> Vec<RepositoryTheme> {
                     repo_url,
                     preview_url,
                     description: None,
+                    download_url: None,
                 });
             }
         } else if let Some(caps) = theme_re_simple.captures(&full_section) {
@@ -403,6 +435,7 @@ pub fn parse_readme(content: &str) -> Vec<RepositoryTheme> {
                     repo_url,
                     preview_url,
                     description: None,
+                    download_url: None,
                 });
             }
         }
@@ -459,6 +492,56 @@ pub async fn fetch_repository() -> Result<Vec<RepositoryTheme>, FetchError> {
         }
     }
 
+    Ok(themes)
+}
+
+/// Fetch community themes from this repo's community-themes directory
+pub async fn fetch_community_themes() -> Result<Vec<RepositoryTheme>, FetchError> {
+    let client = reqwest::Client::builder()
+        .user_agent("bitwig-theme-manager")
+        .build()?;
+
+    let response = client.get(COMMUNITY_THEMES_INDEX).send().await?;
+
+    if !response.status().is_success() {
+        // Community themes are optional, return empty if not found
+        return Ok(Vec::new());
+    }
+
+    let content = response.text().await?;
+    let index: CommunityThemesIndex = serde_json::from_str(&content)?;
+
+    let themes = index
+        .themes
+        .into_iter()
+        .map(|entry| {
+            let download_url = format!("{}/{}", COMMUNITY_THEMES_BASE, entry.file);
+            let preview_url = entry
+                .preview
+                .map(|p| format!("{}/{}", COMMUNITY_THEMES_BASE, p));
+
+            RepositoryTheme {
+                name: entry.name,
+                author: entry.author,
+                author_url: None,
+                repo_url: format!(
+                    "https://github.com/DJZeroAction/bitwig-theme-manager/tree/main/community-themes"
+                ),
+                preview_url,
+                description: entry.description,
+                download_url: Some(download_url),
+            }
+        })
+        .collect();
+
+    Ok(themes)
+}
+
+/// Fetch all themes from both awesome-bitwig-themes and community themes
+pub async fn fetch_all_themes() -> Result<Vec<RepositoryTheme>, FetchError> {
+    let mut themes = fetch_repository().await?;
+    let community_themes = fetch_community_themes().await.unwrap_or_default();
+    themes.extend(community_themes);
     Ok(themes)
 }
 

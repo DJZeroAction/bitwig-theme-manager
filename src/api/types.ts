@@ -39,4 +39,5 @@ export interface RepositoryTheme {
   repo_url: string;
   preview_url?: string;
   description?: string;
+  download_url?: string;
 }

@@ -72,7 +72,7 @@ export function useRepositoryThemes() {
 
   const downloadTheme = useCallback(async (theme: RepositoryTheme) => {
     try {
-      const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url);
+      const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url, theme.download_url);
       return content;
     } catch (e) {
       setError(getErrorMessage(e));
@@ -84,7 +84,7 @@ export function useRepositoryThemes() {
     async (theme: RepositoryTheme, bitwigVersion: string) => {
       try {
         // First download the theme content
-        const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url);
+        const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url, theme.download_url);
         if (!content) {
           throw new Error("Failed to download theme content");
         }

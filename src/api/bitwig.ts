@@ -96,8 +96,8 @@ export async function getCachedRepositoryThemes(): Promise<RepositoryTheme[]> {
   return invoke<RepositoryTheme[]>("get_cached_repository_themes");
 }
 
-export async function downloadRepositoryTheme(themeName: string, repoUrl: string): Promise<string> {
-  return invoke<string>("download_repository_theme", { themeName, repoUrl });
+export async function downloadRepositoryTheme(themeName: string, repoUrl: string, downloadUrl?: string): Promise<string> {
+  return invoke<string>("download_repository_theme", { themeName, repoUrl, downloadUrl });
 }
 
 export async function cacheThemePreview(themeName: string, previewUrl: string): Promise<string> {

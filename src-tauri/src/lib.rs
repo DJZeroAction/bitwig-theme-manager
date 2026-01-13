@@ -498,8 +498,8 @@ async fn fetch_repository_themes(force_refresh: bool) -> Result<Vec<RepositoryTh
         }
     }
 
-    // Fetch fresh data
-    let themes = fetcher::fetch_repository().await?;
+    // Fetch fresh data (from both awesome-bitwig-themes and community themes)
+    let themes = fetcher::fetch_all_themes().await?;
 
     // Update cache
     if let Err(e) = cache::save_cached_themes(&themes) {
@@ -518,23 +518,33 @@ fn get_cached_repository_themes() -> Result<Vec<RepositoryTheme>, AppError> {
     }
 }
 
-/// Download a theme from a repository
+/// Download a theme from a repository or direct URL
 #[tauri::command]
 async fn download_repository_theme(
     theme_name: String,
     repo_url: String,
+    download_url: Option<String>,
 ) -> Result<String, AppError> {
     // First check if already cached
     if let Ok(Some(content)) = cache::load_cached_theme_file(&theme_name) {
         return Ok(content);
     }
 
-    // Try to find and download the theme file
-    let theme_file = fetcher::find_theme_file(&repo_url)
-        .await?
-        .ok_or_else(|| AppError {
-            message: format!("No theme file found in repository: {}", repo_url),
-        })?;
+    // Use direct download URL if provided (community themes), otherwise scrape repo
+    let theme_file = if let Some(url) = download_url {
+        let kind = if url.to_ascii_lowercase().ends_with(".zip") {
+            fetcher::ThemeFileKind::Zip
+        } else {
+            fetcher::ThemeFileKind::Text
+        };
+        fetcher::ThemeFile { url, kind }
+    } else {
+        fetcher::find_theme_file(&repo_url)
+            .await?
+            .ok_or_else(|| AppError {
+                message: format!("No theme file found in repository: {}", repo_url),
+            })?
+    };
 
     let raw_bytes = fetcher::download_theme_bytes(&theme_file.url).await?;
 

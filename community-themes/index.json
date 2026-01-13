@@ -1,0 +1,464 @@
+{
+  "version": 1,
+  "themes": [
+    {
+      "id": "blackwig",
+      "name": "Blackwig",
+      "author": "xbitz",
+      "file": "themes/blackwig.json",
+      "preview": "previews/blackwig.png",
+      "description": "Reimagined dark/elegant variant"
+    },
+    {
+      "id": "dsnvs",
+      "name": "DSNVS",
+      "author": "dsnvs",
+      "file": "themes/dsnvs.json",
+      "preview": "previews/dsnvs.png"
+    },
+    {
+      "id": "dsnvs-dark",
+      "name": "DSNVS Dark",
+      "author": "dsnvs",
+      "file": "themes/dsnvs-dark.bte",
+      "preview": "previews/dsnvs-dark.png",
+      "description": "Day/night themes for Bitwig 6 beta"
+    },
+    {
+      "id": "dsnvs-dark-v2",
+      "name": "DSNVS Dark v2",
+      "author": "dsnvs",
+      "file": "themes/dsnvs-dark-v2.bte",
+      "preview": "previews/dsnvs-dark-v2.png",
+      "description": "DSNVS Dark v2 for Bitwig 6"
+    },
+    {
+      "id": "dsnvs-light",
+      "name": "DSNVS Light",
+      "author": "dsnvs",
+      "file": "themes/dsnvs-light.bte",
+      "preview": "previews/dsnvs-light.png",
+      "description": "Day/night themes for Bitwig 6 beta"
+    },
+    {
+      "id": "dsnvs-light-v2",
+      "name": "DSNVS Light v2",
+      "author": "dsnvs",
+      "file": "themes/dsnvs-light-v2.bte",
+      "preview": "previews/dsnvs-light-v2.png",
+      "description": "DSNVS Light v2 for Bitwig 6"
+    },
+    {
+      "id": "xbitz",
+      "name": "Studio One Fork",
+      "author": "xbitz",
+      "file": "themes/xbitz.json",
+      "preview": "previews/xbitz.png",
+      "description": "50/50/60 with Studio One palette"
+    },
+    {
+      "id": "xbitz2",
+      "name": "Night Friendly",
+      "author": "xbitz",
+      "file": "themes/xbitz2.json",
+      "preview": "previews/xbitz2.png",
+      "description": "Night and eye friendly palette"
+    },
+    {
+      "id": "yellow-studio",
+      "name": "Yellow Studio",
+      "author": "Dark Headyy",
+      "file": "themes/yellow-studio.json",
+      "preview": "previews/yellow-studio.png",
+      "description": "Yellow color theme"
+    },
+    {
+      "id": "dark-red",
+      "name": "Dark Red",
+      "author": "hotpxl",
+      "file": "themes/dark-red.json",
+      "preview": "previews/dark-red.png",
+      "description": "Muted red/orange/yellow color scheme"
+    },
+    {
+      "id": "darkred-2025",
+      "name": "Dark Red 2025",
+      "author": "hotpxl",
+      "file": "themes/darkred-2025.json",
+      "preview": "previews/darkred-2025.png",
+      "description": "Updated version with more contrast and visibility"
+    },
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "author": "FuncK",
+      "file": "themes/halloween.json",
+      "preview": "previews/halloween.png",
+      "description": "Halloween based theme with high contrast grid lines"
+    },
+    {
+      "id": "rustwig-pastelle",
+      "name": "Rustwig Pastelle",
+      "author": "chimi",
+      "file": "themes/rustwig-pastelle.json",
+      "preview": "previews/rustwig-pastelle.png",
+      "description": "Not so dark theme, but not bright either"
+    },
+    {
+      "id": "darkfault",
+      "name": "Darkfault",
+      "author": "dariolupo",
+      "file": "themes/darkfault.json",
+      "description": "What an official Dark theme could be"
+    },
+    {
+      "id": "greenwig-chimi",
+      "name": "Greenwig",
+      "author": "chimi",
+      "file": "themes/greenwig-chimi.json",
+      "preview": "previews/greenwig-chimi.png",
+      "description": "Its green!"
+    },
+    {
+      "id": "december-2024",
+      "name": "Enter the Matrix",
+      "author": "xbitz",
+      "file": "themes/december-2024.json",
+      "preview": "previews/december-2024.png",
+      "description": "Cyberpunk 2077 inspired - 30/60/25"
+    },
+    {
+      "id": "grey-cloud",
+      "name": "Grey Cloud",
+      "author": "Pirapsy",
+      "file": "themes/grey-cloud.json"
+    },
+    {
+      "id": "purpla-shape",
+      "name": "Purpla Shape",
+      "author": "Pirapsy",
+      "file": "themes/purpla-shape.json"
+    },
+    {
+      "id": "oxide",
+      "name": "Oxide",
+      "author": "myst",
+      "file": "themes/oxide.json",
+      "preview": "previews/oxide.png",
+      "description": "Dark brown palette with accents of deep red"
+    },
+    {
+      "id": "sizzurp",
+      "name": "Purplwig+ (Sizzurp Edition)",
+      "author": "chimi",
+      "file": "themes/sizzurp.json",
+      "preview": "previews/sizzurp.png",
+      "description": "Purple main color with lime green modulation"
+    },
+    {
+      "id": "uad-final",
+      "name": "UAD Inspired",
+      "author": "rbd",
+      "file": "themes/uad-final.json",
+      "preview": "previews/uad-final.png",
+      "description": "UAD Luna inspired theme for Bitwig 5.3.1"
+    },
+    {
+      "id": "uad-converted",
+      "name": "UAD Converted (BW6)",
+      "author": "rbd",
+      "file": "themes/uad-converted.bte",
+      "preview": "previews/uad-converted.png",
+      "description": "UAD inspired theme converted for Bitwig 6 Beta"
+    },
+    {
+      "id": "dark-one",
+      "name": "Dark One",
+      "author": "dariolupo",
+      "file": "themes/dark-one.json",
+      "preview": "previews/dark-one.png",
+      "description": "Inspired by Studio One dark mode - best at 25/25 or less"
+    },
+    {
+      "id": "desolate",
+      "name": "Desolate",
+      "author": "Extra Edge",
+      "file": "themes/desolate.json",
+      "preview": "previews/desolate.png",
+      "description": "Someone just had to do this"
+    },
+    {
+      "id": "redblack-work",
+      "name": "Red Black (Work)",
+      "author": "xbitz",
+      "file": "themes/redblack-work.json",
+      "preview": "previews/redblack-work.png",
+      "description": "Tweaked red theme for better usability - 50/50/30-35"
+    },
+    {
+      "id": "chimi-greenish",
+      "name": "Chimi Greenish",
+      "author": "chimi",
+      "file": "themes/chimi-greenish.json",
+      "preview": "previews/chimi-greenish.png"
+    },
+    {
+      "id": "serum2",
+      "name": "Serum 2",
+      "author": "ArcAdeExp",
+      "file": "themes/serum2.json",
+      "preview": "previews/serum2.png",
+      "description": "Serum inspired theme"
+    },
+    {
+      "id": "serum2-alt",
+      "name": "Serum 2 Alt",
+      "author": "ArcAdeExp",
+      "file": "themes/serum2-alt.json",
+      "preview": "previews/serum2.png",
+      "description": "Serum inspired theme - alternative"
+    },
+    {
+      "id": "serum2-v2",
+      "name": "Serum 2 v2",
+      "author": "ArcAdeExp",
+      "file": "themes/serum2-v2.json",
+      "preview": "previews/serum2.png",
+      "description": "Serum inspired theme v2"
+    },
+    {
+      "id": "serum2-v2-alt",
+      "name": "Serum 2 v2 Alt",
+      "author": "ArcAdeExp",
+      "file": "themes/serum2-v2-alt.json",
+      "preview": "previews/serum2.png",
+      "description": "Serum inspired theme v2 - alternative"
+    },
+    {
+      "id": "serum2-v3",
+      "name": "Serum 2 v3",
+      "author": "ArcAdeExp",
+      "file": "themes/serum2-v3.json",
+      "preview": "previews/serum2.png",
+      "description": "Serum inspired theme v3"
+    },
+    {
+      "id": "april-2025",
+      "name": "Serum S1 Remix",
+      "author": "xbitz",
+      "file": "themes/april-2025.json",
+      "preview": "previews/april-2025.png",
+      "description": "Serum and My Awesome remixed - Cubase-S1 vibe - 50/50/50"
+    },
+    {
+      "id": "logwig",
+      "name": "LogWig",
+      "author": "Ibsen Producer",
+      "file": "themes/logwig.json",
+      "preview": "previews/logwig.png",
+      "description": "LogWig Theme for Bitwig"
+    },
+    {
+      "id": "sytruswig",
+      "name": "Sytruswig",
+      "author": "chezburgerleaf",
+      "file": "themes/sytruswig.json",
+      "preview": "previews/sytruswig.png",
+      "description": "Sytrus inspired theme"
+    },
+    {
+      "id": "dark-blue",
+      "name": "Dark Blue",
+      "author": "hotpxl",
+      "file": "themes/dark-blue.json",
+      "preview": "previews/dark-blue.png",
+      "description": "Purples, blues, teal and white palette"
+    },
+    {
+      "id": "retronia",
+      "name": "Retronia",
+      "author": "myst",
+      "file": "themes/retronia.json",
+      "preview": "previews/retronia.png",
+      "description": "Retro-inspired Amiga era aesthetic"
+    },
+    {
+      "id": "minimal-audio",
+      "name": "Minimal Audio",
+      "author": "Koldunya",
+      "file": "themes/minimal-audio.json",
+      "preview": "previews/minimal-audio.png",
+      "description": "Unofficial Minimal Audio-based theme"
+    },
+    {
+      "id": "overcast",
+      "name": "Overcast",
+      "author": "chimi",
+      "file": "themes/overcast.json",
+      "preview": "previews/overcast.png",
+      "description": "Not quite nightmode, not quite daymode either"
+    },
+    {
+      "id": "psx",
+      "name": "PSX",
+      "author": "Vogu",
+      "file": "themes/psx.json",
+      "preview": "previews/psx.png",
+      "description": "PSX inspired theme - 50/50/50"
+    },
+    {
+      "id": "bitwig-live",
+      "name": "Bitwig Live",
+      "author": "Vogu",
+      "file": "themes/bitwig-live.json",
+      "preview": "previews/bitwig-live.png",
+      "description": "Closest to Ableton theme - 50/50/50"
+    },
+    {
+      "id": "greenwig-plus",
+      "name": "Greenwig+",
+      "author": "chimi",
+      "file": "themes/greenwig-plus.json",
+      "preview": "previews/greenwig-plus.png",
+      "description": "Balanced and functional - 35/25/80"
+    },
+    {
+      "id": "dark-greenwig",
+      "name": "Dark Greenwig",
+      "author": "chimi",
+      "file": "themes/dark-greenwig.json",
+      "preview": "previews/dark-greenwig.png",
+      "description": "Darker variant of Greenwig+"
+    },
+    {
+      "id": "darkest-greenwig",
+      "name": "Darkest Greenwig",
+      "author": "chimi",
+      "file": "themes/darkest-greenwig.json",
+      "preview": "previews/darkest-greenwig.png",
+      "description": "Darkest variant of Greenwig+"
+    },
+    {
+      "id": "greenon-blue-automation",
+      "name": "GreenON Blue Automation",
+      "author": "chimi",
+      "file": "themes/greenon-blue-automation.json",
+      "preview": "previews/greenon-blue-automation.png",
+      "description": "60/45/100 - original blue automation"
+    },
+    {
+      "id": "greenon-pink-automation",
+      "name": "GreenON Pink Automation",
+      "author": "chimi",
+      "file": "themes/greenon-pink-automation.json",
+      "preview": "previews/greenon-pink-automation.png",
+      "description": "60/45/100 - pink automation lanes"
+    },
+    {
+      "id": "orangeon-automation",
+      "name": "OrangeON Automation",
+      "author": "chimi",
+      "file": "themes/orangeon-automation.json",
+      "preview": "previews/orangeon-automation.png",
+      "description": "Orange variant for the lunatics"
+    },
+    {
+      "id": "lo-ki",
+      "name": "Lo-Ki",
+      "author": "chimi",
+      "file": "themes/lo-ki.json",
+      "preview": "previews/lo-ki.png",
+      "description": "Less colourful, more minimal - 60/45/100"
+    },
+    {
+      "id": "ocean-blue",
+      "name": "S1 Like (BW6)",
+      "author": "xbitz",
+      "file": "themes/ocean-blue.json",
+      "preview": "previews/ocean-blue.png",
+      "description": "Studio One like for BW6b3 - 30/50"
+    },
+    {
+      "id": "ocean-teal",
+      "name": "AL 12 Dark (BW6)",
+      "author": "xbitz",
+      "file": "themes/ocean-teal.json",
+      "preview": "previews/ocean-teal.png",
+      "description": "Ableton Live 12 dark default variant"
+    },
+    {
+      "id": "sage-minimal",
+      "name": "BlackWig (BW6)",
+      "author": "xbitz",
+      "file": "themes/sage-minimal.json",
+      "preview": "previews/sage-minimal.png",
+      "description": "BlackWig for BW6b4 - new theme format - MID/Black 50/50"
+    },
+    {
+      "id": "purple-wig-green-sliders",
+      "name": "Purple Wig Green Sliders",
+      "author": "TuningJJ",
+      "file": "themes/purple-wig-green-sliders.bte",
+      "preview": "previews/purple-wig-green-sliders.png",
+      "description": "Tweaked Purple Wig theme"
+    },
+    {
+      "id": "infosphere",
+      "name": "Infosphere",
+      "author": "Opale",
+      "file": "themes/infosphere.bte",
+      "preview": "previews/infosphere.png",
+      "description": "Colorful theme to show off colors"
+    },
+    {
+      "id": "sternenherz-cubase",
+      "name": "Bitwig meets Cubase",
+      "author": "Sternenherz",
+      "file": "themes/sternenherz-cubase.json",
+      "description": "Cubase 13 inspired - color-picked from Cubase interface"
+    },
+    {
+      "id": "sternenherz-cubase-greyblue",
+      "name": "Bitwig meets Cubase (Grey Blue)",
+      "author": "Sternenherz",
+      "file": "themes/sternenherz-cubase-greyblue.json",
+      "description": "Grey-blue variant for better element distinction"
+    },
+    {
+      "id": "absynth-fun",
+      "name": "Absynth 5 Fun",
+      "author": "Sternenherz",
+      "file": "themes/absynth-fun.json",
+      "description": "Inspired by Native Instruments Absynth 5"
+    },
+    {
+      "id": "dark-purple",
+      "name": "Dark Purple",
+      "author": "Merlin04",
+      "file": "themes/dark-purple.json",
+      "preview": "previews/dark-purple.png"
+    },
+    {
+      "id": "rose-pine-moon",
+      "name": "Rose Pine Moon",
+      "author": "Rashomakuin",
+      "file": "themes/rose-pine-moon.json",
+      "description": "Rose Pine Moon color scheme"
+    },
+    {
+      "id": "derpwig",
+      "name": "Derpwig",
+      "author": "Derpcat",
+      "file": "themes/derpwig.json",
+      "description": "My awesome Bitwig Theme"
+    },
+    {
+      "id": "blackfire",
+      "name": "Blackfire",
+      "author": "xbitz",
+      "file": "themes/blackfire.bte",
+      "preview": "previews/blackfire.png",
+      "description": "With the most important - the Grid!"
+    }
+  ]
+}
