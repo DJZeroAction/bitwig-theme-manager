@@ -1,6 +1,7 @@
 # Bitwig Theme Manager
 
 A cross-platform desktop application for managing and editing Bitwig Studio themes.
+<img width="1203" height="831" alt="image" src="https://github.com/user-attachments/assets/55d2be7d-403d-4dad-a9df-80d809d21db4" />
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
