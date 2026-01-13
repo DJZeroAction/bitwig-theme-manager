@@ -418,15 +418,14 @@ pub fn find_java() -> Option<PathBuf> {
         // Also check JAVA_HOME
         if let Ok(java_home) = std::env::var("JAVA_HOME") {
             let java_path = PathBuf::from(&java_home).join("bin").join("java.exe");
-            if java_path.exists() {
-                if Command::new(&java_path)
+            if java_path.exists()
+                && Command::new(&java_path)
                     .arg("-version")
                     .output()
                     .map(|o| o.status.success())
                     .unwrap_or(false)
-                {
-                    return Some(java_path);
-                }
+            {
+                return Some(java_path);
             }
         }
     }
@@ -436,15 +435,14 @@ pub fn find_java() -> Option<PathBuf> {
     {
         if let Ok(java_home) = std::env::var("JAVA_HOME") {
             let java_path = PathBuf::from(&java_home).join("bin").join("java");
-            if java_path.exists() {
-                if Command::new(&java_path)
+            if java_path.exists()
+                && Command::new(&java_path)
                     .arg("-version")
                     .output()
                     .map(|o| o.status.success())
                     .unwrap_or(false)
-                {
-                    return Some(java_path);
-                }
+            {
+                return Some(java_path);
             }
         }
     }
@@ -520,16 +518,15 @@ fn find_bitwig_bundled_java() -> Option<PathBuf> {
                         ];
 
                         for java_path in &jre_candidates {
-                            if java_path.exists() {
-                                if Command::new(java_path)
+                            if java_path.exists()
+                                && Command::new(java_path)
                                     .arg("-version")
                                     .output()
                                     .map(|o| o.status.success())
                                     .unwrap_or(false)
-                                {
-                                    log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
-                                    return Some(java_path.clone());
-                                }
+                            {
+                                log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                                return Some(java_path.clone());
                             }
                         }
                     }
@@ -543,16 +540,15 @@ fn find_bitwig_bundled_java() -> Option<PathBuf> {
             ];
 
             for java_path in &jre_candidates {
-                if java_path.exists() {
-                    if Command::new(java_path)
+                if java_path.exists()
+                    && Command::new(java_path)
                         .arg("-version")
                         .output()
                         .map(|o| o.status.success())
                         .unwrap_or(false)
-                    {
-                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
-                        return Some(java_path.clone());
-                    }
+                {
+                    log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                    return Some(java_path.clone());
                 }
             }
         }
@@ -811,6 +807,7 @@ pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError
 
     // Get user home and name (platform-specific)
     #[cfg(target_os = "windows")]
+    #[allow(unused_variables)]
     let (home, user, logname) = {
         let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
             std::env::var("HOME").unwrap_or_default()
