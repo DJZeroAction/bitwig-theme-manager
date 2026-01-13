@@ -11,6 +11,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 TAURI_CONF="$PROJECT_ROOT/src-tauri/tauri.conf.json"
 CARGO_TOML="$PROJECT_ROOT/src-tauri/Cargo.toml"
+PACKAGE_JSON="$PROJECT_ROOT/package.json"
 
 # Get current version
 get_version() {
@@ -49,6 +50,9 @@ update_version() {
 
     # Update Cargo.toml (only the package version, not dependencies)
     sed -i "0,/^version = \"[^\"]*\"/s//version = \"$new_version\"/" "$CARGO_TOML"
+
+    # Update package.json
+    sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$new_version\"/" "$PACKAGE_JSON"
 }
 
 # Main
@@ -86,7 +90,7 @@ main() {
 
     # Git operations
     echo "Committing changes..."
-    git add "$TAURI_CONF" "$CARGO_TOML"
+    git add "$TAURI_CONF" "$CARGO_TOML" "$PACKAGE_JSON"
     git commit -m "Bump version to $new_version"
 
     echo "Creating tag v$new_version..."

@@ -516,10 +516,19 @@ pub async fn fetch_community_themes() -> Result<Vec<RepositoryTheme>, FetchError
         .themes
         .into_iter()
         .map(|entry| {
-            let download_url = format!("{}/{}", COMMUNITY_THEMES_BASE, entry.file);
-            let preview_url = entry
-                .preview
-                .map(|p| format!("{}/{}", COMMUNITY_THEMES_BASE, p));
+            // Use URL directly if it's absolute, otherwise construct relative to base
+            let download_url = if entry.file.starts_with("http://") || entry.file.starts_with("https://") {
+                entry.file.clone()
+            } else {
+                format!("{}/{}", COMMUNITY_THEMES_BASE, entry.file)
+            };
+            let preview_url = entry.preview.map(|p| {
+                if p.starts_with("http://") || p.starts_with("https://") {
+                    p
+                } else {
+                    format!("{}/{}", COMMUNITY_THEMES_BASE, p)
+                }
+            });
 
             RepositoryTheme {
                 name: entry.name,

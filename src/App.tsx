@@ -32,8 +32,12 @@ function App() {
   const {
     available: updateAvailable,
     updateInfo,
+    downloading: updateDownloading,
+    downloadProgress,
+    readyToInstall,
     installing: updateInstalling,
-    installUpdate,
+    downloadUpdate,
+    restartApp,
     dismissUpdate,
   } = useUpdater(
     settings?.check_updates_on_startup ?? false,
@@ -48,22 +52,18 @@ function App() {
     }
   }, [updateInfo, updateSetting, dismissUpdate]);
 
-  // Handle install with restart notice
-  const handleInstallUpdate = useCallback(async () => {
-    const success = await installUpdate();
-    if (success) {
-      // The app will restart automatically after update
-    }
-  }, [installUpdate]);
-
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white">
       {/* Update notification banner */}
-      {updateAvailable && updateInfo && (
+      {(updateAvailable || readyToInstall) && updateInfo && (
         <UpdateNotification
           updateInfo={updateInfo}
+          downloading={updateDownloading}
+          downloadProgress={downloadProgress}
+          readyToInstall={readyToInstall}
           installing={updateInstalling}
-          onInstall={handleInstallUpdate}
+          onDownload={downloadUpdate}
+          onRestart={restartApp}
           onDismiss={dismissUpdate}
           onSkipVersion={handleSkipVersion}
         />
@@ -1064,6 +1064,14 @@ function SettingsView() {
   const [manualVersion, setManualVersion] = useState("");
   const [clearingCache, setClearingCache] = useState(false);
   const [cacheCleared, setCacheCleared] = useState(false);
+  const [appVersion, setAppVersion] = useState<string | null>(null);
+
+  // Fetch app version
+  useEffect(() => {
+    import("@tauri-apps/api/app").then((app) => {
+      app.getVersion().then(setAppVersion);
+    });
+  }, []);
 
   // Get available Bitwig versions
   const availableVersions = installations.length > 0
@@ -1347,11 +1355,11 @@ function SettingsView() {
       <div className="bg-gray-800 rounded-lg p-4">
         <h3 className="font-semibold mb-4">About</h3>
         <div className="text-sm text-gray-400 space-y-2">
-          <p><span className="text-gray-300">Bitwig Theme Manager</span> v0.1.0</p>
+          <p><span className="text-gray-300">Bitwig Theme Manager</span> v{appVersion || "..."}</p>
           <p>Built with Tauri + React + TypeScript</p>
           <p>
             <a
-              href="https://github.com"
+              href="https://github.com/DJZeroAction/bitwig-theme-manager"
               target="_blank"
               rel="noopener noreferrer"
               className="text-purple-400 hover:text-purple-300"
@@ -1362,7 +1370,7 @@ function SettingsView() {
           <p className="pt-2 border-t border-gray-700 mt-2">
             Theme repository:{" "}
             <a
-              href="https://github.com/Jelaio/awesome-bitwig-themes"
+              href="https://github.com/Berikai/awesome-bitwig-themes"
               target="_blank"
               rel="noopener noreferrer"
               className="text-purple-400 hover:text-purple-300"

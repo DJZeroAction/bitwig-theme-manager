@@ -1,9 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
+import { listen } from "@tauri-apps/api/event";
+import { relaunch } from "@tauri-apps/plugin-process";
 import * as api from "../api/bitwig";
+
+export interface DownloadProgress {
+  downloaded: number;
+  total: number | null;
+}
 
 export interface UpdateState {
   checking: boolean;
   available: boolean;
+  downloading: boolean;
+  downloadProgress: DownloadProgress | null;
+  readyToInstall: boolean;
   installing: boolean;
   error: string | null;
   updateInfo: api.UpdateInfo | null;
@@ -14,6 +24,9 @@ export function useUpdater(checkOnMount: boolean = false, skippedVersion: string
   const [state, setState] = useState<UpdateState>({
     checking: false,
     available: false,
+    downloading: false,
+    downloadProgress: null,
+    readyToInstall: false,
     installing: false,
     error: null,
     updateInfo: null,
@@ -25,6 +38,29 @@ export function useUpdater(checkOnMount: boolean = false, skippedVersion: string
     api.getAppVersion().then((version) => {
       setState((prev) => ({ ...prev, currentVersion: version }));
     });
+  }, []);
+
+  // Listen for download progress events
+  useEffect(() => {
+    const unlistenProgress = listen<DownloadProgress>("update-download-progress", (event) => {
+      setState((prev) => ({
+        ...prev,
+        downloadProgress: event.payload,
+      }));
+    });
+
+    const unlistenReady = listen("update-ready", () => {
+      setState((prev) => ({
+        ...prev,
+        downloading: false,
+        readyToInstall: true,
+      }));
+    });
+
+    return () => {
+      unlistenProgress.then((unlisten) => unlisten());
+      unlistenReady.then((unlisten) => unlisten());
+    };
   }, []);
 
   // Check for updates
@@ -73,25 +109,44 @@ export function useUpdater(checkOnMount: boolean = false, skippedVersion: string
     }
   }, [skippedVersion]);
 
-  // Install the update
-  const installUpdate = useCallback(async () => {
+  // Download the update
+  const downloadUpdate = useCallback(async () => {
     if (!state.updateInfo) {
       setState((prev) => ({
         ...prev,
-        error: "No update available to install",
+        error: "No update available to download",
       }));
       return false;
     }
 
-    setState((prev) => ({ ...prev, installing: true, error: null }));
+    setState((prev) => ({
+      ...prev,
+      downloading: true,
+      downloadProgress: { downloaded: 0, total: null },
+      error: null
+    }));
 
     try {
       await api.installUpdate();
+      // The readyToInstall state will be set by the event listener
+      return true;
+    } catch (e) {
+      const errorMessage = e instanceof Error ? e.message : String(e);
       setState((prev) => ({
         ...prev,
-        installing: false,
+        downloading: false,
+        downloadProgress: null,
+        error: errorMessage,
       }));
-      return true;
+      return false;
+    }
+  }, [state.updateInfo]);
+
+  // Restart the app to apply the update
+  const restartApp = useCallback(async () => {
+    setState((prev) => ({ ...prev, installing: true }));
+    try {
+      await relaunch();
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
       setState((prev) => ({
@@ -99,9 +154,15 @@ export function useUpdater(checkOnMount: boolean = false, skippedVersion: string
         installing: false,
         error: errorMessage,
       }));
-      return false;
     }
-  }, [state.updateInfo]);
+  }, []);
+
+  // Legacy install function (download + restart in one step)
+  const installUpdate = useCallback(async () => {
+    const success = await downloadUpdate();
+    // The app will restart automatically after the update is ready
+    return success;
+  }, [downloadUpdate]);
 
   // Dismiss the update notification
   const dismissUpdate = useCallback(() => {
@@ -122,7 +183,9 @@ export function useUpdater(checkOnMount: boolean = false, skippedVersion: string
   return {
     ...state,
     checkForUpdates,
+    downloadUpdate,
     installUpdate,
+    restartApp,
     dismissUpdate,
   };
 }
