@@ -42,6 +42,9 @@ pub struct Settings {
 
     /// Last opened view
     pub last_view: String,
+
+    /// Version that user chose to skip (won't prompt for this version)
+    pub skipped_version: Option<String>,
 }
 
 impl Default for Settings {
@@ -55,6 +58,7 @@ impl Default for Settings {
             cache_duration_hours: 1,
             show_preview_images: true,
             last_view: "browse".to_string(),
+            skipped_version: None,
         }
     }
 }

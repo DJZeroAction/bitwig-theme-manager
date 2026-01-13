@@ -9,7 +9,10 @@ use serde::{Deserialize, Serialize};
 use std::fs::OpenOptions;
 use std::io::{Read, Write};
 use std::path::PathBuf;
+use std::sync::Mutex;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use tauri::Manager;
+use tauri_plugin_updater::{Update, UpdaterExt};
 use theme::parser;
 use zip::ZipArchive;
 
@@ -76,6 +79,98 @@ impl From<settings::SettingsError> for AppError {
         AppError {
             message: e.to_string(),
         }
+    }
+}
+
+// Update Info for frontend
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UpdateInfo {
+    pub version: String,
+    pub current_version: String,
+    pub body: Option<String>,
+    pub date: Option<String>,
+}
+
+// State to hold pending update
+pub struct PendingUpdate(pub Mutex<Option<Update>>);
+
+// Tauri Commands - Updates
+
+/// Check for available updates
+#[tauri::command]
+async fn check_for_updates(app: tauri::AppHandle) -> Result<Option<UpdateInfo>, AppError> {
+    let updater = app.updater().map_err(|e| AppError {
+        message: format!("Failed to get updater: {}", e),
+    })?;
+
+    match updater.check().await {
+        Ok(Some(update)) => {
+            let info = UpdateInfo {
+                version: update.version.clone(),
+                current_version: update.current_version.clone(),
+                body: update.body.clone(),
+                date: update.date.map(|d| d.to_string()),
+            };
+
+            // Store the update for later installation
+            if let Some(state) = app.try_state::<PendingUpdate>() {
+                let mut pending = state.0.lock().unwrap();
+                *pending = Some(update);
+            }
+
+            Ok(Some(info))
+        }
+        Ok(None) => Ok(None),
+        Err(e) => Err(AppError {
+            message: format!("Failed to check for updates: {}", e),
+        }),
+    }
+}
+
+/// Get the current app version
+#[tauri::command]
+fn get_app_version() -> String {
+    env!("CARGO_PKG_VERSION").to_string()
+}
+
+/// Download and install the pending update
+#[tauri::command]
+async fn install_update(app: tauri::AppHandle) -> Result<(), AppError> {
+    let update = {
+        let state = app.state::<PendingUpdate>();
+        let mut pending = state.0.lock().unwrap();
+        pending.take()
+    };
+
+    match update {
+        Some(update) => {
+            // Download and install the update
+            let mut downloaded = 0;
+
+            update
+                .download_and_install(
+                    |chunk_length, content_length| {
+                        downloaded += chunk_length;
+                        log_event(&format!(
+                            "Update download progress: {} / {:?}",
+                            downloaded, content_length
+                        ));
+                    },
+                    || {
+                        log_event("Update download completed, preparing to install");
+                    },
+                )
+                .await
+                .map_err(|e| AppError {
+                    message: format!("Failed to install update: {}", e),
+                })?;
+
+            log_event("Update installed successfully, restart required");
+            Ok(())
+        }
+        None => Err(AppError {
+            message: "No pending update available. Please check for updates first.".to_string(),
+        }),
     }
 }
 
@@ -720,7 +815,9 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(theme::WatcherManager::new())
+        .manage(PendingUpdate(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![
             // Bitwig detection
             detect_bitwig_installations,
@@ -761,6 +858,10 @@ pub fn run() {
             start_watching,
             stop_watching,
             get_watcher_status,
+            // Updates
+            check_for_updates,
+            get_app_version,
+            install_update,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

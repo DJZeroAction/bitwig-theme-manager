@@ -1,10 +1,12 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { useBitwigInstallations } from "./hooks/useBitwig";
 import { useRepositoryThemes } from "./hooks/useRepository";
 import { useThemes } from "./hooks/useThemes";
 import { useSettings } from "./hooks/useSettings";
+import { useUpdater } from "./hooks/useUpdater";
 import { ColorGroup } from "./components/ColorPicker";
+import { UpdateNotification } from "./components/UpdateNotification";
 import * as api from "./api/bitwig";
 import type { BitwigInstallation, RepositoryTheme } from "./api/types";
 
@@ -24,9 +26,50 @@ const NavIcon = ({ children, active, onClick }: { children: React.ReactNode; act
 function App() {
   const [currentView, setCurrentView] = useState<View>("browse");
   const [searchQuery, setSearchQuery] = useState("");
+  const { settings, updateSetting } = useSettings();
+
+  // Initialize updater
+  const {
+    available: updateAvailable,
+    updateInfo,
+    installing: updateInstalling,
+    installUpdate,
+    dismissUpdate,
+  } = useUpdater(
+    settings?.check_updates_on_startup ?? false,
+    settings?.skipped_version ?? null
+  );
+
+  // Handle skip version
+  const handleSkipVersion = useCallback(() => {
+    if (updateInfo) {
+      updateSetting("skipped_version", updateInfo.version);
+      dismissUpdate();
+    }
+  }, [updateInfo, updateSetting, dismissUpdate]);
+
+  // Handle install with restart notice
+  const handleInstallUpdate = useCallback(async () => {
+    const success = await installUpdate();
+    if (success) {
+      // The app will restart automatically after update
+    }
+  }, [installUpdate]);
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
+    <div className="flex flex-col h-screen bg-gray-900 text-white">
+      {/* Update notification banner */}
+      {updateAvailable && updateInfo && (
+        <UpdateNotification
+          updateInfo={updateInfo}
+          installing={updateInstalling}
+          onInstall={handleInstallUpdate}
+          onDismiss={dismissUpdate}
+          onSkipVersion={handleSkipVersion}
+        />
+      )}
+
+      <div className="flex flex-1 overflow-hidden">
       {/* Sidebar */}
       <nav className="w-16 bg-gray-800 flex flex-col items-center py-4 gap-2">
         <NavIcon active={currentView === "browse"} onClick={() => setCurrentView("browse")}>
@@ -84,6 +127,7 @@ function App() {
           {currentView === "settings" && <SettingsView />}
         </div>
       </main>
+      </div>
     </div>
   );
 }

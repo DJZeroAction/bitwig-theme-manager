@@ -151,6 +151,7 @@ export interface Settings {
   cache_duration_hours: number;
   show_preview_images: boolean;
   last_view: string;
+  skipped_version: string | null;
 }
 
 export async function loadSettings(): Promise<Settings> {
@@ -167,4 +168,25 @@ export async function getSettingsPath(): Promise<string> {
 
 export async function getLogPath(): Promise<string | null> {
   return invoke<string | null>("get_log_path");
+}
+
+// Update API
+
+export interface UpdateInfo {
+  version: string;
+  current_version: string;
+  body: string | null;
+  date: string | null;
+}
+
+export async function checkForUpdates(): Promise<UpdateInfo | null> {
+  return invoke<UpdateInfo | null>("check_for_updates");
+}
+
+export async function getAppVersion(): Promise<string> {
+  return invoke<string>("get_app_version");
+}
+
+export async function installUpdate(): Promise<void> {
+  return invoke<void>("install_update");
 }

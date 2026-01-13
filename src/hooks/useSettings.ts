@@ -78,6 +78,7 @@ export function useSettings() {
       cache_duration_hours: 1,
       show_preview_images: true,
       last_view: "browse",
+      skipped_version: null,
     };
 
     setSettings(defaults);
