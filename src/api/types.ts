@@ -1,8 +1,12 @@
+export type InstallationType = "System" | "Flatpak" | "UserLocal" | "Unknown";
+
 export interface BitwigInstallation {
   path: string;
   version: string;
   jar_path: string;
   is_patched: boolean;
+  installation_type: InstallationType;
+  needs_sudo: boolean;
 }
 
 export interface ThemeMetadata {
@@ -26,4 +30,13 @@ export interface ThemeColor {
 
 export interface AppError {
   message: string;
+}
+
+export interface RepositoryTheme {
+  name: string;
+  author: string;
+  author_url?: string;
+  repo_url: string;
+  preview_url?: string;
+  description?: string;
 }

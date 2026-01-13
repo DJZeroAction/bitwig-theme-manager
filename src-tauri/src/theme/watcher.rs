@@ -1,7 +1,11 @@
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
+use serde::Serialize;
 use std::path::{Path, PathBuf};
-use std::sync::mpsc::{channel, Receiver};
+use std::sync::mpsc::{channel, Receiver, Sender};
+use std::sync::{Arc, Mutex};
+use std::thread::{self, JoinHandle};
 use std::time::Duration;
+use tauri::{AppHandle, Emitter};
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -11,6 +15,19 @@ pub enum WatcherError {
 
     #[error("Path not found: {0}")]
     PathNotFound(PathBuf),
+
+    #[error("Watcher already running")]
+    AlreadyRunning,
+
+    #[error("Watcher not running")]
+    NotRunning,
+}
+
+/// Event payload sent to the frontend when theme files change
+#[derive(Clone, Serialize)]
+pub struct ThemeChangeEvent {
+    pub changed_files: Vec<String>,
+    pub watched_path: String,
 }
 
 /// A file watcher for theme files
@@ -106,6 +123,170 @@ impl ThemeWatcher {
             }
         }
     }
+}
+
+/// Internal state for the watcher thread
+struct WatcherThreadState {
+    stop_signal: Sender<()>,
+    handle: JoinHandle<()>,
+    watched_path: PathBuf,
+}
+
+/// Manages theme file watching with Tauri event integration
+pub struct WatcherManager {
+    state: Arc<Mutex<Option<WatcherThreadState>>>,
+}
+
+impl Default for WatcherManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl WatcherManager {
+    pub fn new() -> Self {
+        Self {
+            state: Arc::new(Mutex::new(None)),
+        }
+    }
+
+    /// Check if the watcher is currently running
+    pub fn is_running(&self) -> bool {
+        self.state.lock().unwrap().is_some()
+    }
+
+    /// Get the currently watched path, if any
+    pub fn watched_path(&self) -> Option<PathBuf> {
+        self.state
+            .lock()
+            .unwrap()
+            .as_ref()
+            .map(|s| s.watched_path.clone())
+    }
+
+    /// Start watching a directory for theme file changes
+    pub fn start<R: tauri::Runtime>(
+        &self,
+        app_handle: AppHandle<R>,
+        path: PathBuf,
+    ) -> Result<(), WatcherError> {
+        let mut state = self.state.lock().unwrap();
+
+        if state.is_some() {
+            return Err(WatcherError::AlreadyRunning);
+        }
+
+        if !path.exists() {
+            return Err(WatcherError::PathNotFound(path));
+        }
+
+        let (stop_tx, stop_rx) = channel::<()>();
+        let watched_path = path.clone();
+
+        let handle = thread::spawn(move || {
+            let (tx, rx) = channel();
+
+            let mut watcher = match RecommendedWatcher::new(
+                move |res| {
+                    let _ = tx.send(res);
+                },
+                notify::Config::default().with_poll_interval(Duration::from_millis(500)),
+            ) {
+                Ok(w) => w,
+                Err(e) => {
+                    eprintln!("Failed to create watcher: {}", e);
+                    return;
+                }
+            };
+
+            if let Err(e) = watcher.watch(&path, RecursiveMode::NonRecursive) {
+                eprintln!("Failed to start watching: {}", e);
+                return;
+            }
+
+            loop {
+                // Check for stop signal (non-blocking)
+                if stop_rx.try_recv().is_ok() {
+                    break;
+                }
+
+                // Check for file events with timeout
+                match rx.recv_timeout(Duration::from_millis(100)) {
+                    Ok(Ok(event)) => {
+                        match event.kind {
+                            notify::EventKind::Modify(_)
+                            | notify::EventKind::Create(_)
+                            | notify::EventKind::Remove(_) => {
+                                let changed_files: Vec<String> = event
+                                    .paths
+                                    .iter()
+                                    .filter(|p| {
+                                        p.extension().map_or(false, |ext| ext == "bte")
+                                    })
+                                    .map(|p| p.to_string_lossy().to_string())
+                                    .collect();
+
+                                if !changed_files.is_empty() {
+                                    let event = ThemeChangeEvent {
+                                        changed_files,
+                                        watched_path: path.to_string_lossy().to_string(),
+                                    };
+
+                                    // Emit Tauri event to frontend
+                                    if let Err(e) = app_handle.emit("theme-changed", &event) {
+                                        eprintln!("Failed to emit theme-changed event: {}", e);
+                                    }
+                                }
+                            }
+                            _ => {}
+                        }
+                    }
+                    Ok(Err(e)) => {
+                        eprintln!("Watch error: {}", e);
+                    }
+                    Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
+                        // Continue loop
+                    }
+                    Err(std::sync::mpsc::RecvTimeoutError::Disconnected) => {
+                        break;
+                    }
+                }
+            }
+        });
+
+        *state = Some(WatcherThreadState {
+            stop_signal: stop_tx,
+            handle,
+            watched_path,
+        });
+
+        Ok(())
+    }
+
+    /// Stop watching for theme file changes
+    pub fn stop(&self) -> Result<(), WatcherError> {
+        let mut state = self.state.lock().unwrap();
+
+        match state.take() {
+            Some(thread_state) => {
+                // Send stop signal
+                let _ = thread_state.stop_signal.send(());
+
+                // Wait for thread to finish (with timeout)
+                let _ = thread_state.handle.join();
+
+                Ok(())
+            }
+            None => Err(WatcherError::NotRunning),
+        }
+    }
+}
+
+/// Watcher status information for frontend
+#[derive(Clone, Serialize)]
+pub struct WatcherStatus {
+    pub is_running: bool,
+    pub watched_path: Option<String>,
 }
 
 #[cfg(test)]

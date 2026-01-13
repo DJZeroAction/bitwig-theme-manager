@@ -6,13 +6,18 @@ export function useBitwigInstallations() {
   const [installations, setInstallations] = useState<BitwigInstallation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [javaAvailable, setJavaAvailable] = useState<boolean | null>(null);
 
   const refresh = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const detected = await api.detectBitwigInstallations();
+      const [detected, hasJava] = await Promise.all([
+        api.detectBitwigInstallations(),
+        api.hasJava(),
+      ]);
       setInstallations(detected);
+      setJavaAvailable(hasJava);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -76,6 +81,7 @@ export function useBitwigInstallations() {
     installations,
     loading,
     error,
+    javaAvailable,
     refresh,
     addManualPath,
     patchInstallation,
