@@ -83,6 +83,36 @@ fn path_to_str(path: &Path) -> Result<&str, PatchError> {
         .ok_or_else(|| PatchError::InvalidPath(path.to_path_buf()))
 }
 
+/// Check if a command is available on the system
+fn has_command(cmd: &str) -> bool {
+    #[cfg(target_os = "windows")]
+    {
+        // On Windows, try running the command with --version or -h to see if it exists
+        // The 'where' command can find executables but curl doesn't have --version
+        // Just try to run it
+        Command::new(cmd)
+            .arg("--version")
+            .output()
+            .map(|o| o.status.success())
+            .unwrap_or_else(|_| {
+                // Try without arguments for commands that don't support --version
+                Command::new(cmd)
+                    .arg("-h")
+                    .output()
+                    .map(|o| o.status.success() || o.status.code().is_some())
+                    .unwrap_or(false)
+            })
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        Command::new("which")
+            .arg(cmd)
+            .output()
+            .map(|o| o.status.success())
+            .unwrap_or(false)
+    }
+}
+
 /// Sanitize a string for use in shell scripts
 /// Escapes single quotes and validates for dangerous characters
 fn sanitize_shell_arg(arg: &str) -> Result<String, PatchError> {
@@ -327,13 +357,263 @@ fn get_patcher_jar_path() -> Option<PathBuf> {
     get_patcher_cache_dir().map(|d| d.join(PATCHER_JAR_NAME))
 }
 
-/// Check if Java is available on the system
-pub fn has_java() -> bool {
-    Command::new("java")
+/// Find Java executable path
+/// Searches: Bitwig's bundled JRE, PATH, common installation directories, JAVA_HOME
+pub fn find_java() -> Option<PathBuf> {
+    // First, try to find Bitwig's bundled JRE (most reliable)
+    if let Some(java_path) = find_bitwig_bundled_java() {
+        return Some(java_path);
+    }
+
+    // Try PATH
+    let java_cmd = if cfg!(target_os = "windows") { "java.exe" } else { "java" };
+    if Command::new(java_cmd)
         .arg("-version")
         .output()
         .map(|o| o.status.success())
         .unwrap_or(false)
+    {
+        return Some(PathBuf::from(java_cmd));
+    }
+
+    // On Windows, search common Java installation directories
+    #[cfg(target_os = "windows")]
+    {
+        let program_files = std::env::var("ProgramFiles").unwrap_or_else(|_| "C:\\Program Files".to_string());
+        let program_files_x86 = std::env::var("ProgramFiles(x86)").unwrap_or_else(|_| "C:\\Program Files (x86)".to_string());
+
+        let search_roots = [
+            PathBuf::from(&program_files).join("Java"),
+            PathBuf::from(&program_files).join("Eclipse Adoptium"),
+            PathBuf::from(&program_files).join("Microsoft"),
+            PathBuf::from(&program_files).join("Amazon Corretto"),
+            PathBuf::from(&program_files).join("Zulu"),
+            PathBuf::from(&program_files).join("BellSoft"),
+            PathBuf::from(&program_files).join("OpenJDK"),
+            PathBuf::from(&program_files_x86).join("Java"),
+        ];
+
+        for root in &search_roots {
+            if !root.exists() {
+                continue;
+            }
+            if let Ok(entries) = fs::read_dir(root) {
+                for entry in entries.filter_map(|e| e.ok()) {
+                    let java_path = entry.path().join("bin").join("java.exe");
+                    if java_path.exists() {
+                        // Verify it actually runs
+                        if Command::new(&java_path)
+                            .arg("-version")
+                            .output()
+                            .map(|o| o.status.success())
+                            .unwrap_or(false)
+                        {
+                            return Some(java_path);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Also check JAVA_HOME
+        if let Ok(java_home) = std::env::var("JAVA_HOME") {
+            let java_path = PathBuf::from(&java_home).join("bin").join("java.exe");
+            if java_path.exists() {
+                if Command::new(&java_path)
+                    .arg("-version")
+                    .output()
+                    .map(|o| o.status.success())
+                    .unwrap_or(false)
+                {
+                    return Some(java_path);
+                }
+            }
+        }
+    }
+
+    // On Unix, also check JAVA_HOME
+    #[cfg(unix)]
+    {
+        if let Ok(java_home) = std::env::var("JAVA_HOME") {
+            let java_path = PathBuf::from(&java_home).join("bin").join("java");
+            if java_path.exists() {
+                if Command::new(&java_path)
+                    .arg("-version")
+                    .output()
+                    .map(|o| o.status.success())
+                    .unwrap_or(false)
+                {
+                    return Some(java_path);
+                }
+            }
+        }
+    }
+
+    None
+}
+
+/// Find Bitwig's bundled JRE
+fn find_bitwig_bundled_java() -> Option<PathBuf> {
+    #[cfg(target_os = "windows")]
+    {
+        let program_files = std::env::var("ProgramFiles").unwrap_or_else(|_| "C:\\Program Files".to_string());
+
+        // Check common Bitwig installation paths for bundled JRE
+        let bitwig_paths = [
+            PathBuf::from(&program_files).join("Bitwig Studio"),
+        ];
+
+        for bitwig_path in &bitwig_paths {
+            if !bitwig_path.exists() {
+                continue;
+            }
+
+            // Bitwig bundles JRE in these locations
+            let jre_candidates = [
+                bitwig_path.join("jre").join("bin").join("java.exe"),
+                bitwig_path.join("lib").join("jre").join("bin").join("java.exe"),
+                bitwig_path.join("runtime").join("bin").join("java.exe"),
+            ];
+
+            for java_path in &jre_candidates {
+                if java_path.exists() {
+                    if Command::new(java_path)
+                        .arg("-version")
+                        .output()
+                        .map(|o| o.status.success())
+                        .unwrap_or(false)
+                    {
+                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                        return Some(java_path.clone());
+                    }
+                }
+            }
+        }
+    }
+
+    #[cfg(target_os = "linux")]
+    {
+        let search_paths = [
+            PathBuf::from("/opt/bitwig-studio"),
+            PathBuf::from("/usr/share/bitwig-studio"),
+        ];
+
+        // Also check user home
+        let mut all_paths = search_paths.to_vec();
+        if let Some(home) = dirs::home_dir() {
+            all_paths.push(home.join(".local/share/bitwig-studio"));
+        }
+
+        for bitwig_path in &all_paths {
+            if !bitwig_path.exists() {
+                continue;
+            }
+
+            // Search for versioned directories
+            if let Ok(entries) = fs::read_dir(bitwig_path) {
+                for entry in entries.filter_map(|e| e.ok()) {
+                    let version_dir = entry.path();
+                    if version_dir.is_dir() {
+                        let jre_candidates = [
+                            version_dir.join("lib").join("jre").join("bin").join("java"),
+                            version_dir.join("jre").join("bin").join("java"),
+                        ];
+
+                        for java_path in &jre_candidates {
+                            if java_path.exists() {
+                                if Command::new(java_path)
+                                    .arg("-version")
+                                    .output()
+                                    .map(|o| o.status.success())
+                                    .unwrap_or(false)
+                                {
+                                    log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                                    return Some(java_path.clone());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Also check directly in the bitwig path (non-versioned)
+            let jre_candidates = [
+                bitwig_path.join("lib").join("jre").join("bin").join("java"),
+                bitwig_path.join("jre").join("bin").join("java"),
+            ];
+
+            for java_path in &jre_candidates {
+                if java_path.exists() {
+                    if Command::new(java_path)
+                        .arg("-version")
+                        .output()
+                        .map(|o| o.status.success())
+                        .unwrap_or(false)
+                    {
+                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                        return Some(java_path.clone());
+                    }
+                }
+            }
+        }
+    }
+
+    #[cfg(target_os = "macos")]
+    {
+        let app_paths = [
+            PathBuf::from("/Applications/Bitwig Studio.app"),
+        ];
+
+        if let Some(home) = dirs::home_dir() {
+            let user_app = home.join("Applications/Bitwig Studio.app");
+            if user_app.exists() {
+                let java_path = user_app.join("Contents/PlugIns/jre/Contents/Home/bin/java");
+                if java_path.exists() {
+                    if Command::new(&java_path)
+                        .arg("-version")
+                        .output()
+                        .map(|o| o.status.success())
+                        .unwrap_or(false)
+                    {
+                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                        return Some(java_path);
+                    }
+                }
+            }
+        }
+
+        for app_path in &app_paths {
+            if !app_path.exists() {
+                continue;
+            }
+
+            let jre_candidates = [
+                app_path.join("Contents/PlugIns/jre/Contents/Home/bin/java"),
+                app_path.join("Contents/Resources/app/lib/jre/bin/java"),
+            ];
+
+            for java_path in &jre_candidates {
+                if java_path.exists() {
+                    if Command::new(java_path)
+                        .arg("-version")
+                        .output()
+                        .map(|o| o.status.success())
+                        .unwrap_or(false)
+                    {
+                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
+                        return Some(java_path.clone());
+                    }
+                }
+            }
+        }
+    }
+
+    None
+}
+
+/// Check if Java is available on the system
+pub fn has_java() -> bool {
+    find_java().is_some()
 }
 
 /// Download the patcher JAR if not already cached
@@ -367,12 +647,13 @@ pub fn ensure_patcher_available() -> Result<PathBuf, PatchError> {
     let jar_path_str = path_to_str(&jar_path)?;
 
     // Download the patcher JAR using curl or wget
-    let download_result = if Command::new("which").arg("curl").output().map(|o| o.status.success()).unwrap_or(false) {
+    // On Windows, curl is built-in since Windows 10
+    let download_result = if has_command("curl") {
         log_event("patcher: downloading with curl");
         Command::new("curl")
             .args(["-L", "-o", jar_path_str, PATCHER_JAR_URL])
             .output()
-    } else if Command::new("which").arg("wget").output().map(|o| o.status.success()).unwrap_or(false) {
+    } else if has_command("wget") {
         log_event("patcher: downloading with wget");
         Command::new("wget")
             .args(["-O", jar_path_str, PATCHER_JAR_URL])
@@ -411,11 +692,12 @@ pub fn ensure_patcher_available() -> Result<PathBuf, PatchError> {
 /// Run the bitwig-theme-editor patcher on a JAR file in CLI mode (no GUI)
 /// The patcher accepts the JAR path as argument and patches it directly
 fn run_patcher_process(bitwig_jar_path: &Path, home: &str, user: &str) -> Result<(String, String), PatchError> {
+    let java_path = find_java().ok_or(PatchError::JavaNotFound)?;
     let patcher_jar = ensure_patcher_available()?;
     let patcher_jar_str = path_to_str(&patcher_jar)?;
     let bitwig_jar_str = path_to_str(bitwig_jar_path)?;
 
-    let output = Command::new("java")
+    let output = Command::new(&java_path)
         .args([
             &format!("-Duser.home={}", home),
             &format!("-Duser.name={}", user),
@@ -446,8 +728,22 @@ pub fn run_patcher_cli(bitwig_jar_path: &Path) -> Result<(), PatchError> {
     }
 
     let _ = create_manager_backup(bitwig_jar_path);
-    let home = std::env::var("HOME").unwrap_or_default();
-    let user = std::env::var("USER").unwrap_or_default();
+
+    // Get user home and name (platform-specific)
+    #[cfg(target_os = "windows")]
+    let (home, user) = {
+        let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
+            std::env::var("HOME").unwrap_or_default()
+        });
+        let user = std::env::var("USERNAME").unwrap_or_default();
+        (home, user)
+    };
+    #[cfg(not(target_os = "windows"))]
+    let (home, user) = {
+        let home = std::env::var("HOME").unwrap_or_default();
+        let user = std::env::var("USER").unwrap_or_default();
+        (home, user)
+    };
     let _logname = std::env::var("LOGNAME").unwrap_or_else(|_| user.clone());
 
     log_event(&format!(
@@ -499,12 +795,12 @@ fn create_secure_temp_script(name_prefix: &str, content: &str) -> Result<PathBuf
     Ok(script_path)
 }
 
-/// Run patcher with elevated privileges using pkexec
+/// Run patcher with elevated privileges using pkexec (Unix) or UAC (Windows)
 pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError> {
-    if !has_java() {
+    let java_path = find_java().ok_or_else(|| {
         log_event("patcher: run_patcher_cli_elevated failed (no java)");
-        return Err(PatchError::JavaNotFound);
-    }
+        PatchError::JavaNotFound
+    })?;
 
     let patcher_jar = ensure_patcher_available()?;
 
@@ -513,14 +809,22 @@ pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError
         bitwig_jar_path.to_string_lossy()
     ));
 
-    let home = std::env::var("HOME").unwrap_or_default();
-    let user = std::env::var("USER").unwrap_or_default();
-    let logname = std::env::var("LOGNAME").unwrap_or_else(|_| user.clone());
-
-    // Sanitize all shell arguments
-    let home_safe = sanitize_shell_arg(&home)?;
-    let user_safe = sanitize_shell_arg(&user)?;
-    let logname_safe = sanitize_shell_arg(&logname)?;
+    // Get user home and name (platform-specific)
+    #[cfg(target_os = "windows")]
+    let (home, user, logname) = {
+        let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
+            std::env::var("HOME").unwrap_or_default()
+        });
+        let user = std::env::var("USERNAME").unwrap_or_default();
+        (home.clone(), user.clone(), user)
+    };
+    #[cfg(not(target_os = "windows"))]
+    let (home, user, logname) = {
+        let home = std::env::var("HOME").unwrap_or_default();
+        let user = std::env::var("USER").unwrap_or_default();
+        let logname = std::env::var("LOGNAME").unwrap_or_else(|_| user.clone());
+        (home, user, logname)
+    };
 
     let backup_dir = manager_backup_dir(bitwig_jar_path)?;
     let timestamp = std::time::SystemTime::now()
@@ -530,46 +834,115 @@ pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError
     let backup_path = backup_dir.join(format!("{}.jar", timestamp));
     let checksum_path = backup_dir.join(format!("{}.jar.sha256", timestamp));
 
-    // Sanitize path arguments
-    let backup_dir_safe = sanitize_shell_arg(&backup_dir.to_string_lossy())?;
-    let backup_path_safe = sanitize_shell_arg(&backup_path.to_string_lossy())?;
-    let checksum_path_safe = sanitize_shell_arg(&checksum_path.to_string_lossy())?;
-    let bitwig_jar_safe = sanitize_shell_arg(&bitwig_jar_path.to_string_lossy())?;
-    let patcher_jar_safe = sanitize_shell_arg(&patcher_jar.to_string_lossy())?;
-
     log_event(&format!(
-        "patcher: elevating with HOME='{}' USER='{}' LOGNAME='{}'",
-        home, user, logname
+        "patcher: elevating with HOME='{}' USER='{}'",
+        home, user
     ));
 
-    // Create a script that runs the patcher with java
-    let script_content = format!(
-        "#!/bin/bash\nset -e\nexport HOME='{}'\nexport USER='{}'\nexport LOGNAME='{}'\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\njava -Duser.home='{}' -Duser.name='{}' -Duser.dir='{}' -jar '{}' '{}'\n",
-        home_safe,
-        user_safe,
-        logname_safe,
-        backup_dir_safe,
-        bitwig_jar_safe,
-        backup_path_safe,
-        bitwig_jar_safe,
-        checksum_path_safe,
-        home_safe,
-        user_safe,
-        home_safe,
-        patcher_jar_safe,
-        bitwig_jar_safe
-    );
+    #[cfg(target_os = "windows")]
+    let output = {
+        // On Windows, create a PowerShell script for elevation
+        let temp_dir = std::env::temp_dir().join("bitwig-theme-manager");
+        fs::create_dir_all(&temp_dir)?;
+        fs::create_dir_all(&backup_dir)?;
 
-    let script_path = create_secure_temp_script("patch-cli", &script_content)?;
+        let id: u64 = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos() as u64)
+            .unwrap_or(0);
 
-    // Run with pkexec
-    let output = Command::new("pkexec")
-        .arg("bash")
-        .arg(&script_path)
-        .output()?;
+        let script_path = temp_dir.join(format!("patch-elevated-{}.ps1", id));
 
-    // Clean up script
-    let _ = fs::remove_file(&script_path);
+        // Escape paths for PowerShell
+        let java_path_escaped = java_path.to_string_lossy().replace("'", "''");
+        let patcher_jar_escaped = patcher_jar.to_string_lossy().replace("'", "''");
+        let bitwig_jar_escaped = bitwig_jar_path.to_string_lossy().replace("'", "''");
+        let backup_path_escaped = backup_path.to_string_lossy().replace("'", "''");
+        let checksum_path_escaped = checksum_path.to_string_lossy().replace("'", "''");
+        let home_escaped = home.replace("'", "''");
+        let user_escaped = user.replace("'", "''");
+
+        let script_content = format!(
+            r#"$ErrorActionPreference = 'Stop'
+Copy-Item -Path '{bitwig_jar}' -Destination '{backup_path}' -Force
+$hash = (Get-FileHash -Path '{bitwig_jar}' -Algorithm SHA256).Hash.ToLower()
+Set-Content -Path '{checksum_path}' -Value $hash -NoNewline
+& '{java_path}' '-Duser.home={home}' '-Duser.name={user}' '-Duser.dir={home}' '-jar' '{patcher_jar}' '{bitwig_jar}'
+"#,
+            java_path = java_path_escaped,
+            patcher_jar = patcher_jar_escaped,
+            bitwig_jar = bitwig_jar_escaped,
+            backup_path = backup_path_escaped,
+            checksum_path = checksum_path_escaped,
+            home = home_escaped,
+            user = user_escaped,
+        );
+
+        fs::write(&script_path, &script_content)?;
+
+        let script_path_str = script_path.to_string_lossy().replace("'", "''");
+
+        // Use PowerShell to run the script with elevation
+        let ps_command = format!(
+            "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', '{}' -Verb RunAs -Wait -WindowStyle Hidden",
+            script_path_str
+        );
+
+        let output = Command::new("powershell")
+            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+            .output()?;
+
+        // Clean up script
+        let _ = fs::remove_file(&script_path);
+        output
+    };
+
+    #[cfg(not(target_os = "windows"))]
+    let output = {
+        // Sanitize all shell arguments
+        let home_safe = sanitize_shell_arg(&home)?;
+        let user_safe = sanitize_shell_arg(&user)?;
+        let logname_safe = sanitize_shell_arg(&logname)?;
+
+        // Sanitize path arguments
+        let backup_dir_safe = sanitize_shell_arg(&backup_dir.to_string_lossy())?;
+        let backup_path_safe = sanitize_shell_arg(&backup_path.to_string_lossy())?;
+        let checksum_path_safe = sanitize_shell_arg(&checksum_path.to_string_lossy())?;
+        let bitwig_jar_safe = sanitize_shell_arg(&bitwig_jar_path.to_string_lossy())?;
+        let patcher_jar_safe = sanitize_shell_arg(&patcher_jar.to_string_lossy())?;
+        let java_path_safe = sanitize_shell_arg(&java_path.to_string_lossy())?;
+
+        // Create a script that runs the patcher with java
+        let script_content = format!(
+            "#!/bin/bash\nset -e\nexport HOME='{}'\nexport USER='{}'\nexport LOGNAME='{}'\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\n'{}' -Duser.home='{}' -Duser.name='{}' -Duser.dir='{}' -jar '{}' '{}'\n",
+            home_safe,
+            user_safe,
+            logname_safe,
+            backup_dir_safe,
+            bitwig_jar_safe,
+            backup_path_safe,
+            bitwig_jar_safe,
+            checksum_path_safe,
+            java_path_safe,
+            home_safe,
+            user_safe,
+            home_safe,
+            patcher_jar_safe,
+            bitwig_jar_safe
+        );
+
+        let script_path = create_secure_temp_script("patch-cli", &script_content)?;
+
+        // Run with pkexec
+        let output = Command::new("pkexec")
+            .arg("bash")
+            .arg(&script_path)
+            .output()?;
+
+        // Clean up script
+        let _ = fs::remove_file(&script_path);
+        output
+    };
 
     let stderr = String::from_utf8_lossy(&output.stderr);
     let stdout = String::from_utf8_lossy(&output.stdout);
@@ -577,21 +950,39 @@ pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError
     if output.status.success() {
         // Create our marker file for tracking
         let marker_path = get_marker_path(bitwig_jar_path);
-        // Need to write marker with sudo too if in system location
+        // Need to write marker with elevation too if in system location
         if !can_write(&marker_path) {
-            let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
-            let marker_script = format!(
-                "#!/bin/bash\necho 'patched' > '{}'\n",
-                marker_path_safe
-            );
-            let marker_script_path = create_secure_temp_script("marker", &marker_script)?;
-            let marker_result = Command::new("pkexec")
-                .arg("bash")
-                .arg(&marker_script_path)
-                .output();
-            let _ = fs::remove_file(&marker_script_path);
-            if let Err(e) = marker_result {
-                log_event(&format!("patcher: warning - failed to write marker: {}", e));
+            #[cfg(target_os = "windows")]
+            {
+                // On Windows, use PowerShell with elevation to write marker
+                let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
+                let ps_command = format!(
+                    "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"Set-Content -Path '{}' -Value 'patched'\" -Verb RunAs -Wait -WindowStyle Hidden",
+                    marker_path_escaped
+                );
+                let marker_result = Command::new("powershell")
+                    .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+                    .output();
+                if let Err(e) = marker_result {
+                    log_event(&format!("patcher: warning - failed to write marker: {}", e));
+                }
+            }
+            #[cfg(not(target_os = "windows"))]
+            {
+                let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
+                let marker_script = format!(
+                    "#!/bin/bash\necho 'patched' > '{}'\n",
+                    marker_path_safe
+                );
+                let marker_script_path = create_secure_temp_script("marker", &marker_script)?;
+                let marker_result = Command::new("pkexec")
+                    .arg("bash")
+                    .arg(&marker_script_path)
+                    .output();
+                let _ = fs::remove_file(&marker_script_path);
+                if let Err(e) = marker_result {
+                    log_event(&format!("patcher: warning - failed to write marker: {}", e));
+                }
             }
         } else if let Err(e) = fs::write(&marker_path, "patched") {
             log_event(&format!("patcher: warning - failed to write marker: {}", e));
@@ -832,8 +1223,22 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
     }
 
     let temp_jar = temp_dir.join("bitwig.jar");
-    let home = std::env::var("HOME").unwrap_or_default();
-    let user = std::env::var("USER").unwrap_or_default();
+
+    // Get user home and name (platform-specific)
+    #[cfg(target_os = "windows")]
+    let (home, user) = {
+        let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
+            std::env::var("HOME").unwrap_or_default()
+        });
+        let user = std::env::var("USERNAME").unwrap_or_default();
+        (home, user)
+    };
+    #[cfg(not(target_os = "windows"))]
+    let (home, user) = {
+        let home = std::env::var("HOME").unwrap_or_default();
+        let user = std::env::var("USER").unwrap_or_default();
+        (home, user)
+    };
 
     for source in get_patch_sources(jar_path) {
         fs::copy(&source, &temp_jar)?;
@@ -855,24 +1260,59 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
 
         let marker_path = get_marker_path(jar_path);
 
-        // Sanitize paths for shell script
-        let temp_jar_safe = sanitize_shell_arg(&temp_jar.to_string_lossy())?;
-        let jar_path_safe = sanitize_shell_arg(&jar_path.to_string_lossy())?;
-        let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
+        #[cfg(target_os = "windows")]
+        {
+            // On Windows, use PowerShell with elevation to copy the patched jar
+            let temp_jar_escaped = temp_jar.to_string_lossy().replace("'", "''");
+            let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
+            let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
 
-        let script_content = format!(
-            "#!/bin/bash\nset -e\ncp '{}' '{}'\necho 'patched' > '{}'\n",
-            temp_jar_safe,
-            jar_path_safe,
-            marker_path_safe
-        );
+            let ps_script = format!(
+                r#"Copy-Item -Path '{}' -Destination '{}' -Force; Set-Content -Path '{}' -Value 'patched'"#,
+                temp_jar_escaped, jar_path_escaped, marker_path_escaped
+            );
 
-        let script_path = create_secure_temp_script("copy-patched", &script_content)?;
-        let script_path_str = path_to_str(&script_path)?;
+            let ps_command = format!(
+                "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"{}\" -Verb RunAs -Wait -WindowStyle Hidden",
+                ps_script.replace('"', "`\"")
+            );
 
-        let result = run_with_pkexec("bash", &[script_path_str]);
-        let _ = fs::remove_file(&script_path);
-        return result;
+            let output = Command::new("powershell")
+                .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+                .output()?;
+
+            if output.status.success() {
+                return Ok(());
+            } else {
+                let stderr = String::from_utf8_lossy(&output.stderr);
+                if stderr.contains("canceled") || stderr.contains("cancelled") {
+                    return Err(PatchError::ElevationCancelled);
+                }
+                return Err(PatchError::PkexecFailed(format!("Windows elevation failed: {}", stderr)));
+            }
+        }
+
+        #[cfg(not(target_os = "windows"))]
+        {
+            // Sanitize paths for shell script
+            let temp_jar_safe = sanitize_shell_arg(&temp_jar.to_string_lossy())?;
+            let jar_path_safe = sanitize_shell_arg(&jar_path.to_string_lossy())?;
+            let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
+
+            let script_content = format!(
+                "#!/bin/bash\nset -e\ncp '{}' '{}'\necho 'patched' > '{}'\n",
+                temp_jar_safe,
+                jar_path_safe,
+                marker_path_safe
+            );
+
+            let script_path = create_secure_temp_script("copy-patched", &script_content)?;
+            let script_path_str = path_to_str(&script_path)?;
+
+            let result = run_with_pkexec("bash", &[script_path_str]);
+            let _ = fs::remove_file(&script_path);
+            return result;
+        }
     }
 
     Err(PatchError::AlreadyPatched)
