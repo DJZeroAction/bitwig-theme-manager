@@ -462,6 +462,14 @@
       "file": "themes/blackfire.bte",
       "preview": "previews/blackfire.png",
       "description": "With the most important - the Grid!"
+    },
+    {
+      "id": "frost",
+      "name": "Frost",
+      "author": "Ibsen Producer",
+      "file": "https://raw.githubusercontent.com/ibsenproducer/Frost-bitwig-theme/main/frost.json",
+      "preview": "https://i.imgur.com/VFly7HF.png",
+      "description": "Light theme for Bitwig"
     }
   ]
 }
