@@ -1,6 +1,6 @@
 [package]
 name = "bitwig-theme-manager"
-version = "0.2.1"
+version = "0.2.2"
 description = "Bitwig Theme Manager - A cross-platform theme manager for Bitwig Studio"
 authors = ["you"]
 edition = "2021"
