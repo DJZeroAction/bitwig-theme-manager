@@ -109,6 +109,7 @@
       "name": "Darkfault",
       "author": "dariolupo",
       "file": "themes/darkfault.json",
+      "preview": "previews/darkfault.png",
       "description": "What an official Dark theme could be"
     },
     {
@@ -443,6 +444,7 @@
       "name": "Rose Pine Moon",
       "author": "Rashomakuin",
       "file": "themes/rose-pine-moon.json",
+      "preview": "previews/rose-pine-moon.png",
       "description": "Rose Pine Moon color scheme"
     },
     {
@@ -450,6 +452,7 @@
       "name": "Derpwig",
       "author": "Derpcat",
       "file": "themes/derpwig.json",
+      "preview": "previews/derpwig.png",
       "description": "My awesome Bitwig Theme"
     },
     {
