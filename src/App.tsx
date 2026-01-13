@@ -211,7 +211,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   const getExistingThemePath = (themeName: string): string | null => {
     const safeName = themeName.replace(/[^a-zA-Z0-9\-_ ]/g, "_");
     const found = localThemes.find((path) => {
-      const fileName = path.split("/").pop()?.replace(".bte", "") || "";
+      const fileName = path.split(/[/\\]/).pop()?.replace(".bte", "") || "";
       return fileName === safeName || fileName.startsWith(safeName + "_") || fileName === themeName;
     });
     return found || null;
@@ -675,7 +675,8 @@ function EditorView() {
           ) : (
             <div className="space-y-1 max-h-64 overflow-y-auto">
               {themes.map((themePath) => {
-                const name = themePath.split("/").pop()?.replace(".bte", "") || themePath;
+                // Handle both Unix (/) and Windows (\) path separators
+                const name = themePath.split(/[/\\]/).pop()?.replace(".bte", "") || themePath;
                 const isSelected = currentTheme?.path === themePath;
                 const isApplied = activeThemePath === themePath;
                 return (
