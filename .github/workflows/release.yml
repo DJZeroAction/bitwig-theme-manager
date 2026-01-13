@@ -83,12 +83,17 @@ jobs:
     needs: [create-release, build-tauri]
 
     steps:
-      - name: Rename assets to remove version numbers
+      - name: Rename assets and update latest.json URLs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          RELEASE_ID="${{ needs.create-release.outputs.release_id }}"
+
+          # Build a mapping of old names to new names
+          declare -A rename_map
+
           # Get all assets for this release
-          assets=$(gh api /repos/${{ github.repository }}/releases/${{ needs.create-release.outputs.release_id }}/assets --jq '.[] | "\(.id) \(.name)"')
+          assets=$(gh api /repos/${{ github.repository }}/releases/$RELEASE_ID/assets --jq '.[] | "\(.id) \(.name)"')
 
           while IFS= read -r line; do
             id=$(echo "$line" | cut -d' ' -f1)
@@ -99,6 +104,7 @@ jobs:
 
             if [ "$name" != "$new_name" ]; then
               echo "Renaming: $name -> $new_name"
+              rename_map["$name"]="$new_name"
               gh api \
                 --method PATCH \
                 -H "Accept: application/vnd.github+json" \
@@ -106,6 +112,26 @@ jobs:
                 -f name="$new_name"
             fi
           done <<< "$assets"
+
+          # Update latest.json URLs to use new filenames
+          latest_asset=$(gh api /repos/${{ github.repository }}/releases/$RELEASE_ID/assets --jq '.[] | select(.name == "latest.json") | .id')
+          if [ -n "$latest_asset" ]; then
+            echo "Updating latest.json URLs..."
+            gh release download --repo ${{ github.repository }} --pattern "latest.json" -O latest.json -D . --clobber || true
+
+            if [ -f "latest.json" ]; then
+              # Replace versioned filenames with renamed ones in URLs
+              for old_name in "${!rename_map[@]}"; do
+                new_name="${rename_map[$old_name]}"
+                echo "  Replacing $old_name -> $new_name in URLs"
+                sed -i "s|$old_name|$new_name|g" latest.json
+              done
+
+              # Delete old latest.json and upload updated one
+              gh api --method DELETE /repos/${{ github.repository }}/releases/assets/$latest_asset
+              gh release upload --repo ${{ github.repository }} --clobber "${{ github.ref_name }}" latest.json
+            fi
+          fi
 
       - name: Publish Release
         env:
