@@ -14,7 +14,16 @@ A cross-platform desktop application for managing and editing Bitwig Studio them
 
 ## Installation
 
-Download the latest release for your platform from the [Releases](https://github.com/yourusername/bitwig-theme-manager/releases) page.
+Download the latest release for your platform:
+
+| Platform | Download |
+|----------|----------|
+| Windows | [Setup (exe)](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64-setup.exe) · [MSI](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64_en-US.msi) |
+| macOS (Apple Silicon) | [DMG](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_aarch64.dmg) |
+| macOS (Intel) | [DMG](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64.dmg) |
+| Linux | [AppImage](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.AppImage) · [deb](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.deb) · [rpm](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager-1.x86_64.rpm) |
+
+Or browse all releases on the [Releases](https://github.com/DJZeroAction/bitwig-theme-manager/releases) page.
 
 ### Building from Source
 
@@ -25,7 +34,7 @@ Prerequisites:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/bitwig-theme-manager.git
+git clone https://github.com/DJZeroAction/bitwig-theme-manager.git
 cd bitwig-theme-manager
 
 # Install dependencies
