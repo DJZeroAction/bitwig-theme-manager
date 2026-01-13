@@ -159,11 +159,11 @@ pub async fn cache_preview_image(theme_name: &str, url: &str) -> Result<PathBuf,
     // Download the image
     let client = reqwest::Client::new();
     let response = client.get(url).send().await.map_err(|e| {
-        CacheError::Io(io::Error::new(io::ErrorKind::Other, e.to_string()))
+        CacheError::Io(io::Error::other(e.to_string()))
     })?;
 
     let bytes = response.bytes().await.map_err(|e| {
-        CacheError::Io(io::Error::new(io::ErrorKind::Other, e.to_string()))
+        CacheError::Io(io::Error::other(e.to_string()))
     })?;
 
     fs::write(&file_path, bytes)?;
@@ -215,7 +215,7 @@ pub fn list_cached_themes() -> Result<Vec<PathBuf>, CacheError> {
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() && path.extension().map_or(false, |ext| ext == "bte") {
+        if path.is_file() && path.extension().is_some_and(|ext| ext == "bte") {
             themes.push(path);
         }
     }

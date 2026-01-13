@@ -454,7 +454,7 @@ pub fn list_themes(bitwig_version: &str) -> Result<Vec<PathBuf>, ThemeError> {
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() && path.extension().map_or(false, |ext| ext == "bte") {
+        if path.is_file() && path.extension().is_some_and(|ext| ext == "bte") {
             themes.push(path);
         }
     }

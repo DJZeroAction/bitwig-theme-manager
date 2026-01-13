@@ -377,13 +377,14 @@ pub fn detect_installations() -> Vec<BitwigInstallation> {
                                 let needs_sudo = path_needs_sudo(&jar_path);
 
                                 installations.push(BitwigInstallation {
-                                    path: entry_path,
+                                    path: entry_path.clone(),
                                     version,
                                     jar_path,
                                     is_patched,
                                     installation_type: search_path.installation_type.clone(),
                                     needs_sudo,
                                 });
+                                continue; // Skip the regular directory check if we found a .app bundle
                             }
                         }
                     }

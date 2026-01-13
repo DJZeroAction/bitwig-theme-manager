@@ -358,7 +358,7 @@ fn create_theme(name: String, bitwig_version: String) -> Result<Theme, AppError>
     let base_theme = parser::get_active_theme_path(&bitwig_version)
         .filter(|path| path.exists())
         .and_then(|path| parser::parse_theme_file(&path).ok())
-        .unwrap_or_else(Theme::new);
+        .unwrap_or_default();
 
     let mut theme = Theme::with_name(&name);
     theme.colors = base_theme.colors;

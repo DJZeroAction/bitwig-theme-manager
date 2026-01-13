@@ -78,18 +78,16 @@ impl ThemeWatcher {
     pub fn poll(&self) -> Option<Vec<PathBuf>> {
         let mut changed_files = Vec::new();
 
-        while let Ok(result) = self.receiver.try_recv() {
-            if let Ok(event) = result {
-                match event.kind {
-                    notify::EventKind::Modify(_) | notify::EventKind::Create(_) => {
-                        for path in event.paths {
-                            if path.extension().map_or(false, |ext| ext == "bte") {
-                                changed_files.push(path);
-                            }
+        while let Ok(Ok(event)) = self.receiver.try_recv() {
+            match event.kind {
+                notify::EventKind::Modify(_) | notify::EventKind::Create(_) => {
+                    for path in event.paths {
+                        if path.extension().is_some_and(|ext| ext == "bte") {
+                            changed_files.push(path);
                         }
                     }
-                    _ => {}
                 }
+                _ => {}
             }
         }
 
@@ -103,22 +101,20 @@ impl ThemeWatcher {
     /// Block and wait for the next change event
     pub fn wait_for_change(&self) -> Result<Vec<PathBuf>, WatcherError> {
         loop {
-            if let Ok(result) = self.receiver.recv() {
-                if let Ok(event) = result {
-                    match event.kind {
-                        notify::EventKind::Modify(_) | notify::EventKind::Create(_) => {
-                            let changed_files: Vec<PathBuf> = event
-                                .paths
-                                .into_iter()
-                                .filter(|p| p.extension().map_or(false, |ext| ext == "bte"))
-                                .collect();
+            if let Ok(Ok(event)) = self.receiver.recv() {
+                match event.kind {
+                    notify::EventKind::Modify(_) | notify::EventKind::Create(_) => {
+                        let changed_files: Vec<PathBuf> = event
+                            .paths
+                            .into_iter()
+                            .filter(|p| p.extension().is_some_and(|ext| ext == "bte"))
+                            .collect();
 
-                            if !changed_files.is_empty() {
-                                return Ok(changed_files);
-                            }
+                        if !changed_files.is_empty() {
+                            return Ok(changed_files);
                         }
-                        _ => {}
                     }
+                    _ => {}
                 }
             }
         }
@@ -221,7 +217,7 @@ impl WatcherManager {
                                     .paths
                                     .iter()
                                     .filter(|p| {
-                                        p.extension().map_or(false, |ext| ext == "bte")
+                                        p.extension().is_some_and(|ext| ext == "bte")
                                     })
                                     .map(|p| p.to_string_lossy().to_string())
                                     .collect();

@@ -44,6 +44,7 @@ pub struct RepositoryTheme {
 /// A theme entry from the community-themes index.json
 #[derive(Debug, Clone, Deserialize)]
 struct CommunityThemeEntry {
+    #[allow(dead_code)]
     id: String,
     name: String,
     author: String,
@@ -201,7 +202,7 @@ fn resolve_url(url: &str, base_url: Option<&str>) -> String {
 fn url_extension(url: &str) -> Option<&'static str> {
     let lower = url.to_ascii_lowercase();
     let clean = lower
-        .split(|c| c == '?' || c == '#')
+        .split(['?', '#'])
         .next()
         .unwrap_or(&lower);
     if clean.ends_with(".bte") {
@@ -524,9 +525,7 @@ pub async fn fetch_community_themes() -> Result<Vec<RepositoryTheme>, FetchError
                 name: entry.name,
                 author: entry.author,
                 author_url: None,
-                repo_url: format!(
-                    "https://github.com/DJZeroAction/bitwig-theme-manager/tree/main/community-themes"
-                ),
+                repo_url: "https://github.com/DJZeroAction/bitwig-theme-manager/tree/main/community-themes".to_string(),
                 preview_url,
                 description: entry.description,
                 download_url: Some(download_url),
@@ -615,6 +614,9 @@ async fn check_github_releases_html(
     let base = format!("https://github.com/{}/{}/releases", owner, repo);
     let candidates = [format!("{}/latest", base), base.clone()];
 
+    // Compile regex once before the loop
+    let expanded_re = regex::Regex::new(r#"expanded_assets/([^"]+)"#).ok();
+
     for url in candidates {
         let response = client.get(&url).send().await?;
         if !response.status().is_success() {
@@ -623,8 +625,7 @@ async fn check_github_releases_html(
         let content = response.text().await?;
 
         // Check for expanded_assets URL (GitHub loads assets via AJAX)
-        let expanded_re = regex::Regex::new(r#"expanded_assets/([^"]+)"#).ok();
-        if let Some(re) = expanded_re {
+        if let Some(ref re) = expanded_re {
             if let Some(caps) = re.captures(&content) {
                 if let Some(tag) = caps.get(1) {
                     let expanded_url = format!(
