@@ -117,7 +117,8 @@ jobs:
           latest_asset=$(gh api /repos/${{ github.repository }}/releases/$RELEASE_ID/assets --jq '.[] | select(.name == "latest.json") | .id')
           if [ -n "$latest_asset" ]; then
             echo "Updating latest.json URLs..."
-            gh release download --repo ${{ github.repository }} --pattern "latest.json" -O latest.json -D . --clobber || true
+            # Download from this specific release, not "latest"
+            gh api /repos/${{ github.repository }}/releases/assets/$latest_asset > latest.json
 
             if [ -f "latest.json" ]; then
               # Replace versioned filenames with renamed ones in URLs
