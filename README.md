@@ -47,6 +47,9 @@ npm run tauri build
 3. Click **Patch** to enable theme support
 4. Restart Bitwig Studio
 
+<img width="1200" height="831" alt="image" src="https://github.com/user-attachments/assets/1f911e03-7d65-4c5c-be71-a06ee7bb9a02" />
+
+
 ### Applying Themes
 
 1. Open the **Theme Browser** tab
@@ -54,12 +57,16 @@ npm run tauri build
 3. Click on a theme to apply it
 4. Changes apply immediately when Bitwig is running
 
+<img width="1198" height="828" alt="image" src="https://github.com/user-attachments/assets/68ea0262-0755-431c-883f-2b59073f6717" />
+
 ### Creating Custom Themes
 
 1. Open the **Theme Editor** tab
 2. Click **New Theme** or duplicate an existing theme
 3. Adjust colors using the visual editor
 4. Save and apply your theme
+
+<img width="1201" height="831" alt="image" src="https://github.com/user-attachments/assets/ee7f813a-3a3c-4017-ab80-eb451d24254a" />
 
 ## How It Works
 
