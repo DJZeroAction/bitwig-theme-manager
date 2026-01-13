@@ -474,16 +474,18 @@ fn find_bitwig_bundled_java() -> Option<PathBuf> {
             ];
 
             for java_path in &jre_candidates {
-                if java_path.exists() {
-                    if Command::new(java_path)
+                if java_path.exists()
+                    && Command::new(java_path)
                         .arg("-version")
                         .output()
                         .map(|o| o.status.success())
                         .unwrap_or(false)
-                    {
-                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
-                        return Some(java_path.clone());
-                    }
+                {
+                    log_event(&format!(
+                        "patcher: found Bitwig bundled Java at {}",
+                        java_path.display()
+                    ));
+                    return Some(java_path.clone());
                 }
             }
         }
@@ -564,16 +566,18 @@ fn find_bitwig_bundled_java() -> Option<PathBuf> {
             let user_app = home.join("Applications/Bitwig Studio.app");
             if user_app.exists() {
                 let java_path = user_app.join("Contents/PlugIns/jre/Contents/Home/bin/java");
-                if java_path.exists() {
-                    if Command::new(&java_path)
+                if java_path.exists()
+                    && Command::new(&java_path)
                         .arg("-version")
                         .output()
                         .map(|o| o.status.success())
                         .unwrap_or(false)
-                    {
-                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
-                        return Some(java_path);
-                    }
+                {
+                    log_event(&format!(
+                        "patcher: found Bitwig bundled Java at {}",
+                        java_path.display()
+                    ));
+                    return Some(java_path);
                 }
             }
         }
@@ -589,16 +593,18 @@ fn find_bitwig_bundled_java() -> Option<PathBuf> {
             ];
 
             for java_path in &jre_candidates {
-                if java_path.exists() {
-                    if Command::new(java_path)
+                if java_path.exists()
+                    && Command::new(java_path)
                         .arg("-version")
                         .output()
                         .map(|o| o.status.success())
                         .unwrap_or(false)
-                    {
-                        log_event(&format!("patcher: found Bitwig bundled Java at {}", java_path.display()));
-                        return Some(java_path.clone());
-                    }
+                {
+                    log_event(&format!(
+                        "patcher: found Bitwig bundled Java at {}",
+                        java_path.display()
+                    ));
+                    return Some(java_path.clone());
                 }
             }
         }
