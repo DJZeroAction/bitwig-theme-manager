@@ -21,7 +21,7 @@ Download the latest release for your platform:
 | Windows | [Setup (exe)](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64-setup.exe) · [MSI](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64_en-US.msi) |
 | macOS (Apple Silicon) | [DMG](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_aarch64.dmg) |
 | macOS (Intel) | [DMG](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_x64.dmg) |
-| Linux | [AppImage](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.AppImage) · [deb](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.deb) · [rpm](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager-1.x86_64.rpm) |
+| Linux | [AppImage](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.AppImage) · [deb](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager_amd64.deb) · [rpm](https://github.com/DJZeroAction/bitwig-theme-manager/releases/latest/download/Bitwig.Theme.Manager-1.x86_64.rpm) · [AUR](https://aur.archlinux.org/packages/bitwig-theme-manager-bin) |
 
 Or browse all releases on the [Releases](https://github.com/DJZeroAction/bitwig-theme-manager/releases) page.
 
