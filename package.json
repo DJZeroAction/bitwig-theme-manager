@@ -1,7 +1,7 @@
 {
   "name": "bitwig-theme-manager",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-dialog": "^2.5.0",
     "@tauri-apps/plugin-opener": "^2",
+    "@tauri-apps/plugin-process": "^2.3.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
