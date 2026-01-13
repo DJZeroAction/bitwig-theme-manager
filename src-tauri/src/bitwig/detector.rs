@@ -190,10 +190,10 @@ fn get_default_search_paths() -> Vec<SearchPath> {
 
         // Enumerate all drives for Bitwig installations
         for letter in b'A'..=b'Z' {
-            let drive = format!("{}:", letter as char);
-            let drive_path = PathBuf::from(&drive);
+            let drive_root = format!("{}:\\", letter as char);
+            let drive_path = PathBuf::from(&drive_root);
             // Only check drives that exist
-            if drive_path.join("\\").exists() {
+            if drive_path.exists() {
                 // Check Program Files on this drive
                 let pf_path = drive_path.join("Program Files").join("Bitwig Studio");
                 if !paths.iter().any(|p| p.path == pf_path) {
