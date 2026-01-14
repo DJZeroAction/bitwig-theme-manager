@@ -262,7 +262,7 @@ dependencies = [
 
 [[package]]
 name = "bitwig-theme-manager"
-version = "0.2.9"
+version = "0.2.11"
 dependencies = [
  "dirs",
  "hex",

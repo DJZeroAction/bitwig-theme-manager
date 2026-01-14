@@ -549,7 +549,21 @@ pub async fn fetch_community_themes() -> Result<Vec<RepositoryTheme>, FetchError
 pub async fn fetch_all_themes() -> Result<Vec<RepositoryTheme>, FetchError> {
     let mut themes = fetch_repository().await?;
     let community_themes = fetch_community_themes().await.unwrap_or_default();
-    themes.extend(community_themes);
+
+    // Deduplicate: official themes (awesome-bitwig-themes) take precedence
+    // Community themes are only added if they don't exist in the official repo
+    let official_names: std::collections::HashSet<String> = themes
+        .iter()
+        .map(|t| t.name.to_lowercase())
+        .collect();
+
+    // Only add community themes that don't exist in official repo
+    for community_theme in community_themes {
+        if !official_names.contains(&community_theme.name.to_lowercase()) {
+            themes.push(community_theme);
+        }
+    }
+
     Ok(themes)
 }
 
