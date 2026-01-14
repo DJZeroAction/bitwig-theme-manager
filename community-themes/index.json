@@ -132,13 +132,15 @@
       "id": "grey-cloud",
       "name": "Grey Cloud",
       "author": "Pirapsy",
-      "file": "themes/grey-cloud.json"
+      "file": "themes/grey-cloud.json",
+      "preview": "previews/grey-cloud.png"
     },
     {
       "id": "purpla-shape",
       "name": "Purpla Shape",
       "author": "Pirapsy",
-      "file": "themes/purpla-shape.json"
+      "file": "themes/purpla-shape.json",
+      "preview": "previews/purpla-shape.png"
     },
     {
       "id": "oxide",
@@ -416,6 +418,7 @@
       "name": "Bitwig meets Cubase",
       "author": "Sternenherz",
       "file": "themes/sternenherz-cubase.json",
+      "preview": "previews/sternenherz-cubase.png",
       "description": "Cubase 13 inspired - color-picked from Cubase interface"
     },
     {
@@ -423,6 +426,7 @@
       "name": "Bitwig meets Cubase (Grey Blue)",
       "author": "Sternenherz",
       "file": "themes/sternenherz-cubase-greyblue.json",
+      "preview": "previews/sternenherz-cubase-greyblue.png",
       "description": "Grey-blue variant for better element distinction"
     },
     {
@@ -430,6 +434,7 @@
       "name": "Absynth 5 Fun",
       "author": "Sternenherz",
       "file": "themes/absynth-fun.json",
+      "preview": "previews/absynth-fun.png",
       "description": "Inspired by Native Instruments Absynth 5"
     },
     {
