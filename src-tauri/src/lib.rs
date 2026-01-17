@@ -4,17 +4,16 @@ pub mod settings;
 pub mod theme;
 
 use bitwig::{detector, patcher};
-use repository::{cache, fetcher};
+use repository::{bundled, cache, fetcher};
 use serde::{Deserialize, Serialize};
 use std::fs::OpenOptions;
-use std::io::{Read, Write};
+use std::io::Write;
 use std::path::PathBuf;
 use std::sync::Mutex;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use std::time::{SystemTime, UNIX_EPOCH};
 use tauri::{Emitter, Manager};
 use tauri_plugin_updater::{Update, UpdaterExt};
 use theme::parser;
-use zip::ZipArchive;
 
 // Re-export types for frontend
 pub use bitwig::BitwigInstallation;
@@ -76,6 +75,14 @@ impl From<theme::WatcherError> for AppError {
 
 impl From<settings::SettingsError> for AppError {
     fn from(e: settings::SettingsError) -> Self {
+        AppError {
+            message: e.to_string(),
+        }
+    }
+}
+
+impl From<bundled::BundledError> for AppError {
+    fn from(e: bundled::BundledError) -> Self {
         AppError {
             message: e.to_string(),
         }
@@ -597,41 +604,14 @@ fn save_downloaded_theme(
 
 // Tauri Commands - Repository
 
-/// Fetch themes from the awesome-bitwig-themes repository
+/// Fetch themes from bundled resources (no network required)
 #[tauri::command]
-async fn fetch_repository_themes(force_refresh: bool) -> Result<Vec<RepositoryTheme>, AppError> {
-    // Check cache first (unless force refresh)
-    if !force_refresh {
-        if let Ok(Some(cached)) = cache::load_cached_themes() {
-            // Return cached if not stale (1 hour cache)
-            if !cache::is_cache_stale(Duration::from_secs(3600)) {
-                let mut themes = cached.themes;
-                let mut updated = false;
-                for theme in &mut themes {
-                    if let Some(preview_url) = theme.preview_url.as_deref() {
-                        let normalized = fetcher::normalize_preview_url(preview_url);
-                        if normalized != preview_url {
-                            theme.preview_url = Some(normalized);
-                            updated = true;
-                        }
-                    }
-                }
-                if updated {
-                    let _ = cache::save_cached_themes(&themes);
-                }
-                return Ok(themes);
-            }
-        }
-    }
-
-    // Fetch fresh data (from both awesome-bitwig-themes and community themes)
-    let themes = fetcher::fetch_all_themes().await?;
-
-    // Update cache
-    if let Err(e) = cache::save_cached_themes(&themes) {
-        eprintln!("Failed to cache themes: {}", e);
-    }
-
+fn fetch_repository_themes(
+    app: tauri::AppHandle,
+    _force_refresh: bool,
+) -> Result<Vec<RepositoryTheme>, AppError> {
+    // Load themes from bundled resources
+    let themes = bundled::load_bundled_themes(&app)?;
     Ok(themes)
 }
 
@@ -644,118 +624,34 @@ fn get_cached_repository_themes() -> Result<Vec<RepositoryTheme>, AppError> {
     }
 }
 
-/// Download a theme from a repository or direct URL
+/// Get theme content from bundled resources
 #[tauri::command]
-async fn download_repository_theme(
+fn download_repository_theme(
+    app: tauri::AppHandle,
     theme_name: String,
-    repo_url: String,
+    _repo_url: String,
     download_url: Option<String>,
 ) -> Result<String, AppError> {
-    // First check if already cached
-    if let Ok(Some(content)) = cache::load_cached_theme_file(&theme_name) {
-        return Ok(content);
-    }
+    // Extract filename from the bundled:// URL
+    let filename = download_url
+        .as_ref()
+        .and_then(|url| url.strip_prefix("bundled://"))
+        .ok_or_else(|| AppError {
+            message: format!("Invalid bundled theme URL for: {}", theme_name),
+        })?;
 
-    // Use direct download URL if provided (community themes), otherwise scrape repo
-    let theme_file = if let Some(url) = download_url {
-        let kind = if url.to_ascii_lowercase().ends_with(".zip") {
-            fetcher::ThemeFileKind::Zip
-        } else {
-            fetcher::ThemeFileKind::Text
-        };
-        fetcher::ThemeFile { url, kind }
-    } else {
-        fetcher::find_theme_file(&repo_url)
-            .await?
-            .ok_or_else(|| AppError {
-                message: format!("No theme file found in repository: {}", repo_url),
-            })?
-    };
-
-    let raw_bytes = fetcher::download_theme_bytes(&theme_file.url).await?;
-
-    let (raw_content, is_json) = match theme_file.kind {
-        fetcher::ThemeFileKind::Zip => extract_theme_from_zip(&raw_bytes)?,
-        fetcher::ThemeFileKind::Text => {
-            let content = String::from_utf8(raw_bytes).map_err(|e| AppError {
-                message: format!("Failed to decode theme file: {}", e),
-            })?;
-
-            // Reject HTML content (anti-bot pages, error pages, etc.)
-            let trimmed = content.trim();
-            if trimmed.starts_with("<!") || trimmed.starts_with("<html") || trimmed.starts_with("<HTML") {
-                let debug_msg = format!("HTML received for {}\nURL: {}\nContent preview:\n{}",
-                    theme_name, theme_file.url, &content[..content.len().min(500)]);
-                let _ = std::fs::write("/tmp/theme-html-error.txt", &debug_msg);
-                return Err(AppError {
-                    message: "Download failed: received HTML instead of theme file (possible anti-bot protection)".to_string(),
-                });
-            }
-
-            let is_json = parser::is_json_content(&content);
-            (content, is_json)
-        }
-    };
+    // Read theme content from bundled resources
+    let raw_content = bundled::get_bundled_theme_content(&app, filename)?;
 
     // Convert JSON themes to BTE format if needed
+    let is_json = parser::is_json_content(&raw_content);
     let content = if is_json {
-        parser::convert_json_to_bte(&raw_content, Some(&theme_name)).map_err(|e| {
-            // Write debug info to file
-            let debug_msg = format!("Failed to convert JSON for {}: {}\nContent length: {}\nContent preview:\n{}",
-                theme_name, e, raw_content.len(), &raw_content[..raw_content.len().min(1000)]);
-            let _ = std::fs::write("/tmp/theme-convert-error.txt", &debug_msg);
-            e
-        })?
+        parser::convert_json_to_bte(&raw_content, Some(&theme_name))?
     } else {
         raw_content
     };
 
-    // Cache the downloaded theme
-    cache::save_theme_file(&theme_name, &content)?;
-
     Ok(content)
-}
-
-fn extract_theme_from_zip(bytes: &[u8]) -> Result<(String, bool), AppError> {
-    let cursor = std::io::Cursor::new(bytes);
-    let mut archive = ZipArchive::new(cursor).map_err(|e| AppError {
-        message: format!("Failed to read theme archive: {}", e),
-    })?;
-
-    let mut bte_index = None;
-    let mut json_index = None;
-
-    for i in 0..archive.len() {
-        let file = archive.by_index(i).map_err(|e| AppError {
-            message: format!("Failed to read theme archive entry: {}", e),
-        })?;
-        let name = file.name().to_ascii_lowercase();
-        if name.ends_with('/') {
-            continue;
-        }
-        if name.ends_with(".bte") {
-            bte_index = Some(i);
-            break;
-        }
-        if name.ends_with(".json") && !name.ends_with("package.json") && json_index.is_none() {
-            json_index = Some(i);
-        }
-    }
-
-    let index = bte_index.or(json_index).ok_or_else(|| AppError {
-        message: "No theme file found in archive.".to_string(),
-    })?;
-
-    let mut file = archive.by_index(index).map_err(|e| AppError {
-        message: format!("Failed to read theme archive entry: {}", e),
-    })?;
-    let mut content = String::new();
-    file.read_to_string(&mut content).map_err(|e| AppError {
-        message: format!("Failed to read theme file from archive: {}", e),
-    })?;
-    let name = file.name().to_ascii_lowercase();
-    let is_json = name.ends_with(".json") && !name.ends_with("package.json");
-    Ok((content, is_json))
 }
 
 /// Cache a preview image for a theme

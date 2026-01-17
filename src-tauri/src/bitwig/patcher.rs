@@ -157,6 +157,15 @@ fn create_manager_backup(jar_path: &Path) -> Result<PathBuf, PatchError> {
         return Err(PatchError::JarNotFound(jar_path.to_path_buf()));
     }
 
+    // Only create a backup if none exists - we want to preserve the ORIGINAL unpatched JAR
+    if let Ok(existing) = find_latest_manager_backup(jar_path) {
+        log_event(&format!(
+            "patcher: backup already exists, skipping: {}",
+            existing.to_string_lossy()
+        ));
+        return Ok(existing);
+    }
+
     let backup_dir = manager_backup_dir(jar_path)?;
     fs::create_dir_all(&backup_dir)?;
 

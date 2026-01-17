@@ -145,7 +145,6 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   const [downloadStatus, setDownloadStatus] = useState<string | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [localThemes, setLocalThemes] = useState<string[]>([]);
-  const [downloadedPath, setDownloadedPath] = useState<string | null>(null);
 
   // Get available Bitwig versions from installations
   const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
@@ -217,8 +216,6 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
     return found || null;
   };
 
-  const selectedThemeLocalPath = selectedTheme ? (downloadedPath || getExistingThemePath(selectedTheme.name)) : null;
-
   const handleImageError = (themeName: string) => {
     setFailedImages(prev => new Set(prev).add(themeName));
   };
@@ -246,39 +243,35 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
     ];
   };
 
-  const handleDownload = async (theme: RepositoryTheme) => {
+  const handleApply = async (theme: RepositoryTheme) => {
     setDownloading(true);
-    setDownloadStatus("Downloading theme...");
-    try {
-      const savedPath = await downloadAndInstallTheme(theme, resolvedVersion);
-      if (savedPath) {
-        setDownloadedPath(savedPath);
-        setLocalThemes((prev) => [...prev, savedPath]);
-        setDownloadStatus("Downloaded! Click Apply to activate.");
-      } else {
-        setDownloadStatus("Failed to download theme");
-      }
-    } catch (e) {
-      setDownloadStatus(`Error: ${e instanceof Error ? e.message : String(e)}`);
-    } finally {
-      setDownloading(false);
-    }
-  };
 
-  const handleApply = async (themePath: string) => {
-    setDownloading(true);
-    setDownloadStatus("Applying theme...");
     try {
+      // Get the local path if already installed
+      let themePath = getExistingThemePath(theme.name);
+
+      // If not installed locally, install it first
+      if (!themePath) {
+        setDownloadStatus("Installing theme...");
+        const savedPath = await downloadAndInstallTheme(theme, resolvedVersion);
+        if (!savedPath) {
+          setDownloadStatus("Failed to install theme");
+          return;
+        }
+        themePath = savedPath;
+        setLocalThemes((prev) => [...prev, savedPath]);
+      }
+
+      // Now apply the theme
+      setDownloadStatus("Applying theme...");
       const message = await api.applyTheme(themePath, resolvedVersion);
       setDownloadStatus(message);
       setTimeout(() => {
         setDownloadStatus(null);
         setSelectedTheme(null);
-        setDownloadedPath(null);
       }, 5000);
     } catch (e) {
       const errorMsg = e instanceof Error ? e.message : String(e);
-      // Check if it's a structured error from Tauri
       const parsed = typeof e === 'object' && e !== null && 'message' in e ? (e as {message: string}).message : errorMsg;
       setDownloadStatus(`Error: ${parsed}`);
     } finally {
@@ -286,9 +279,8 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
     }
   };
 
-  // Reset downloaded path when selecting a different theme
+  // Reset status when selecting a different theme
   useEffect(() => {
-    setDownloadedPath(null);
     setDownloadStatus(null);
   }, [selectedTheme?.name]);
 
@@ -450,25 +442,13 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
                 </select>
               </div>
               <div className="flex gap-2">
-                {selectedThemeLocalPath ? (
-                  // Theme is already downloaded - show Apply button
-                  <button
-                    onClick={() => handleApply(selectedThemeLocalPath)}
-                    disabled={downloading}
-                    className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg"
-                  >
-                    {downloading ? "Applying..." : "Apply Theme"}
-                  </button>
-                ) : (
-                  // Theme not downloaded - show Download button
-                  <button
-                    onClick={() => handleDownload(selectedTheme)}
-                    disabled={downloading}
-                    className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 rounded-lg"
-                  >
-                    {downloading ? "Downloading..." : "Download"}
-                  </button>
-                )}
+                <button
+                  onClick={() => handleApply(selectedTheme)}
+                  disabled={downloading}
+                  className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg"
+                >
+                  {downloading ? "Applying..." : "Apply Theme"}
+                </button>
                 <a
                   href={selectedTheme.repo_url}
                   target="_blank"
@@ -478,19 +458,14 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
                   Repo
                 </a>
                 <button
-                  onClick={() => { setSelectedTheme(null); setDownloadedPath(null); }}
+                  onClick={() => setSelectedTheme(null)}
                   className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg"
                 >
                   Close
                 </button>
               </div>
-              {selectedThemeLocalPath && !downloadStatus && (
-                <div className="mt-3 text-sm text-green-400 text-center">
-                  Already downloaded
-                </div>
-              )}
               {downloadStatus && (
-                <div className={`mt-3 text-sm text-center whitespace-pre-wrap ${downloadStatus.includes("applied") || downloadStatus.includes("Downloaded") ? "text-green-400" : downloadStatus.includes("Error") ? "text-red-400" : "text-gray-400"}`}>
+                <div className={`mt-3 text-sm text-center whitespace-pre-wrap ${downloadStatus.includes("applied") ? "text-green-400" : downloadStatus.includes("Error") ? "text-red-400" : "text-gray-400"}`}>
                   {downloadStatus}
                 </div>
               )}

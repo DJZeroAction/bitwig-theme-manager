@@ -1,20 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import type { RepositoryTheme } from "../api/types";
 import * as api from "../api/bitwig";
-
-const normalizePreviewUrl = (url?: string): string | undefined => {
-  if (!url) return undefined;
-  if (url.includes("github.com") && url.includes("/blob/")) {
-    return url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
-  }
-  if (url.includes("codeberg.org") && url.includes("/media/")) {
-    return url.replace("/media/", "/raw/");
-  }
-  if (url.includes("github.com") && !url.includes("raw.githubusercontent") && !url.includes("camo.githubusercontent")) {
-    return url.includes("?") ? `${url}&raw=true` : `${url}?raw=true`;
-  }
-  return url;
-};
 
 const getErrorMessage = (error: unknown): string => {
   if (error instanceof Error) return error.message;
@@ -34,33 +21,20 @@ export function useRepositoryThemes() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const refresh = useCallback(async (forceRefresh: boolean = false) => {
+  const refresh = useCallback(async (_forceRefresh: boolean = false) => {
     setLoading(true);
     setError(null);
     try {
-      const fetchedThemes = await api.fetchRepositoryThemes(forceRefresh);
-      setThemes(
-        fetchedThemes.map((theme) => ({
-          ...theme,
-          preview_url: normalizePreviewUrl(theme.preview_url),
-        }))
-      );
+      // Themes are now bundled with the app - no network required
+      const fetchedThemes = await api.fetchRepositoryThemes(false);
+      // Convert preview file paths to asset protocol URLs
+      const themesWithAssetUrls = fetchedThemes.map((theme) => ({
+        ...theme,
+        preview_url: theme.preview_url ? convertFileSrc(theme.preview_url) : undefined,
+      }));
+      setThemes(themesWithAssetUrls);
     } catch (e) {
       setError(getErrorMessage(e));
-      // Try to load from cache on error
-      try {
-        const cachedThemes = await api.getCachedRepositoryThemes();
-        if (cachedThemes.length > 0) {
-          setThemes(
-            cachedThemes.map((theme) => ({
-              ...theme,
-              preview_url: normalizePreviewUrl(theme.preview_url),
-            }))
-          );
-        }
-      } catch {
-        // Ignore cache errors
-      }
     } finally {
       setLoading(false);
     }
@@ -70,7 +44,7 @@ export function useRepositoryThemes() {
     refresh(false);
   }, [refresh]);
 
-  const downloadTheme = useCallback(async (theme: RepositoryTheme) => {
+  const installTheme = useCallback(async (theme: RepositoryTheme) => {
     try {
       const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url, theme.download_url);
       return content;
@@ -80,16 +54,16 @@ export function useRepositoryThemes() {
     }
   }, []);
 
-  const downloadAndInstallTheme = useCallback(
+  const installAndSaveTheme = useCallback(
     async (theme: RepositoryTheme, bitwigVersion: string) => {
       try {
-        // First download the theme content
+        // Get theme content from bundled resources
         const content = await api.downloadRepositoryTheme(theme.name, theme.repo_url, theme.download_url);
         if (!content) {
-          throw new Error("Failed to download theme content");
+          throw new Error("Failed to load theme content");
         }
 
-        // Then save it to the themes directory
+        // Save it to the themes directory
         const savedPath = await api.saveDownloadedTheme(
           theme.name,
           content,
@@ -110,7 +84,10 @@ export function useRepositoryThemes() {
     loading,
     error,
     refresh,
-    downloadTheme,
-    downloadAndInstallTheme,
+    installTheme,
+    installAndSaveTheme,
+    // Keep old names as aliases for backwards compatibility
+    downloadTheme: installTheme,
+    downloadAndInstallTheme: installAndSaveTheme,
   };
 }
