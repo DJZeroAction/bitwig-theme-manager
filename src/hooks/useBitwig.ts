@@ -7,6 +7,7 @@ export function useBitwigInstallations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [javaAvailable, setJavaAvailable] = useState<boolean | null>(null);
+  const [backups, setBackups] = useState<Record<string, boolean>>({});
 
   const refresh = useCallback(async () => {
     setLoading(true);
@@ -18,6 +19,13 @@ export function useBitwigInstallations() {
       ]);
       setInstallations(detected);
       setJavaAvailable(hasJava);
+
+      // Check for backups for each installation
+      const backupStatus: Record<string, boolean> = {};
+      for (const install of detected) {
+        backupStatus[install.jar_path] = await api.hasBackup(install.jar_path);
+      }
+      setBackups(backupStatus);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -82,6 +90,7 @@ export function useBitwigInstallations() {
     loading,
     error,
     javaAvailable,
+    backups,
     refresh,
     addManualPath,
     patchInstallation,

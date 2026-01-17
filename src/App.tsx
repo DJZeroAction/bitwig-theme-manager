@@ -888,7 +888,7 @@ function EditorView() {
 }
 
 function PatchView() {
-  const { installations, loading, error, javaAvailable, addManualPath, patchInstallation, refresh } = useBitwigInstallations();
+  const { installations, loading, error, javaAvailable, backups, addManualPath, patchInstallation, restoreInstallation, refresh } = useBitwigInstallations();
   const [manualPath, setManualPath] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [patchResult, setPatchResult] = useState<{ success: boolean; message: string } | null>(null);
@@ -904,6 +904,31 @@ function PatchView() {
     }
     setActionLoading(null);
     refresh();
+  };
+
+  const handleRestore = async (installation: BitwigInstallation) => {
+    setActionLoading(installation.jar_path + "-restore");
+    setPatchResult(null);
+    const success = await restoreInstallation(installation.jar_path);
+    if (success) {
+      setPatchResult({ success: true, message: "Restored to original! Restart Bitwig for changes to take effect." });
+    } else {
+      setPatchResult({ success: false, message: "Restore failed. Check if you have the required permissions." });
+    }
+    setActionLoading(null);
+    refresh();
+  };
+
+  const handleResetTheme = async (version: string) => {
+    setActionLoading(version + "-reset");
+    setPatchResult(null);
+    try {
+      const message = await api.resetTheme(version);
+      setPatchResult({ success: true, message });
+    } catch (e) {
+      setPatchResult({ success: false, message: `Reset failed: ${e instanceof Error ? e.message : String(e)}` });
+    }
+    setActionLoading(null);
   };
 
   const handleAddManual = async () => {
@@ -1003,7 +1028,7 @@ function PatchView() {
                 </div>
                 <button
                   onClick={() => handlePatch(install)}
-                  disabled={actionLoading === install.jar_path}
+                  disabled={actionLoading === install.jar_path || actionLoading === install.jar_path + "-restore"}
                   className="px-4 py-2 rounded-lg disabled:opacity-50 bg-purple-600 hover:bg-purple-700"
                 >
                   {actionLoading === install.jar_path
@@ -1011,6 +1036,32 @@ function PatchView() {
                     : install.is_patched ? "Repatch" : "Patch"
                   }
                 </button>
+                {backups[install.jar_path] && (
+                  <button
+                    onClick={() => handleRestore(install)}
+                    disabled={actionLoading === install.jar_path || actionLoading === install.jar_path + "-restore"}
+                    className="px-4 py-2 rounded-lg disabled:opacity-50 bg-orange-600 hover:bg-orange-700"
+                    title="Restore original unpatched JAR from backup"
+                  >
+                    {actionLoading === install.jar_path + "-restore"
+                      ? "Restoring..."
+                      : "Restore JAR"
+                    }
+                  </button>
+                )}
+                {install.is_patched && (
+                  <button
+                    onClick={() => handleResetTheme(install.version)}
+                    disabled={actionLoading === install.version + "-reset"}
+                    className="px-4 py-2 rounded-lg disabled:opacity-50 bg-gray-600 hover:bg-gray-500"
+                    title="Remove custom theme (keeps patching)"
+                  >
+                    {actionLoading === install.version + "-reset"
+                      ? "Resetting..."
+                      : "Reset Theme"
+                    }
+                  </button>
+                )}
               </div>
               {install.needs_sudo && !install.is_patched && (
                 <div className="mt-2 text-xs text-yellow-400 flex items-center gap-1">

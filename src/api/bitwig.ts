@@ -62,6 +62,10 @@ export async function applyTheme(themePath: string, bitwigVersion: string): Prom
   return invoke<string>("apply_theme", { themePath, bitwigVersion });
 }
 
+export async function resetTheme(bitwigVersion: string): Promise<string> {
+  return invoke<string>("reset_theme", { bitwigVersion });
+}
+
 export async function createTheme(name: string, bitwigVersion: string): Promise<Theme> {
   return invoke<Theme>("create_theme", { name, bitwigVersion });
 }
