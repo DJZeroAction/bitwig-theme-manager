@@ -199,15 +199,79 @@ async fn install_update(app: tauri::AppHandle) -> Result<(), AppError> {
 // Tauri Commands - Bitwig Detection
 
 /// Detect all Bitwig Studio installations on the system
+/// Includes both auto-detected and custom (manually added) installations
 #[tauri::command]
 fn detect_bitwig_installations() -> Vec<BitwigInstallation> {
-    detector::detect_installations()
+    let mut installations = detector::detect_installations();
+
+    // Load custom installations from settings
+    if let Ok(settings) = settings::load_settings() {
+        for custom_path in settings.custom_installations {
+            if let Some(installation) = detector::validate_installation(&PathBuf::from(&custom_path)) {
+                // Only add if not already detected
+                if !installations.iter().any(|i| i.jar_path == installation.jar_path) {
+                    installations.push(installation);
+                }
+            }
+        }
+    }
+
+    installations
 }
 
 /// Validate a manually provided Bitwig installation path
 #[tauri::command]
 fn validate_bitwig_path(path: String) -> Option<BitwigInstallation> {
     detector::validate_installation(&PathBuf::from(path))
+}
+
+/// Add a custom Bitwig installation path to settings
+#[tauri::command]
+fn add_custom_installation(path: String) -> Result<(), AppError> {
+    // Validate the path first
+    if detector::validate_installation(&PathBuf::from(&path)).is_none() {
+        return Err(AppError {
+            message: "Invalid Bitwig installation path".to_string(),
+        });
+    }
+
+    let mut current = settings::load_settings()?;
+    if !current.custom_installations.contains(&path) {
+        current.custom_installations.push(path);
+        settings::save_settings(&current)?;
+    }
+    Ok(())
+}
+
+/// Remove a custom Bitwig installation path from settings
+#[tauri::command]
+fn remove_custom_installation(path: String) -> Result<(), AppError> {
+    let mut current = settings::load_settings()?;
+    current.custom_installations.retain(|p| p != &path);
+    settings::save_settings(&current)?;
+    Ok(())
+}
+
+/// Toggle a theme as favorite (add if not present, remove if present)
+#[tauri::command]
+fn toggle_favorite_theme(theme_id: String) -> Result<bool, AppError> {
+    let mut current = settings::load_settings()?;
+    let is_favorite = if current.favorite_themes.contains(&theme_id) {
+        current.favorite_themes.retain(|id| id != &theme_id);
+        false
+    } else {
+        current.favorite_themes.push(theme_id);
+        true
+    };
+    settings::save_settings(&current)?;
+    Ok(is_favorite)
+}
+
+/// Get all favorite theme IDs
+#[tauri::command]
+fn get_favorite_themes() -> Result<Vec<String>, AppError> {
+    let current = settings::load_settings()?;
+    Ok(current.favorite_themes)
 }
 
 /// Get the patch status of a Bitwig installation
@@ -322,18 +386,42 @@ fn get_active_theme_path(bitwig_version: String) -> Option<String> {
     parser::get_active_theme_path(&bitwig_version).map(|p| p.to_string_lossy().to_string())
 }
 
+/// Check if a Bitwig version is 5.x (requires JSON format)
+/// Returns true for Bitwig 5.x, false for Bitwig 6.x and later
+fn is_bitwig_5(version: &str) -> bool {
+    // Extract major version number from version string like "5.2", "5.2.3", "6.0", "6.0 Beta 1"
+    version.starts_with("5.") || version == "5"
+}
+
 /// Apply a theme by copying it to the active theme location
 /// Also patches Bitwig if not already patched
+/// Automatically converts between JSON and BTE formats based on Bitwig version:
+/// - Bitwig 5.x: Requires JSON format with window/arranger/advanced sections
+/// - Bitwig 6.x: Requires BTE text format with Key: value pairs
 #[tauri::command]
 fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, AppError> {
     let source = PathBuf::from(theme_path);
-    let target = parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
-        message: "Could not determine active theme path".to_string(),
-    })?;
+
+    // Determine target path and format based on Bitwig version
+    let needs_json = is_bitwig_5(&bitwig_version);
+    let target = if needs_json {
+        // Bitwig 5.x uses JSON format with .json extension
+        parser::get_theme_directory(&bitwig_version)
+            .map(|dir| dir.join("theme.json"))
+            .ok_or_else(|| AppError {
+                message: "Could not determine theme directory".to_string(),
+            })?
+    } else {
+        // Bitwig 6.x uses BTE format with .bte extension
+        parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
+            message: "Could not determine active theme path".to_string(),
+        })?
+    };
 
     let installations = detector::detect_installations();
     let mut details = Vec::new();
     details.push(format!("Version: {}", bitwig_version));
+    details.push(format!("Target format: {}", if needs_json { "JSON (Bitwig 5)" } else { "BTE (Bitwig 6)" }));
     details.push(format!("Source: {}", source.to_string_lossy()));
     details.push(format!("Source exists: {}", source.exists()));
     details.push(format!("Target: {}", target.to_string_lossy()));
@@ -359,17 +447,42 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
         std::fs::create_dir_all(parent)?;
     }
 
-    // Copy or convert theme file
-    let mut converted = false;
-    if let Ok(content) = std::fs::read_to_string(&source) {
-        if parser::is_json_content(&content) {
-            let theme_name = source
-                .file_stem()
-                .and_then(|s| s.to_str())
-                .map(|s| s.to_string());
-            let converted_content = parser::convert_json_to_bte(&content, theme_name.as_deref())
+    // Read source content
+    let content = std::fs::read_to_string(&source).map_err(|e| {
+        log_event(&format!("apply_theme read failed: {}", e));
+        AppError {
+            message: format!("Failed to read theme: {}", e),
+        }
+    })?;
+
+    let source_is_json = parser::is_json_content(&content);
+    let theme_name = source
+        .file_stem()
+        .and_then(|s| s.to_str())
+        .map(|s| s.to_string());
+
+    // Convert and write theme based on target format
+    let _converted = if needs_json {
+        // Bitwig 5.x needs JSON format
+        if source_is_json {
+            // Source is already JSON, copy directly
+            std::fs::write(&target, &content).map_err(|e| {
+                log_event(&format!("apply_theme write failed: {}", e));
+                AppError {
+                    message: format!(
+                        "Failed to write theme: {}.\n\nDetails:\n{}",
+                        e,
+                        details.join("\n")
+                    ),
+                }
+            })?;
+            log_event("apply_theme copied json to json (Bitwig 5)");
+            false
+        } else {
+            // Source is BTE, convert to JSON
+            let converted_content = parser::convert_bte_to_json(&content, theme_name.as_deref())
                 .map_err(|e| AppError {
-                    message: format!("Failed to convert JSON theme: {}", e),
+                    message: format!("Failed to convert BTE to JSON: {}", e),
                 })?;
             std::fs::write(&target, converted_content).map_err(|e| {
                 log_event(&format!("apply_theme write failed: {}", e));
@@ -381,24 +494,91 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
                     ),
                 }
             })?;
-            converted = true;
-            log_event("apply_theme converted json to bte");
+            log_event("apply_theme converted bte to json (Bitwig 5)");
+            true
         }
-    }
+    } else {
+        // Bitwig 6.x needs BTE format
+        if source_is_json {
+            // Source is JSON, convert to BTE
+            let bte_content = parser::convert_json_to_bte(&content, theme_name.as_deref())
+                .map_err(|e| AppError {
+                    message: format!("Failed to convert JSON to BTE: {}", e),
+                })?;
 
-    if !converted {
-        std::fs::copy(&source, &target).map_err(|e| {
-            log_event(&format!("apply_theme copy failed: {}", e));
-            AppError {
-                message: format!(
-                    "Failed to copy theme: {}.\n\nDetails:\n{}",
-                    e,
-                    details.join("\n")
-                ),
+            // Check if the JSON was a Bitwig 5 theme and needs property conversion
+            let is_bw5_theme = bte_content.lines().any(|line| {
+                let trimmed = line.trim();
+                trimmed.starts_with("On:") ||
+                trimmed.starts_with("Selection:") ||
+                trimmed.starts_with("Panel body:") ||
+                trimmed.starts_with("Hitech on:") ||
+                trimmed.starts_with("Dark Timeline Background:")
+            });
+
+            let final_content = if is_bw5_theme {
+                log_event("apply_theme detected bw5 json, converting to bw6");
+                parser::convert_bw5_to_bw6(&bte_content)
+            } else {
+                bte_content
+            };
+
+            std::fs::write(&target, final_content).map_err(|e| {
+                log_event(&format!("apply_theme write failed: {}", e));
+                AppError {
+                    message: format!(
+                        "Failed to write theme: {}.\n\nDetails:\n{}",
+                        e,
+                        details.join("\n")
+                    ),
+                }
+            })?;
+            log_event("apply_theme converted json to bte (Bitwig 6)");
+            true
+        } else {
+            // Source is BTE - check if it needs Bitwig 5→6 conversion
+            let is_bw5_theme = content.lines().any(|line| {
+                let trimmed = line.trim();
+                // These properties exist in Bitwig 5 but not Bitwig 6
+                trimmed.starts_with("On:") ||
+                trimmed.starts_with("Selection:") ||
+                trimmed.starts_with("Panel body:") ||
+                trimmed.starts_with("Hitech on:") ||
+                trimmed.starts_with("Dark Timeline Background:")
+            });
+
+            if is_bw5_theme {
+                // Convert Bitwig 5 theme to Bitwig 6 format
+                let converted_content = parser::convert_bw5_to_bw6(&content);
+                std::fs::write(&target, converted_content).map_err(|e| {
+                    log_event(&format!("apply_theme write failed: {}", e));
+                    AppError {
+                        message: format!(
+                            "Failed to write theme: {}.\n\nDetails:\n{}",
+                            e,
+                            details.join("\n")
+                        ),
+                    }
+                })?;
+                log_event("apply_theme converted bw5 bte to bw6 bte");
+                true
+            } else {
+                // Already Bitwig 6 format, copy directly
+                std::fs::write(&target, &content).map_err(|e| {
+                    log_event(&format!("apply_theme write failed: {}", e));
+                    AppError {
+                        message: format!(
+                            "Failed to write theme: {}.\n\nDetails:\n{}",
+                            e,
+                            details.join("\n")
+                        ),
+                    }
+                })?;
+                log_event("apply_theme copied bte to bte (Bitwig 6)");
+                false
             }
-        })?;
-        log_event("apply_theme copy ok");
-    }
+        }
+    };
 
     // Check if Bitwig needs patching
     let mut patched_now = false;
@@ -750,6 +930,11 @@ pub fn run() {
             // Bitwig detection
             detect_bitwig_installations,
             validate_bitwig_path,
+            add_custom_installation,
+            remove_custom_installation,
+            // Favorites
+            toggle_favorite_theme,
+            get_favorite_themes,
             get_patch_status,
             get_latest_bitwig_version,
             patch_bitwig,

@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { open, save } from "@tauri-apps/plugin-dialog";
+import { openUrl } from "@tauri-apps/plugin-opener";
 import { useBitwigInstallations } from "./hooks/useBitwig";
 import { useRepositoryThemes } from "./hooks/useRepository";
 import { useThemes } from "./hooks/useThemes";
@@ -8,7 +9,7 @@ import { useUpdater } from "./hooks/useUpdater";
 import { ColorGroup } from "./components/ColorPicker";
 import { UpdateNotification } from "./components/UpdateNotification";
 import * as api from "./api/bitwig";
-import type { BitwigInstallation, RepositoryTheme } from "./api/types";
+import type { BitwigInstallation, RepositoryTheme, ThemeBundle } from "./api/types";
 
 type View = "browse" | "editor" | "patch" | "settings";
 
@@ -145,6 +146,40 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   const [downloadStatus, setDownloadStatus] = useState<string | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [localThemes, setLocalThemes] = useState<string[]>([]);
+  const [authorFilter, setAuthorFilter] = useState<string>("all");
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+
+  // Load favorites from settings on mount
+  useEffect(() => {
+    api.getFavoriteThemes().then((favs) => setFavorites(new Set(favs)));
+  }, []);
+
+  // Toggle favorite status for a theme
+  const toggleFavorite = useCallback(async (themeId: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Don't open theme detail modal
+    const isFavorite = await api.toggleFavoriteTheme(themeId);
+    setFavorites((prev) => {
+      const next = new Set(prev);
+      if (isFavorite) {
+        next.add(themeId);
+      } else {
+        next.delete(themeId);
+      }
+      return next;
+    });
+  }, []);
+
+  // Extract unique authors sorted by theme count (descending), then alphabetically
+  const authors = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const theme of themes) {
+      counts.set(theme.author, (counts.get(theme.author) || 0) + 1);
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([name, count]) => ({ name, count }));
+  }, [themes]);
 
   // Get available Bitwig versions from installations
   const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
@@ -220,16 +255,68 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
     setFailedImages(prev => new Set(prev).add(themeName));
   };
 
-  // Filter themes based on search query
-  const filteredThemes = themes.filter((theme) => {
-    if (!searchQuery) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      theme.name.toLowerCase().includes(query) ||
-      theme.author.toLowerCase().includes(query) ||
-      (theme.description?.toLowerCase().includes(query) ?? false)
-    );
-  });
+  // Filter themes based on search query, author filter, and favorites
+  const filteredThemes = themes
+    .filter((theme) => {
+      // Handle favorites filter
+      if (authorFilter === "favorites" && !favorites.has(theme.name)) return false;
+      // Handle author filter
+      if (authorFilter !== "all" && authorFilter !== "favorites" && theme.author !== authorFilter) return false;
+      if (!searchQuery) return true;
+      const query = searchQuery.toLowerCase();
+      return (
+        theme.name.toLowerCase().includes(query) ||
+        theme.author.toLowerCase().includes(query) ||
+        (theme.description?.toLowerCase().includes(query) ?? false)
+      );
+    })
+    // Sort favorites to top when showing "All" with no search query
+    .sort((a, b) => {
+      if (authorFilter === "all" && !searchQuery) {
+        const aFav = favorites.has(a.name);
+        const bFav = favorites.has(b.name);
+        if (aFav && !bFav) return -1;
+        if (!aFav && bFav) return 1;
+      }
+      return 0;
+    });
+
+  // Group themes by bundle - bundles show as single cards with variant dropdown
+  const { bundledThemes, standalonethemes } = useMemo(() => {
+    const bundles = new Map<string, RepositoryTheme[]>();
+    const standalone: RepositoryTheme[] = [];
+
+    for (const theme of filteredThemes) {
+      if (theme.bundle) {
+        const existing = bundles.get(theme.bundle) || [];
+        existing.push(theme);
+        bundles.set(theme.bundle, existing);
+      } else {
+        standalone.push(theme);
+      }
+    }
+
+    // Convert bundles map to ThemeBundle objects
+    const bundleList: ThemeBundle[] = Array.from(bundles.entries()).map(([id, themes]) => ({
+      id,
+      name: themes[0].name.replace(/ (Original|Basic|BW5)$/, '').replace(/ \(.*\)$/, ''),
+      themes,
+    }));
+
+    return { bundledThemes: bundleList, standalonethemes: standalone };
+  }, [filteredThemes]);
+
+  // Get the currently selected variant for a bundle
+  const getSelectedVariant = (bundle: ThemeBundle): RepositoryTheme => {
+    const selectedName = selectedVariants[bundle.id];
+    return bundle.themes.find(t => t.name === selectedName) || bundle.themes[0];
+  };
+
+  // Set the selected variant for a bundle
+  const selectVariant = (bundleId: string, themeName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedVariants(prev => ({ ...prev, [bundleId]: themeName }));
+  };
 
   // Generate a color palette from the theme name for placeholder preview
   const getThemeColors = (name: string): string[] => {
@@ -247,10 +334,18 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
     setDownloading(true);
 
     try {
-      // Get the local path if already installed
-      let themePath = getExistingThemePath(theme.name);
+      // For bundled themes, always use fresh content from bundled resources
+      // (don't use cached/downloaded versions which may be outdated)
+      const isBundled = theme.download_url?.startsWith("bundled://");
 
-      // If not installed locally, install it first
+      let themePath: string | null = null;
+
+      if (!isBundled) {
+        // For non-bundled themes, check if already installed locally
+        themePath = getExistingThemePath(theme.name);
+      }
+
+      // Install the theme (always for bundled, only if missing for others)
       if (!themePath) {
         setDownloadStatus("Installing theme...");
         const savedPath = await downloadAndInstallTheme(theme, resolvedVersion);
@@ -259,7 +354,9 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
           return;
         }
         themePath = savedPath;
-        setLocalThemes((prev) => [...prev, savedPath]);
+        if (!isBundled) {
+          setLocalThemes((prev) => [...prev, savedPath]);
+        }
       }
 
       // Now apply the theme
@@ -268,7 +365,6 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
       setDownloadStatus(message);
       setTimeout(() => {
         setDownloadStatus(null);
-        setSelectedTheme(null);
       }, 5000);
     } catch (e) {
       const errorMsg = e instanceof Error ? e.message : String(e);
@@ -314,69 +410,251 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
             {error} - Showing cached themes
           </div>
         )}
-        {searchQuery && (
-          <div className="text-sm text-gray-400">
-            Found {filteredThemes.length} theme{filteredThemes.length !== 1 ? "s" : ""} matching "{searchQuery}"
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-2">
+            <label htmlFor="author-filter" className="text-sm text-gray-400">Filter:</label>
+            <select
+              id="author-filter"
+              value={authorFilter}
+              onChange={(e) => setAuthorFilter(e.target.value)}
+              className="bg-gray-700 border border-gray-600 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-purple-500"
+            >
+              <option value="all">All ({themes.length})</option>
+              {favorites.size > 0 && (
+                <option value="favorites">★ Favorites ({favorites.size})</option>
+              )}
+              {authors.map(({ name, count }) => (
+                <option key={name} value={name}>
+                  {name} ({count})
+                </option>
+              ))}
+            </select>
           </div>
-        )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredThemes.map((theme) => {
+          {(searchQuery || authorFilter !== "all") && (
+            <div className="text-sm text-gray-400">
+              {filteredThemes.length} theme{filteredThemes.length !== 1 ? "s" : ""}
+              {searchQuery && <> matching "{searchQuery}"</>}
+              {authorFilter === "favorites" && <> in favorites</>}
+              {authorFilter !== "all" && authorFilter !== "favorites" && <> by {authorFilter}</>}
+            </div>
+          )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
+          {/* Bundled themes - show as single cards with variant dropdown */}
+          {bundledThemes.map((bundle) => {
+            const theme = getSelectedVariant(bundle);
             const colors = getThemeColors(theme.name);
+            const hasRealRepoUrl = theme.repo_url && !theme.repo_url.startsWith("bundled://");
             return (
               <div
-                key={theme.name}
+                key={bundle.id}
                 onClick={() => setSelectedTheme(theme)}
-                className="bg-gray-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-purple-500 transition-all cursor-pointer"
+                className="rounded-lg overflow-hidden hover:ring-2 hover:ring-purple-500 transition-all cursor-pointer group relative aspect-video"
               >
-                {/* Preview */}
+                {/* Preview background */}
                 {theme.preview_url && !failedImages.has(theme.name) ? (
-                  <div className="h-32 bg-gray-700 relative">
-                    <img
-                      src={theme.preview_url}
-                      alt={`${theme.name} preview`}
-                      className="w-full h-full object-cover"
-                      onError={() => handleImageError(theme.name)}
-                    />
-                  </div>
+                  <img
+                    src={theme.preview_url}
+                    alt={`${theme.name} preview`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={() => handleImageError(theme.name)}
+                  />
                 ) : (
-                  <div className="h-32 flex" style={{ background: colors[0] }}>
+                  <div className="absolute inset-0 flex" style={{ background: colors[0] }}>
                     <div className="w-1/3" style={{ background: colors[1] }} />
                     <div className="w-1/3" style={{ background: colors[2] }} />
                     <div className="w-1/3" style={{ background: colors[0] }} />
                   </div>
                 )}
-                {/* Info */}
-                <div className="p-4">
-                  <h3 className="font-semibold">{theme.name}</h3>
-                  <p className="text-sm text-gray-400">
+
+                {/* Favorite star - top right */}
+                <button
+                  onClick={(e) => toggleFavorite(theme.name, e)}
+                  className={`absolute top-3 right-3 text-5xl transition-all z-10 drop-shadow-lg ${
+                    favorites.has(theme.name)
+                      ? "text-yellow-400 hover:text-yellow-300"
+                      : "text-white/50 hover:text-yellow-400"
+                  }`}
+                  title={favorites.has(theme.name) ? "Remove from favorites" : "Add to favorites"}
+                >
+                  {favorites.has(theme.name) ? "★" : "☆"}
+                </button>
+
+                {/* Variant selector - top left */}
+                <div className="absolute top-3 left-3 z-10">
+                  <select
+                    value={theme.name}
+                    onChange={(e) => selectVariant(bundle.id, e.target.value, e as unknown as React.MouseEvent)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-purple-500 cursor-pointer shadow-lg"
+                    title="Select variant"
+                  >
+                    {bundle.themes.map((variant) => (
+                      <option key={variant.name} value={variant.name}>
+                        {variant.variant_name || variant.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Title with gradient shadow */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-8 pb-3 px-3">
+                  <h3 className="font-bold text-white text-[1.8rem] tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    {bundle.name}
+                  </h3>
+                  <p className="text-xs text-white/70 drop-shadow">
                     by{" "}
                     {theme.author_url ? (
-                      <a
-                        href={theme.author_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-400 hover:text-purple-300"
-                        onClick={(e) => e.stopPropagation()}
+                      <button
+                        className="hover:text-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openUrl(theme.author_url!);
+                        }}
                       >
                         @{theme.author}
-                      </a>
+                      </button>
+                    ) : (
+                      `@${theme.author}`
+                    )}
+                    {" · "}{bundle.themes.length} variants
+                  </p>
+                </div>
+
+                {/* Action buttons - bottom right, visible on hover */}
+                <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleApply(theme);
+                    }}
+                    disabled={downloading}
+                    className="px-5 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg text-sm font-semibold shadow-lg"
+                    title="Apply theme"
+                  >
+                    Apply
+                  </button>
+                  {hasRealRepoUrl && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openUrl(theme.repo_url);
+                      }}
+                      className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm font-medium shadow-lg"
+                      title="View repository"
+                    >
+                      Repo
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Standalone themes - no bundle */}
+          {standalonethemes.map((theme) => {
+            const colors = getThemeColors(theme.name);
+            const hasRealRepoUrl = theme.repo_url && !theme.repo_url.startsWith("bundled://");
+            return (
+              <div
+                key={theme.name}
+                onClick={() => setSelectedTheme(theme)}
+                className="rounded-lg overflow-hidden hover:ring-2 hover:ring-purple-500 transition-all cursor-pointer group relative aspect-video"
+              >
+                {/* Preview background */}
+                {theme.preview_url && !failedImages.has(theme.name) ? (
+                  <img
+                    src={theme.preview_url}
+                    alt={`${theme.name} preview`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={() => handleImageError(theme.name)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex" style={{ background: colors[0] }}>
+                    <div className="w-1/3" style={{ background: colors[1] }} />
+                    <div className="w-1/3" style={{ background: colors[2] }} />
+                    <div className="w-1/3" style={{ background: colors[0] }} />
+                  </div>
+                )}
+
+                {/* Favorite star - top right */}
+                <button
+                  onClick={(e) => toggleFavorite(theme.name, e)}
+                  className={`absolute top-3 right-3 text-5xl transition-all z-10 drop-shadow-lg ${
+                    favorites.has(theme.name)
+                      ? "text-yellow-400 hover:text-yellow-300"
+                      : "text-white/50 hover:text-yellow-400"
+                  }`}
+                  title={favorites.has(theme.name) ? "Remove from favorites" : "Add to favorites"}
+                >
+                  {favorites.has(theme.name) ? "★" : "☆"}
+                </button>
+
+                {/* Title with gradient shadow */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-8 pb-3 px-3">
+                  <h3 className="font-bold text-white text-[1.8rem] tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    {theme.name}
+                  </h3>
+                  <p className="text-xs text-white/70 drop-shadow">
+                    by{" "}
+                    {theme.author_url ? (
+                      <button
+                        className="hover:text-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openUrl(theme.author_url!);
+                        }}
+                      >
+                        @{theme.author}
+                      </button>
                     ) : (
                       `@${theme.author}`
                     )}
                   </p>
-                  {theme.description && (
-                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                      {theme.description}
-                    </p>
+                </div>
+
+                {/* Action buttons - bottom right, visible on hover */}
+                <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleApply(theme);
+                    }}
+                    disabled={downloading}
+                    className="px-5 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg text-sm font-semibold shadow-lg"
+                    title="Apply theme"
+                  >
+                    Apply
+                  </button>
+                  {hasRealRepoUrl && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openUrl(theme.repo_url);
+                      }}
+                      className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm font-medium shadow-lg"
+                      title="View repository"
+                    >
+                      Repo
+                    </button>
                   )}
                 </div>
               </div>
             );
           })}
         </div>
-        {filteredThemes.length === 0 && searchQuery && (
+        {(bundledThemes.length + standalonethemes.length) === 0 && (searchQuery || authorFilter !== "all") && (
           <div className="text-center py-8 text-gray-400">
-            No themes found matching "{searchQuery}"
+            {authorFilter === "favorites" && !searchQuery ? (
+              <>No favorites yet. Click the ☆ on any theme to add it!</>
+            ) : (
+              <>
+                No themes found
+                {searchQuery && <> matching "{searchQuery}"</>}
+                {authorFilter === "favorites" && <> in favorites</>}
+                {authorFilter !== "all" && authorFilter !== "favorites" && <> by {authorFilter}</>}
+              </>
+            )}
           </div>
         )}
       </div>
@@ -413,14 +691,12 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
               <p className="text-gray-400 mb-4">
                 by{" "}
                 {selectedTheme.author_url ? (
-                  <a
-                    href={selectedTheme.author_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => openUrl(selectedTheme.author_url!)}
                     className="text-purple-400 hover:text-purple-300"
                   >
                     @{selectedTheme.author}
-                  </a>
+                  </button>
                 ) : (
                   `@${selectedTheme.author}`
                 )}
@@ -428,6 +704,30 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
               {selectedTheme.description && (
                 <p className="text-gray-300 mb-4">{selectedTheme.description}</p>
               )}
+              {/* Variant Selector - for bundled themes */}
+              {selectedTheme.bundle && (() => {
+                const bundle = bundledThemes.find(b => b.id === selectedTheme.bundle);
+                if (!bundle || bundle.themes.length <= 1) return null;
+                return (
+                  <div className="mb-4">
+                    <label className="block text-sm text-gray-400 mb-1">Theme Variant</label>
+                    <select
+                      value={selectedTheme.name}
+                      onChange={(e) => {
+                        const newTheme = bundle.themes.find(t => t.name === e.target.value);
+                        if (newTheme) setSelectedTheme(newTheme);
+                      }}
+                      className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500"
+                    >
+                      {bundle.themes.map((variant) => (
+                        <option key={variant.name} value={variant.name}>
+                          {variant.variant_name || variant.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                );
+              })()}
               {/* Version Selector */}
               <div className="mb-4">
                 <label className="block text-sm text-gray-400 mb-1">Bitwig Version</label>
@@ -449,14 +749,14 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
                 >
                   {downloading ? "Applying..." : "Apply Theme"}
                 </button>
-                <a
-                  href={selectedTheme.repo_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded-lg"
-                >
-                  Repo
-                </a>
+                {selectedTheme.repo_url && !selectedTheme.repo_url.startsWith("bundled://") && (
+                  <button
+                    onClick={() => openUrl(selectedTheme.repo_url)}
+                    className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded-lg"
+                  >
+                    Repo
+                  </button>
+                )}
                 <button
                   onClick={() => setSelectedTheme(null)}
                   className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg"
@@ -1384,25 +1684,21 @@ function SettingsView() {
           <p><span className="text-gray-300">Bitwig Theme Manager</span> v{appVersion || "..."}</p>
           <p>Built with Tauri + React + TypeScript</p>
           <p>
-            <a
-              href="https://github.com/DJZeroAction/bitwig-theme-manager"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openUrl("https://github.com/DJZeroAction/bitwig-theme-manager")}
               className="text-purple-400 hover:text-purple-300"
             >
               View on GitHub
-            </a>
+            </button>
           </p>
           <p className="pt-2 border-t border-gray-700 mt-2">
             Theme repository:{" "}
-            <a
-              href="https://github.com/Berikai/awesome-bitwig-themes"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openUrl("https://github.com/Berikai/awesome-bitwig-themes")}
               className="text-purple-400 hover:text-purple-300"
             >
               awesome-bitwig-themes
-            </a>
+            </button>
           </p>
         </div>
       </div>

@@ -40,4 +40,13 @@ export interface RepositoryTheme {
   preview_url?: string;
   description?: string;
   download_url?: string;
+  bundle?: string;        // Bundle ID for grouping variants
+  variant_name?: string;  // Display name for this variant within bundle
+}
+
+// A theme bundle groups multiple theme variants together
+export interface ThemeBundle {
+  id: string;
+  name: string;
+  themes: RepositoryTheme[];
 }

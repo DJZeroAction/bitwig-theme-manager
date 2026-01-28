@@ -173,19 +173,42 @@ fn get_default_search_paths() -> Vec<SearchPath> {
 
     #[cfg(target_os = "windows")]
     {
+        // Helper to add Bitwig folders from a Program Files directory
+        // Searches for "Bitwig Studio" and versioned folders like "Bitwig Studio 6", "Bitwig Studio 6 Beta"
+        fn add_bitwig_folders(base: &Path, paths: &mut Vec<SearchPath>, installation_type: InstallationType) {
+            // Always check the base "Bitwig Studio" folder
+            let base_path = base.join("Bitwig Studio");
+            if !paths.iter().any(|p| p.path == base_path) {
+                paths.push(SearchPath {
+                    path: base_path,
+                    installation_type: installation_type.clone(),
+                });
+            }
+
+            // Also search for versioned folders like "Bitwig Studio 6", "Bitwig Studio 6 Beta", etc.
+            if let Ok(entries) = std::fs::read_dir(base) {
+                for entry in entries.filter_map(|e| e.ok()) {
+                    let name = entry.file_name().to_string_lossy().to_string();
+                    // Match "Bitwig Studio" followed by version/beta indicators
+                    if name.starts_with("Bitwig Studio ") && entry.path().is_dir() {
+                        if !paths.iter().any(|p| p.path == entry.path()) {
+                            paths.push(SearchPath {
+                                path: entry.path(),
+                                installation_type: installation_type.clone(),
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
         // Use environment variables for proper paths (handles non-C: installations)
         if let Ok(pf) = std::env::var("ProgramFiles") {
-            paths.push(SearchPath {
-                path: PathBuf::from(&pf).join("Bitwig Studio"),
-                installation_type: InstallationType::System,
-            });
+            add_bitwig_folders(&PathBuf::from(&pf), &mut paths, InstallationType::System);
         }
 
         if let Ok(pf86) = std::env::var("ProgramFiles(x86)") {
-            paths.push(SearchPath {
-                path: PathBuf::from(&pf86).join("Bitwig Studio"),
-                installation_type: InstallationType::System,
-            });
+            add_bitwig_folders(&PathBuf::from(&pf86), &mut paths, InstallationType::System);
         }
 
         // Enumerate all drives for Bitwig installations
@@ -195,40 +218,19 @@ fn get_default_search_paths() -> Vec<SearchPath> {
             // Only check drives that exist
             if drive_path.exists() {
                 // Check Program Files on this drive
-                let pf_path = drive_path.join("Program Files").join("Bitwig Studio");
-                if !paths.iter().any(|p| p.path == pf_path) {
-                    paths.push(SearchPath {
-                        path: pf_path,
-                        installation_type: InstallationType::System,
-                    });
-                }
-                let pf86_path = drive_path.join("Program Files (x86)").join("Bitwig Studio");
-                if !paths.iter().any(|p| p.path == pf86_path) {
-                    paths.push(SearchPath {
-                        path: pf86_path,
-                        installation_type: InstallationType::System,
-                    });
-                }
+                add_bitwig_folders(&drive_path.join("Program Files"), &mut paths, InstallationType::System);
+                add_bitwig_folders(&drive_path.join("Program Files (x86)"), &mut paths, InstallationType::System);
             }
         }
 
         // Local app data (user installation)
         if let Ok(local) = std::env::var("LOCALAPPDATA") {
-            paths.push(SearchPath {
-                path: PathBuf::from(local).join("Programs").join("Bitwig Studio"),
-                installation_type: InstallationType::UserLocal,
-            });
+            add_bitwig_folders(&PathBuf::from(&local).join("Programs"), &mut paths, InstallationType::UserLocal);
         }
 
         // Also check using dirs crate as fallback
         if let Some(local_app_data) = dirs::data_local_dir() {
-            let user_path = local_app_data.join("Programs").join("Bitwig Studio");
-            if !paths.iter().any(|p| p.path == user_path) {
-                paths.push(SearchPath {
-                    path: user_path,
-                    installation_type: InstallationType::UserLocal,
-                });
-            }
+            add_bitwig_folders(&local_app_data.join("Programs"), &mut paths, InstallationType::UserLocal);
         }
     }
 

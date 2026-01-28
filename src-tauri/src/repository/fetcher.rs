@@ -22,4 +22,10 @@ pub struct RepositoryTheme {
     /// Direct download URL (for bundled themes)
     #[serde(skip_serializing_if = "Option::is_none")]
     pub download_url: Option<String>,
+    /// Bundle ID for grouping theme variants
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bundle: Option<String>,
+    /// Display name for this variant within a bundle
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub variant_name: Option<String>,
 }

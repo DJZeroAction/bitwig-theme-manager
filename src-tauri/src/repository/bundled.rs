@@ -26,6 +26,10 @@ struct BundledThemeEntry {
     file: String,
     preview: Option<String>,
     description: Option<String>,
+    repo_url: Option<String>,
+    author_url: Option<String>,
+    bundle: Option<String>,
+    variant_name: Option<String>,
 }
 
 /// The bundled themes index file structure
@@ -74,11 +78,16 @@ pub fn load_bundled_themes(app: &AppHandle) -> Result<Vec<RepositoryTheme>, Bund
             RepositoryTheme {
                 name: entry.name,
                 author: entry.author,
-                author_url: None,
-                repo_url: format!("bundled://{}", entry.id),
+                author_url: entry.author_url,
+                // Use real repo_url if provided, otherwise fallback to bundled:// protocol
+                repo_url: entry
+                    .repo_url
+                    .unwrap_or_else(|| format!("bundled://{}", entry.id)),
                 preview_url,
                 description: entry.description,
                 download_url: Some(format!("bundled://{}", file_name)),
+                bundle: entry.bundle,
+                variant_name: entry.variant_name,
             }
         })
         .collect();

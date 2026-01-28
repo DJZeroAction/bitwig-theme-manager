@@ -9,6 +9,22 @@ export async function validateBitwigPath(path: string): Promise<BitwigInstallati
   return invoke<BitwigInstallation | null>("validate_bitwig_path", { path });
 }
 
+export async function addCustomInstallation(path: string): Promise<void> {
+  return invoke<void>("add_custom_installation", { path });
+}
+
+export async function removeCustomInstallation(path: string): Promise<void> {
+  return invoke<void>("remove_custom_installation", { path });
+}
+
+export async function toggleFavoriteTheme(themeId: string): Promise<boolean> {
+  return invoke<boolean>("toggle_favorite_theme", { themeId });
+}
+
+export async function getFavoriteThemes(): Promise<string[]> {
+  return invoke<string[]>("get_favorite_themes");
+}
+
 export async function getPatchStatus(jarPath: string): Promise<boolean> {
   return invoke<boolean>("get_patch_status", { jarPath });
 }
@@ -156,6 +172,8 @@ export interface Settings {
   show_preview_images: boolean;
   last_view: string;
   skipped_version: string | null;
+  custom_installations: string[];
+  favorite_themes: string[];
 }
 
 export async function loadSettings(): Promise<Settings> {

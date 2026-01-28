@@ -7,14 +7,18 @@
       "author": "xbitz",
       "file": "blackwig.json",
       "preview": "blackwig.png",
-      "description": "Reimagined dark/elegant variant"
+      "description": "Reimagined dark/elegant variant",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "dsnvs",
       "name": "DSNVS",
       "author": "dsnvs",
       "file": "dsnvs.json",
-      "preview": "dsnvs.png"
+      "preview": "dsnvs.png",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "dsnvs",
+      "variant_name": "Original"
     },
     {
       "id": "dsnvs-dark",
@@ -22,7 +26,10 @@
       "author": "dsnvs",
       "file": "dsnvs-dark.bte",
       "preview": "dsnvs-dark.png",
-      "description": "Day/night themes for Bitwig 6 beta"
+      "description": "Day/night themes for Bitwig 6 beta",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "dsnvs",
+      "variant_name": "Dark"
     },
     {
       "id": "dsnvs-dark-v2",
@@ -30,7 +37,10 @@
       "author": "dsnvs",
       "file": "dsnvs-dark-v2.bte",
       "preview": "dsnvs-dark-v2.png",
-      "description": "DSNVS Dark v2 for Bitwig 6"
+      "description": "DSNVS Dark v2 for Bitwig 6",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "dsnvs",
+      "variant_name": "Dark v2"
     },
     {
       "id": "dsnvs-light",
@@ -38,7 +48,10 @@
       "author": "dsnvs",
       "file": "dsnvs-light.bte",
       "preview": "dsnvs-light.png",
-      "description": "Day/night themes for Bitwig 6 beta"
+      "description": "Day/night themes for Bitwig 6 beta",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "dsnvs",
+      "variant_name": "Light"
     },
     {
       "id": "dsnvs-light-v2",
@@ -46,7 +59,10 @@
       "author": "dsnvs",
       "file": "dsnvs-light-v2.bte",
       "preview": "dsnvs-light-v2.png",
-      "description": "DSNVS Light v2 for Bitwig 6"
+      "description": "DSNVS Light v2 for Bitwig 6",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "dsnvs",
+      "variant_name": "Light v2"
     },
     {
       "id": "xbitz",
@@ -54,7 +70,8 @@
       "author": "xbitz",
       "file": "xbitz.json",
       "preview": "xbitz.png",
-      "description": "50/50/60 with Studio One palette"
+      "description": "50/50/60 with Studio One palette",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "xbitz2",
@@ -62,7 +79,8 @@
       "author": "xbitz",
       "file": "xbitz2.json",
       "preview": "xbitz2.png",
-      "description": "Night and eye friendly palette"
+      "description": "Night and eye friendly palette",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "yellow-studio",
@@ -78,7 +96,9 @@
       "author": "hotpxl",
       "file": "dark-red.json",
       "preview": "dark-red.png",
-      "description": "Muted red/orange/yellow color scheme"
+      "description": "Muted red/orange/yellow color scheme",
+      "bundle": "dark-red",
+      "variant_name": "Original"
     },
     {
       "id": "darkred-2025",
@@ -86,7 +106,9 @@
       "author": "hotpxl",
       "file": "darkred-2025.json",
       "preview": "darkred-2025.png",
-      "description": "Updated version with more contrast and visibility"
+      "description": "Updated version with more contrast and visibility",
+      "bundle": "dark-red",
+      "variant_name": "2025"
     },
     {
       "id": "halloween",
@@ -118,7 +140,39 @@
       "author": "chimi",
       "file": "greenwig-chimi.json",
       "preview": "greenwig-chimi.png",
-      "description": "Its green!"
+      "description": "Its green!",
+      "bundle": "greenwig",
+      "variant_name": "Original"
+    },
+    {
+      "id": "greenwig-plus",
+      "name": "Greenwig+",
+      "author": "chimi",
+      "file": "greenwig-plus.json",
+      "preview": "greenwig-plus.png",
+      "description": "Balanced and functional - 35/25/80",
+      "bundle": "greenwig",
+      "variant_name": "Plus"
+    },
+    {
+      "id": "dark-greenwig",
+      "name": "Dark Greenwig",
+      "author": "chimi",
+      "file": "dark-greenwig.json",
+      "preview": "dark-greenwig.png",
+      "description": "Darker variant of Greenwig+",
+      "bundle": "greenwig",
+      "variant_name": "Dark"
+    },
+    {
+      "id": "darkest-greenwig",
+      "name": "Darkest Greenwig",
+      "author": "chimi",
+      "file": "darkest-greenwig.json",
+      "preview": "darkest-greenwig.png",
+      "description": "Darkest variant of Greenwig+",
+      "bundle": "greenwig",
+      "variant_name": "Darkest"
     },
     {
       "id": "december-2024",
@@ -148,7 +202,8 @@
       "author": "myst",
       "file": "oxide.json",
       "preview": "oxide.png",
-      "description": "Dark brown palette with accents of deep red"
+      "description": "Dark brown palette with accents of deep red",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "sizzurp",
@@ -164,7 +219,9 @@
       "author": "rbd",
       "file": "uad-final.json",
       "preview": "uad-final.png",
-      "description": "UAD Luna inspired theme for Bitwig 5.3.1"
+      "description": "UAD Luna inspired theme for Bitwig 5.3.1",
+      "bundle": "uad",
+      "variant_name": "BW5"
     },
     {
       "id": "uad-converted",
@@ -172,7 +229,9 @@
       "author": "rbd",
       "file": "uad-converted.bte",
       "preview": "uad-converted.png",
-      "description": "UAD inspired theme converted for Bitwig 6 Beta"
+      "description": "UAD inspired theme converted for Bitwig 6 Beta",
+      "bundle": "uad",
+      "variant_name": "BW6"
     },
     {
       "id": "dark-one",
@@ -211,7 +270,9 @@
       "author": "ArcAdeExp",
       "file": "serum2.json",
       "preview": "serum2.png",
-      "description": "Serum inspired theme"
+      "description": "Serum inspired theme",
+      "bundle": "serum",
+      "variant_name": "Original"
     },
     {
       "id": "serum2-alt",
@@ -219,7 +280,9 @@
       "author": "ArcAdeExp",
       "file": "serum2-alt.json",
       "preview": "serum2.png",
-      "description": "Serum inspired theme - alternative"
+      "description": "Serum inspired theme - alternative",
+      "bundle": "serum",
+      "variant_name": "Alt"
     },
     {
       "id": "serum2-v2",
@@ -227,7 +290,9 @@
       "author": "ArcAdeExp",
       "file": "serum2-v2.json",
       "preview": "serum2.png",
-      "description": "Serum inspired theme v2"
+      "description": "Serum inspired theme v2",
+      "bundle": "serum",
+      "variant_name": "v2"
     },
     {
       "id": "serum2-v2-alt",
@@ -235,7 +300,9 @@
       "author": "ArcAdeExp",
       "file": "serum2-v2-alt.json",
       "preview": "serum2.png",
-      "description": "Serum inspired theme v2 - alternative"
+      "description": "Serum inspired theme v2 - alternative",
+      "bundle": "serum",
+      "variant_name": "v2 Alt"
     },
     {
       "id": "serum2-v3",
@@ -243,7 +310,9 @@
       "author": "ArcAdeExp",
       "file": "serum2-v3.json",
       "preview": "serum2.png",
-      "description": "Serum inspired theme v3"
+      "description": "Serum inspired theme v3",
+      "bundle": "serum",
+      "variant_name": "v3"
     },
     {
       "id": "april-2025",
@@ -283,7 +352,8 @@
       "author": "myst",
       "file": "retronia.json",
       "preview": "retronia.png",
-      "description": "Retro-inspired Amiga era aesthetic"
+      "description": "Retro-inspired Amiga era aesthetic",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "minimal-audio",
@@ -318,36 +388,14 @@
       "description": "Closest to Ableton theme - 50/50/50"
     },
     {
-      "id": "greenwig-plus",
-      "name": "Greenwig+",
-      "author": "chimi",
-      "file": "greenwig-plus.json",
-      "preview": "greenwig-plus.png",
-      "description": "Balanced and functional - 35/25/80"
-    },
-    {
-      "id": "dark-greenwig",
-      "name": "Dark Greenwig",
-      "author": "chimi",
-      "file": "dark-greenwig.json",
-      "preview": "dark-greenwig.png",
-      "description": "Darker variant of Greenwig+"
-    },
-    {
-      "id": "darkest-greenwig",
-      "name": "Darkest Greenwig",
-      "author": "chimi",
-      "file": "darkest-greenwig.json",
-      "preview": "darkest-greenwig.png",
-      "description": "Darkest variant of Greenwig+"
-    },
-    {
       "id": "greenon-blue-automation",
       "name": "GreenON Blue Automation",
       "author": "chimi",
       "file": "greenon-blue-automation.json",
       "preview": "greenon-blue-automation.png",
-      "description": "60/45/100 - original blue automation"
+      "description": "60/45/100 - original blue automation",
+      "bundle": "greenon",
+      "variant_name": "Blue"
     },
     {
       "id": "greenon-pink-automation",
@@ -355,7 +403,9 @@
       "author": "chimi",
       "file": "greenon-pink-automation.json",
       "preview": "greenon-pink-automation.png",
-      "description": "60/45/100 - pink automation lanes"
+      "description": "60/45/100 - pink automation lanes",
+      "bundle": "greenon",
+      "variant_name": "Pink"
     },
     {
       "id": "orangeon-automation",
@@ -363,7 +413,9 @@
       "author": "chimi",
       "file": "orangeon-automation.json",
       "preview": "orangeon-automation.png",
-      "description": "Orange variant for the lunatics"
+      "description": "Orange variant for the lunatics",
+      "bundle": "greenon",
+      "variant_name": "Orange"
     },
     {
       "id": "lo-ki",
@@ -419,7 +471,9 @@
       "author": "Sternenherz",
       "file": "sternenherz-cubase.json",
       "preview": "sternenherz-cubase.png",
-      "description": "Cubase 13 inspired - color-picked from Cubase interface"
+      "description": "Cubase 13 inspired - color-picked from Cubase interface",
+      "bundle": "cubase-sternenherz",
+      "variant_name": "Original"
     },
     {
       "id": "sternenherz-cubase-greyblue",
@@ -427,7 +481,9 @@
       "author": "Sternenherz",
       "file": "sternenherz-cubase-greyblue.json",
       "preview": "sternenherz-cubase-greyblue.png",
-      "description": "Grey-blue variant for better element distinction"
+      "description": "Grey-blue variant for better element distinction",
+      "bundle": "cubase-sternenherz",
+      "variant_name": "Grey Blue"
     },
     {
       "id": "absynth-fun",
@@ -450,7 +506,8 @@
       "author": "Rashomakuin",
       "file": "rose-pine-moon.json",
       "preview": "rose-pine-moon.png",
-      "description": "Rose Pine Moon color scheme"
+      "description": "Rose Pine Moon color scheme",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes"
     },
     {
       "id": "derpwig",
@@ -474,7 +531,10 @@
       "author": "Verdant (aka Berikai)",
       "file": "light-azure.bte",
       "preview": "light-azure.png",
-      "description": "Light theme with azure blue accents"
+      "description": "Light theme with azure blue accents",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "light-verdant",
+      "variant_name": "Azure"
     },
     {
       "id": "light-crimson-velvet",
@@ -482,7 +542,10 @@
       "author": "Verdant (aka Berikai)",
       "file": "light-crimson-velvet.bte",
       "preview": "light-crimson-velvet.png",
-      "description": "Light theme with crimson velvet accents"
+      "description": "Light theme with crimson velvet accents",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "light-verdant",
+      "variant_name": "Crimson"
     },
     {
       "id": "vibrant-orange-light",
@@ -490,7 +553,217 @@
       "author": "Verdant (aka Berikai)",
       "file": "vibrant-orange-light.bte",
       "preview": "vibrant-orange-light.png",
-      "description": "Light theme with vibrant orange accents"
+      "description": "Light theme with vibrant orange accents",
+      "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
+      "bundle": "light-verdant",
+      "variant_name": "Orange"
+    },
+    {
+      "id": "workbench",
+      "name": "Workbench",
+      "author": "Community",
+      "file": "workbench.bte",
+      "description": "Amiga Workbench 1.x — blue, white, orange, black"
+    },
+    {
+      "id": "platinum",
+      "name": "Platinum",
+      "author": "Community",
+      "file": "platinum.bte",
+      "description": "Classic Mac OS 8/9 Platinum — warm grey with rainbow accents"
+    },
+    {
+      "id": "turbo",
+      "name": "Turbo",
+      "author": "Community",
+      "file": "turbo.bte",
+      "description": "Borland Turbo Pascal IDE — deep blue with yellow and cyan"
+    },
+    {
+      "id": "hotdog-stand",
+      "name": "Hotdog Stand",
+      "author": "Community",
+      "file": "hotdog-stand.bte",
+      "description": "Windows 3.1's worst color scheme — red and yellow everywhere"
+    },
+    {
+      "id": "bebox",
+      "name": "BeBox",
+      "author": "Community",
+      "file": "bebox.json",
+      "description": "BeOS desktop — clean grey with signature yellow accents"
+    },
+    {
+      "id": "irix",
+      "name": "IRIX",
+      "author": "Community",
+      "file": "irix.bte",
+      "description": "SGI IRIX workstation — slate blue-purple with teal accents"
+    },
+    {
+      "id": "ghosty",
+      "name": "Ghosty",
+      "author": "notoyz",
+      "file": "ghosty.json",
+      "preview": "ghosty.png",
+      "description": "Dark pastel theme with soft colors",
+      "repo_url": "https://github.com/notoyz/ghosty-theme-bitwig"
+    },
+    {
+      "id": "dark-mellow",
+      "name": "Dark Mellow",
+      "author": "Dario Lupo",
+      "file": "dark-mellow.json",
+      "preview": "dark-mellow.png",
+      "description": "Dark theme with soft color palette",
+      "repo_url": "https://github.com/dariolupo/dark-mellow_bitwig"
+    },
+    {
+      "id": "gruvbit",
+      "name": "GruvBit",
+      "author": "stianfan",
+      "file": "gruvbit.json",
+      "preview": "gruvbit.png",
+      "description": "Gruvbox-inspired warm retro colors",
+      "repo_url": "https://github.com/stianfan/GruvBit"
+    },
+    {
+      "id": "dark-neon",
+      "name": "Dark Neon",
+      "author": "Dario Lupo",
+      "file": "dark-neon.json",
+      "preview": "dark-neon.png",
+      "description": "Dark theme with bright neon colors",
+      "repo_url": "https://github.com/dariolupo/dark-neon_bitwig"
+    },
+    {
+      "id": "frost",
+      "name": "Frost",
+      "author": "ibsenproducer",
+      "file": "frost.json",
+      "preview": "frost.png",
+      "description": "Custom visual theme for Bitwig Studio",
+      "repo_url": "https://github.com/ibsenproducer/Frost-bitwig-theme"
+    },
+    {
+      "id": "magentic-revival",
+      "name": "Magentic Revival",
+      "author": "mradziwanowski",
+      "file": "magentic-revival.json",
+      "preview": "magentic-revival.png",
+      "description": "Neutral gray palette with teal/cyan accents",
+      "repo_url": "https://github.com/mradziwanowski/magentic-revival-bitwig-theme"
+    },
+    {
+      "id": "macchiato",
+      "name": "Macchiato",
+      "author": "lenninst",
+      "file": "macchiato.json",
+      "preview": "macchiato.png",
+      "description": "Catppuccin Macchiato color palette",
+      "repo_url": "https://github.com/lenninst/Macchiato_BitwigTheme"
+    },
+    {
+      "id": "mothwig-basic",
+      "name": "MothWig Basic",
+      "author": "woodmoth",
+      "file": "mothwig-basic.json",
+      "preview": "mothwig-basic.png",
+      "description": "Retro-futuristic spaceship blue and sandy brown",
+      "repo_url": "https://github.com/woodmoth/mothwig-bitwig-theme",
+      "bundle": "mothwig",
+      "variant_name": "Basic"
+    },
+    {
+      "id": "mothwig-solarized",
+      "name": "MothWig Solarized",
+      "author": "woodmoth",
+      "file": "mothwig-solarized.json",
+      "preview": "mothwig-solarized.png",
+      "description": "Solarized variant of MothWig theme",
+      "repo_url": "https://github.com/woodmoth/mothwig-bitwig-theme",
+      "bundle": "mothwig",
+      "variant_name": "Solarized"
+    },
+    {
+      "id": "nord",
+      "name": "Nord",
+      "author": "lenninst",
+      "file": "nord.json",
+      "preview": "nord.png",
+      "description": "Cool dark arctic theme with frost-colored accents",
+      "repo_url": "https://github.com/lenninst/Nord_BitwigTheme"
+    },
+    {
+      "id": "horizon",
+      "name": "Horizon",
+      "author": "Patrick Wulfe",
+      "file": "horizon.json",
+      "preview": "horizon.png",
+      "description": "Deep charcoal with mint green, cyan, and purple accents",
+      "repo_url": "https://github.com/PatrickWulfe/horizon-bitwig-theme",
+      "bundle": "horizon",
+      "variant_name": "BW5"
+    },
+    {
+      "id": "horizon-bw6",
+      "name": "Horizon (BW6)",
+      "author": "Patrick Wulfe",
+      "file": "horizon.bte",
+      "preview": "horizon.png",
+      "description": "Horizon theme for Bitwig 6",
+      "repo_url": "https://github.com/PatrickWulfe/horizon-bitwig-theme",
+      "bundle": "horizon",
+      "variant_name": "BW6"
+    },
+    {
+      "id": "light-cat",
+      "name": "Light Cat",
+      "author": "ey82ysdjia",
+      "file": "light-cat.json",
+      "preview": "light-cat.png",
+      "description": "Light theme using Catppuccin Latte colors",
+      "repo_url": "https://codeberg.org/themefiend/bitwig-light-cat"
+    },
+    {
+      "id": "cubitwig",
+      "name": "Cubitwig",
+      "author": "Yucatec98",
+      "file": "cubitwig.json",
+      "preview": "cubitwig.png",
+      "description": "Cubase-inspired theme for Bitwig Studio",
+      "repo_url": "https://github.com/Yucatec98/cubase-bitwig-theme"
+    },
+    {
+      "id": "light-nordish",
+      "name": "Light Nordish",
+      "author": "pmhn",
+      "file": "light-nordish.json",
+      "preview": "light-nordish.png",
+      "description": "Light theme using Nord color palette",
+      "repo_url": "https://codeberg.org/pmhn/bitwig-light-nordish",
+      "bundle": "light-nordish",
+      "variant_name": "BW5"
+    },
+    {
+      "id": "light-nordish-bw6",
+      "name": "Light Nordish (BW6)",
+      "author": "pmhn",
+      "file": "light-nordish.bte",
+      "preview": "light-nordish.png",
+      "description": "Light Nordish for Bitwig 6",
+      "repo_url": "https://codeberg.org/pmhn/bitwig-light-nordish",
+      "bundle": "light-nordish",
+      "variant_name": "BW6"
+    },
+    {
+      "id": "dracula",
+      "name": "Dracula",
+      "author": "sleeplessKomodo",
+      "file": "dracula.json",
+      "preview": "dracula.png",
+      "description": "Dark purple Dracula color palette",
+      "repo_url": "https://github.com/sleeplessKomodo/bitwig-dracula-theme"
     }
   ]
 }

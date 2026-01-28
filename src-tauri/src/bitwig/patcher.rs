@@ -157,32 +157,20 @@ fn create_manager_backup(jar_path: &Path) -> Result<PathBuf, PatchError> {
         return Err(PatchError::JarNotFound(jar_path.to_path_buf()));
     }
 
-    // Only create a backup if none exists - we want to preserve the ORIGINAL unpatched JAR
-    if let Ok(existing) = find_latest_manager_backup(jar_path) {
-        log_event(&format!(
-            "patcher: backup already exists, skipping: {}",
-            existing.to_string_lossy()
-        ));
-        return Ok(existing);
-    }
-
     let backup_dir = manager_backup_dir(jar_path)?;
     fs::create_dir_all(&backup_dir)?;
 
-    let timestamp = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .map(|d| d.as_secs())
-        .unwrap_or(0);
+    // Always use a fixed name for the backup - we only need the last pre-patch state
+    let backup_path = backup_dir.join("backup.jar");
+    let checksum_path = backup_dir.join("backup.jar.sha256");
 
-    let backup_path = backup_dir.join(format!("{}.jar", timestamp));
-    let checksum_path = backup_dir.join(format!("{}.jar.sha256", timestamp));
-
+    // Always overwrite - we want the current JAR before this patch attempt
     fs::copy(jar_path, &backup_path)?;
     let checksum = calculate_checksum(jar_path)?;
     fs::write(&checksum_path, &checksum)?;
 
     log_event(&format!(
-        "patcher: manager backup created {}",
+        "patcher: backup created {}",
         backup_path.to_string_lossy()
     ));
 
@@ -191,29 +179,23 @@ fn create_manager_backup(jar_path: &Path) -> Result<PathBuf, PatchError> {
 
 fn find_latest_manager_backup(jar_path: &Path) -> Result<PathBuf, PatchError> {
     let backup_dir = manager_backup_dir(jar_path)?;
-    if !backup_dir.exists() {
-        return Err(PatchError::BackupNotFound(backup_dir));
-    }
+    let backup_path = backup_dir.join("backup.jar");
 
-    let mut latest: Option<(u64, PathBuf)> = None;
-    for entry in fs::read_dir(&backup_dir)? {
-        let entry = entry?;
-        let path = entry.path();
-        if path.extension().is_some_and(|ext| ext == "jar") {
-            if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
-                if let Ok(ts) = stem.parse::<u64>() {
-                    match latest {
-                        Some((prev_ts, _)) if prev_ts >= ts => {}
-                        _ => latest = Some((ts, path)),
-                    }
+    if backup_path.exists() {
+        Ok(backup_path)
+    } else {
+        // Also check for old timestamped backups for backwards compatibility
+        if backup_dir.exists() {
+            for entry in fs::read_dir(&backup_dir)? {
+                let entry = entry?;
+                let path = entry.path();
+                if path.extension().is_some_and(|ext| ext == "jar") {
+                    return Ok(path);
                 }
             }
         }
+        Err(PatchError::BackupNotFound(backup_dir))
     }
-
-    latest
-        .map(|(_, path)| path)
-        .ok_or(PatchError::BackupNotFound(backup_dir))
 }
 
 fn restore_from_manager_backup(jar_path: &Path) -> Result<(), PatchError> {
@@ -253,8 +235,13 @@ pub fn get_checksum_path(jar_path: &Path) -> PathBuf {
     jar_path.with_extension("jar.backup.sha256")
 }
 
-/// Get the patch marker file path
+/// Get the patch marker file path (stored in backup directory, not next to JAR)
 pub fn get_marker_path(jar_path: &Path) -> PathBuf {
+    // Store marker in our backup directory so it doesn't linger after Bitwig updates
+    if let Ok(backup_dir) = manager_backup_dir(jar_path) {
+        return backup_dir.join("patched.marker");
+    }
+    // Fallback to old location (shouldn't happen)
     jar_path.with_extension("patched")
 }
 
@@ -346,12 +333,79 @@ pub fn patch_jar(jar_path: &Path) -> Result<(), PatchError> {
 }
 
 /// Check if a JAR file is patched
+/// Only returns true if marker exists AND JAR wasn't replaced since patching
 pub fn is_patched(jar_path: &Path) -> bool {
-    get_marker_path(jar_path).exists()
+    let marker_path = get_marker_path(jar_path);
+
+    // Must have marker
+    if !marker_path.exists() {
+        return false;
+    }
+
+    // Check if JAR was replaced (up/downgrade) - JAR mtime should be close to marker mtime
+    if let (Ok(jar_meta), Ok(marker_meta)) = (fs::metadata(jar_path), fs::metadata(&marker_path)) {
+        if let (Ok(jar_time), Ok(marker_time)) = (jar_meta.modified(), marker_meta.modified()) {
+            let diff = if jar_time > marker_time {
+                jar_time.duration_since(marker_time).unwrap_or_default()
+            } else {
+                marker_time.duration_since(jar_time).unwrap_or_default()
+            };
+            if diff.as_secs() > 60 {
+                // JAR was replaced after patching
+                log_event(&format!(
+                    "patcher: is_patched=false (JAR mtime differs from marker by {}s, Bitwig was updated)",
+                    diff.as_secs()
+                ));
+                return false;
+            }
+        }
+    }
+
+    true
 }
 
 /// Check if a backup exists for a JAR file
+/// Only returns true if:
+/// 1. The JAR was patched by us (marker exists)
+/// 2. The JAR hasn't been replaced since we patched (JAR mtime close to marker mtime)
+/// This prevents restoring an old backup to a different Bitwig version
 pub fn has_backup(jar_path: &Path) -> bool {
+    let marker_path = get_marker_path(jar_path);
+
+    // Must have marker (we patched this JAR)
+    if !marker_path.exists() {
+        return false;
+    }
+
+    // Check if JAR was replaced (up/downgrade) - JAR mtime should be close to marker mtime
+    // When we patch, both get modified around the same time (within a few seconds)
+    // If JAR mtime is very different, it was replaced
+    if let (Ok(jar_meta), Ok(marker_meta)) = (fs::metadata(jar_path), fs::metadata(&marker_path)) {
+        if let (Ok(jar_time), Ok(marker_time)) = (jar_meta.modified(), marker_meta.modified()) {
+            // Allow 60 seconds tolerance for patching time
+            let diff = if jar_time > marker_time {
+                jar_time.duration_since(marker_time).unwrap_or_default()
+            } else {
+                marker_time.duration_since(jar_time).unwrap_or_default()
+            };
+            if diff.as_secs() > 60 {
+                // JAR was replaced (different timestamp than when we patched)
+                log_event(&format!(
+                    "patcher: has_backup=false (JAR mtime differs from marker by {}s, Bitwig was replaced)",
+                    diff.as_secs()
+                ));
+                return false;
+            }
+        }
+    }
+
+    // Check new manager backup location first
+    if let Ok(backup_dir) = manager_backup_dir(jar_path) {
+        if backup_dir.join("backup.jar").exists() {
+            return true;
+        }
+    }
+    // Fall back to old backup location for backwards compatibility
     get_backup_path(jar_path).exists()
 }
 
@@ -710,6 +764,7 @@ fn run_patcher_process(bitwig_jar_path: &Path, home: &str, user: &str) -> Result
 
     let output = Command::new(&java_path)
         .args([
+            "-Xmx2g", // Ensure enough heap for ASM bytecode manipulation
             &format!("-Duser.home={}", home),
             &format!("-Duser.name={}", user),
             &format!("-Duser.dir={}", home),
@@ -806,227 +861,6 @@ fn create_secure_temp_script(name_prefix: &str, content: &str) -> Result<PathBuf
     Ok(script_path)
 }
 
-/// Run patcher with elevated privileges using pkexec (Unix) or UAC (Windows)
-pub fn run_patcher_cli_elevated(bitwig_jar_path: &Path) -> Result<(), PatchError> {
-    let java_path = find_java().ok_or_else(|| {
-        log_event("patcher: run_patcher_cli_elevated failed (no java)");
-        PatchError::JavaNotFound
-    })?;
-
-    let patcher_jar = ensure_patcher_available()?;
-
-    log_event(&format!(
-        "patcher: run_patcher_cli_elevated start -> {}",
-        bitwig_jar_path.to_string_lossy()
-    ));
-
-    // Get user home and name (platform-specific)
-    #[cfg(target_os = "windows")]
-    #[allow(unused_variables)]
-    let (home, user, logname) = {
-        let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
-            std::env::var("HOME").unwrap_or_default()
-        });
-        let user = std::env::var("USERNAME").unwrap_or_default();
-        (home.clone(), user.clone(), user)
-    };
-    #[cfg(not(target_os = "windows"))]
-    let (home, user, logname) = {
-        let home = std::env::var("HOME").unwrap_or_default();
-        let user = std::env::var("USER").unwrap_or_default();
-        let logname = std::env::var("LOGNAME").unwrap_or_else(|_| user.clone());
-        (home, user, logname)
-    };
-
-    let backup_dir = manager_backup_dir(bitwig_jar_path)?;
-    let timestamp = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .map(|d| d.as_secs())
-        .unwrap_or(0);
-    let backup_path = backup_dir.join(format!("{}.jar", timestamp));
-    let checksum_path = backup_dir.join(format!("{}.jar.sha256", timestamp));
-
-    log_event(&format!(
-        "patcher: elevating with HOME='{}' USER='{}'",
-        home, user
-    ));
-
-    #[cfg(target_os = "windows")]
-    let output = {
-        // On Windows, create a PowerShell script for elevation
-        let temp_dir = std::env::temp_dir().join("bitwig-theme-manager");
-        fs::create_dir_all(&temp_dir)?;
-        fs::create_dir_all(&backup_dir)?;
-
-        let id: u64 = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .map(|d| d.as_nanos() as u64)
-            .unwrap_or(0);
-
-        let script_path = temp_dir.join(format!("patch-elevated-{}.ps1", id));
-
-        // Escape paths for PowerShell
-        let java_path_escaped = java_path.to_string_lossy().replace("'", "''");
-        let patcher_jar_escaped = patcher_jar.to_string_lossy().replace("'", "''");
-        let bitwig_jar_escaped = bitwig_jar_path.to_string_lossy().replace("'", "''");
-        let backup_path_escaped = backup_path.to_string_lossy().replace("'", "''");
-        let checksum_path_escaped = checksum_path.to_string_lossy().replace("'", "''");
-        let home_escaped = home.replace("'", "''");
-        let user_escaped = user.replace("'", "''");
-
-        let script_content = format!(
-            r#"$ErrorActionPreference = 'Stop'
-Copy-Item -Path '{bitwig_jar}' -Destination '{backup_path}' -Force
-$hash = (Get-FileHash -Path '{bitwig_jar}' -Algorithm SHA256).Hash.ToLower()
-Set-Content -Path '{checksum_path}' -Value $hash -NoNewline
-& '{java_path}' '-Duser.home={home}' '-Duser.name={user}' '-Duser.dir={home}' '-jar' '{patcher_jar}' '{bitwig_jar}'
-"#,
-            java_path = java_path_escaped,
-            patcher_jar = patcher_jar_escaped,
-            bitwig_jar = bitwig_jar_escaped,
-            backup_path = backup_path_escaped,
-            checksum_path = checksum_path_escaped,
-            home = home_escaped,
-            user = user_escaped,
-        );
-
-        fs::write(&script_path, &script_content)?;
-
-        let script_path_str = script_path.to_string_lossy().replace("'", "''");
-
-        // Use PowerShell to run the script with elevation
-        let ps_command = format!(
-            "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', '{}' -Verb RunAs -Wait -WindowStyle Hidden",
-            script_path_str
-        );
-
-        let output = Command::new("powershell")
-            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
-            .output()?;
-
-        // Clean up script
-        let _ = fs::remove_file(&script_path);
-        output
-    };
-
-    #[cfg(not(target_os = "windows"))]
-    let output = {
-        // Sanitize all shell arguments
-        let home_safe = sanitize_shell_arg(&home)?;
-        let user_safe = sanitize_shell_arg(&user)?;
-        let logname_safe = sanitize_shell_arg(&logname)?;
-
-        // Sanitize path arguments
-        let backup_dir_safe = sanitize_shell_arg(&backup_dir.to_string_lossy())?;
-        let backup_path_safe = sanitize_shell_arg(&backup_path.to_string_lossy())?;
-        let checksum_path_safe = sanitize_shell_arg(&checksum_path.to_string_lossy())?;
-        let bitwig_jar_safe = sanitize_shell_arg(&bitwig_jar_path.to_string_lossy())?;
-        let patcher_jar_safe = sanitize_shell_arg(&patcher_jar.to_string_lossy())?;
-        let java_path_safe = sanitize_shell_arg(&java_path.to_string_lossy())?;
-
-        // Create a script that runs the patcher with java
-        let script_content = format!(
-            "#!/bin/bash\nset -e\nexport HOME='{}'\nexport USER='{}'\nexport LOGNAME='{}'\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\n'{}' -Duser.home='{}' -Duser.name='{}' -Duser.dir='{}' -jar '{}' '{}'\n",
-            home_safe,
-            user_safe,
-            logname_safe,
-            backup_dir_safe,
-            bitwig_jar_safe,
-            backup_path_safe,
-            bitwig_jar_safe,
-            checksum_path_safe,
-            java_path_safe,
-            home_safe,
-            user_safe,
-            home_safe,
-            patcher_jar_safe,
-            bitwig_jar_safe
-        );
-
-        let script_path = create_secure_temp_script("patch-cli", &script_content)?;
-
-        // Run with pkexec
-        let output = Command::new("pkexec")
-            .arg("bash")
-            .arg(&script_path)
-            .output()?;
-
-        // Clean up script
-        let _ = fs::remove_file(&script_path);
-        output
-    };
-
-    let stderr = String::from_utf8_lossy(&output.stderr);
-    let stdout = String::from_utf8_lossy(&output.stdout);
-
-    if output.status.success() {
-        // Create our marker file for tracking
-        let marker_path = get_marker_path(bitwig_jar_path);
-        // Need to write marker with elevation too if in system location
-        if !can_write(&marker_path) {
-            #[cfg(target_os = "windows")]
-            {
-                // On Windows, use PowerShell with elevation to write marker
-                let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
-                let ps_command = format!(
-                    "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"Set-Content -Path '{}' -Value 'patched'\" -Verb RunAs -Wait -WindowStyle Hidden",
-                    marker_path_escaped
-                );
-                let marker_result = Command::new("powershell")
-                    .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
-                    .output();
-                if let Err(e) = marker_result {
-                    log_event(&format!("patcher: warning - failed to write marker: {}", e));
-                }
-            }
-            #[cfg(not(target_os = "windows"))]
-            {
-                let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
-                let marker_script = format!(
-                    "#!/bin/bash\necho 'patched' > '{}'\n",
-                    marker_path_safe
-                );
-                let marker_script_path = create_secure_temp_script("marker", &marker_script)?;
-                let marker_result = Command::new("pkexec")
-                    .arg("bash")
-                    .arg(&marker_script_path)
-                    .output();
-                let _ = fs::remove_file(&marker_script_path);
-                if let Err(e) = marker_result {
-                    log_event(&format!("patcher: warning - failed to write marker: {}", e));
-                }
-            }
-        } else if let Err(e) = fs::write(&marker_path, "patched") {
-            log_event(&format!("patcher: warning - failed to write marker: {}", e));
-        }
-        log_event(&format!(
-            "patcher: run_patcher_cli_elevated ok stdout='{}' stderr='{}'",
-            stdout, stderr
-        ));
-        Ok(())
-    } else {
-        log_event(&format!(
-            "patcher: run_patcher_cli_elevated failed stdout='{}' stderr='{}'",
-            stdout, stderr
-        ));
-
-        if stderr.contains("dismissed") || output.status.code() == Some(126) {
-            Err(PatchError::ElevationCancelled)
-        } else if stdout.contains("already patched") {
-            let marker_path = get_marker_path(bitwig_jar_path);
-            if let Err(e) = fs::write(&marker_path, "patched") {
-                log_event(&format!("patcher: warning - failed to write marker: {}", e));
-            }
-            Ok(())
-        } else {
-            Err(PatchError::PatcherFailed(format!(
-                "stdout: {}\nstderr: {}",
-                stdout, stderr
-            )))
-        }
-    }
-}
-
 /// Create a headless patching script that uses the patcher's classes
 /// Kept for potential future use
 #[allow(dead_code)]
@@ -1062,11 +896,11 @@ if [ ! -f "$BACKUP_PATH" ]; then
     cp "$BITWIG_JAR" "$BACKUP_PATH"
 fi
 
-# Launch the patcher GUI
+# Launch the patcher GUI with enough heap for ASM bytecode manipulation
 # The user needs to:
 # 1. Select the Bitwig installation in the GUI
 # 2. Click "Patch"
-java -jar "$PATCHER_JAR" &
+java -Xmx2g -jar "$PATCHER_JAR" &
 
 echo "Patcher launched. Please complete patching in the GUI."
 "#);
@@ -1202,41 +1036,10 @@ pub fn run_with_pkexec(_command: &str, _args: &[&str]) -> Result<(), PatchError>
     Err(PatchError::PkexecFailed("Elevation not available on this platform".to_string()))
 }
 
-fn get_patch_sources(jar_path: &Path) -> Vec<PathBuf> {
-    let mut sources = Vec::new();
-    let candidates = [
-        jar_path.with_extension("jar.bak"),
-        jar_path.with_extension("jar.backup"),
-        jar_path.with_extension("backup"),
-    ];
-
-    for candidate in candidates {
-        if candidate.exists() {
-            sources.push(candidate);
-        }
-    }
-
-    if let Ok(backup) = find_latest_manager_backup(jar_path) {
-        sources.push(backup);
-    }
-
-    sources.push(jar_path.to_path_buf());
-    sources
-}
 
 fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
-    let temp_dir = std::env::temp_dir().join("bitwig-theme-manager");
-    fs::create_dir_all(&temp_dir)?;
-
-    #[cfg(unix)]
-    {
-        use std::os::unix::fs::PermissionsExt;
-        let _ = fs::set_permissions(&temp_dir, fs::Permissions::from_mode(0o700));
-    }
-
-    let temp_jar = temp_dir.join("bitwig.jar");
-
-    // Get user home and name (platform-specific)
+    // Get user home and name to pass to the patcher
+    // This ensures theme files are written to user's home, not root's
     #[cfg(target_os = "windows")]
     let (home, user) = {
         let home = std::env::var("USERPROFILE").unwrap_or_else(|_| {
@@ -1252,82 +1055,96 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         (home, user)
     };
 
-    for source in get_patch_sources(jar_path) {
-        fs::copy(&source, &temp_jar)?;
-        log_event(&format!(
-            "patcher: patching temp jar as user -> {} (source {})",
-            temp_jar.to_string_lossy(),
-            source.to_string_lossy()
-        ));
+    let java_path = find_java().ok_or(PatchError::JavaNotFound)?;
+    let patcher_jar = ensure_patcher_available()?;
+    let marker_path = get_marker_path(jar_path);
 
-        let (stdout, stderr) = run_patcher_process(&temp_jar, &home, &user)?;
-        log_event(&format!(
-            "patcher: run_patcher_cli temp stdout='{}' stderr='{}'",
-            stdout, stderr
-        ));
+    // Backup directory in user's cache (writable without elevation)
+    let backup_dir = manager_backup_dir(jar_path)?;
+    let backup_path = backup_dir.join("backup.jar");
+    let checksum_path = backup_dir.join("backup.jar.sha256");
 
-        if stdout.contains("already patched") || stderr.contains("already patched") {
-            continue;
-        }
+    log_event(&format!(
+        "patcher: patch_via_user_temp -> {} (home={}, user={})",
+        jar_path.to_string_lossy(),
+        home,
+        user
+    ));
 
-        let marker_path = get_marker_path(jar_path);
+    #[cfg(target_os = "windows")]
+    {
+        // On Windows, use PowerShell with elevation to run the patcher directly
+        let java_path_escaped = java_path.to_string_lossy().replace("'", "''");
+        let patcher_jar_escaped = patcher_jar.to_string_lossy().replace("'", "''");
+        let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
+        let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
+        let home_escaped = home.replace("'", "''");
+        let user_escaped = user.replace("'", "''");
 
-        #[cfg(target_os = "windows")]
-        {
-            // On Windows, use PowerShell with elevation to copy the patched jar
-            let temp_jar_escaped = temp_jar.to_string_lossy().replace("'", "''");
-            let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
-            let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
+        let ps_script = format!(
+            r#"& '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-jar' '{}' '{}'; Set-Content -Path '{}' -Value 'patched'"#,
+            java_path_escaped, home_escaped, user_escaped, patcher_jar_escaped, jar_path_escaped, marker_path_escaped
+        );
 
-            let ps_script = format!(
-                r#"Copy-Item -Path '{}' -Destination '{}' -Force; Set-Content -Path '{}' -Value 'patched'"#,
-                temp_jar_escaped, jar_path_escaped, marker_path_escaped
-            );
+        let ps_command = format!(
+            "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"{}\" -Verb RunAs -Wait -WindowStyle Hidden",
+            ps_script.replace('"', "`\"")
+        );
 
-            let ps_command = format!(
-                "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"{}\" -Verb RunAs -Wait -WindowStyle Hidden",
-                ps_script.replace('"', "`\"")
-            );
+        let output = Command::new("powershell")
+            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+            .output()?;
 
-            let output = Command::new("powershell")
-                .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
-                .output()?;
-
-            if output.status.success() {
-                return Ok(());
-            } else {
-                let stderr = String::from_utf8_lossy(&output.stderr);
-                if stderr.contains("canceled") || stderr.contains("cancelled") {
-                    return Err(PatchError::ElevationCancelled);
-                }
-                return Err(PatchError::PkexecFailed(format!("Windows elevation failed: {}", stderr)));
+        if output.status.success() {
+            return Ok(());
+        } else {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            if stderr.contains("canceled") || stderr.contains("cancelled") {
+                return Err(PatchError::ElevationCancelled);
             }
-        }
-
-        #[cfg(not(target_os = "windows"))]
-        {
-            // Sanitize paths for shell script
-            let temp_jar_safe = sanitize_shell_arg(&temp_jar.to_string_lossy())?;
-            let jar_path_safe = sanitize_shell_arg(&jar_path.to_string_lossy())?;
-            let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
-
-            let script_content = format!(
-                "#!/bin/bash\nset -e\ncp '{}' '{}'\necho 'patched' > '{}'\n",
-                temp_jar_safe,
-                jar_path_safe,
-                marker_path_safe
-            );
-
-            let script_path = create_secure_temp_script("copy-patched", &script_content)?;
-            let script_path_str = path_to_str(&script_path)?;
-
-            let result = run_with_pkexec("bash", &[script_path_str]);
-            let _ = fs::remove_file(&script_path);
-            return result;
+            return Err(PatchError::PkexecFailed(format!("Windows elevation failed: {}", stderr)));
         }
     }
 
-    Err(PatchError::AlreadyPatched)
+    #[cfg(not(target_os = "windows"))]
+    {
+        // Run patcher directly with pkexec (like: sudo java -jar patcher.jar bitwig.jar)
+        // This matches the working manual command
+        let java_path_safe = sanitize_shell_arg(&java_path.to_string_lossy())?;
+        let patcher_jar_safe = sanitize_shell_arg(&patcher_jar.to_string_lossy())?;
+        let jar_path_safe = sanitize_shell_arg(&jar_path.to_string_lossy())?;
+        let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
+        let backup_dir_safe = sanitize_shell_arg(&backup_dir.to_string_lossy())?;
+        let backup_path_safe = sanitize_shell_arg(&backup_path.to_string_lossy())?;
+        let checksum_path_safe = sanitize_shell_arg(&checksum_path.to_string_lossy())?;
+        let home_safe = sanitize_shell_arg(&home)?;
+        let user_safe = sanitize_shell_arg(&user)?;
+
+        // Script: 1) backup current JAR, 2) patch it, 3) create marker
+        let script_content = format!(
+            "#!/bin/bash\nset -e\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\n'{}' -Xmx2g -Duser.home='{}' -Duser.name='{}' -jar '{}' '{}'\necho 'patched' > '{}'\n",
+            backup_dir_safe,
+            jar_path_safe,
+            backup_path_safe,
+            jar_path_safe,
+            checksum_path_safe,
+            java_path_safe,
+            home_safe,
+            user_safe,
+            patcher_jar_safe,
+            jar_path_safe,
+            marker_path_safe
+        );
+
+        let script_path = create_secure_temp_script("patch-direct", &script_content)?;
+        let script_path_str = path_to_str(&script_path)?;
+
+        log_event(&format!("patcher: running script:\n{}", script_content));
+
+        let result = run_with_pkexec("bash", &[script_path_str]);
+        let _ = fs::remove_file(&script_path);
+        return result;
+    }
 }
 
 /// Patch the JAR file with elevation if needed
@@ -1346,8 +1163,6 @@ pub fn patch_jar_elevated(jar_path: &Path) -> Result<(), PatchError> {
         log_event("patcher: patch_jar_elevated failed (no java)");
         return Err(PatchError::JavaNotFound);
     }
-
-    let _ = create_manager_backup(jar_path);
 
     log_event(&format!(
         "patcher: patch_jar_elevated start -> {}",
@@ -1612,9 +1427,8 @@ mod tests {
             get_checksum_path(jar_path),
             Path::new("/opt/bitwig-studio/5.2/bin/bitwig.jar.backup.sha256")
         );
-        assert_eq!(
-            get_marker_path(jar_path),
-            Path::new("/opt/bitwig-studio/5.2/bin/bitwig.patched")
-        );
+        // marker path is now in cache dir, not next to JAR
+        let marker = get_marker_path(jar_path);
+        assert!(marker.ends_with("patched.marker"));
     }
 }

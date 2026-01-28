@@ -45,6 +45,12 @@ pub struct Settings {
 
     /// Version that user chose to skip (won't prompt for this version)
     pub skipped_version: Option<String>,
+
+    /// Custom Bitwig installation paths (manually added by user)
+    pub custom_installations: Vec<String>,
+
+    /// Favorite theme IDs (starred by user)
+    pub favorite_themes: Vec<String>,
 }
 
 impl Default for Settings {
@@ -59,6 +65,8 @@ impl Default for Settings {
             show_preview_images: true,
             last_view: "browse".to_string(),
             skipped_version: None,
+            custom_installations: Vec::new(),
+            favorite_themes: Vec::new(),
         }
     }
 }

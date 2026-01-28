@@ -79,6 +79,8 @@ export function useSettings() {
       show_preview_images: true,
       last_view: "browse",
       skipped_version: null,
+      custom_installations: [],
+      favorite_themes: [],
     };
 
     setSettings(defaults);

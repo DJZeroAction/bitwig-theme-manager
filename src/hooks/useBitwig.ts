@@ -41,6 +41,8 @@ export function useBitwigInstallations() {
     try {
       const installation = await api.validateBitwigPath(path);
       if (installation) {
+        // Persist to settings so it survives app restart
+        await api.addCustomInstallation(path);
         setInstallations((prev) => {
           const exists = prev.some((i) => i.jar_path === installation.jar_path);
           if (exists) return prev;

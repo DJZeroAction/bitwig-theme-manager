@@ -1,0 +1,370 @@
+// Workbench
+// Inspired by the Commodore Amiga Workbench 1.x interface
+// 4-color spirit: blue (#0055AA), white, black, orange (#FF8800)
+// Author: Community
+
+// Core
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FF8800
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #FF8800
+Default text: #FFFFFF
+Window background: #003878
+Grey 0: #001A40
+Grey 1: #002050
+Grey 2: #002860
+Grey 3: #003070
+Grey 4: #003878
+Grey 5: #004088
+Grey 6: #1A5098
+Shadow: #00000080
+Brighter: #FFFFFF
+
+// Text
+Dark Text: #FFFFFF
+Subtle Dark Text: #88BBDD
+Subtle Light Text: #AACCEE
+Subtler Light Text: #88AACC
+Medium Light Text: #CCDDEE
+Light Text: #FFFFFF
+Lighter Text: #CCDDEE
+Link Text: #FF8800
+Link Text Rollover: #FFAA44
+Error Text: #FF4444
+
+// Accent & Status
+Accent (default): #FF8800
+Accent (hitech): #FFAA44
+Implicit On (subtle): #FF880066
+On (subtle): #FF880044
+On (subtler): #FF880022
+Pressed On: #CC6600
+Mapping: #FFAA44
+Selection: #FF880066
+Standby selection: #FF880033
+White Selection: #FF8800
+White Selection (standby): #AACCEE
+Warning: #FFCC00
+Activation Green: #44BB44
+Activation Yellow: #FFCC00
+Activation Red: #FF4444
+
+// Buttons
+Button background: #00285880
+Button stroke: #0066BB
+OK Button background: #FF8800
+Pressed button background: #FFFFFF1A
+Checkbox background: #002050
+Button in tree background: #002860
+View button background: #FFFFFF0D
+Pressed view button background: #FFFFFF1A
+Inverted Selected Borderless Button background: #FFFFFF1A
+Selected borderless button background: #FF880040
+Pressed borderless button background: #FF880066
+Rubber button stroke: #0066BB
+Rubber highlight button stroke: #FF8800
+Close button mouse over background: #FFFFFF1A
+Close button pressed background: #FF440066
+Abstract Button Stroke: #0066BB44
+Abstract Button Selected Background: #FF880040
+Abstract Button Unselected Background: #002860
+Abstract Button Pressed Background: #FFFFFF1A
+Color bar button fill color: #FFFFFF20
+
+// Knobs & Sliders
+Knob Body: #003070
+Knob Body Lighter: #004088
+Knob Body Lightest: #0050A0
+Knob Body Darkest: #001A40
+Knob Line: #FFFFFF
+Knob Line Dark: #AACCEE
+Knob Stroke: #0066BB44
+Knob Emboss Highlight: #FFFFFF20
+Knob Emboss Shadow: #00000040
+Knob Value Background: #001A4080
+Knob Value Background (dark): #001A40
+Knob Value Color: #FF8800
+Slider background: #001A4080
+Emboss Highlight: #FFFFFF10
+Emboss Shadow: #00000020
+
+// Toggle Icons
+Normal Toggle Icon: #AACCEE
+Mouse Over Toggle Icon: #FFFFFF
+Active Toggle Icon (Playing): #FF8800
+Pressed Toggle Icon: #88AACC
+Normal Inverted Toggle Icon: #FFFFFF80
+Mouse Over Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #FF8800
+Pressed Inverted Toggle Icon: #CCDDEE
+Toggle Icon: #AACCEE
+
+// Menus & Popups
+Menu background: #002050
+Menu stroke: #0066BB
+Menu text: #FFFFFF
+Menu Icon: #FFFFFFcc
+Menu description text: #CCDDEE
+Menu separator: #0066BB44
+Popup insert: #003878
+Popup overlay background color: #000000CC
+Popup Notification Background: #002860
+Notification Background: #002860
+Notification Normal: #FFFFFF
+Notification Error: #FF4444
+Notification Button Background: #003878
+Tooltip Background: #001A40
+Light Tooltip Background: #FFFFFF
+Tooltip Stroke: #0066BB
+
+// LEDs & Meters
+Led On: #FF8800
+Led Off: #003878
+Meter Normal: #44BB44
+Meter Yellow: #FFCC00
+Meter Red: #FF4444
+Meter Clipping: #FF0000
+Meter Gain Reduction: #FF8800
+Meter Hitech: #FF8800
+Meter Hitech Background: #001A4080
+Meter Muted: #88AACC
+Hitech background: #001A40
+Hitech on: #FF8800
+
+// Scrollbars
+Scrollbar: #0066BB
+Scrollbar background: #001A40
+Modern Scrollbar Handle (active): #FF8800
+Modern Scrollbar Handle (inactive): #0066BB66
+Modern Scrollbar Background (active): #001A4066
+Modern Dark Scrollbar Handle (active): #0066BB66
+Modern Dark Scrollbar Handle (inactive): #0066BB33
+
+// Tree & List Views
+Tree Item Background: #002860
+Selected Tree Item Background: #FF880040
+Selected Tree Item Background (standby): #FF880020
+Tree Separator: #0066BB22
+List Item Background: #002860
+List Separator: #0066BB22
+Selected Dashboard Tree: #FF8800
+Dark tree background (selected): #FF880040
+Dark tree selection frame: #FF8800
+Dark tree background (standby selected): #FF880020
+Dark tree separator: #0066BB22
+Dark tree text: #FFFFFF
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #FFFFFF08
+Frame color of selection cursor in the tree.: #FF8800
+Frame color of selection cursor in the tree. (standby): #88AACC
+Launcher Mapping Indication: #88AACC
+
+// Panels & Separators
+Panel body: #003070
+Selected Panel body: #004088
+Panel stroke: #0066BB44
+Selected Panel stroke: #FF8800
+Selected Panel stroke (standby): #0066BB
+Active Panel stroke: #FF8800
+Panel Stroke (focused): #FF8800
+Inspector Section Frame: #0066BB44
+Content Background: #002860
+Light Separator Line: #0066BB22
+Dark Separator Line: #001A4080
+Dark Panel Sub-frame Stroke: #0066BB22
+Dark Panel Sub-frame Fill: #002050
+Field background: #001A40
+Number field bar background: #FF8800
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #0066BB22
+
+// Device Chain
+Device Header: #003070
+Device Header (selected): #003878
+Device Locked Overlay: #FF880080
+Device Tint Future: #0088FF64
+Device Tint Retro: #FF880052
+Device Tint Military: #44BB4447
+Plugin missing: #FF4444
+
+// Display & Waveforms
+Display Background: #001A40
+Display Background (error): #400000
+Display Waveform: #FF8800
+Display Stroke: #0066BB44
+Display Start/End Markers: #FFCC00
+Display Loop Markers: #44BB44
+Grey Display Background: #002050
+Audio Event Background: #002860
+Audio Event Boundary: #0066BB44
+Audio Event Waveform: #FF8800
+
+// Grid & Modular Environment
+The Grid (background): #002050
+The Grid (stroke): #0066BB22
+Grid Line (Primary): #0066BB44
+Grid Line (Secondary): #0066BB22
+Background color of the modular environment.: #002860
+Compressed Audio Port in modular environment: #0088FF
+Audio connection in modular environment: #FF8800
+Audio64 connection in modular environment: #FFCC00
+Event connection in modular environment: #44BB44
+Polyphonic Desktop Object: #FFAA44
+Current Atom Value Color: #FF8800
+
+// Timeline & Arranger
+Dark Timeline Background: #001A40
+Dark Timeline Header Background: #002050
+Light Timeline Background: #002860
+Light Timeline Header Background: #003070
+Top Level Timeline Background: #002050
+Top Level Timeline Header Background: #002860
+Irrelevant Timeline Background: #001530
+Irrelevant Timeline Header Background: #001A40
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #002860
+Timeline Header Background Pattern: #003070
+Timeline Primary Grid: #0066BB33
+Timeline Secondary Grid: #0066BB1A
+Timeline Header Primary Grid: #0066BB33
+Timeline Header Secondary Grid: #0066BB1A
+Timeline Playhead: #FFFFFF
+Timeline edit tool chooser background: #002860
+
+// Timeline Selection & Cursors
+Time Selection Fill: #FF880030
+Time Selection Stroke: #FF8800
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FF8800
+Time Selection Standby Fill: #FFFFFF10
+Time Selection Standby Stroke: #88AACC
+Time Selection Standby Cursor Stroke: #88AACC
+Time Selection Inactive Fill: #88AACC08
+Time Selection Inactive Stroke: #88AACC
+Time Selection Not Selected Fill: #FFFFFF0D
+Time Selection Not Selected Stroke: #88AACC
+Time Selection Across All Lanes Fill: #FF880050
+Time Selection Across All Lanes Stroke: #CCDDEE
+Header Time Selection Fill: #FF880050
+Header Time Selection Stroke: #FF8800
+Header Time Selection Standby Fill: #FFFFFF10
+Header Time Selection Standby Stroke: #88AACC
+Header Time Selection Across All Lanes Fill: #FF880066
+Header Time Selection Across All Lanes Stroke: #CCDDEE
+Header Time Selection Cursor Stroke: #FF8800
+Header Time Selection Standby Cursor Stroke: #88AACC
+Header Loop Region Background: #FF880020
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FFCC00
+Timeline Header Cue Marker: #FFCC00
+Timeline Tooltip Background: #001A40EE
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #001A40EE
+Timeline Header Tooltip Text: #FFFFFF
+
+// Loop Regions
+Loop Region Background: #FF880020
+Loop Region Fill: #FF880030
+Loop Region Stroke: #FF8800
+Loop Region Selected Fill: #FF880050
+Loop Region Selected Stroke: #FFAA44
+Insert preview time: #FFFFFF80
+
+// Automation & Modulation
+Automation Chooser Background: #00000000
+Automation Color: #FF880040
+Automation button glow color: #FF880040
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #FF8800
+Track Automation Color: #FFCC00
+Clip Automation Color: #FFAA44
+Clip Modulation Color: #44BB44
+Add Modulation Button Color: #FF8800
+Multiply Modulation Button Color: #FFCC00
+User Automation Override Color: #44BB44
+Note Expression Color: #FFCC00
+Send (post) value color: #44BB44
+Send (pre) value color: #0088FF
+Dark offset for automation/channel bar: #00000020
+Light offset for automation/channel bar: #FFFFFF20
+Unselected Filled Automation Type Icon: #88AACC
+Unselected Empty Automation Type Icon: #0066BB66
+Selected matrix slot color: #FF8800
+
+// Modulation Mapping
+Modulation Mapping Color: #FFAA44
+Modulation Mapping Color (subtractive): #FF4444
+Modulation Mapping Color (polyphonic): #44BB44
+Modulation Mapping Background (monophonic): #FF880040
+Modulation Mapping Background (polyphonic): #44BB4440
+Modulation Mapping Background Color: #FF880030
+Mapping indication 1: #FF4444
+Mapping indication 2: #FF8800
+Mapping indication 3: #FFCC00
+Mapping indication 4: #44BB44
+Mapping indication 5: #0088FF
+Mapping indication 6: #0055AA
+Mapping indication 7: #FFAA44
+Mapping indication 8: #FF6644
+
+// Record & Transport
+Record button color: #FF4444
+Record button color implicit: #FF444488
+Record button glow color: #FF444440
+Record text color: #FF4444
+Monitoring buttons color: #FFCC00
+
+// Onset & Beat Detection
+Onset Color Min: #FFCC00
+Onset Color Max: #FF8800
+Onset Marker Color: #FF8800
+Beat Marker Color: #44BB44
+Analyzed Beat Color: #44BB44
+
+// File Status Indicators
+Missing file icon: #FF4444
+Missing file text: #FF4444
+Found file icon: #44BB44
+Found file text: #44BB44
+External file icon: #FFCC00
+External file text: #FFCC00
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #002050
+Invoke Action Category: #88AACC
+Invoke Action Text: #FFFFFF
+User input text: #FFFFFF
+
+// Panel Colors
+Panel Red: #FF4444
+Panel Orange: #FF8800
+Panel Yellow: #FFCC00
+Panel Lime: #88DD44
+Panel Green: #44BB44
+Panel Mint: #44DDAA
+Panel Turquoise: #44AADD
+Panel Blue: #0088FF
+Panel Purple: #AA66FF
+
+// Bitwig Branding
+Bitwig Red: #FF4444
+Bitwig Mint: #44DDAA
+Bitwig CI: #FF8800
+Bitwig Producer: #FFCC00
+Bitwig Essentials: #0088FF
+Bitwig 8-Track: #44BB44
+Bitwig 16-Track: #0088FF
+
+// Misc
+Comp fill: #FF880050
+Selected Panel stroke (standby): #0066BB
+Popup insert: #003878
+Selected Dashboard Tree: #FF8800
+// <end>
