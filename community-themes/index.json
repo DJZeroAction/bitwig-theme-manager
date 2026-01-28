@@ -467,6 +467,30 @@
       "file": "blackfire.bte",
       "preview": "blackfire.png",
       "description": "With the most important - the Grid!"
+    },
+    {
+      "id": "light-azure",
+      "name": "Light Azure",
+      "author": "Unknown",
+      "file": "light-azure.bte",
+      "preview": "light-azure.png",
+      "description": "Light theme with azure blue accents"
+    },
+    {
+      "id": "light-crimson-velvet",
+      "name": "Light Crimson Velvet",
+      "author": "Unknown",
+      "file": "light-crimson-velvet.bte",
+      "preview": "light-crimson-velvet.png",
+      "description": "Light theme with crimson velvet accents"
+    },
+    {
+      "id": "vibrant-orange-light",
+      "name": "Vibrant Orange Light",
+      "author": "Unknown",
+      "file": "vibrant-orange-light.bte",
+      "preview": "vibrant-orange-light.png",
+      "description": "Light theme with vibrant orange accents"
     }
   ]
 }
