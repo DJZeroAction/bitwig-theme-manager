@@ -512,23 +512,33 @@ Bright/saturated accent colors that look great on dark backgrounds often have po
 
 | Use Case | Bright Color | Dark Variant |
 |----------|--------------|--------------|
-| Yellow accent | `#FFD700` (buttons, knobs) | `#8B6500` (text, selection) |
+| Yellow accent | `#FFD700` (buttons, knobs) | `#5A3800` (text, selection) |
 | Cyan accent | `#00CED1` (indicators) | `#008080` (text, selection) |
 | Lime accent | `#7FFF00` (meters) | `#339900` (text, selection) |
 
 **Properties that need good contrast** (use darker variants on light themes):
+- `Accent (default)` — **primary accent**, used for toggles and active states
+- `Accent (hitech)` — **transport bar displays**, time readouts, value fields
 - `White Selection` — selection highlight, often used for text
 - `Selected Dashboard Tree` — tree selection text
-- `Accent (default)` — if used in text contexts
+- `Active Toggle Icon (Playing)` — active toggle icons
 - `Mapping indication 1-8` — mapping slot labels
+- `Number field bar background` — value bars in number fields
 - Any `*Text` or `*Icon` property
 
 **Properties where bright colors work fine** (decorative, not text):
-- `Knob Value Color` — value arcs
-- `Progress bar` — progress indicators
-- `Meter Normal/Yellow/Red` — level meters
-- `OK Button background` — button fills
+- `Knob Value Color` — value arcs (on dark knob bodies)
+- `Progress bar` — progress indicators (on dark track)
+- `Meter Normal/Yellow/Red` — level meters (on dark backgrounds)
+- `OK Button background` — button fills (text is dark)
+- `Drop Indicator` — drag-and-drop indicator (temporary UI)
 - `Time Selection Fill/Stroke` — selection overlays (use alpha)
+
+**Testing tip**: After applying your theme, check these areas in Bitwig:
+1. Transport bar (tempo, time position) — controlled by `Accent (hitech)`
+2. Inspector panel values (Position, Length, etc.) — also `Accent (hitech)`
+3. Browser/tree selections — `White Selection`, `Selected Dashboard Tree`
+4. Toggle buttons when active — `Active Toggle Icon`
 
 ### Alpha Transparency Tips
 
