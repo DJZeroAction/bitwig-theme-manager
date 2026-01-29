@@ -190,13 +190,14 @@ fn get_default_search_paths() -> Vec<SearchPath> {
                 for entry in entries.filter_map(|e| e.ok()) {
                     let name = entry.file_name().to_string_lossy().to_string();
                     // Match "Bitwig Studio" followed by version/beta indicators
-                    if name.starts_with("Bitwig Studio ") && entry.path().is_dir() {
-                        if !paths.iter().any(|p| p.path == entry.path()) {
-                            paths.push(SearchPath {
-                                path: entry.path(),
-                                installation_type: installation_type.clone(),
-                            });
-                        }
+                    if name.starts_with("Bitwig Studio ")
+                        && entry.path().is_dir()
+                        && !paths.iter().any(|p| p.path == entry.path())
+                    {
+                        paths.push(SearchPath {
+                            path: entry.path(),
+                            installation_type: installation_type.clone(),
+                        });
                     }
                 }
             }

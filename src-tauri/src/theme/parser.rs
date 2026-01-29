@@ -585,10 +585,12 @@ pub fn save_theme(theme: &Theme, path: &Path) -> Result<(), ThemeError> {
     Ok(())
 }
 
-/// Get the theme directory for a specific Bitwig version
+/// Get the theme directory for a specific Bitwig version.
+///
 /// This must match where bitwig-theme-editor patcher expects themes:
-/// - All platforms: <user_home>/.bitwig-theme-editor/versions/<version>/
-/// The Java patcher uses -Duser.home which is the user's home directory on all platforms.
+/// - All platforms: `<user_home>/.bitwig-theme-editor/versions/<version>/`
+///
+/// The Java patcher uses `-Duser.home` which is the user's home directory on all platforms.
 pub fn get_theme_directory(bitwig_version: &str) -> Option<PathBuf> {
     // Use home directory on ALL platforms - this matches what the Java patcher expects
     // The patcher uses -Duser.home which is:

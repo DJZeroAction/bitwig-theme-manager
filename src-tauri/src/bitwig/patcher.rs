@@ -365,9 +365,11 @@ pub fn is_patched(jar_path: &Path) -> bool {
 }
 
 /// Check if a backup exists for a JAR file
+///
 /// Only returns true if:
 /// 1. The JAR was patched by us (marker exists)
 /// 2. The JAR hasn't been replaced since we patched (JAR mtime close to marker mtime)
+///
 /// This prevents restoring an old backup to a different Bitwig version
 pub fn has_backup(jar_path: &Path) -> bool {
     let marker_path = get_marker_path(jar_path);
@@ -1121,19 +1123,20 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
             // Verify the marker was actually created
             if marker_path.exists() {
                 log_event("patcher: Windows elevation succeeded, marker created");
-                return Ok(());
+                Ok(())
             } else {
                 log_event("patcher: Windows elevation ran but marker not found");
-                return Err(PatchError::PatcherFailed("Patching completed but marker file was not created".to_string()));
+                Err(PatchError::PatcherFailed("Patching completed but marker file was not created".to_string()))
             }
         } else {
             let stderr = String::from_utf8_lossy(&output.stderr);
             let stdout = String::from_utf8_lossy(&output.stdout);
             log_event(&format!("patcher: Windows elevation failed - stderr: {}, stdout: {}", stderr, stdout));
             if stderr.contains("canceled") || stderr.contains("cancelled") {
-                return Err(PatchError::ElevationCancelled);
+                Err(PatchError::ElevationCancelled)
+            } else {
+                Err(PatchError::PkexecFailed(format!("Windows elevation failed: {}", stderr)))
             }
-            return Err(PatchError::PkexecFailed(format!("Windows elevation failed: {}", stderr)));
         }
     }
 
@@ -1174,7 +1177,7 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
 
         let result = run_with_pkexec("bash", &[script_path_str]);
         let _ = fs::remove_file(&script_path);
-        return result;
+        result
     }
 }
 
