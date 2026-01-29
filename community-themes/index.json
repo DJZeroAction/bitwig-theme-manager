@@ -561,44 +561,44 @@
     {
       "id": "workbench",
       "name": "Workbench",
-      "author": "Community",
+      "author": "Claude",
       "file": "workbench.bte",
-      "description": "Amiga Workbench 1.x — blue, white, orange, black"
+      "description": "Amiga Workbench 1.x \u2014 blue, white, orange, black"
     },
     {
       "id": "platinum",
       "name": "Platinum",
-      "author": "Community",
+      "author": "Claude",
       "file": "platinum.bte",
-      "description": "Classic Mac OS 8/9 Platinum — warm grey with rainbow accents"
+      "description": "Classic Mac OS 8/9 Platinum \u2014 warm grey with rainbow accents"
     },
     {
       "id": "turbo",
       "name": "Turbo",
-      "author": "Community",
+      "author": "Claude",
       "file": "turbo.bte",
-      "description": "Borland Turbo Pascal IDE — deep blue with yellow and cyan"
+      "description": "Borland Turbo Pascal IDE \u2014 deep blue with yellow and cyan"
     },
     {
       "id": "hotdog-stand",
       "name": "Hotdog Stand",
-      "author": "Community",
+      "author": "Claude",
       "file": "hotdog-stand.bte",
-      "description": "Windows 3.1's worst color scheme — red and yellow everywhere"
+      "description": "Windows 3.1's worst color scheme \u2014 red and yellow everywhere"
     },
     {
       "id": "bebox",
       "name": "BeBox",
-      "author": "Community",
-      "file": "bebox.json",
-      "description": "BeOS desktop — clean grey with signature yellow accents"
+      "author": "Claude",
+      "file": "bebox.bte",
+      "description": "BeOS desktop \u2014 clean grey with signature yellow accents"
     },
     {
       "id": "irix",
       "name": "IRIX",
-      "author": "Community",
+      "author": "Claude",
       "file": "irix.bte",
-      "description": "SGI IRIX workstation — slate blue-purple with teal accents"
+      "description": "SGI IRIX workstation \u2014 slate blue-purple with teal accents"
     },
     {
       "id": "ghosty",
@@ -764,6 +764,125 @@
       "preview": "dracula.png",
       "description": "Dark purple Dracula color palette",
       "repo_url": "https://github.com/sleeplessKomodo/bitwig-dracula-theme"
+    },
+    {
+      "id": "gameboy",
+      "name": "GameBoy",
+      "author": "Claude",
+      "file": "gameboy.bte",
+      "description": "Nintendo GameBoy LCD \u2014 yellow-green monochrome"
+    },
+    {
+      "id": "cga-dos",
+      "name": "CGA DOS",
+      "author": "Claude",
+      "file": "cga-dos.bte",
+      "description": "Classic CGA 4-color \u2014 cyan, magenta, white, black"
+    },
+    {
+      "id": "shrek-swamp",
+      "name": "Shrek Swamp",
+      "author": "Claude",
+      "file": "shrek-swamp.bte",
+      "description": "Shrek's swamp \u2014 ogre green, mud brown, onion layers"
+    },
+    {
+      "id": "barbie",
+      "name": "Barbie",
+      "author": "Claude",
+      "file": "barbie.bte",
+      "description": "Barbie Dreamhouse \u2014 hot pink, white, gold"
+    },
+    {
+      "id": "hannah-montana",
+      "name": "Hannah Montana",
+      "author": "Claude",
+      "file": "hannah-montana.bte",
+      "description": "Best of Both Worlds \u2014 purple, magenta, silver sparkle"
+    },
+    {
+      "id": "disney-princess",
+      "name": "Disney Princess",
+      "author": "Claude",
+      "file": "disney-princess.bte",
+      "description": "Fairytale elegance \u2014 cream, gold, soft blue, blush pink"
+    },
+    {
+      "id": "spongebob",
+      "name": "Spongebob",
+      "author": "Claude",
+      "file": "spongebob.bte",
+      "description": "Bikini Bottom \u2014 yellow, underwater blue, Patrick pink"
+    },
+    {
+      "id": "among-us",
+      "name": "Among Us",
+      "author": "Claude",
+      "file": "among-us.bte",
+      "description": "Pretty Sus \u2014 spaceship grey, emergency red, vent cyan"
+    },
+    {
+      "id": "stranger-things",
+      "name": "Stranger Things",
+      "author": "Claude",
+      "file": "stranger-things.bte",
+      "description": "The Upside Down \u2014 dark with Christmas light RGB"
+    },
+    {
+      "id": "taco-bell",
+      "name": "Taco Bell",
+      "author": "Claude",
+      "file": "taco-bell.bte",
+      "description": "Live M\u00e1s \u2014 purple, Baja Blast teal, hot pink"
+    },
+    {
+      "id": "lisa-frank",
+      "name": "Lisa Frank",
+      "author": "Claude",
+      "file": "lisa-frank.bte",
+      "description": "Dolphin Fever Dream \u2014 rainbow pastel 90s maximalism"
+    },
+    {
+      "id": "mountain-dew",
+      "name": "Mountain Dew",
+      "author": "Claude",
+      "file": "mountain-dew.bte",
+      "description": "Do the Dew \u2014 radioactive green, Dorito orange, gamer black"
+    },
+    {
+      "id": "circus",
+      "name": "Circus",
+      "author": "Claude",
+      "file": "circus.bte",
+      "description": "Clown College \u2014 red, yellow, blue primary chaos"
+    },
+    {
+      "id": "naruto",
+      "name": "Naruto",
+      "author": "Claude",
+      "file": "naruto.bte",
+      "description": "Believe It! \u2014 orange ninja, Sharingan red, chakra yellow"
+    },
+    {
+      "id": "pokemon",
+      "name": "Pokemon",
+      "author": "Claude",
+      "file": "pokemon.bte",
+      "description": "Gotta Catch 'Em All \u2014 Pokeball red, Pikachu yellow"
+    },
+    {
+      "id": "dragon-ball",
+      "name": "Dragon Ball",
+      "author": "Claude",
+      "file": "dragon-ball.bte",
+      "description": "Over 9000! \u2014 Goku orange, Super Saiyan yellow"
+    },
+    {
+      "id": "yugioh",
+      "name": "Yu-Gi-Oh",
+      "author": "Claude",
+      "file": "yugioh.bte",
+      "description": "Time to Duel! \u2014 Millennium gold, Shadow Realm purple"
     }
   ]
 }

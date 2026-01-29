@@ -1,0 +1,371 @@
+// Stranger Things - The Upside Down
+// You're in the Upside Down now - dark, decayed, ominous
+// Stranger Things red neon (#FF0040) pierces the darkness
+// Christmas lights: Red, Yellow, Green, Blue
+// Author: Claude
+
+// Core - The Upside Down: near-black with reddish-brown decay
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FF0040
+White: #E8DDD0
+Black: #0A0608
+Same as background: #00000000
+Accent: #FF0040
+Default text: #E8DDD0
+Window background: #0D0809
+Grey 0: #0A0608
+Grey 1: #120D0F
+Grey 2: #1A1215
+Grey 3: #221820
+Grey 4: #2A1E25
+Grey 5: #32242C
+Grey 6: #3A2A33
+Shadow: #000000DD
+Brighter: #E8DDD0
+
+// Text - Retro cream and neon red
+Dark Text: #E8DDD0
+Subtle Dark Text: #A89888
+Subtle Light Text: #C8B8A8
+Subtler Light Text: #887868
+Medium Light Text: #D8C8B8
+Light Text: #E8DDD0
+Lighter Text: #D8C8B8
+Link Text: #FF0040
+Link Text Rollover: #FF3366
+Error Text: #FF0040
+
+// Accent & Status - STRANGER THINGS RED dominates
+Accent (default): #FF0040
+Accent (hitech): #FF3366
+Implicit On (subtle): #FF004066
+On (subtle): #FF004044
+On (subtler): #FF004022
+Pressed On: #CC0033
+Mapping: #FFD700
+Selection: #FF004066
+Standby selection: #FF004033
+White Selection: #FF0040
+White Selection (standby): #887868
+Warning: #FFD700
+Activation Green: #00FF66
+Activation Yellow: #FFD700
+Activation Red: #FF0040
+
+// Buttons - Upside Down organic darkness
+Button background: #1A121580
+Button stroke: #4A2830
+OK Button background: #E40045
+Pressed button background: #E8DDD01A
+Checkbox background: #120D0F
+Button in tree background: #1A1215
+View button background: #E8DDD00D
+Pressed view button background: #E8DDD01A
+Inverted Selected Borderless Button background: #E8DDD01A
+Selected borderless button background: #FF004040
+Pressed borderless button background: #FF004066
+Rubber button stroke: #4A2830
+Rubber highlight button stroke: #FF0040
+Close button mouse over background: #E8DDD01A
+Close button pressed background: #FF004066
+Abstract Button Stroke: #4A283044
+Abstract Button Selected Background: #FF004040
+Abstract Button Unselected Background: #1A1215
+Abstract Button Pressed Background: #E8DDD01A
+Color bar button fill color: #E8DDD020
+
+// Knobs & Sliders - Dark with neon red glow
+Knob Body: #1A1215
+Knob Body Lighter: #221820
+Knob Body Lightest: #2A1E25
+Knob Body Darkest: #0A0608
+Knob Line: #E8DDD0
+Knob Line Dark: #A89888
+Knob Stroke: #4A283044
+Knob Emboss Highlight: #E8DDD020
+Knob Emboss Shadow: #00000040
+Knob Value Background: #0A060880
+Knob Value Background (dark): #0A0608
+Knob Value Color: #FF0040
+Slider background: #0A060880
+Emboss Highlight: #E8DDD010
+Emboss Shadow: #00000020
+
+// Toggle Icons - Neon red when active
+Normal Toggle Icon: #A89888
+Mouse Over Toggle Icon: #E8DDD0
+Active Toggle Icon (Playing): #FF0040
+Pressed Toggle Icon: #686058
+Normal Inverted Toggle Icon: #E8DDD080
+Mouse Over Inverted Toggle Icon: #E8DDD0
+Active Inverted Toggle Icon (Playing): #FF0040
+Pressed Inverted Toggle Icon: #C8B8A8
+Toggle Icon: #A89888
+
+// Menus & Popups - Upside Down void
+Menu background: #0D0809
+Menu stroke: #4A2830
+Menu text: #E8DDD0
+Menu Icon: #E8DDD0cc
+Menu description text: #C8B8A8
+Menu separator: #4A283044
+Popup insert: #1A1215
+Popup overlay background color: #000000EE
+Popup Notification Background: #120D0F
+Notification Background: #120D0F
+Notification Normal: #E8DDD0
+Notification Error: #FF0040
+Notification Button Background: #1A1215
+Tooltip Background: #0A0608
+Light Tooltip Background: #E8DDD0
+Tooltip Stroke: #4A2830
+
+// LEDs & Meters - Christmas lights through the darkness
+Led On: #FF0040
+Led Off: #1A1215
+Meter Normal: #00FF66
+Meter Yellow: #FFD700
+Meter Red: #FF0040
+Meter Clipping: #FF0040
+Meter Gain Reduction: #3366FF
+Meter Hitech: #FF0040
+Meter Hitech Background: #0A060880
+Meter Muted: #686058
+Hitech background: #0A0608
+Hitech on: #FF0040
+
+// Scrollbars - Dark with red accent
+Scrollbar: #4A2830
+Scrollbar background: #0A0608
+Modern Scrollbar Handle (active): #FF0040
+Modern Scrollbar Handle (inactive): #4A283066
+Modern Scrollbar Background (active): #0A060866
+Modern Dark Scrollbar Handle (active): #4A283066
+Modern Dark Scrollbar Handle (inactive): #4A283033
+
+// Tree & List Views - Deep Upside Down darkness
+Tree Item Background: #120D0F
+Selected Tree Item Background: #FF004040
+Selected Tree Item Background (standby): #FF004020
+Tree Separator: #4A283022
+List Item Background: #120D0F
+List Separator: #4A283022
+Selected Dashboard Tree: #FF0040
+Dark tree background (selected): #FF004040
+Dark tree selection frame: #FF0040
+Dark tree background (standby selected): #FF004020
+Dark tree separator: #4A283022
+Dark tree text: #E8DDD0
+Dark tree text (selected): #E8DDD0
+Dark tree hover background change: #E8DDD008
+Frame color of selection cursor in the tree.: #FF0040
+Frame color of selection cursor in the tree. (standby): #887868
+Launcher Mapping Indication: #FFD700
+
+// Panels & Separators - Decayed organic darkness
+Panel body: #1A1215
+Selected Panel body: #221820
+Panel stroke: #4A283044
+Selected Panel stroke: #FF0040
+Selected Panel stroke (standby): #4A2830
+Active Panel stroke: #FF0040
+Panel Stroke (focused): #FF0040
+Inspector Section Frame: #4A283044
+Content Background: #120D0F
+Light Separator Line: #4A283022
+Dark Separator Line: #0A060880
+Dark Panel Sub-frame Stroke: #4A283022
+Dark Panel Sub-frame Fill: #0D0809
+Field background: #0A0608
+Number field bar background: #FF0040
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #4A283022
+
+// Device Chain - Upside Down tints
+Device Header: #1A1215
+Device Header (selected): #221820
+Device Locked Overlay: #FF004080
+Device Tint Future: #3366FF64
+Device Tint Retro: #FF004052
+Device Tint Military: #00FF6647
+Plugin missing: #FF0040
+
+// Display & Waveforms - Neon red dominates
+Display Background: #0A0608
+Display Background (error): #400018
+Display Waveform: #FF0040
+Display Stroke: #4A283044
+Display Start/End Markers: #FFD700
+Display Loop Markers: #00FF66
+Grey Display Background: #0D0809
+Audio Event Background: #120D0F
+Audio Event Boundary: #4A283044
+Audio Event Waveform: #FF0040
+
+// Grid & Modular Environment - Christmas lights for connections
+The Grid (background): #0D0809
+The Grid (stroke): #4A283022
+Grid Line (Primary): #4A283044
+Grid Line (Secondary): #4A283022
+Background color of the modular environment.: #120D0F
+Compressed Audio Port in modular environment: #3366FF
+Audio connection in modular environment: #FF0040
+Audio64 connection in modular environment: #FFD700
+Event connection in modular environment: #00FF66
+Polyphonic Desktop Object: #3366FF
+Current Atom Value Color: #FF0040
+
+// Timeline & Arranger - The Upside Down void
+Dark Timeline Background: #0A0608
+Dark Timeline Header Background: #0D0809
+Light Timeline Background: #120D0F
+Light Timeline Header Background: #1A1215
+Top Level Timeline Background: #0D0809
+Top Level Timeline Header Background: #120D0F
+Irrelevant Timeline Background: #060405
+Irrelevant Timeline Header Background: #0A0608
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #120D0F
+Timeline Header Background Pattern: #1A1215
+Timeline Primary Grid: #4A283033
+Timeline Secondary Grid: #4A28301A
+Timeline Header Primary Grid: #4A283033
+Timeline Header Secondary Grid: #4A28301A
+Timeline Playhead: #E8DDD0
+Timeline edit tool chooser background: #120D0F
+
+// Timeline Selection & Cursors - Neon red selection
+Time Selection Fill: #FF004030
+Time Selection Stroke: #FF0040
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FF0040
+Time Selection Standby Fill: #E8DDD010
+Time Selection Standby Stroke: #887868
+Time Selection Standby Cursor Stroke: #887868
+Time Selection Inactive Fill: #88786808
+Time Selection Inactive Stroke: #887868
+Time Selection Not Selected Fill: #E8DDD00D
+Time Selection Not Selected Stroke: #887868
+Time Selection Across All Lanes Fill: #FF004050
+Time Selection Across All Lanes Stroke: #C8B8A8
+Header Time Selection Fill: #FF004050
+Header Time Selection Stroke: #FF0040
+Header Time Selection Standby Fill: #E8DDD010
+Header Time Selection Standby Stroke: #887868
+Header Time Selection Across All Lanes Fill: #FF004066
+Header Time Selection Across All Lanes Stroke: #C8B8A8
+Header Time Selection Cursor Stroke: #FF0040
+Header Time Selection Standby Cursor Stroke: #887868
+Header Loop Region Background: #FF004020
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FFD700
+Timeline Header Cue Marker: #FFD700
+Timeline Tooltip Background: #0A0608EE
+Timeline Tooltip Text: #E8DDD0
+Timeline Header Tooltip Background: #0A0608EE
+Timeline Header Tooltip Text: #E8DDD0
+
+// Loop Regions - Neon red loops
+Loop Region Background: #FF004020
+Loop Region Fill: #FF004030
+Loop Region Stroke: #FF0040
+Loop Region Selected Fill: #FF004050
+Loop Region Selected Stroke: #FF3366
+Insert preview time: #E8DDD080
+
+// Automation & Modulation
+Automation Chooser Background: #00000000
+Automation Color: #FF004040
+Automation button glow color: #FF004040
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #FF0040
+Track Automation Color: #FF0040
+Clip Automation Color: #FF3366
+Clip Modulation Color: #00FF66
+Add Modulation Button Color: #FF0040
+Multiply Modulation Button Color: #FFD700
+User Automation Override Color: #00FF66
+Note Expression Color: #FFD700
+Send (post) value color: #00FF66
+Send (pre) value color: #3366FF
+Dark offset for automation/channel bar: #00000020
+Light offset for automation/channel bar: #E8DDD020
+Unselected Filled Automation Type Icon: #A89888
+Unselected Empty Automation Type Icon: #4A283066
+Selected matrix slot color: #FF0040
+
+// Modulation Mapping - Christmas lights palette
+Modulation Mapping Color: #FFD700
+Modulation Mapping Color (subtractive): #FF0040
+Modulation Mapping Color (polyphonic): #00FF66
+Modulation Mapping Background (monophonic): #FFD70040
+Modulation Mapping Background (polyphonic): #00FF6640
+Modulation Mapping Background Color: #FFD70030
+Mapping indication 1: #FF0040
+Mapping indication 2: #3366FF
+Mapping indication 3: #FFD700
+Mapping indication 4: #00FF66
+Mapping indication 5: #FF3366
+Mapping indication 6: #5588FF
+Mapping indication 7: #FFE033
+Mapping indication 8: #33FF88
+
+// Record & Transport - Neon red record
+Record button color: #FF0040
+Record button color implicit: #FF004088
+Record button glow color: #FF004040
+Record text color: #FF0040
+Monitoring buttons color: #FFD700
+
+// Onset & Beat Detection
+Onset Color Min: #FFD700
+Onset Color Max: #FF0040
+Onset Marker Color: #FF0040
+Beat Marker Color: #00FF66
+Analyzed Beat Color: #00FF66
+
+// File Status Indicators
+Missing file icon: #FF0040
+Missing file text: #FF0040
+Found file icon: #00FF66
+Found file text: #00FF66
+External file icon: #FFD700
+External file text: #FFD700
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #0D0809
+Invoke Action Category: #A89888
+Invoke Action Text: #E8DDD0
+User input text: #E8DDD0
+
+// Panel Colors - Christmas lights through the Upside Down
+Panel Red: #FF0040
+Panel Orange: #FF6633
+Panel Yellow: #FFD700
+Panel Lime: #88FF33
+Panel Green: #00FF66
+Panel Mint: #33FFAA
+Panel Turquoise: #33CCFF
+Panel Blue: #3366FF
+Panel Purple: #9933FF
+
+// Bitwig Branding - Stranger Things red takeover
+Bitwig Red: #FF0040
+Bitwig Mint: #33FFAA
+Bitwig CI: #FF0040
+Bitwig Producer: #FFD700
+Bitwig Essentials: #3366FF
+Bitwig 8-Track: #00FF66
+Bitwig 16-Track: #3366FF
+
+// Misc
+Comp fill: #FF004050
+Drop Indicator: #FF0040
+Progress bar: #FF0040
+Progress background: #0A0608
+// <end>

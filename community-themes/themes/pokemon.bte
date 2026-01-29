@@ -1,0 +1,372 @@
+// Pokemon - Gotta Catch 'Em All
+// POKEBALL theme - Red workspace with Pikachu yellow accents
+// Red-tinted workspace like the top of a Pokeball, yellow highlights like Pikachu
+// Author: Claude
+
+// Core
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #CC0000
+White: #FFFFFF
+Black: #1A0808
+Same as background: #00000000
+Accent: #CC0000
+Default text: #FFDE00
+Window background: #3A1010
+
+// Grey Scale - POKEBALL RED TINTED!
+Grey 0: #1A0808
+Grey 1: #2A1010
+Grey 2: #3A1515
+Grey 3: #4A1A1A
+Grey 4: #5A2020
+Grey 5: #6A2A2A
+Grey 6: #7A3030
+Shadow: #00000099
+Brighter: #FFDE00
+
+// Text - Pikachu Yellow on dark!
+Dark Text: #FFDE00
+Subtle Dark Text: #CCAA00
+Subtle Light Text: #FFE855
+Subtler Light Text: #CC9900
+Medium Light Text: #FFE033
+Light Text: #FFDE00
+Lighter Text: #FFE855
+Link Text: #3B4CCA
+Link Text Rollover: #5A6BE0
+Error Text: #FF6666
+
+// Accent & Status - Pokeball Red Primary!
+Accent (default): #CC0000
+Accent (hitech): #AA0000
+Implicit On (subtle): #CC000066
+On (subtle): #CC000055
+On (subtler): #CC000033
+Pressed On: #AA0000
+Mapping: #FFDE00
+Selection: #CC000077
+Standby selection: #CC000044
+White Selection: #CC0000
+White Selection (standby): #FFDE00
+Warning: #FFDE00
+Activation Green: #44DD44
+Activation Yellow: #FFDE00
+Activation Red: #CC0000
+
+// Buttons
+Button background: #4A1A1A99
+Button stroke: #CC0000
+OK Button background: #CC0000
+Pressed button background: #FFDE0033
+Checkbox background: #2A1010
+Button in tree background: #4A1A1A
+View button background: #FFDE000D
+Pressed view button background: #FFDE001A
+Inverted Selected Borderless Button background: #FFDE001A
+Selected borderless button background: #CC000055
+Pressed borderless button background: #CC000077
+Rubber button stroke: #3B4CCA
+Rubber highlight button stroke: #FFDE00
+Close button mouse over background: #FFDE001A
+Close button pressed background: #CC000077
+Abstract Button Stroke: #CC000066
+Abstract Button Selected Background: #CC000055
+Abstract Button Unselected Background: #4A1A1A
+Abstract Button Pressed Background: #FFDE001A
+Color bar button fill color: #FFDE0030
+
+// Knobs & Sliders
+Knob Body: #4A1A1A
+Knob Body Lighter: #5A2020
+Knob Body Lightest: #6A2A2A
+Knob Body Darkest: #1A0808
+Knob Line: #FFDE00
+Knob Line Dark: #CCAA00
+Knob Stroke: #CC000066
+Knob Emboss Highlight: #FFDE0020
+Knob Emboss Shadow: #00000050
+Knob Value Background: #1A080899
+Knob Value Background (dark): #1A0808
+Knob Value Color: #FFDE00
+Slider background: #1A080899
+Emboss Highlight: #FFDE0010
+Emboss Shadow: #00000030
+
+// Toggle Icons - Pikachu Yellow!
+Normal Toggle Icon: #FFDE00AA
+Mouse Over Toggle Icon: #FFDE00
+Active Toggle Icon (Playing): #FFDE00
+Pressed Toggle Icon: #CC9900
+Normal Inverted Toggle Icon: #FFDE0080
+Mouse Over Inverted Toggle Icon: #FFDE00
+Active Inverted Toggle Icon (Playing): #FFDE00
+Pressed Inverted Toggle Icon: #FFE855
+Toggle Icon: #FFDE00AA
+
+// Menus & Popups
+Menu background: #2A1010
+Menu stroke: #CC0000
+Menu text: #FFDE00
+Menu Icon: #FFDE00CC
+Menu description text: #FFE855
+Menu separator: #CC000066
+Popup insert: #4A1A1A
+Popup overlay background color: #1A0808DD
+Popup Notification Background: #3A1515
+Notification Background: #3A1515
+Notification Normal: #FFDE00
+Notification Error: #FF6666
+Notification Button Background: #4A1A1A
+Tooltip Background: #1A0808
+Light Tooltip Background: #FFFFFF
+Tooltip Stroke: #FFDE00
+
+// LEDs & Meters - Pikachu Yellow!
+Led On: #FFDE00
+Led Off: #4A1A1A
+Meter Normal: #FFDE00
+Meter Yellow: #FFDE00
+Meter Red: #CC0000
+Meter Clipping: #FF4444
+Meter Gain Reduction: #FFDE00
+Meter Hitech: #FFDE00
+Meter Hitech Background: #1A080899
+Meter Muted: #7A3030
+Hitech background: #1A0808
+Hitech on: #FFDE00
+
+// Scrollbars - Pokemon Blue!
+Scrollbar: #3B4CCA
+Scrollbar background: #1A0808
+Modern Scrollbar Handle (active): #FFDE00
+Modern Scrollbar Handle (inactive): #3B4CCA88
+Modern Scrollbar Background (active): #1A080888
+Modern Dark Scrollbar Handle (active): #FFDE0088
+Modern Dark Scrollbar Handle (inactive): #3B4CCA55
+
+// Tree & List Views
+Tree Item Background: #3A1515
+Selected Tree Item Background: #CC000055
+Selected Tree Item Background (standby): #CC000033
+Tree Separator: #CC000044
+List Item Background: #3A1515
+List Separator: #CC000044
+Selected Dashboard Tree: #FFDE00
+Dark tree background (selected): #CC000055
+Dark tree selection frame: #FFDE00
+Dark tree background (standby selected): #CC000033
+Dark tree separator: #CC000044
+Dark tree text: #FFDE00
+Dark tree text (selected): #FFDE00
+Dark tree hover background change: #FFDE0010
+Frame color of selection cursor in the tree.: #FFDE00
+Frame color of selection cursor in the tree. (standby): #CC9900
+Launcher Mapping Indication: #CC9900
+
+// Panels & Separators
+Panel body: #4A1A1A
+Selected Panel body: #5A2020
+Panel stroke: #CC000066
+Selected Panel stroke: #FFDE00
+Selected Panel stroke (standby): #3B4CCA
+Active Panel stroke: #FFDE00
+Panel Stroke (focused): #FFDE00
+Inspector Section Frame: #CC000066
+Content Background: #3A1515
+Light Separator Line: #CC000044
+Dark Separator Line: #1A080899
+Dark Panel Sub-frame Stroke: #CC000044
+Dark Panel Sub-frame Fill: #2A1010
+Field background: #1A0808
+Number field bar background: #FFDE00
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #CC000044
+
+// Device Chain
+Device Header: #4A1A1A
+Device Header (selected): #5A2020
+Device Locked Overlay: #FFDE0080
+Device Tint Future: #3B4CCA64
+Device Tint Retro: #CC000064
+Device Tint Military: #44DD4447
+Plugin missing: #FF6666
+
+// Display & Waveforms
+Display Background: #1A0808
+Display Background (error): #550000
+Display Waveform: #FFDE00
+Display Stroke: #CC000066
+Display Start/End Markers: #FFDE00
+Display Loop Markers: #44DD44
+Grey Display Background: #2A1010
+Audio Event Background: #3A1515
+Audio Event Boundary: #CC000066
+Audio Event Waveform: #FFDE00
+
+// Grid & Modular Environment
+The Grid (background): #2A1010
+The Grid (stroke): #CC000044
+Grid Line (Primary): #CC000066
+Grid Line (Secondary): #CC000033
+Background color of the modular environment.: #3A1515
+Compressed Audio Port in modular environment: #3B4CCA
+Audio connection in modular environment: #CC0000
+Audio64 connection in modular environment: #FFDE00
+Event connection in modular environment: #44DD44
+Polyphonic Desktop Object: #FFDE00
+Current Atom Value Color: #FFDE00
+
+// Timeline & Arranger - Red tinted!
+Dark Timeline Background: #1A0808
+Dark Timeline Header Background: #2A1010
+Light Timeline Background: #3A1515
+Light Timeline Header Background: #4A1A1A
+Top Level Timeline Background: #2A1010
+Top Level Timeline Header Background: #3A1515
+Irrelevant Timeline Background: #140606
+Irrelevant Timeline Header Background: #1A0808
+Irrelevant Timeline Overlay: #00000050
+Irrelevant Timeline Header Overlay: #00000050
+Timeline Background Pattern: #3A1515
+Timeline Header Background Pattern: #4A1A1A
+Timeline Primary Grid: #CC000055
+Timeline Secondary Grid: #CC000033
+Timeline Header Primary Grid: #CC000055
+Timeline Header Secondary Grid: #CC000033
+Timeline Playhead: #FFDE00
+Timeline edit tool chooser background: #3A1515
+
+// Timeline Selection & Cursors
+Time Selection Fill: #FFDE0040
+Time Selection Stroke: #FFDE00
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FFDE00
+Time Selection Standby Fill: #FFDE0015
+Time Selection Standby Stroke: #CC9900
+Time Selection Standby Cursor Stroke: #CC9900
+Time Selection Inactive Fill: #CC990010
+Time Selection Inactive Stroke: #CC9900
+Time Selection Not Selected Fill: #FFDE0010
+Time Selection Not Selected Stroke: #CC9900
+Time Selection Across All Lanes Fill: #FFDE0055
+Time Selection Across All Lanes Stroke: #FFDE00
+Header Time Selection Fill: #FFDE0055
+Header Time Selection Stroke: #FFDE00
+Header Time Selection Standby Fill: #FFDE0015
+Header Time Selection Standby Stroke: #CC9900
+Header Time Selection Across All Lanes Fill: #FFDE0066
+Header Time Selection Across All Lanes Stroke: #FFDE00
+Header Time Selection Cursor Stroke: #FFDE00
+Header Time Selection Standby Cursor Stroke: #CC9900
+Header Loop Region Background: #CC000033
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FFDE00
+Timeline Header Cue Marker: #FFDE00
+Timeline Tooltip Background: #1A0808EE
+Timeline Tooltip Text: #FFDE00
+Timeline Header Tooltip Background: #1A0808EE
+Timeline Header Tooltip Text: #FFDE00
+
+// Loop Regions
+Loop Region Background: #CC000033
+Loop Region Fill: #CC000044
+Loop Region Stroke: #CC0000
+Loop Region Selected Fill: #CC000066
+Loop Region Selected Stroke: #FF4444
+Insert preview time: #FFDE0088
+
+// Automation & Modulation
+Automation Chooser Background: #00000000
+Automation Color: #FFDE0055
+Automation button glow color: #FFDE0055
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #FFDE00
+Track Automation Color: #FFDE00
+Clip Automation Color: #FFE855
+Clip Modulation Color: #44DD44
+Add Modulation Button Color: #FFDE00
+Multiply Modulation Button Color: #CC0000
+User Automation Override Color: #44DD44
+Note Expression Color: #FFDE00
+Send (post) value color: #44DD44
+Send (pre) value color: #3B4CCA
+Dark offset for automation/channel bar: #00000030
+Light offset for automation/channel bar: #FFDE0020
+Unselected Filled Automation Type Icon: #CC9900
+Unselected Empty Automation Type Icon: #3B4CCA88
+Selected matrix slot color: #FFDE00
+
+// Modulation Mapping
+Modulation Mapping Color: #FFDE00
+Modulation Mapping Color (subtractive): #FF6666
+Modulation Mapping Color (polyphonic): #44DD44
+Modulation Mapping Background (monophonic): #FFDE0044
+Modulation Mapping Background (polyphonic): #44DD4444
+Modulation Mapping Background Color: #FFDE0033
+Mapping indication 1: #FFDE00
+Mapping indication 2: #CC0000
+Mapping indication 3: #3B4CCA
+Mapping indication 4: #44DD44
+Mapping indication 5: #FF8800
+Mapping indication 6: #AA66FF
+Mapping indication 7: #FF4488
+Mapping indication 8: #00CCCC
+
+// Record & Transport
+Record button color: #CC0000
+Record button color implicit: #CC000099
+Record button glow color: #CC000055
+Record text color: #CC0000
+Monitoring buttons color: #FFDE00
+
+// Onset & Beat Detection
+Onset Color Min: #FFDE00
+Onset Color Max: #CC0000
+Onset Marker Color: #FFDE00
+Beat Marker Color: #44DD44
+Analyzed Beat Color: #44DD44
+
+// File Status Indicators
+Missing file icon: #FF6666
+Missing file text: #FF6666
+Found file icon: #44DD44
+Found file text: #44DD44
+External file icon: #FFDE00
+External file text: #FFDE00
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #2A1010
+Invoke Action Category: #CC9900
+Invoke Action Text: #FFDE00
+User input text: #FFDE00
+
+// Panel Colors
+Panel Red: #CC0000
+Panel Orange: #FF8800
+Panel Yellow: #FFDE00
+Panel Lime: #88DD44
+Panel Green: #44DD44
+Panel Mint: #44DDAA
+Panel Turquoise: #44AADD
+Panel Blue: #3B4CCA
+Panel Purple: #AA66FF
+
+// Bitwig Branding - Pokemon styled!
+Bitwig Red: #CC0000
+Bitwig Mint: #44DDAA
+Bitwig CI: #CC0000
+Bitwig Producer: #FFDE00
+Bitwig Essentials: #3B4CCA
+Bitwig 8-Track: #44DD44
+Bitwig 16-Track: #3B4CCA
+
+// Misc
+Comp fill: #FFDE0055
+Selected Panel stroke (standby): #3B4CCA
+Popup insert: #4A1A1A
+Selected Dashboard Tree: #FFDE00
+// <end>

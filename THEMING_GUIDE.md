@@ -614,7 +614,142 @@ Panel Purple: #c090e0
 
 ---
 
-## Legacy: Bitwig 5.x JSON Format
+## Creating Recognizable Themed Themes
+
+Many themes use neutral greys for the workspace and only add color to accents — this makes themes feel generic. To create a theme that's *instantly recognizable*, tint the ENTIRE workspace with your theme color.
+
+### The "Oxide" Approach — Full Color Immersion
+
+The **Oxide** theme (by myst) is an excellent example of a fully-themed workspace:
+
+```
+// WRONG: Neutral greys + colored accents (feels generic)
+Window background: #2e2e2e       // neutral grey
+Grey 0-6: #1a1a1a to #4a4a4a    // neutral grey scale
+Light Text: #ffffff              // pure white
+Accent (default): #e9536f        // red accent
+
+// RIGHT: Tinted workspace + coordinated accents (instantly recognizable)
+Window background: #2e292b       // warm brownish-red tint
+Grey 0-6: #171414 to #807072    // brown/mauve tinted greys
+Light Text: #d6c0ad             // warm cream (not white!)
+Light Timeline Background: #807072   // same tinted grey
+Accent (default): #e9536f        // matches the overall warmth
+```
+
+### High-Impact Properties for "Theming"
+
+To make your theme instantly recognizable, color-tint ALL of these:
+
+**1. The Grey Scale (Most Visible)**
+```
+Grey 0: #...  // tint toward your theme hue
+Grey 1: #...
+Grey 2: #...
+Grey 3: #...
+Grey 4: #...
+Grey 5: #...
+Grey 6: #...
+Window background: #...  // same hue family
+```
+
+**2. Text Colors (Often Overlooked)**
+```
+Light Text: #...          // don't use pure #FFFFFF
+Lighter Text: #...        // use cream, tinted white
+Medium Light Text: #...   // or theme-tinted light color
+Dark Text: #...           // for inverted contexts
+```
+
+**3. Timeline Backgrounds**
+```
+Dark Timeline Background: #...
+Light Timeline Background: #...
+Top Level Timeline Background: #...
+Timeline Background Pattern: #...
+```
+
+**4. Knobs and Scrollbars**
+```
+Knob Body Lighter: #...
+Modern Scrollbar Handle (active): #...
+Modern Scrollbar Handle (inactive): #...
+```
+
+**5. Device Chain**
+```
+Device Header: #...
+Device Header (selected): #...
+```
+
+### Example: Themed vs Generic
+
+**Yellow Theme (Generic)**
+```
+Window background: #2a2a2a     // neutral dark grey
+Grey 0-6: #1a1a1a to #4a4a4a  // neutral grey scale
+Light Text: #ffffff            // pure white
+Accent (default): #ffd700      // yellow accent
+```
+Result: A dark theme with yellow highlights. Could be anything.
+
+**Yellow Theme (Recognizable)**
+```
+Window background: #2a2820     // dark yellow-brown
+Grey 0: #1a1810               // darkest, warm tint
+Grey 1: #222018               // warm dark
+Grey 2: #2a2820               // medium warm
+Grey 3: #323028               // warm grey
+Grey 4: #3a3830               // lighter warm grey
+Grey 5: #424038               // light warm grey
+Grey 6: #4a4840               // lightest, slight gold tint
+Light Text: #f5e8d0           // warm cream
+Device Header: #2a2820        // matches workspace
+Display Waveform: #ffd700     // bright yellow for contrast
+Accent (default): #c9a227     // darker gold for legibility
+```
+Result: The entire workspace glows warm gold. Unmistakably "Yellow."
+
+### Pastel & Midtone Themes
+
+For themes that aren't dark or light, use the FULL saturation range:
+
+**Spongebob Theme (Weak)**
+```
+Grey 0-6: #0F1F35 to #355A85  // all blue, but LOW saturation
+```
+
+**Spongebob Theme (Bold)**
+```
+Grey 0: #0A2844              // deep ocean
+Grey 1: #0D3355              // medium ocean
+Grey 2: #104060              // underwater blue
+Grey 3: #1A5580              // brighter underwater
+Grey 4: #2468A0              // surface blue
+Grey 5: #3080C0              // bright aqua
+Grey 6: #50B8E8              // sky/surface reflection
+Light Text: #FFF8E0          // warm beach sand color
+Accent (default): #DAA520    // dark goldenrod (Spongebob)
+```
+Result: You're IN the ocean. Immediately recognizable.
+
+### The "Tint Everything" Checklist
+
+When creating a themed theme, go through this checklist:
+
+- [ ] Grey 0-6: All tinted toward theme hue
+- [ ] Window background: Same hue family
+- [ ] Light Text / Lighter Text: Tinted (not pure white)
+- [ ] Timeline backgrounds: Same tint as Grey scale
+- [ ] Device Header: Matches Grey scale
+- [ ] Knob Body: Has theme tint
+- [ ] Scrollbar handles: Match or complement theme
+- [ ] Menu background: Same hue family
+- [ ] Field background: Tinted
+
+The goal: If someone squints at your theme, they should see ONE dominant color family, not grey with colored accents.
+
+---
 
 Older themes use JSON with three sections. The Theme Manager auto-converts these to BTE:
 
