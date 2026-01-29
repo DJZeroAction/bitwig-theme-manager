@@ -1095,16 +1095,17 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         let user_escaped = user.replace("'", "''");
 
         // PowerShell script that:
-        // 1. Creates backup directory
-        // 2. Backs up current JAR with checksum
-        // 3. Runs patcher
-        // 4. Creates marker file
+        // 1. Sets error action to stop on failures
+        // 2. Creates backup directory
+        // 3. Backs up current JAR with checksum
+        // 4. Runs patcher with proper Java properties (including -Duser.dir)
+        // 5. Only creates marker file if patcher succeeds (checks $LASTEXITCODE)
         let ps_script = format!(
-            r#"New-Item -ItemType Directory -Force -Path '{}' | Out-Null; Copy-Item -Path '{}' -Destination '{}' -Force; (Get-FileHash -Path '{}' -Algorithm SHA256).Hash | Set-Content -Path '{}'; & '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-jar' '{}' '{}'; Set-Content -Path '{}' -Value 'patched'"#,
+            r#"$ErrorActionPreference = 'Stop'; New-Item -ItemType Directory -Force -Path '{}' | Out-Null; Copy-Item -Path '{}' -Destination '{}' -Force; (Get-FileHash -Path '{}' -Algorithm SHA256).Hash | Set-Content -Path '{}'; & '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-Duser.dir={}' '-jar' '{}' '{}'; if ($LASTEXITCODE -eq 0) {{ Set-Content -Path '{}' -Value 'patched' }} else {{ throw 'Patcher failed with exit code ' + $LASTEXITCODE }}"#,
             backup_dir_escaped,
             jar_path_escaped, backup_path_escaped,
             jar_path_escaped, checksum_path_escaped,
-            java_path_escaped, home_escaped, user_escaped, patcher_jar_escaped, jar_path_escaped,
+            java_path_escaped, home_escaped, user_escaped, home_escaped, patcher_jar_escaped, jar_path_escaped,
             marker_path_escaped
         );
 
