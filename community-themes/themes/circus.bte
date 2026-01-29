@@ -1,372 +1,372 @@
-// Circus - Primary Color Chaos
-// A BOLD circus tent theme - RED/YELLOW/BLUE everywhere!
-// Palette: Circus tent red, spotlight yellow, clown blue, white stripes
+// Circus Clown - Carnival Funhouse
+// Full carnival chaos - purples, oranges, teals, reds, greens!
+// Not Spider-Man primaries - actual circus/carnival variety
 // Author: Claude
 
 // Core
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
-Inherited: #CC0000
+Inherited: #DD3366
 White: #FFFFFF
 Black: #000000
 Same as background: #00000000
-Accent: #FFDD00
-Default text: #FFFF00
-Window background: #AA0000
-Grey 0: #0022CC
-Grey 1: #CC0000
-Grey 2: #DDAA00
-Grey 3: #0033DD
-Grey 4: #DD2200
-Grey 5: #EECC00
-Grey 6: #2244EE
+Accent: #FFAA00
+Default text: #FFFFFF
+Window background: #882266
+Grey 0: #CC5500
+Grey 1: #2288AA
+Grey 2: #AA2266
+Grey 3: #339966
+Grey 4: #CC7700
+Grey 5: #6633AA
+Grey 6: #DD4477
 Shadow: #00000099
-Brighter: #FFFF00
+Brighter: #FFDD00
 
-// Text - BOLD yellow on red, white highlights
-Dark Text: #FFFF00
-Subtle Dark Text: #FFDD44
-Subtle Light Text: #FFFFFF
-Subtler Light Text: #FFEE88
+// Text - Cream/gold for carnival feel
+Dark Text: #000000
+Subtle Dark Text: #332211
+Subtle Light Text: #FFEECC
+Subtler Light Text: #FFDDAA
 Medium Light Text: #FFFFFF
-Light Text: #FFFF00
+Light Text: #FFEECC
 Lighter Text: #FFFFFF
-Link Text: #00CCFF
-Link Text Rollover: #66EEFF
+Link Text: #44DDFF
+Link Text Rollover: #88FFFF
 Error Text: #FFFFFF
 
-// Accent & Status - Spotlight Yellow primary
-Accent (default): #FFDD00
-Accent (hitech): #FFFF44
-Implicit On (subtle): #FFDD0088
-On (subtle): #FFDD0066
-On (subtler): #FFDD0044
-Pressed On: #CCAA00
-Mapping: #FF00FF
-Selection: #FFDD0088
-Standby selection: #FFDD0044
-White Selection: #FFDD00
-White Selection (standby): #FFEE88
-Warning: #FF8800
-Activation Green: #00FF00
-Activation Yellow: #FFFF00
-Activation Red: #FF0000
+// Accent & Status - Carnival gold
+Accent (default): #FFAA00
+Accent (hitech): #44DDDD
+Implicit On (subtle): #FFAA0088
+On (subtle): #FFAA0066
+On (subtler): #FFAA0044
+Pressed On: #DD8800
+Mapping: #44FF88
+Selection: #FFAA0066
+Standby selection: #FFAA0033
+White Selection: #FFAA00
+White Selection (standby): #FFCC66
+Warning: #FF6600
+Activation Green: #44FF44
+Activation Yellow: #FFDD00
+Activation Red: #FF3366
 
-// Buttons - Alternating circus colors
-Button background: #0044DD
-Button stroke: #FFFF00
-OK Button background: #00CC00
-Pressed button background: #FFFF0044
-Checkbox background: #880000
-Button in tree background: #0033AA
-View button background: #CC000088
-Pressed view button background: #FFDD0066
-Inverted Selected Borderless Button background: #FFFF0044
-Selected borderless button background: #FFDD0066
-Pressed borderless button background: #FFDD0088
-Rubber button stroke: #FFFF00
-Rubber highlight button stroke: #00FFFF
-Close button mouse over background: #FFFF0044
-Close button pressed background: #00FF0088
-Abstract Button Stroke: #FFFF0088
-Abstract Button Selected Background: #0066FF88
-Abstract Button Unselected Background: #880000
-Abstract Button Pressed Background: #FFFF0066
-Color bar button fill color: #FFFF0044
+// Buttons - Varied circus colors
+Button background: #6633AA
+Button stroke: #FFCC00
+OK Button background: #44AA66
+Pressed button background: #FFDD0044
+Checkbox background: #AA3366
+Button in tree background: #2288AA
+View button background: #CC550088
+Pressed view button background: #FFCC0066
+Inverted Selected Borderless Button background: #FFCC0044
+Selected borderless button background: #FFAA0066
+Pressed borderless button background: #FFAA0088
+Rubber button stroke: #FFCC00
+Rubber highlight button stroke: #44DDFF
+Close button mouse over background: #FF448844
+Close button pressed background: #44FF8888
+Abstract Button Stroke: #FFCC0088
+Abstract Button Selected Background: #44DDDD66
+Abstract Button Unselected Background: #773355
+Abstract Button Pressed Background: #FFCC0066
+Color bar button fill color: #FFCC0044
 
-// Knobs & Sliders - Blue body, yellow value arc
-Knob Body: #0044CC
-Knob Body Lighter: #0055DD
-Knob Body Lightest: #0066EE
-Knob Body Darkest: #002288
-Knob Line: #FFFF00
-Knob Line Dark: #CCAA00
-Knob Stroke: #FFDD0066
+// Knobs & Sliders - Purple body, gold accents
+Knob Body: #7744AA
+Knob Body Lighter: #8855BB
+Knob Body Lightest: #9966CC
+Knob Body Darkest: #553388
+Knob Line: #FFDD00
+Knob Line Dark: #DDAA00
+Knob Stroke: #FFCC0066
 Knob Emboss Highlight: #FFFFFF44
 Knob Emboss Shadow: #00000066
-Knob Value Background: #88000088
-Knob Value Background (dark): #660000
-Knob Value Color: #FFFF00
-Slider background: #88000099
+Knob Value Background: #AA336688
+Knob Value Background (dark): #882255
+Knob Value Color: #44DDDD
+Slider background: #77335599
 Emboss Highlight: #FFFFFF22
 Emboss Shadow: #00000044
 
-// Toggle Icons - Yellow and white
-Normal Toggle Icon: #FFEE88
+// Toggle Icons
+Normal Toggle Icon: #FFDDAA
 Mouse Over Toggle Icon: #FFFF00
-Active Toggle Icon (Playing): #00FF00
-Pressed Toggle Icon: #FFDD44
+Active Toggle Icon (Playing): #44FF88
+Pressed Toggle Icon: #FFCC44
 Normal Inverted Toggle Icon: #FFFFFF99
 Mouse Over Inverted Toggle Icon: #FFFFFF
-Active Inverted Toggle Icon (Playing): #00FF00
-Pressed Inverted Toggle Icon: #FFEE88
-Toggle Icon: #FFFF00
+Active Inverted Toggle Icon (Playing): #44FF88
+Pressed Inverted Toggle Icon: #FFEEAA
+Toggle Icon: #FFCC00
 
-// Menus & Popups - Deep red tent background
-Menu background: #990000
-Menu stroke: #FFDD00
-Menu text: #FFFF00
-Menu Icon: #FFFFFF
-Menu description text: #FFEE88
-Menu separator: #FFDD0066
-Popup insert: #0044CC
+// Menus & Popups - Deep purple tent
+Menu background: #662255
+Menu stroke: #FFAA00
+Menu text: #FFFFFF
+Menu Icon: #FFDDAA
+Menu description text: #FFEECC
+Menu separator: #FFAA0066
+Popup insert: #2288AA
 Popup overlay background color: #000000DD
-Popup Notification Background: #0044CC
-Notification Background: #0044CC
-Notification Normal: #FFFF00
-Notification Error: #FFFFFF
-Notification Button Background: #CC0000
-Tooltip Background: #0033AA
-Light Tooltip Background: #FFFF00
-Tooltip Stroke: #FFDD00
+Popup Notification Background: #339966
+Notification Background: #339966
+Notification Normal: #FFFFFF
+Notification Error: #FFAAAA
+Notification Button Background: #CC5500
+Tooltip Background: #CC5500
+Light Tooltip Background: #FFDD00
+Tooltip Stroke: #FFAA00
 
-// LEDs & Meters - Primary colors!
-Led On: #00FF00
-Led Off: #003388
-Meter Normal: #FFFF00
-Meter Yellow: #FFAA00
-Meter Red: #FF0000
+// LEDs & Meters - Carnival lights
+Led On: #44FF44
+Led Off: #553344
+Meter Normal: #44FF88
+Meter Yellow: #FFDD00
+Meter Red: #FF4466
 Meter Clipping: #FFFFFF
-Meter Gain Reduction: #FF00FF
-Meter Hitech: #00FFFF
-Meter Hitech Background: #00228899
+Meter Gain Reduction: #44DDFF
+Meter Hitech: #44DDDD
+Meter Hitech Background: #55334488
 Meter Muted: #888888
-Hitech background: #001166
-Hitech on: #00FFFF
+Hitech background: #442244
+Hitech on: #44DDDD
 
-// Scrollbars - Bold blue with yellow
-Scrollbar: #FFDD00
-Scrollbar background: #002288
-Modern Scrollbar Handle (active): #FFFF00
-Modern Scrollbar Handle (inactive): #FFDD0099
-Modern Scrollbar Background (active): #00228888
-Modern Dark Scrollbar Handle (active): #0066FFAA
-Modern Dark Scrollbar Handle (inactive): #0055DD77
+// Scrollbars - Orange and teal
+Scrollbar: #FFAA00
+Scrollbar background: #553366
+Modern Scrollbar Handle (active): #44DDDD
+Modern Scrollbar Handle (inactive): #44AABB99
+Modern Scrollbar Background (active): #44228888
+Modern Dark Scrollbar Handle (active): #FFAA00AA
+Modern Dark Scrollbar Handle (inactive): #DD880077
 
-// Tree & List Views - Alternating primary colors
-Tree Item Background: #0033AA
-Selected Tree Item Background: #FFDD0066
-Selected Tree Item Background (standby): #FFDD0033
-Tree Separator: #FFDD0044
-List Item Background: #880000
-List Separator: #FFDD0044
-Selected Dashboard Tree: #FFDD00
-Dark tree background (selected): #FFDD0066
-Dark tree selection frame: #FFFF00
-Dark tree background (standby selected): #FFDD0033
-Dark tree separator: #FFDD0044
-Dark tree text: #FFFF00
+// Tree & List Views - Orange and teal backgrounds
+Tree Item Background: #CC5500
+Selected Tree Item Background: #44DDDD66
+Selected Tree Item Background (standby): #44DDDD33
+Tree Separator: #FFAA0044
+List Item Background: #2288AA
+List Separator: #FFCC0044
+Selected Dashboard Tree: #FFAA00
+Dark tree background (selected): #FFAA0066
+Dark tree selection frame: #FFCC00
+Dark tree background (standby selected): #FFAA0033
+Dark tree separator: #FFCC0044
+Dark tree text: #FFFFFF
 Dark tree text (selected): #FFFFFF
-Dark tree hover background change: #FFFF0022
-Frame color of selection cursor in the tree.: #FFFF00
-Frame color of selection cursor in the tree. (standby): #FFDD88
-Launcher Mapping Indication: #FF00FF
+Dark tree hover background change: #FFFFFF22
+Frame color of selection cursor in the tree.: #FFCC00
+Frame color of selection cursor in the tree. (standby): #FFBB66
+Launcher Mapping Indication: #44FF88
 
-// Panels & Separators - Red and blue circus stripes
-Panel body: #BB0000
-Selected Panel body: #0044CC
-Panel stroke: #FFDD0066
-Selected Panel stroke: #FFFF00
-Selected Panel stroke (standby): #FFDD00
-Active Panel stroke: #00FFFF
-Panel Stroke (focused): #FFFF00
-Inspector Section Frame: #FFDD0066
-Content Background: #880000
-Light Separator Line: #FFDD0044
+// Panels & Separators - Purple and orange
+Panel body: #773366
+Selected Panel body: #CC6600
+Panel stroke: #FFAA0066
+Selected Panel stroke: #FFCC00
+Selected Panel stroke (standby): #FFBB00
+Active Panel stroke: #44FFFF
+Panel Stroke (focused): #FFCC00
+Inspector Section Frame: #FFAA0066
+Content Background: #339966
+Light Separator Line: #FFAA0044
 Dark Separator Line: #00000088
-Dark Panel Sub-frame Stroke: #FFDD0044
-Dark Panel Sub-frame Fill: #0033AA
-Field background: #002288
-Number field bar background: #FFDD00
+Dark Panel Sub-frame Stroke: #FFAA0044
+Dark Panel Sub-frame Fill: #2288AA
+Field background: #553377
+Number field bar background: #44DDDD
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
-Color of stroke between tabs: #FFDD0044
+Color of stroke between tabs: #FFAA0044
 
-// Device Chain - Circus tent styling with stripes
-Device Header: #0044CC
-Device Header (selected): #BB0000
-Device Locked Overlay: #FFFF0099
-Device Tint Future: #0088FF88
-Device Tint Retro: #FF000088
-Device Tint Military: #00FF0066
-Plugin missing: #FFFFFF
+// Device Chain - Different carnival sections
+Device Header: #339966
+Device Header (selected): #CC5500
+Device Locked Overlay: #FFCC0099
+Device Tint Future: #44DDDD88
+Device Tint Retro: #FF668888
+Device Tint Military: #66FF8866
+Plugin missing: #FF6688
 
-// Display & Waveforms - Yellow waveforms on red
-Display Background: #660000
-Display Background (error): #0022AA
-Display Waveform: #FFFF00
-Display Stroke: #FFDD0066
-Display Start/End Markers: #00FFFF
-Display Loop Markers: #00FF00
-Grey Display Background: #0033AA
-Audio Event Background: #880000
-Audio Event Boundary: #FFDD0066
-Audio Event Waveform: #FFFF00
+// Display & Waveforms - Teal waveforms on purple
+Display Background: #553366
+Display Background (error): #AA3355
+Display Waveform: #44DDDD
+Display Stroke: #FFAA0066
+Display Start/End Markers: #FFCC00
+Display Loop Markers: #44FF88
+Grey Display Background: #664477
+Audio Event Background: #CC5500
+Audio Event Boundary: #FFCC0066
+Audio Event Waveform: #44DDDD
 
-// Grid & Modular Environment - Full color chaos
-The Grid (background): #770000
-The Grid (stroke): #FFDD0044
-Grid Line (Primary): #FFDD0066
-Grid Line (Secondary): #FFDD0033
-Background color of the modular environment.: #0033AA
-Compressed Audio Port in modular environment: #00FFFF
-Audio connection in modular environment: #FF0000
-Audio64 connection in modular environment: #FFFF00
-Event connection in modular environment: #00FF00
-Polyphonic Desktop Object: #FF00FF
-Current Atom Value Color: #FFFF00
+// Grid & Modular Environment - Full carnival
+The Grid (background): #664455
+The Grid (stroke): #FFAA0044
+Grid Line (Primary): #FFCC0066
+Grid Line (Secondary): #FFCC0033
+Background color of the modular environment.: #2288AA
+Compressed Audio Port in modular environment: #44DDFF
+Audio connection in modular environment: #FF6688
+Audio64 connection in modular environment: #FFCC00
+Event connection in modular environment: #44FF88
+Polyphonic Desktop Object: #DD66AA
+Current Atom Value Color: #FFDD00
 
-// Timeline & Arranger - Red/Blue alternating
-Dark Timeline Background: #660000
-Dark Timeline Header Background: #002288
-Light Timeline Background: #880000
-Light Timeline Header Background: #0033AA
-Top Level Timeline Background: #770000
-Top Level Timeline Header Background: #002288
-Irrelevant Timeline Background: #440000
-Irrelevant Timeline Header Background: #001155
+// Timeline & Arranger - Purple/teal/orange rotation
+Dark Timeline Background: #553355
+Dark Timeline Header Background: #227788
+Light Timeline Background: #664466
+Light Timeline Header Background: #2288AA
+Top Level Timeline Background: #604060
+Top Level Timeline Header Background: #1E7080
+Irrelevant Timeline Background: #443344
+Irrelevant Timeline Header Background: #1A6066
 Irrelevant Timeline Overlay: #00000055
 Irrelevant Timeline Header Overlay: #00000055
-Timeline Background Pattern: #990000
-Timeline Header Background Pattern: #0044CC
-Timeline Primary Grid: #FFDD0055
-Timeline Secondary Grid: #FFDD0033
-Timeline Header Primary Grid: #FFFF0055
-Timeline Header Secondary Grid: #FFFF0033
+Timeline Background Pattern: #775577
+Timeline Header Background Pattern: #339999
+Timeline Primary Grid: #FFCC0055
+Timeline Secondary Grid: #FFCC0033
+Timeline Header Primary Grid: #FFDD0055
+Timeline Header Secondary Grid: #FFDD0033
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #0044CC
+Timeline edit tool chooser background: #CC5500
 
-// Timeline Selection & Cursors - Yellow selections
-Time Selection Fill: #FFDD0055
-Time Selection Stroke: #FFFF00
+// Timeline Selection & Cursors
+Time Selection Fill: #44DDDD55
+Time Selection Stroke: #44FFFF
 Time Selection Implicit Fill: #00000000
-Time Selection Cursor Stroke: #FFFF00
+Time Selection Cursor Stroke: #44FFFF
 Time Selection Standby Fill: #FFFFFF22
-Time Selection Standby Stroke: #FFEE88
-Time Selection Standby Cursor Stroke: #FFEE88
-Time Selection Inactive Fill: #FFEE8822
-Time Selection Inactive Stroke: #FFEE88
+Time Selection Standby Stroke: #FFEECC
+Time Selection Standby Cursor Stroke: #FFEECC
+Time Selection Inactive Fill: #FFDDAA22
+Time Selection Inactive Stroke: #FFDDAA
 Time Selection Not Selected Fill: #FFFFFF22
-Time Selection Not Selected Stroke: #FFEE88
-Time Selection Across All Lanes Fill: #FFDD0077
+Time Selection Not Selected Stroke: #FFDDAA
+Time Selection Across All Lanes Fill: #44DDDD77
 Time Selection Across All Lanes Stroke: #FFFFFF
-Header Time Selection Fill: #FFDD0077
-Header Time Selection Stroke: #FFFF00
+Header Time Selection Fill: #FFAA0077
+Header Time Selection Stroke: #FFCC00
 Header Time Selection Standby Fill: #FFFFFF22
-Header Time Selection Standby Stroke: #FFEE88
-Header Time Selection Across All Lanes Fill: #FFDD0099
+Header Time Selection Standby Stroke: #FFEECC
+Header Time Selection Across All Lanes Fill: #FFAA0099
 Header Time Selection Across All Lanes Stroke: #FFFFFF
-Header Time Selection Cursor Stroke: #FFFF00
-Header Time Selection Standby Cursor Stroke: #FFEE88
-Header Loop Region Background: #FFDD0033
+Header Time Selection Cursor Stroke: #FFCC00
+Header Time Selection Standby Cursor Stroke: #FFEECC
+Header Loop Region Background: #44FF8833
 
-// Cue Markers & Tooltips - Cyan markers
-Timeline Cue Marker: #00FFFF
-Timeline Header Cue Marker: #00FFFF
-Timeline Tooltip Background: #002288EE
-Timeline Tooltip Text: #FFFF00
-Timeline Header Tooltip Background: #002288EE
-Timeline Header Tooltip Text: #FFFF00
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FFCC00
+Timeline Header Cue Marker: #FFCC00
+Timeline Tooltip Background: #CC5500EE
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #CC5500EE
+Timeline Header Tooltip Text: #FFFFFF
 
-// Loop Regions - Green loops
-Loop Region Background: #00FF0033
-Loop Region Fill: #00FF0044
-Loop Region Stroke: #00FF00
-Loop Region Selected Fill: #00FF0066
-Loop Region Selected Stroke: #88FF88
+// Loop Regions - Green carnival
+Loop Region Background: #44FF8833
+Loop Region Fill: #44FF8844
+Loop Region Stroke: #44FF88
+Loop Region Selected Fill: #44FF8866
+Loop Region Selected Stroke: #88FFAA
 Insert preview time: #FFFFFF99
 
-// Automation & Modulation - Rainbow circus modulation
+// Automation & Modulation - Full carnival colors
 Automation Chooser Background: #00000000
-Automation Color: #00CCFF66
-Automation button glow color: #00CCFF66
+Automation Color: #44DDFF66
+Automation button glow color: #44DDFF66
 Arranger Automation Curve Fill Color: #00000000
-Track Automation Button Color: #00CCFF
-Track Automation Color: #00CCFF
-Clip Automation Color: #66EEFF
-Clip Modulation Color: #FF00FF
-Add Modulation Button Color: #FF00FF
-Multiply Modulation Button Color: #00FF00
-User Automation Override Color: #00FF00
-Note Expression Color: #FFFF00
-Send (post) value color: #00FF00
-Send (pre) value color: #00CCFF
+Track Automation Button Color: #44DDFF
+Track Automation Color: #44DDFF
+Clip Automation Color: #88EEFF
+Clip Modulation Color: #DD66AA
+Add Modulation Button Color: #DD66AA
+Multiply Modulation Button Color: #44FF88
+User Automation Override Color: #44FF88
+Note Expression Color: #FFCC00
+Send (post) value color: #44FF88
+Send (pre) value color: #44DDFF
 Dark offset for automation/channel bar: #00000033
 Light offset for automation/channel bar: #FFFFFF33
-Unselected Filled Automation Type Icon: #FFEE88
-Unselected Empty Automation Type Icon: #FFDD0088
-Selected matrix slot color: #FFFF00
+Unselected Filled Automation Type Icon: #FFDDAA
+Unselected Empty Automation Type Icon: #FFAA0088
+Selected matrix slot color: #FFCC00
 
-// Modulation Mapping - Full rainbow!
-Modulation Mapping Color: #FF00FF
-Modulation Mapping Color (subtractive): #FF0000
-Modulation Mapping Color (polyphonic): #00FF00
-Modulation Mapping Background (monophonic): #FF00FF66
-Modulation Mapping Background (polyphonic): #00FF0066
-Modulation Mapping Background Color: #FF00FF44
-Mapping indication 1: #FF0000
-Mapping indication 2: #FF8800
-Mapping indication 3: #FFFF00
-Mapping indication 4: #00FF00
-Mapping indication 5: #00FFFF
-Mapping indication 6: #0088FF
-Mapping indication 7: #FF00FF
-Mapping indication 8: #FF0088
+// Modulation Mapping - Carnival rainbow
+Modulation Mapping Color: #DD66AA
+Modulation Mapping Color (subtractive): #FF6688
+Modulation Mapping Color (polyphonic): #44FF88
+Modulation Mapping Background (monophonic): #DD66AA66
+Modulation Mapping Background (polyphonic): #44FF8866
+Modulation Mapping Background Color: #DD66AA44
+Mapping indication 1: #FF4466
+Mapping indication 2: #FF8844
+Mapping indication 3: #FFCC00
+Mapping indication 4: #44FF88
+Mapping indication 5: #44DDDD
+Mapping indication 6: #4488FF
+Mapping indication 7: #AA44DD
+Mapping indication 8: #DD66AA
 
-// Record & Transport - Bright record colors
-Record button color: #FF0000
-Record button color implicit: #FF0000AA
-Record button glow color: #FF000066
-Record text color: #FF0000
-Monitoring buttons color: #FFFF00
+// Record & Transport
+Record button color: #FF4466
+Record button color implicit: #FF4466AA
+Record button glow color: #FF446666
+Record text color: #FF4466
+Monitoring buttons color: #FFCC00
 
-// Onset & Beat Detection - Primary colors
-Onset Color Min: #FFFF00
-Onset Color Max: #FF0000
-Onset Marker Color: #FF0000
-Beat Marker Color: #00FF00
-Analyzed Beat Color: #00FF00
+// Onset & Beat Detection
+Onset Color Min: #FFCC00
+Onset Color Max: #FF6688
+Onset Marker Color: #FF6688
+Beat Marker Color: #44FF88
+Analyzed Beat Color: #44FF88
 
-// File Status Indicators - Primary colors
-Missing file icon: #FF0000
-Missing file text: #FF0000
-Found file icon: #00FF00
-Found file text: #00FF00
-External file icon: #FFFF00
-External file text: #FFDD00
+// File Status Indicators
+Missing file icon: #FF6688
+Missing file text: #FF6688
+Found file icon: #44FF88
+Found file text: #44FF88
+External file icon: #FFCC00
+External file text: #FFCC00
 
-// Invoke Action (Command Palette) - Red tent background
-Invoke Action Background: #880000
-Invoke Action Category: #00CCFF
-Invoke Action Text: #FFFF00
+// Invoke Action (Command Palette) - Orange carnival
+Invoke Action Background: #CC5500
+Invoke Action Category: #44DDDD
+Invoke Action Text: #FFFFFF
 User input text: #FFFFFF
 
-// Panel Colors - FULL PRIMARY RAINBOW
-Panel Red: #FF0000
-Panel Orange: #FF8800
-Panel Yellow: #FFFF00
-Panel Lime: #88FF00
-Panel Green: #00FF00
-Panel Mint: #00FF88
-Panel Turquoise: #00FFFF
-Panel Blue: #0088FF
-Panel Purple: #FF00FF
+// Panel Colors - Full carnival rainbow
+Panel Red: #FF4466
+Panel Orange: #FF8844
+Panel Yellow: #FFCC00
+Panel Lime: #88FF44
+Panel Green: #44FF88
+Panel Mint: #44FFBB
+Panel Turquoise: #44DDDD
+Panel Blue: #4488FF
+Panel Purple: #AA44DD
 
-// Bitwig Branding - Circus primaries
-Bitwig Red: #FF0000
-Bitwig Mint: #00FFFF
-Bitwig CI: #FF0000
-Bitwig Producer: #FFFF00
-Bitwig Essentials: #0088FF
-Bitwig 8-Track: #00FF00
-Bitwig 16-Track: #0088FF
+// Bitwig Branding - Carnival
+Bitwig Red: #FF4466
+Bitwig Mint: #44FFBB
+Bitwig CI: #DD66AA
+Bitwig Producer: #FFCC00
+Bitwig Essentials: #44DDDD
+Bitwig 8-Track: #44FF88
+Bitwig 16-Track: #4488FF
 
 // Misc
-Comp fill: #FFDD0066
-Drop Indicator: #00FFFF
-Progress bar: #FFFF00
-Progress background: #002288
-Hitcount background: #FF00FF
+Comp fill: #44FF8866
+Drop Indicator: #44FFFF
+Progress bar: #44DDDD
+Progress background: #553366
+Hitcount background: #DD66AA
 Hitcount text color: #FFFFFF
 // <end>
