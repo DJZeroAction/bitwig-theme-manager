@@ -1297,20 +1297,81 @@ pub fn restore_jar_elevated(jar_path: &Path) -> Result<(), PatchError> {
             Ok(())
         }
         Err(PatchError::Io(ref e)) if e.kind() == io::ErrorKind::PermissionDenied => {
-            // Try with pkexec
-            if has_pkexec() {
-                log_event("patcher: restore needs elevation");
-                let script = create_restore_manager_script(jar_path)?;
-                let script_str = path_to_str(&script)?;
-                let result = run_with_pkexec("bash", &[script_str]);
-                let _ = fs::remove_file(&script);
-                result
-            } else {
-                log_event("patcher: restore failed (no pkexec)");
-                Err(PatchError::PermissionDenied)
-            }
+            log_event("patcher: restore needs elevation");
+            restore_with_elevation(jar_path)
         }
         Err(e) => Err(e),
+    }
+}
+
+/// Platform-specific elevated restore
+fn restore_with_elevation(jar_path: &Path) -> Result<(), PatchError> {
+    #[cfg(target_os = "windows")]
+    {
+        let backup_path = find_latest_manager_backup(jar_path)?;
+        let checksum_path = backup_path.with_extension("jar.sha256");
+        let marker_path = get_marker_path(jar_path);
+
+        // Verify checksum before attempting restore
+        if !checksum_path.exists() {
+            return Err(PatchError::ChecksumMismatch);
+        }
+        let expected_checksum = fs::read_to_string(&checksum_path)?;
+        let actual_checksum = calculate_checksum(&backup_path)?;
+        if expected_checksum.trim() != actual_checksum {
+            log_event("patcher: restore checksum mismatch");
+            return Err(PatchError::ChecksumMismatch);
+        }
+
+        let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
+        let backup_path_escaped = backup_path.to_string_lossy().replace("'", "''");
+        let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
+
+        // PowerShell script to restore backup with elevation
+        let ps_script = format!(
+            r#"$ErrorActionPreference = 'Stop'; Copy-Item -Path '{}' -Destination '{}' -Force; if (Test-Path '{}') {{ Remove-Item -Path '{}' -Force }}"#,
+            backup_path_escaped, jar_path_escaped,
+            marker_path_escaped, marker_path_escaped
+        );
+
+        let ps_command = format!(
+            "Start-Process -FilePath 'powershell' -ArgumentList '-NoProfile', '-Command', \"{}\" -Verb RunAs -Wait -WindowStyle Hidden",
+            ps_script.replace('"', "`\"")
+        );
+
+        log_event(&format!("patcher: Windows restore script:\n{}", ps_script));
+
+        let output = Command::new("powershell")
+            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+            .output()?;
+
+        if output.status.success() {
+            log_event("patcher: Windows restore succeeded");
+            Ok(())
+        } else {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            log_event(&format!("patcher: Windows restore failed - {}", stderr));
+            if stderr.contains("canceled") || stderr.contains("cancelled") {
+                Err(PatchError::ElevationCancelled)
+            } else {
+                Err(PatchError::PkexecFailed(format!("Windows restore failed: {}", stderr)))
+            }
+        }
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        // Unix: use pkexec with bash script
+        if has_pkexec() {
+            let script = create_restore_manager_script(jar_path)?;
+            let script_str = path_to_str(&script)?;
+            let result = run_with_pkexec("bash", &[script_str]);
+            let _ = fs::remove_file(&script);
+            result
+        } else {
+            log_event("patcher: restore failed (no pkexec)");
+            Err(PatchError::PermissionDenied)
+        }
     }
 }
 
