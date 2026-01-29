@@ -503,6 +503,10 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
         log_event("apply_theme converting bw5 theme to bw6 format");
         parser::convert_bw5_to_bw6(&bte_content)
     } else {
+        log_event(&format!(
+            "apply_theme skipping conversion (target_bw6={}, theme_is_bw5={})",
+            is_bitwig_6_target, is_bw5_theme
+        ));
         bte_content
     };
 
