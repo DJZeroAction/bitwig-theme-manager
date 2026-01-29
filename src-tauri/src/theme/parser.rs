@@ -588,21 +588,25 @@ pub fn save_theme(theme: &Theme, path: &Path) -> Result<(), ThemeError> {
 /// Get the theme directory for a specific Bitwig version.
 ///
 /// This must match where bitwig-theme-editor patcher expects themes:
-/// - All platforms: `<user_home>/.bitwig-theme-editor/versions/<version>/`
+/// - Windows: `C:\Users\<user>\AppData\Roaming\.bitwig-theme-editor\versions\<version>\`
+/// - Linux/macOS: `~/.bitwig-theme-editor/versions/<version>/`
 ///
-/// The Java patcher uses `-Duser.home` which is the user's home directory on all platforms.
+/// See: https://github.com/Berikai/bitwig-theme-editor
 pub fn get_theme_directory(bitwig_version: &str) -> Option<PathBuf> {
-    // Use home directory on ALL platforms - this matches what the Java patcher expects
-    // The patcher uses -Duser.home which is:
-    // - Linux/macOS: /home/<user> or /Users/<user>
-    // - Windows: C:\Users\<user> (NOT AppData!)
-    let base = dirs::home_dir()?
+    // Platform-specific base directory
+    #[cfg(target_os = "windows")]
+    let base_dir = dirs::data_dir()?; // AppData\Roaming on Windows
+
+    #[cfg(not(target_os = "windows"))]
+    let base_dir = dirs::home_dir()?; // Home directory on Linux/macOS
+
+    let base = base_dir
         .join(".bitwig-theme-editor")
         .join("versions")
         .join(bitwig_version);
 
     // Check for legacy path (without "versions" subdirectory)
-    let legacy = dirs::home_dir()?
+    let legacy = base_dir
         .join(".bitwig-theme-editor")
         .join(bitwig_version);
 

@@ -388,6 +388,7 @@ fn get_active_theme_path(bitwig_version: String) -> Option<String> {
 
 /// Check if a Bitwig version is 5.x (requires JSON format)
 /// Returns true for Bitwig 5.x, false for Bitwig 6.x and later
+#[allow(dead_code)]
 fn is_bitwig_5(version: &str) -> bool {
     // Extract major version number from version string like "5.2", "5.2.3", "6.0", "6.0 Beta 1"
     version.starts_with("5.") || version == "5"
@@ -395,33 +396,25 @@ fn is_bitwig_5(version: &str) -> bool {
 
 /// Apply a theme by copying it to the active theme location
 /// Also patches Bitwig if not already patched
-/// Automatically converts between JSON and BTE formats based on Bitwig version:
-/// - Bitwig 5.x: Requires JSON format with window/arranger/advanced sections
-/// - Bitwig 6.x: Requires BTE text format with Key: value pairs
+///
+/// Theme location (per bitwig-theme-editor 2.x):
+/// - Windows: `AppData\Roaming\.bitwig-theme-editor\versions\<version>\theme.bte`
+/// - Linux/macOS: `~/.bitwig-theme-editor/versions/<version>/theme.bte`
+///
+/// Always uses BTE format (Key: value pairs) - converts from JSON if needed
 #[tauri::command]
 fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, AppError> {
     let source = PathBuf::from(theme_path);
 
-    // Determine target path and format based on Bitwig version
-    let needs_json = is_bitwig_5(&bitwig_version);
-    let target = if needs_json {
-        // Bitwig 5.x uses JSON format with .json extension
-        parser::get_theme_directory(&bitwig_version)
-            .map(|dir| dir.join("theme.json"))
-            .ok_or_else(|| AppError {
-                message: "Could not determine theme directory".to_string(),
-            })?
-    } else {
-        // Bitwig 6.x uses BTE format with .bte extension
-        parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
-            message: "Could not determine active theme path".to_string(),
-        })?
-    };
+    // Target is always theme.bte - bitwig-theme-editor 2.x uses BTE format for all versions
+    let target = parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
+        message: "Could not determine active theme path".to_string(),
+    })?;
 
     let installations = detector::detect_installations();
     let mut details = Vec::new();
     details.push(format!("Version: {}", bitwig_version));
-    details.push(format!("Target format: {}", if needs_json { "JSON (Bitwig 5)" } else { "BTE (Bitwig 6)" }));
+    details.push(format!("Target format: BTE (theme.bte)"));
     details.push(format!("Source: {}", source.to_string_lossy()));
     details.push(format!("Source exists: {}", source.exists()));
     details.push(format!("Target: {}", target.to_string_lossy()));
@@ -461,124 +454,51 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
         .and_then(|s| s.to_str())
         .map(|s| s.to_string());
 
-    // Convert and write theme based on target format
-    let _converted = if needs_json {
-        // Bitwig 5.x needs JSON format
-        if source_is_json {
-            // Source is already JSON, copy directly
-            std::fs::write(&target, &content).map_err(|e| {
-                log_event(&format!("apply_theme write failed: {}", e));
-                AppError {
-                    message: format!(
-                        "Failed to write theme: {}.\n\nDetails:\n{}",
-                        e,
-                        details.join("\n")
-                    ),
-                }
-            })?;
-            log_event("apply_theme copied json to json (Bitwig 5)");
-            false
-        } else {
-            // Source is BTE, convert to JSON
-            let converted_content = parser::convert_bte_to_json(&content, theme_name.as_deref())
-                .map_err(|e| AppError {
-                    message: format!("Failed to convert BTE to JSON: {}", e),
-                })?;
-            std::fs::write(&target, converted_content).map_err(|e| {
-                log_event(&format!("apply_theme write failed: {}", e));
-                AppError {
-                    message: format!(
-                        "Failed to write theme: {}.\n\nDetails:\n{}",
-                        e,
-                        details.join("\n")
-                    ),
-                }
-            })?;
-            log_event("apply_theme converted bte to json (Bitwig 5)");
-            true
-        }
-    } else {
-        // Bitwig 6.x needs BTE format
-        if source_is_json {
-            // Source is JSON, convert to BTE
-            let bte_content = parser::convert_json_to_bte(&content, theme_name.as_deref())
-                .map_err(|e| AppError {
-                    message: format!("Failed to convert JSON to BTE: {}", e),
-                })?;
-
-            // Check if the JSON was a Bitwig 5 theme and needs property conversion
-            let is_bw5_theme = bte_content.lines().any(|line| {
-                let trimmed = line.trim();
-                trimmed.starts_with("On:") ||
-                trimmed.starts_with("Selection:") ||
-                trimmed.starts_with("Panel body:") ||
-                trimmed.starts_with("Hitech on:") ||
-                trimmed.starts_with("Dark Timeline Background:")
-            });
-
-            let final_content = if is_bw5_theme {
-                log_event("apply_theme detected bw5 json, converting to bw6");
-                parser::convert_bw5_to_bw6(&bte_content)
-            } else {
-                bte_content
-            };
-
-            std::fs::write(&target, final_content).map_err(|e| {
-                log_event(&format!("apply_theme write failed: {}", e));
-                AppError {
-                    message: format!(
-                        "Failed to write theme: {}.\n\nDetails:\n{}",
-                        e,
-                        details.join("\n")
-                    ),
-                }
-            })?;
-            log_event("apply_theme converted json to bte (Bitwig 6)");
-            true
-        } else {
-            // Source is BTE - check if it needs Bitwig 5→6 conversion
-            let is_bw5_theme = content.lines().any(|line| {
-                let trimmed = line.trim();
-                // These properties exist in Bitwig 5 but not Bitwig 6
-                trimmed.starts_with("On:") ||
-                trimmed.starts_with("Selection:") ||
-                trimmed.starts_with("Panel body:") ||
-                trimmed.starts_with("Hitech on:") ||
-                trimmed.starts_with("Dark Timeline Background:")
-            });
-
-            if is_bw5_theme {
-                // Convert Bitwig 5 theme to Bitwig 6 format
-                let converted_content = parser::convert_bw5_to_bw6(&content);
-                std::fs::write(&target, converted_content).map_err(|e| {
-                    log_event(&format!("apply_theme write failed: {}", e));
-                    AppError {
-                        message: format!(
-                            "Failed to write theme: {}.\n\nDetails:\n{}",
-                            e,
-                            details.join("\n")
-                        ),
+    // Clear old theme files from target directory to avoid conflicts
+    if let Some(parent) = target.parent() {
+        if parent.exists() {
+            for entry in std::fs::read_dir(parent).into_iter().flatten() {
+                if let Ok(entry) = entry {
+                    let path = entry.path();
+                    // Remove old theme.bte and theme.json files
+                    if path.is_file() {
+                        if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                            if name == "theme.bte" || name == "theme.json" {
+                                let _ = std::fs::remove_file(&path);
+                                log_event(&format!("apply_theme removed old theme file: {}", name));
+                            }
+                        }
                     }
-                })?;
-                log_event("apply_theme converted bw5 bte to bw6 bte");
-                true
-            } else {
-                // Already Bitwig 6 format, copy directly
-                std::fs::write(&target, &content).map_err(|e| {
-                    log_event(&format!("apply_theme write failed: {}", e));
-                    AppError {
-                        message: format!(
-                            "Failed to write theme: {}.\n\nDetails:\n{}",
-                            e,
-                            details.join("\n")
-                        ),
-                    }
-                })?;
-                log_event("apply_theme copied bte to bte (Bitwig 6)");
-                false
+                }
             }
         }
+    }
+
+    // Always write BTE format - bitwig-theme-editor 2.x uses BTE for all Bitwig versions
+    let final_content = if source_is_json {
+        // Source is JSON, convert to BTE
+        let bte_content = parser::convert_json_to_bte(&content, theme_name.as_deref())
+            .map_err(|e| AppError {
+                message: format!("Failed to convert JSON to BTE: {}", e),
+            })?;
+        log_event("apply_theme converted json to bte");
+        bte_content
+    } else {
+        // Source is already BTE
+        log_event("apply_theme using bte directly");
+        content.clone()
     };
+
+    std::fs::write(&target, &final_content).map_err(|e| {
+        log_event(&format!("apply_theme write failed: {}", e));
+        AppError {
+            message: format!(
+                "Failed to write theme: {}.\n\nDetails:\n{}",
+                e,
+                details.join("\n")
+            ),
+        }
+    })?;
 
     // Check if Bitwig needs patching
     let mut patched_now = false;
