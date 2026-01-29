@@ -821,7 +821,15 @@ pub fn run_patcher_cli(bitwig_jar_path: &Path) -> Result<(), PatchError> {
     if !stdout.contains("already patched") && !stderr.contains("already patched") {
         // Create our marker file for tracking
         let marker_path = get_marker_path(bitwig_jar_path);
+        // Ensure marker directory exists
+        if let Some(parent) = marker_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
         fs::write(&marker_path, "patched")?;
+        log_event(&format!(
+            "patcher: marker created at {}",
+            marker_path.to_string_lossy()
+        ));
     }
     log_event(&format!(
         "patcher: run_patcher_cli ok stdout='{}' stderr='{}'",
@@ -1078,12 +1086,24 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         let patcher_jar_escaped = patcher_jar.to_string_lossy().replace("'", "''");
         let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
         let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
+        let backup_dir_escaped = backup_dir.to_string_lossy().replace("'", "''");
+        let backup_path_escaped = backup_path.to_string_lossy().replace("'", "''");
+        let checksum_path_escaped = checksum_path.to_string_lossy().replace("'", "''");
         let home_escaped = home.replace("'", "''");
         let user_escaped = user.replace("'", "''");
 
+        // PowerShell script that:
+        // 1. Creates backup directory
+        // 2. Backs up current JAR with checksum
+        // 3. Runs patcher
+        // 4. Creates marker file
         let ps_script = format!(
-            r#"& '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-jar' '{}' '{}'; Set-Content -Path '{}' -Value 'patched'"#,
-            java_path_escaped, home_escaped, user_escaped, patcher_jar_escaped, jar_path_escaped, marker_path_escaped
+            r#"New-Item -ItemType Directory -Force -Path '{}' | Out-Null; Copy-Item -Path '{}' -Destination '{}' -Force; (Get-FileHash -Path '{}' -Algorithm SHA256).Hash | Set-Content -Path '{}'; & '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-jar' '{}' '{}'; Set-Content -Path '{}' -Value 'patched'"#,
+            backup_dir_escaped,
+            jar_path_escaped, backup_path_escaped,
+            jar_path_escaped, checksum_path_escaped,
+            java_path_escaped, home_escaped, user_escaped, patcher_jar_escaped, jar_path_escaped,
+            marker_path_escaped
         );
 
         let ps_command = format!(
@@ -1091,14 +1111,25 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
             ps_script.replace('"', "`\"")
         );
 
+        log_event(&format!("patcher: Windows elevated script:\n{}", ps_script));
+
         let output = Command::new("powershell")
             .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
             .output()?;
 
         if output.status.success() {
-            return Ok(());
+            // Verify the marker was actually created
+            if marker_path.exists() {
+                log_event("patcher: Windows elevation succeeded, marker created");
+                return Ok(());
+            } else {
+                log_event("patcher: Windows elevation ran but marker not found");
+                return Err(PatchError::PatcherFailed("Patching completed but marker file was not created".to_string()));
+            }
         } else {
             let stderr = String::from_utf8_lossy(&output.stderr);
+            let stdout = String::from_utf8_lossy(&output.stdout);
+            log_event(&format!("patcher: Windows elevation failed - stderr: {}, stdout: {}", stderr, stdout));
             if stderr.contains("canceled") || stderr.contains("cancelled") {
                 return Err(PatchError::ElevationCancelled);
             }

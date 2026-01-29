@@ -328,10 +328,10 @@ fn get_version_from_build_info(jar_path: &Path) -> Option<String> {
 }
 /// Check if bitwig.jar has been patched for theme support
 pub fn is_jar_patched(jar_path: &Path) -> bool {
-    // For now, we'll check for the existence of a marker file
-    // In the future, this should verify the JAR contents
-    let marker_path = jar_path.with_extension("patched");
-    marker_path.exists()
+    // Use the patcher module's is_patched function which checks:
+    // 1. New marker location in cache directory
+    // 2. JAR modification time matches marker (to detect Bitwig updates)
+    crate::bitwig::patcher::is_patched(jar_path)
 }
 
 /// Detect all Bitwig Studio installations on the system
