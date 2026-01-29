@@ -46,22 +46,27 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Sync version from git tag
+        shell: bash
         run: |
           # Extract version from tag (removes 'v' prefix)
           VERSION="${GITHUB_REF_NAME#v}"
           echo "Setting version to: $VERSION"
 
-          # Update package.json
-          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" package.json
+          # Update package.json (cross-platform)
+          if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" package.json
+            sed -i '' "s/^version = \"[^\"]*\"/version = \"$VERSION\"/" src-tauri/Cargo.toml
+            sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" src-tauri/tauri.conf.json
+          else
+            sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" package.json
+            sed -i "s/^version = \"[^\"]*\"/version = \"$VERSION\"/" src-tauri/Cargo.toml
+            sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" src-tauri/tauri.conf.json
+          fi
 
-          # Update Cargo.toml
-          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" src-tauri/Cargo.toml
-
-          # Update tauri.conf.json (in case it's not using the path reference)
-          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" src-tauri/tauri.conf.json
-
-          # Update Cargo.lock
-          cd src-tauri && cargo update -p bitwig-theme-manager --precise $VERSION 2>/dev/null || cargo generate-lockfile
+          # Verify
+          echo "package.json: $(grep '"version"' package.json | head -1)"
+          echo "Cargo.toml: $(grep '^version' src-tauri/Cargo.toml)"
+          echo "tauri.conf.json: $(grep '"version"' src-tauri/tauri.conf.json)"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
