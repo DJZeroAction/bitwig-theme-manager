@@ -45,6 +45,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Sync version from git tag
+        run: |
+          # Extract version from tag (removes 'v' prefix)
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "Setting version to: $VERSION"
+
+          # Update package.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" package.json
+
+          # Update Cargo.toml
+          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" src-tauri/Cargo.toml
+
+          # Update tauri.conf.json (in case it's not using the path reference)
+          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" src-tauri/tauri.conf.json
+
+          # Update Cargo.lock
+          cd src-tauri && cargo update -p bitwig-theme-manager --precise $VERSION 2>/dev/null || cargo generate-lockfile
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

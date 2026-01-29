@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Bitwig Theme Manager",
-  "version": "../package.json",
+  "version": "0.0.0",
   "identifier": "com.bitwig-theme-manager",
   "plugins": {
     "updater": {
