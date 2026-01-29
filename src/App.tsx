@@ -183,6 +183,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
 
   // Get available Bitwig versions from installations
   const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
+  const [initializedVersion, setInitializedVersion] = useState(false);
 
   useEffect(() => {
     api.getLatestBitwigVersion().then(setDetectedVersion);
@@ -191,38 +192,25 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   const availableVersions = installations.length > 0
     ? [...new Set(installations.map((i) => i.version))]
     : detectedVersion ? [detectedVersion] : ["5.2"];
-  const inferredVersion = installations.length > 0 ? availableVersions[0] : detectedVersion;
   const [selectedVersion, setSelectedVersion] = useState(availableVersions[0]);
-  const resolvedVersion = installations.length > 0 && !availableVersions.includes(selectedVersion)
-    ? availableVersions[0]
-    : selectedVersion;
 
-  // Update selected version when detected version loads
+  // Initialize version once from settings or first available
   useEffect(() => {
-    if (installations.length === 0 && detectedVersion && !availableVersions.includes(selectedVersion)) {
-      setSelectedVersion(detectedVersion);
-    }
-  }, [installations.length, detectedVersion, availableVersions, selectedVersion]);
-
-  useEffect(() => {
-    if (installations.length > 0 && !availableVersions.includes(selectedVersion)) {
-      setSelectedVersion(availableVersions[0]);
-    }
-  }, [installations.length, availableVersions, selectedVersion]);
-
-  useEffect(() => {
-    if (settings?.selected_bitwig_version && settings.selected_bitwig_version !== selectedVersion) {
+    if (initializedVersion) return;
+    if (settings?.selected_bitwig_version && availableVersions.includes(settings.selected_bitwig_version)) {
       setSelectedVersion(settings.selected_bitwig_version);
+      setInitializedVersion(true);
+    } else if (availableVersions.length > 0) {
+      setSelectedVersion(availableVersions[0]);
+      setInitializedVersion(true);
     }
-  }, [settings?.selected_bitwig_version, selectedVersion]);
+  }, [settings?.selected_bitwig_version, availableVersions, initializedVersion]);
 
-  useEffect(() => {
-    if (!settings || !inferredVersion) return;
-    if (!settings.selected_bitwig_version || !availableVersions.includes(settings.selected_bitwig_version)) {
-      updateSetting("selected_bitwig_version", inferredVersion);
-      setSelectedVersion(inferredVersion);
-    }
-  }, [settings, inferredVersion, availableVersions, updateSetting]);
+  // Save selection to settings when user changes it
+  const handleVersionChange = (version: string) => {
+    setSelectedVersion(version);
+    updateSetting("selected_bitwig_version", version);
+  };
 
   useEffect(() => {
     setFailedImages(new Set());
@@ -232,14 +220,14 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   useEffect(() => {
     const loadLocalThemes = async () => {
       try {
-        const themes = await api.listThemes(resolvedVersion);
+        const themes = await api.listThemes(selectedVersion);
         setLocalThemes(themes);
       } catch {
         setLocalThemes([]);
       }
     };
     loadLocalThemes();
-  }, [resolvedVersion]);
+  }, [selectedVersion]);
 
   // Check if selected theme is already downloaded
   const getExistingThemePath = (themeName: string): string | null => {
@@ -348,7 +336,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
       // Install the theme (always for bundled, only if missing for others)
       if (!themePath) {
         setDownloadStatus("Installing theme...");
-        const savedPath = await downloadAndInstallTheme(theme, resolvedVersion);
+        const savedPath = await downloadAndInstallTheme(theme, selectedVersion);
         if (!savedPath) {
           setDownloadStatus("Failed to install theme");
           return;
@@ -361,7 +349,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
 
       // Now apply the theme
       setDownloadStatus("Applying theme...");
-      const message = await api.applyTheme(themePath, resolvedVersion);
+      const message = await api.applyTheme(themePath, selectedVersion);
       setDownloadStatus(message);
       setTimeout(() => {
         setDownloadStatus(null);
@@ -732,8 +720,8 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
               <div className="mb-4">
                 <label className="block text-sm text-gray-400 mb-1">Bitwig Version</label>
                 <select
-                  value={resolvedVersion}
-                  onChange={(e) => setSelectedVersion(e.target.value)}
+                  value={selectedVersion}
+                  onChange={(e) => handleVersionChange(e.target.value)}
                   className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500"
                 >
                   {availableVersions.map((v) => (
