@@ -183,28 +183,38 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
 
   // Get available Bitwig versions from installations
   const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
-  const [initializedVersion, setInitializedVersion] = useState(false);
 
   useEffect(() => {
     api.getLatestBitwigVersion().then(setDetectedVersion);
   }, []);
 
+  // Only use detected installations, fall back to detectedVersion or "5.2" only if no installations
   const availableVersions = installations.length > 0
     ? [...new Set(installations.map((i) => i.version))]
     : detectedVersion ? [detectedVersion] : ["5.2"];
-  const [selectedVersion, setSelectedVersion] = useState(availableVersions[0]);
 
-  // Initialize version once from settings or first available
+  // Initialize to first available, but update when installations load
+  const [selectedVersion, setSelectedVersion] = useState<string>("");
+
+  // Update selected version when installations load or change
   useEffect(() => {
-    if (initializedVersion) return;
-    if (settings?.selected_bitwig_version && availableVersions.includes(settings.selected_bitwig_version)) {
-      setSelectedVersion(settings.selected_bitwig_version);
-      setInitializedVersion(true);
-    } else if (availableVersions.length > 0) {
-      setSelectedVersion(availableVersions[0]);
-      setInitializedVersion(true);
+    // If we have installations and current selection is not valid, pick the first one
+    if (installations.length > 0) {
+      const validVersions = installations.map(i => i.version);
+      if (!validVersions.includes(selectedVersion)) {
+        // Check if settings has a valid version
+        if (settings?.selected_bitwig_version && validVersions.includes(settings.selected_bitwig_version)) {
+          setSelectedVersion(settings.selected_bitwig_version);
+        } else {
+          setSelectedVersion(validVersions[0]);
+        }
+      }
+    } else if (detectedVersion && !selectedVersion) {
+      setSelectedVersion(detectedVersion);
+    } else if (!selectedVersion) {
+      setSelectedVersion("5.2");
     }
-  }, [settings?.selected_bitwig_version, availableVersions, initializedVersion]);
+  }, [installations, detectedVersion, settings?.selected_bitwig_version, selectedVersion]);
 
   // Save selection to settings when user changes it
   const handleVersionChange = (version: string) => {
