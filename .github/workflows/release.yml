@@ -126,13 +126,19 @@ jobs:
             new_name=$(echo "$name" | sed -E 's/[_-][0-9]+\.[0-9]+\.[0-9]+([_-]|\.)/\1/g' | sed -E 's/[_-][0-9]+\.[0-9]+\.[0-9]+(-[0-9]+)?(\.[^.]+)$/\2/')
 
             if [ "$name" != "$new_name" ]; then
-              echo "Renaming: $name -> $new_name"
-              rename_map["$name"]="$new_name"
-              gh api \
-                --method PATCH \
-                -H "Accept: application/vnd.github+json" \
-                /repos/${{ github.repository }}/releases/assets/$id \
-                -f name="$new_name"
+              # Check if target name already exists (skip if so)
+              existing=$(echo "$assets" | grep -F " $new_name" || true)
+              if [ -n "$existing" ]; then
+                echo "Skipping: $name (target $new_name already exists)"
+              else
+                echo "Renaming: $name -> $new_name"
+                rename_map["$name"]="$new_name"
+                gh api \
+                  --method PATCH \
+                  -H "Accept: application/vnd.github+json" \
+                  /repos/${{ github.repository }}/releases/assets/$id \
+                  -f name="$new_name" || echo "Warning: Failed to rename $name"
+              fi
             fi
           done <<< "$assets"
 
