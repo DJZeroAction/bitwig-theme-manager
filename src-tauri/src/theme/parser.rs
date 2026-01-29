@@ -587,45 +587,27 @@ pub fn save_theme(theme: &Theme, path: &Path) -> Result<(), ThemeError> {
 
 /// Get the theme directory for a specific Bitwig version
 /// This must match where bitwig-theme-editor patcher expects themes:
-/// - Linux/macOS: ~/.bitwig-theme-editor/versions/<version>/
-/// - Windows: %APPDATA%\.bitwig-theme-editor\versions\<version>\
+/// - All platforms: <user_home>/.bitwig-theme-editor/versions/<version>/
+/// The Java patcher uses -Duser.home which is the user's home directory on all platforms.
 pub fn get_theme_directory(bitwig_version: &str) -> Option<PathBuf> {
-    #[cfg(target_os = "windows")]
-    {
-        let base = dirs::data_dir()?
-            .join(".bitwig-theme-editor")
-            .join("versions")
-            .join(bitwig_version);
-        let legacy = dirs::data_dir()?
-            .join(".bitwig-theme-editor")
-            .join(bitwig_version);
-        if legacy.exists() && !base.exists() {
-            return Some(legacy);
-        }
-        Some(
-            dirs::data_dir()?
-                .join(".bitwig-theme-editor")
-                .join("versions")
-                .join(bitwig_version),
-        )
-    }
+    // Use home directory on ALL platforms - this matches what the Java patcher expects
+    // The patcher uses -Duser.home which is:
+    // - Linux/macOS: /home/<user> or /Users/<user>
+    // - Windows: C:\Users\<user> (NOT AppData!)
+    let base = dirs::home_dir()?
+        .join(".bitwig-theme-editor")
+        .join("versions")
+        .join(bitwig_version);
 
-    #[cfg(not(target_os = "windows"))]
-    {
-        // Use home directory directly, NOT config_dir
-        // This matches bitwig-theme-editor's expected path
-        let base = dirs::home_dir()?
-            .join(".bitwig-theme-editor")
-            .join("versions")
-            .join(bitwig_version);
-        let legacy = dirs::home_dir()?
-            .join(".bitwig-theme-editor")
-            .join(bitwig_version);
-        if legacy.exists() && !base.exists() {
-            return Some(legacy);
-        }
-        Some(base)
+    // Check for legacy path (without "versions" subdirectory)
+    let legacy = dirs::home_dir()?
+        .join(".bitwig-theme-editor")
+        .join(bitwig_version);
+
+    if legacy.exists() && !base.exists() {
+        return Some(legacy);
     }
+    Some(base)
 }
 
 /// Get the active theme file path for a Bitwig version
