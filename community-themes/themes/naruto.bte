@@ -1,372 +1,372 @@
 // Naruto - Believe It! DATTEBAYO!
-// Inspired by Naruto Uzumaki's iconic ORANGE jumpsuit
-// ORANGE is THE Naruto color - it should be EVERYWHERE
-// Orange: #FF6B00 (jumpsuit), Black: #1A1008 (details), Cream: #F5E6D3 (headband cloth)
-// Red: #CC2200 (Sharingan), Green: #4A7C3F (Hidden Leaf), Blue: #4488DD (Chakra)
+// BRIGHT ORANGE jumpsuit, BLACK trim, BLUE headband, GREEN Hidden Leaf
+// Different areas = different iconic colors so you KNOW it's Naruto
 // Author: Claude
 
-// Core - ORANGE-TINTED EVERYTHING!
+// Core - BLACK base to make ORANGE pop!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
-Inherited: #FF6B00
-White: #FFF5E8
-Black: #1A0800
+Inherited: #FF6600
+White: #FFFFFF
+Black: #000000
 Same as background: #00000000
-Accent: #FF6B00
-Default text: #FFF5E8
-Window background: #2A1808
-Grey 0: #1A0C04
-Grey 1: #2A1808
-Grey 2: #3A2510
-Grey 3: #4A3218
-Grey 4: #5A3F20
-Grey 5: #6A4C28
-Grey 6: #7A5930
-Shadow: #0A040080
-Brighter: #FFFFFF
+Accent: #FF6600
+Default text: #FFFFFF
+Window background: #111111
+Grey 0: #FF6600
+Grey 1: #1A1A1A
+Grey 2: #CC5500
+Grey 3: #222222
+Grey 4: #DD5500
+Grey 5: #2A2A2A
+Grey 6: #EE6600
+Shadow: #00000099
+Brighter: #FFCC00
 
-// Text - Cream/tan tones like headband cloth
-Dark Text: #FFF5E8
-Subtle Dark Text: #D4C4A8
-Subtle Light Text: #E8D8BC
-Subtler Light Text: #C4B498
-Medium Light Text: #F0E0C8
-Light Text: #FFF5E8
-Lighter Text: #F0E0C8
-Link Text: #FF8C00
-Link Text Rollover: #FFAA00
-Error Text: #CC2200
+// Text - White and cream on black/orange
+Dark Text: #000000
+Subtle Dark Text: #222222
+Subtle Light Text: #FFEECC
+Subtler Light Text: #FFDDAA
+Medium Light Text: #FFFFFF
+Light Text: #FFFFFF
+Lighter Text: #FFFFFF
+Link Text: #4488DD
+Link Text Rollover: #66AAFF
+Error Text: #DD2200
 
-// Accent & Status - NARUTO ORANGE!
-Accent (default): #FF6B00
-Accent (hitech): #FF6B00
-Implicit On (subtle): #FF6B0088
-On (subtle): #FF6B0066
-On (subtler): #FF6B0044
-Pressed On: #FF8C00
-Mapping: #FF6B00
-Selection: #FF6B0088
-Standby selection: #FF6B0044
-White Selection: #FF6B00
-White Selection (standby): #D4C4A8
+// Accent & Status - NARUTO ORANGE + Chakra Blue
+Accent (default): #FF6600
+Accent (hitech): #4488DD
+Implicit On (subtle): #FF660088
+On (subtle): #FF660066
+On (subtler): #FF660044
+Pressed On: #FF8800
+Mapping: #4488DD
+Selection: #FF660088
+Standby selection: #FF660044
+White Selection: #FF6600
+White Selection (standby): #FFAA44
 Warning: #FFCC00
-Activation Green: #4A7C3F
+Activation Green: #44AA44
 Activation Yellow: #FFCC00
-Activation Red: #CC2200
+Activation Red: #DD2200
 
-// Buttons - Orange everywhere!
-Button background: #4A321880
-Button stroke: #FF6B00
-OK Button background: #FF6B00
-Pressed button background: #FF8C0040
-Checkbox background: #2A1808
-Button in tree background: #3A2510
-View button background: #FF6B0020
-Pressed view button background: #FF6B0040
-Inverted Selected Borderless Button background: #FF8C0030
-Selected borderless button background: #FF6B0060
-Pressed borderless button background: #FF8C0080
-Rubber button stroke: #FF6B00
-Rubber highlight button stroke: #FFAA00
-Close button mouse over background: #FF6B0030
-Close button pressed background: #CC220080
-Abstract Button Stroke: #FF6B0066
-Abstract Button Selected Background: #FF6B0060
-Abstract Button Unselected Background: #3A2510
-Abstract Button Pressed Background: #FF8C0040
-Color bar button fill color: #FF6B0030
+// Buttons - Orange on black!
+Button background: #FF660080
+Button stroke: #FFAA00
+OK Button background: #FF6600
+Pressed button background: #FF880044
+Checkbox background: #222222
+Button in tree background: #FF660088
+View button background: #FF660040
+Pressed view button background: #FF880060
+Inverted Selected Borderless Button background: #FF880044
+Selected borderless button background: #FF660066
+Pressed borderless button background: #FF880088
+Rubber button stroke: #FF8800
+Rubber highlight button stroke: #FFCC00
+Close button mouse over background: #DD220044
+Close button pressed background: #DD220088
+Abstract Button Stroke: #FF880088
+Abstract Button Selected Background: #FF660066
+Abstract Button Unselected Background: #1A1A1A
+Abstract Button Pressed Background: #FF880044
+Color bar button fill color: #FF660044
 
-// Knobs & Sliders - Orange accents on warm brown
-Knob Body: #4A3218
-Knob Body Lighter: #5A3F20
-Knob Body Lightest: #6A4C28
-Knob Body Darkest: #1A0C04
-Knob Line: #FFF5E8
-Knob Line Dark: #E8D8BC
-Knob Stroke: #FF6B0066
+// Knobs & Sliders - Black body, orange value
+Knob Body: #1A1A1A
+Knob Body Lighter: #2A2A2A
+Knob Body Lightest: #3A3A3A
+Knob Body Darkest: #0A0A0A
+Knob Line: #FFFFFF
+Knob Line Dark: #FFCC00
+Knob Stroke: #FF660066
 Knob Emboss Highlight: #FFFFFF30
-Knob Emboss Shadow: #00000060
-Knob Value Background: #1A0C0480
-Knob Value Background (dark): #1A0C04
-Knob Value Color: #FF6B00
-Slider background: #1A0C0480
+Knob Emboss Shadow: #00000080
+Knob Value Background: #00000088
+Knob Value Background (dark): #000000
+Knob Value Color: #FF6600
+Slider background: #00000088
 Emboss Highlight: #FFFFFF15
-Emboss Shadow: #00000030
+Emboss Shadow: #00000050
 
-// Toggle Icons
-Normal Toggle Icon: #E8D8BC
-Mouse Over Toggle Icon: #FFF5E8
-Active Toggle Icon (Playing): #FF6B00
-Pressed Toggle Icon: #C4B498
-Normal Inverted Toggle Icon: #FFF5E880
-Mouse Over Inverted Toggle Icon: #FFF5E8
-Active Inverted Toggle Icon (Playing): #FF6B00
-Pressed Inverted Toggle Icon: #F0E0C8
-Toggle Icon: #E8D8BC
+// Toggle Icons - Orange glow
+Normal Toggle Icon: #FFCC88
+Mouse Over Toggle Icon: #FFFFFF
+Active Toggle Icon (Playing): #FF6600
+Pressed Toggle Icon: #FFAA44
+Normal Inverted Toggle Icon: #FFFFFF88
+Mouse Over Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #FF6600
+Pressed Inverted Toggle Icon: #FFCC88
+Toggle Icon: #FFCC00
 
-// Menus & Popups - Orange-tinted backgrounds
-Menu background: #2A1808
-Menu stroke: #FF6B00
-Menu text: #FFF5E8
-Menu Icon: #FFF5E8cc
-Menu description text: #F0E0C8
-Menu separator: #FF6B0066
-Popup insert: #4A3218
-Popup overlay background color: #1A0800DD
-Popup Notification Background: #3A2510
-Notification Background: #3A2510
-Notification Normal: #FFF5E8
-Notification Error: #CC2200
-Notification Button Background: #4A3218
-Tooltip Background: #1A0C04
-Light Tooltip Background: #FFF5E8
-Tooltip Stroke: #FF6B00
+// Menus & Popups - ORANGE background!
+Menu background: #DD5500
+Menu stroke: #FFCC00
+Menu text: #FFFFFF
+Menu Icon: #FFFFFF
+Menu description text: #FFEECC
+Menu separator: #FFCC0066
+Popup insert: #222222
+Popup overlay background color: #000000DD
+Popup Notification Background: #FF6600
+Notification Background: #FF6600
+Notification Normal: #FFFFFF
+Notification Error: #FFFFFF
+Notification Button Background: #222222
+Tooltip Background: #FF6600
+Light Tooltip Background: #FFCC00
+Tooltip Stroke: #FFCC00
 
-// LEDs & Meters - Chakra yellow and Naruto orange!
-Led On: #FF6B00
-Led Off: #4A3218
-Meter Normal: #FF8C00
+// LEDs & Meters - Orange chakra energy!
+Led On: #FF6600
+Led Off: #333333
+Meter Normal: #FF8800
 Meter Yellow: #FFCC00
-Meter Red: #CC2200
+Meter Red: #DD2200
 Meter Clipping: #FF0000
-Meter Gain Reduction: #FF6B00
-Meter Hitech: #FFCC00
-Meter Hitech Background: #1A0C0480
-Meter Muted: #C4B498
-Hitech background: #1A0C04
-Hitech on: #FF6B00
+Meter Gain Reduction: #4488DD
+Meter Hitech: #4488DD
+Meter Hitech Background: #00000088
+Meter Muted: #666666
+Hitech background: #111111
+Hitech on: #4488DD
 
-// Scrollbars - ORANGE!
-Scrollbar: #FF6B00
-Scrollbar background: #1A0C04
-Modern Scrollbar Handle (active): #FF6B00
-Modern Scrollbar Handle (inactive): #FF6B0088
-Modern Scrollbar Background (active): #1A0C0488
-Modern Dark Scrollbar Handle (active): #FF6B0088
-Modern Dark Scrollbar Handle (inactive): #FF6B0055
+// Scrollbars - Orange on black
+Scrollbar: #FF6600
+Scrollbar background: #111111
+Modern Scrollbar Handle (active): #FF6600
+Modern Scrollbar Handle (inactive): #FF660088
+Modern Scrollbar Background (active): #00000088
+Modern Dark Scrollbar Handle (active): #FF8800
+Modern Dark Scrollbar Handle (inactive): #FF660066
 
-// Tree & List Views - Orange selections!
-Tree Item Background: #3A2510
-Selected Tree Item Background: #FF6B0060
-Selected Tree Item Background (standby): #FF6B0030
-Tree Separator: #FF6B0044
-List Item Background: #3A2510
-List Separator: #FF6B0044
-Selected Dashboard Tree: #FF6B00
-Dark tree background (selected): #FF6B0060
-Dark tree selection frame: #FF6B00
-Dark tree background (standby selected): #FF6B0030
-Dark tree separator: #FF6B0044
-Dark tree text: #FFF5E8
-Dark tree text (selected): #FFF5E8
-Dark tree hover background change: #FF6B0020
-Frame color of selection cursor in the tree.: #FF6B00
-Frame color of selection cursor in the tree. (standby): #C4B498
-Launcher Mapping Indication: #C4B498
+// Tree & List Views - Blue headband area!
+Tree Item Background: #335588
+Selected Tree Item Background: #FF660088
+Selected Tree Item Background (standby): #FF660044
+Tree Separator: #4488DD66
+List Item Background: #2A4466
+List Separator: #4488DD44
+Selected Dashboard Tree: #FF6600
+Dark tree background (selected): #FF660088
+Dark tree selection frame: #FF8800
+Dark tree background (standby selected): #FF660044
+Dark tree separator: #FF880044
+Dark tree text: #FFFFFF
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #FF660033
+Frame color of selection cursor in the tree.: #FF8800
+Frame color of selection cursor in the tree. (standby): #FFAA44
+Launcher Mapping Indication: #4488DD
 
-// Panels & Separators - Warm orange-brown
-Panel body: #4A3218
-Selected Panel body: #5A3F20
-Panel stroke: #FF6B0066
-Selected Panel stroke: #FF6B00
-Selected Panel stroke (standby): #4488DD
-Active Panel stroke: #FF6B00
-Panel Stroke (focused): #FF6B00
-Inspector Section Frame: #FF6B0066
-Content Background: #3A2510
-Light Separator Line: #FF6B0044
-Dark Separator Line: #1A0C0480
-Dark Panel Sub-frame Stroke: #FF6B0044
-Dark Panel Sub-frame Fill: #2A1808
-Field background: #1A0C04
-Number field bar background: #FF6B00
+// Panels & Separators - BRIGHT ORANGE panels!
+Panel body: #CC5500
+Selected Panel body: #DD6600
+Panel stroke: #FFAA0088
+Selected Panel stroke: #FFCC00
+Selected Panel stroke (standby): #FF8800
+Active Panel stroke: #4488DD
+Panel Stroke (focused): #FFCC00
+Inspector Section Frame: #FFAA0066
+Content Background: #44AA44
+Light Separator Line: #FFAA0044
+Dark Separator Line: #00000088
+Dark Panel Sub-frame Stroke: #FF880044
+Dark Panel Sub-frame Fill: #222222
+Field background: #111111
+Number field bar background: #FF6600
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
-Color of stroke between tabs: #FF6B0044
+Color of stroke between tabs: #FF880044
 
-// Device Chain - Orange tint!
-Device Header: #4A3218
-Device Header (selected): #5A3F20
-Device Locked Overlay: #FF6B0080
-Device Tint Future: #4488DD64
-Device Tint Retro: #FF6B0064
-Device Tint Military: #4A7C3F60
-Plugin missing: #CC2200
+// Device Chain - Green Hidden Leaf headers!
+Device Header: #336633
+Device Header (selected): #448844
+Device Locked Overlay: #FF660099
+Device Tint Future: #4488DD88
+Device Tint Retro: #FF660088
+Device Tint Military: #44884466
+Plugin missing: #DD2200
 
-// Display & Waveforms - Orange waveforms!
-Display Background: #1A0C04
-Display Background (error): #400808
-Display Waveform: #FF6B00
-Display Stroke: #FF6B0066
+// Display & Waveforms - Orange waveforms on black
+Display Background: #111111
+Display Background (error): #441111
+Display Waveform: #FF6600
+Display Stroke: #FF880066
 Display Start/End Markers: #FFCC00
-Display Loop Markers: #4A7C3F
-Grey Display Background: #2A1808
-Audio Event Background: #3A2510
-Audio Event Boundary: #FF6B0066
-Audio Event Waveform: #FF6B00
+Display Loop Markers: #44AA44
+Grey Display Background: #1A1A1A
+Audio Event Background: #CC5500
+Audio Event Boundary: #FFCC0066
+Audio Event Waveform: #FFCC00
 
-// Grid & Modular Environment
-The Grid (background): #2A1808
-The Grid (stroke): #FF6B0044
-Grid Line (Primary): #FF6B0066
-Grid Line (Secondary): #FF6B0033
-Background color of the modular environment.: #3A2510
+// Grid & Modular Environment - Hidden Leaf green
+The Grid (background): #224422
+The Grid (stroke): #44AA4444
+Grid Line (Primary): #44AA4466
+Grid Line (Secondary): #44AA4433
+Background color of the modular environment.: #335533
 Compressed Audio Port in modular environment: #4488DD
-Audio connection in modular environment: #FF6B00
+Audio connection in modular environment: #FF6600
 Audio64 connection in modular environment: #FFCC00
-Event connection in modular environment: #4A7C3F
-Polyphonic Desktop Object: #FFCC00
-Current Atom Value Color: #FF6B00
+Event connection in modular environment: #44AA44
+Polyphonic Desktop Object: #DD2200
+Current Atom Value Color: #FF8800
 
-// Timeline & Arranger - ORANGE-TINTED BACKGROUNDS!
-Dark Timeline Background: #1A0C04
-Dark Timeline Header Background: #2A1808
-Light Timeline Background: #3A2510
-Light Timeline Header Background: #4A3218
-Top Level Timeline Background: #2A1808
-Top Level Timeline Header Background: #3A2510
-Irrelevant Timeline Background: #140A04
-Irrelevant Timeline Header Background: #1A0C04
-Irrelevant Timeline Overlay: #00000050
-Irrelevant Timeline Header Overlay: #00000050
-Timeline Background Pattern: #3A2510
-Timeline Header Background Pattern: #4A3218
-Timeline Primary Grid: #FF6B0055
-Timeline Secondary Grid: #FF6B0030
-Timeline Header Primary Grid: #FF6B0055
-Timeline Header Secondary Grid: #FF6B0030
-Timeline Playhead: #FFF5E8
-Timeline edit tool chooser background: #3A2510
+// Timeline & Arranger - BLACK with ORANGE clips!
+Dark Timeline Background: #0A0A0A
+Dark Timeline Header Background: #111111
+Light Timeline Background: #151515
+Light Timeline Header Background: #1A1A1A
+Top Level Timeline Background: #0D0D0D
+Top Level Timeline Header Background: #141414
+Irrelevant Timeline Background: #080808
+Irrelevant Timeline Header Background: #0A0A0A
+Irrelevant Timeline Overlay: #00000066
+Irrelevant Timeline Header Overlay: #00000066
+Timeline Background Pattern: #181818
+Timeline Header Background Pattern: #222222
+Timeline Primary Grid: #FF660044
+Timeline Secondary Grid: #FF660022
+Timeline Header Primary Grid: #FF880044
+Timeline Header Secondary Grid: #FF880022
+Timeline Playhead: #FFFFFF
+Timeline edit tool chooser background: #DD5500
 
 // Timeline Selection & Cursors - Bold orange!
-Time Selection Fill: #FF6B0050
-Time Selection Stroke: #FF6B00
+Time Selection Fill: #FF660066
+Time Selection Stroke: #FF8800
 Time Selection Implicit Fill: #00000000
-Time Selection Cursor Stroke: #FF6B00
-Time Selection Standby Fill: #FFF5E815
-Time Selection Standby Stroke: #C4B498
-Time Selection Standby Cursor Stroke: #C4B498
-Time Selection Inactive Fill: #C4B49810
-Time Selection Inactive Stroke: #C4B498
-Time Selection Not Selected Fill: #FFF5E815
-Time Selection Not Selected Stroke: #C4B498
-Time Selection Across All Lanes Fill: #FF6B0070
-Time Selection Across All Lanes Stroke: #F0E0C8
-Header Time Selection Fill: #FF6B0070
-Header Time Selection Stroke: #FF6B00
-Header Time Selection Standby Fill: #FFF5E815
-Header Time Selection Standby Stroke: #C4B498
-Header Time Selection Across All Lanes Fill: #FF6B0088
-Header Time Selection Across All Lanes Stroke: #F0E0C8
-Header Time Selection Cursor Stroke: #FF6B00
-Header Time Selection Standby Cursor Stroke: #C4B498
-Header Loop Region Background: #FF6B0040
+Time Selection Cursor Stroke: #FF8800
+Time Selection Standby Fill: #FFFFFF22
+Time Selection Standby Stroke: #FFAA44
+Time Selection Standby Cursor Stroke: #FFAA44
+Time Selection Inactive Fill: #FFAA4422
+Time Selection Inactive Stroke: #FFAA44
+Time Selection Not Selected Fill: #FFFFFF15
+Time Selection Not Selected Stroke: #888888
+Time Selection Across All Lanes Fill: #FF660088
+Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Fill: #FF660088
+Header Time Selection Stroke: #FF8800
+Header Time Selection Standby Fill: #FFFFFF22
+Header Time Selection Standby Stroke: #FFAA44
+Header Time Selection Across All Lanes Fill: #FF6600AA
+Header Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Cursor Stroke: #FF8800
+Header Time Selection Standby Cursor Stroke: #FFAA44
+Header Loop Region Background: #FF660044
 
 // Cue Markers & Tooltips - Yellow chakra!
 Timeline Cue Marker: #FFCC00
 Timeline Header Cue Marker: #FFCC00
-Timeline Tooltip Background: #1A0C04EE
-Timeline Tooltip Text: #FFF5E8
-Timeline Header Tooltip Background: #1A0C04EE
-Timeline Header Tooltip Text: #FFF5E8
+Timeline Tooltip Background: #FF6600EE
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #FF6600EE
+Timeline Header Tooltip Text: #FFFFFF
 
-// Loop Regions - Orange loops!
-Loop Region Background: #FF6B0040
-Loop Region Fill: #FF6B0050
-Loop Region Stroke: #FF6B00
-Loop Region Selected Fill: #FF6B0070
-Loop Region Selected Stroke: #FFAA00
-Insert preview time: #FFF5E880
+// Loop Regions - Green loops (Hidden Leaf)
+Loop Region Background: #44AA4444
+Loop Region Fill: #44AA4455
+Loop Region Stroke: #44AA44
+Loop Region Selected Fill: #44AA4477
+Loop Region Selected Stroke: #88DD88
+Insert preview time: #FFFFFF88
 
-// Automation & Modulation - Orange automation!
+// Automation & Modulation - Chakra blue!
 Automation Chooser Background: #00000000
-Automation Color: #FF6B0060
-Automation button glow color: #FF6B0060
+Automation Color: #4488DD66
+Automation button glow color: #4488DD66
 Arranger Automation Curve Fill Color: #00000000
-Track Automation Button Color: #FF6B00
-Track Automation Color: #FFCC00
-Clip Automation Color: #FF6B00
-Clip Modulation Color: #4A7C3F
-Add Modulation Button Color: #FF6B00
-Multiply Modulation Button Color: #FFCC00
-User Automation Override Color: #4A7C3F
+Track Automation Button Color: #4488DD
+Track Automation Color: #4488DD
+Clip Automation Color: #66AAFF
+Clip Modulation Color: #44AA44
+Add Modulation Button Color: #4488DD
+Multiply Modulation Button Color: #44AA44
+User Automation Override Color: #FFCC00
 Note Expression Color: #FFCC00
-Send (post) value color: #4A7C3F
+Send (post) value color: #44AA44
 Send (pre) value color: #4488DD
-Dark offset for automation/channel bar: #00000030
-Light offset for automation/channel bar: #FFFFFF25
-Unselected Filled Automation Type Icon: #C4B498
-Unselected Empty Automation Type Icon: #FF6B0088
-Selected matrix slot color: #FF6B00
+Dark offset for automation/channel bar: #00000044
+Light offset for automation/channel bar: #FFFFFF22
+Unselected Filled Automation Type Icon: #AAAAAA
+Unselected Empty Automation Type Icon: #FF660088
+Selected matrix slot color: #FF6600
 
 // Modulation Mapping - Jutsu colors!
-Modulation Mapping Color: #FFCC00
-Modulation Mapping Color (subtractive): #CC2200
-Modulation Mapping Color (polyphonic): #4A7C3F
-Modulation Mapping Background (monophonic): #FF6B0060
-Modulation Mapping Background (polyphonic): #4A7C3F60
-Modulation Mapping Background Color: #FF6B0050
-Mapping indication 1: #CC2200
-Mapping indication 2: #FF6B00
+Modulation Mapping Color: #4488DD
+Modulation Mapping Color (subtractive): #DD2200
+Modulation Mapping Color (polyphonic): #44AA44
+Modulation Mapping Background (monophonic): #4488DD66
+Modulation Mapping Background (polyphonic): #44AA4466
+Modulation Mapping Background Color: #4488DD55
+Mapping indication 1: #DD2200
+Mapping indication 2: #FF6600
 Mapping indication 3: #FFCC00
-Mapping indication 4: #4A7C3F
+Mapping indication 4: #44AA44
 Mapping indication 5: #4488DD
 Mapping indication 6: #2255AA
-Mapping indication 7: #FF8C00
-Mapping indication 8: #E65500
+Mapping indication 7: #FF8800
+Mapping indication 8: #CC4400
 
-// Record & Transport - Sharingan red for record!
-Record button color: #CC2200
-Record button color implicit: #CC220088
-Record button glow color: #CC220060
-Record text color: #CC2200
+// Record & Transport - Sharingan red!
+Record button color: #DD2200
+Record button color implicit: #DD2200AA
+Record button glow color: #DD220066
+Record text color: #DD2200
 Monitoring buttons color: #FFCC00
 
-// Onset & Beat Detection - Orange energy!
+// Onset & Beat Detection
 Onset Color Min: #FFCC00
-Onset Color Max: #FF6B00
-Onset Marker Color: #FF6B00
-Beat Marker Color: #4A7C3F
-Analyzed Beat Color: #4A7C3F
+Onset Color Max: #FF6600
+Onset Marker Color: #FF6600
+Beat Marker Color: #44AA44
+Analyzed Beat Color: #44AA44
 
 // File Status Indicators
-Missing file icon: #CC2200
-Missing file text: #CC2200
-Found file icon: #4A7C3F
-Found file text: #4A7C3F
+Missing file icon: #DD2200
+Missing file text: #DD2200
+Found file icon: #44AA44
+Found file text: #44AA44
 External file icon: #FFCC00
 External file text: #FFCC00
 
-// Invoke Action (Command Palette)
-Invoke Action Background: #2A1808
-Invoke Action Category: #C4B498
-Invoke Action Text: #FFF5E8
-User input text: #FFF5E8
+// Invoke Action (Command Palette) - ORANGE!
+Invoke Action Background: #DD5500
+Invoke Action Category: #FFCC88
+Invoke Action Text: #FFFFFF
+User input text: #FFFFFF
 
-// Panel Colors - Ninja color palette!
-Panel Red: #CC2200
-Panel Orange: #FF6B00
+// Panel Colors - Ninja palette!
+Panel Red: #DD2200
+Panel Orange: #FF6600
 Panel Yellow: #FFCC00
 Panel Lime: #88CC44
-Panel Green: #4A7C3F
+Panel Green: #44AA44
 Panel Mint: #44CCAA
 Panel Turquoise: #44AACC
 Panel Blue: #4488DD
-Panel Purple: #AA66FF
+Panel Purple: #AA66DD
 
 // Bitwig Branding - Naruto style!
-Bitwig Red: #CC2200
+Bitwig Red: #DD2200
 Bitwig Mint: #44CCAA
-Bitwig CI: #FF6B00
+Bitwig CI: #FF6600
 Bitwig Producer: #FFCC00
 Bitwig Essentials: #4488DD
-Bitwig 8-Track: #4A7C3F
+Bitwig 8-Track: #44AA44
 Bitwig 16-Track: #4488DD
 
 // Misc
-Comp fill: #FF6B0070
-Selected Panel stroke (standby): #4488DD
-Popup insert: #4A3218
-Selected Dashboard Tree: #FF6B00
+Comp fill: #FF660088
+Drop Indicator: #FFCC00
+Progress bar: #FF6600
+Progress background: #222222
+Hitcount background: #DD2200
+Hitcount text color: #FFFFFF
 // <end>
