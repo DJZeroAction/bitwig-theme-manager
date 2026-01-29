@@ -414,7 +414,7 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
     let installations = detector::detect_installations();
     let mut details = Vec::new();
     details.push(format!("Version: {}", bitwig_version));
-    details.push(format!("Target format: BTE (theme.bte)"));
+    details.push("Target format: BTE (theme.bte)".to_string());
     details.push(format!("Source: {}", source.to_string_lossy()));
     details.push(format!("Source exists: {}", source.exists()));
     details.push(format!("Target: {}", target.to_string_lossy()));
@@ -457,16 +457,14 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
     // Clear old theme files from target directory to avoid conflicts
     if let Some(parent) = target.parent() {
         if parent.exists() {
-            for entry in std::fs::read_dir(parent).into_iter().flatten() {
-                if let Ok(entry) = entry {
-                    let path = entry.path();
-                    // Remove old theme.bte and theme.json files
-                    if path.is_file() {
-                        if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
-                            if name == "theme.bte" || name == "theme.json" {
-                                let _ = std::fs::remove_file(&path);
-                                log_event(&format!("apply_theme removed old theme file: {}", name));
-                            }
+            for entry in std::fs::read_dir(parent).into_iter().flatten().flatten() {
+                let path = entry.path();
+                // Remove old theme.bte and theme.json files
+                if path.is_file() {
+                    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                        if name == "theme.bte" || name == "theme.json" {
+                            let _ = std::fs::remove_file(&path);
+                            log_event(&format!("apply_theme removed old theme file: {}", name));
                         }
                     }
                 }
@@ -475,18 +473,37 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
     }
 
     // Always write BTE format - bitwig-theme-editor 2.x uses BTE for all Bitwig versions
-    let final_content = if source_is_json {
+    let bte_content = if source_is_json {
         // Source is JSON, convert to BTE
-        let bte_content = parser::convert_json_to_bte(&content, theme_name.as_deref())
+        let bte = parser::convert_json_to_bte(&content, theme_name.as_deref())
             .map_err(|e| AppError {
                 message: format!("Failed to convert JSON to BTE: {}", e),
             })?;
         log_event("apply_theme converted json to bte");
-        bte_content
+        bte
     } else {
         // Source is already BTE
         log_event("apply_theme using bte directly");
         content.clone()
+    };
+
+    // Check if theme needs Bitwig 5 → 6 property conversion
+    let is_bitwig_6_target = !is_bitwig_5(&bitwig_version);
+    let is_bw5_theme = bte_content.lines().any(|line| {
+        let trimmed = line.trim();
+        // These properties exist in Bitwig 5 but were renamed in Bitwig 6
+        trimmed.starts_with("On:")
+            || trimmed.starts_with("Selection:")
+            || trimmed.starts_with("Panel body:")
+            || trimmed.starts_with("Hitech on:")
+            || trimmed.starts_with("Dark Timeline Background:")
+    });
+
+    let final_content = if is_bitwig_6_target && is_bw5_theme {
+        log_event("apply_theme converting bw5 theme to bw6 format");
+        parser::convert_bw5_to_bw6(&bte_content)
+    } else {
+        bte_content
     };
 
     std::fs::write(&target, &final_content).map_err(|e| {
@@ -682,21 +699,9 @@ fn save_downloaded_theme(
         })
         .collect();
 
-    let mut dest = theme_dir.join(format!("{}.bte", safe_name));
+    let dest = theme_dir.join(format!("{}.bte", safe_name));
 
-    // Handle duplicate names
-    if dest.exists() {
-        let mut counter = 1;
-        loop {
-            let candidate = theme_dir.join(format!("{}_{}.bte", safe_name, counter));
-            if !candidate.exists() {
-                dest = candidate;
-                break;
-            }
-            counter += 1;
-        }
-    }
-
+    // Overwrite if exists - user is installing the same theme
     std::fs::write(&dest, &content)?;
 
     Ok(dest.to_string_lossy().to_string())
