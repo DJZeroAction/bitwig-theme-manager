@@ -592,18 +592,8 @@ fn create_theme(name: String, bitwig_version: String) -> Result<Theme, AppError>
         .chars()
         .map(|c| if c.is_alphanumeric() || c == '-' || c == '_' { c } else { '_' })
         .collect();
-    let mut dest = theme_dir.join(format!("{}.bte", safe_name));
-    if dest.exists() {
-        let mut counter = 1;
-        loop {
-            let candidate = theme_dir.join(format!("{}_{}.bte", safe_name, counter));
-            if !candidate.exists() {
-                dest = candidate;
-                break;
-            }
-            counter += 1;
-        }
-    }
+    // Overwrite if exists - don't create numbered copies
+    let dest = theme_dir.join(format!("{}.bte", safe_name));
 
     let base_theme = parser::get_active_theme_path(&bitwig_version)
         .filter(|path| path.exists())
