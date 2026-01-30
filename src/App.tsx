@@ -935,9 +935,9 @@ function EditorView() {
   }
 
   return (
-    <div className="flex gap-6 h-full">
+    <div className="flex gap-6">
       {/* Theme Selector Sidebar */}
-      <div className="w-64 flex flex-col gap-4">
+      <div className="w-64 flex flex-col gap-4 self-start sticky top-0 max-h-[calc(100vh-theme(spacing.20))] overflow-y-auto">
         <div className="bg-gray-800 rounded-lg p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold">Themes</h3>
@@ -1006,15 +1006,15 @@ function EditorView() {
       </div>
 
       {/* Color Editor */}
-      <div className="flex-1 overflow-y-auto space-y-4">
+      <div className="flex-1 space-y-4 min-w-0">
         {!populatedTheme ? (
           <div className="flex items-center justify-center h-64 text-gray-400">
             Select a theme to edit or create a new one
           </div>
         ) : (
           <>
-            {/* Theme Header */}
-            <div className="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
+            {/* Theme Header - Sticky */}
+            <div className="bg-gray-800 rounded-lg p-4 flex items-center justify-between sticky top-0 z-10">
               <div>
                 <h2 className="text-lg font-semibold">{populatedTheme.metadata.name || "Untitled Theme"}</h2>
                 {populatedTheme.metadata.author && (
@@ -1069,7 +1069,7 @@ function EditorView() {
               </div>
             </div>
 
-            {/* Unified Theme Editor */}
+            {/* Unified Theme Editor - Bundle List */}
             <UnifiedThemeEditor
               theme={populatedTheme}
               bitwigVersion={editorVersion}
@@ -1081,8 +1081,9 @@ function EditorView() {
         )}
       </div>
 
-      {/* Preview Panel */}
-      <div className="w-80 bg-gray-800 rounded-lg p-4 h-fit sticky top-0 flex-shrink-0">
+      {/* Preview Panel - Sticky */}
+      <div className="w-80 flex-shrink-0 self-start sticky top-0 max-h-[calc(100vh-theme(spacing.20))] overflow-y-auto">
+        <div className="bg-gray-800 rounded-lg p-4">
         <h3 className="font-semibold mb-4">Live Preview</h3>
         <div
           className="rounded-lg p-4 space-y-2"
@@ -1149,6 +1150,7 @@ function EditorView() {
         <p className="text-xs text-gray-500 mt-4 text-center">
           Preview updates as you change colors
         </p>
+        </div>
       </div>
 
       {/* New Theme Dialog */}

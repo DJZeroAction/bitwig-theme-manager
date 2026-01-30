@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { ColorPicker } from "./ColorPicker";
+import { addGlobalRecentColor } from "../hooks/useRecentColors";
 import type { PropertyDefinition } from "../data/properties";
 
 interface ModeToggleConfig {
@@ -55,6 +56,9 @@ export function CategoryEditor({
   }, [properties, values]);
 
   const handleGroupColorChange = (color: string) => {
+    // Add to recent colors
+    addGlobalRecentColor(color);
+
     if (onGroupColorChange) {
       onGroupColorChange(color);
     } else {

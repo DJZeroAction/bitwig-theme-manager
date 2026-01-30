@@ -1,4 +1,9 @@
 import { useState, useRef, useEffect } from "react";
+import {
+  addGlobalRecentColor,
+  getGlobalRecentColors,
+  subscribeToRecentColors,
+} from "../hooks/useRecentColors";
 
 interface ColorPickerProps {
   value: string;
@@ -9,11 +14,19 @@ interface ColorPickerProps {
 export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(value);
+  const [recentColors, setRecentColors] = useState<string[]>(getGlobalRecentColors);
   const pickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setInputValue(value);
   }, [value]);
+
+  // Subscribe to recent colors updates
+  useEffect(() => {
+    return subscribeToRecentColors(() => {
+      setRecentColors(getGlobalRecentColors());
+    });
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -37,6 +50,14 @@ export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
     const newValue = e.target.value.toUpperCase();
     setInputValue(newValue);
     onChange(newValue);
+    // Add to recent colors when picker is closed or color is selected
+    addGlobalRecentColor(newValue);
+  };
+
+  const handleRecentColorClick = (color: string) => {
+    setInputValue(color);
+    onChange(color);
+    setIsOpen(false);
   };
 
   return (
@@ -64,11 +85,29 @@ export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
         <div className="absolute top-12 left-0 z-10 bg-gray-700 rounded-lg p-3 shadow-xl border border-gray-600">
           <input
             type="color"
-            value={value}
+            value={value.substring(0, 7)}
             onChange={handleNativeChange}
             className="w-32 h-32 cursor-pointer border-0 rounded"
           />
           <div className="mt-2 text-center text-sm text-gray-400">{value}</div>
+
+          {/* Recent Colors */}
+          {recentColors.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-gray-600">
+              <div className="text-xs text-gray-500 mb-2">Recent</div>
+              <div className="flex flex-wrap gap-1">
+                {recentColors.map((color, index) => (
+                  <button
+                    key={`${color}-${index}`}
+                    onClick={() => handleRecentColorClick(color)}
+                    className="w-6 h-6 rounded border border-gray-500 hover:border-purple-400 transition-colors"
+                    style={{ background: color }}
+                    title={color}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

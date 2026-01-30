@@ -35,30 +35,9 @@ export interface SemanticBundle {
 }
 
 // Semantic bundles based on THEMING_GUIDE.md best practices
+// ORDERED BY VISUAL PROMINENCE: most area-covering first
 export const SEMANTIC_BUNDLES: SemanticBundle[] = [
-  // === 1. Grey Scale Foundation ===
-  {
-    id: "grey-scale",
-    name: "Grey Scale",
-    description: "Background tones - the foundation of your entire theme",
-    baseProperty: "Window background",
-    derivationMode: "graduated-lightness",
-    properties: [
-      "Window background",
-      "Grey 0",
-      "Grey 1",
-      "Grey 2",
-      "Grey 3",
-      "Grey 4",
-      "Grey 5",
-      "Grey 6",
-      "Grey Display Background",
-      "Black",
-      "Brighter",
-    ],
-  },
-
-  // === 2. Text Colors ===
+  // === 1. Text Colors (appears everywhere) ===
   {
     id: "text-colors",
     name: "Text Colors",
@@ -92,7 +71,81 @@ export const SEMANTIC_BUNDLES: SemanticBundle[] = [
     ],
   },
 
-  // === 3. Primary Accent ===
+  // === 2. Grey Scale Foundation (background of everything) ===
+  {
+    id: "grey-scale",
+    name: "Grey Scale",
+    description: "Background tones - the foundation of your entire theme",
+    baseProperty: "Window background",
+    derivationMode: "graduated-lightness",
+    properties: [
+      "Window background",
+      "Grey 0",
+      "Grey 1",
+      "Grey 2",
+      "Grey 3",
+      "Grey 4",
+      "Grey 5",
+      "Grey 6",
+      "Grey Display Background",
+      "Black",
+      "Brighter",
+    ],
+  },
+
+  // === 3. Surface Colors (buttons, panels, menus - very common) ===
+  {
+    id: "surface-colors",
+    name: "Surface Colors",
+    description: "UI surfaces - buttons, panels, menus (derived from grey scale)",
+    baseProperty: "Button background",
+    derivationMode: "surface-colors",
+    properties: [
+      // Buttons
+      "Button background",
+      "Button stroke",
+      "Pressed button background",
+      "Button in tree background",
+      "OK Button background",
+      "View button background",
+      "Pressed view button background",
+      "Abstract Button Unselected Background",
+      "Abstract Button Selected Background",
+      "Abstract Button Pressed Background",
+      "Abstract Button Stroke",
+      "Checkbox background",
+      "Close button mouse over background",
+      "Close button pressed background",
+      "Inverted Selected Borderless Button background",
+      "Rubber button stroke",
+      "Notification Button Background",
+      "Pressed borderless button background",
+      "Selected borderless button background",
+      "Color bar button fill color",
+      // Menus
+      "Menu background",
+      "Menu stroke",
+      "Menu separator",
+      // Tooltips
+      "Tooltip Background",
+      "Tooltip Stroke",
+      "Light Tooltip Background",
+      "Timeline Header Tooltip Background",
+      "Timeline Tooltip Background",
+      // Notifications
+      "Notification Background",
+      "Notification Normal",
+      "Notification Error",
+      "Popup Notification Background",
+      "Popup insert",
+      "Popup overlay background color",
+      // Invoke/Command palette
+      "Invoke Action Background",
+      "Invoke Action Category",
+    ],
+  },
+
+  // === 4. Primary Accent ===
   {
     id: "primary-accent",
     name: "Primary Accent",
@@ -217,59 +270,7 @@ export const SEMANTIC_BUNDLES: SemanticBundle[] = [
     ],
   },
 
-  // === 7. Surface Colors ===
-  {
-    id: "surface-colors",
-    name: "Surface Colors",
-    description: "UI surfaces - buttons, panels, menus (derived from grey scale)",
-    baseProperty: "Button background",
-    derivationMode: "surface-colors",
-    properties: [
-      // Buttons
-      "Button background",
-      "Button stroke",
-      "Pressed button background",
-      "Button in tree background",
-      "OK Button background",
-      "View button background",
-      "Pressed view button background",
-      "Abstract Button Unselected Background",
-      "Abstract Button Selected Background",
-      "Abstract Button Pressed Background",
-      "Abstract Button Stroke",
-      "Checkbox background",
-      "Close button mouse over background",
-      "Close button pressed background",
-      "Inverted Selected Borderless Button background",
-      "Rubber button stroke",
-      "Notification Button Background",
-      "Pressed borderless button background",
-      "Selected borderless button background",
-      "Color bar button fill color",
-      // Menus
-      "Menu background",
-      "Menu stroke",
-      "Menu separator",
-      // Tooltips
-      "Tooltip Background",
-      "Tooltip Stroke",
-      "Light Tooltip Background",
-      "Timeline Header Tooltip Background",
-      "Timeline Tooltip Background",
-      // Notifications
-      "Notification Background",
-      "Notification Normal",
-      "Notification Error",
-      "Popup Notification Background",
-      "Popup insert",
-      "Popup overlay background color",
-      // Invoke/Command palette
-      "Invoke Action Background",
-      "Invoke Action Category",
-    ],
-  },
-
-  // === 8. Panels & Separators ===
+  // === 5. Panels & Separators ===
   {
     id: "panels-separators",
     name: "Panels & Separators",
