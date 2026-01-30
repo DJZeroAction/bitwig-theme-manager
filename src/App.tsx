@@ -809,6 +809,7 @@ function EditorView() {
     createThemeFromTemplate,
     applyTheme,
     updateColor,
+    updateColors,
     importTheme,
     exportTheme,
     deleteTheme,
@@ -840,6 +841,11 @@ function EditorView() {
 
   const handleColorChange = (key: string, value: string) => {
     updateColor(key, value);
+    setHasUnsavedChanges(true);
+  };
+
+  const handleColorsChange = (updates: Record<string, string>) => {
+    updateColors(updates);
     setHasUnsavedChanges(true);
   };
 
@@ -1046,6 +1052,7 @@ function EditorView() {
               theme={populatedTheme}
               bitwigVersion={editorVersion}
               onColorChange={handleColorChange}
+              onColorsChange={handleColorsChange}
               onVersionChange={setEditorVersion}
             />
           </>

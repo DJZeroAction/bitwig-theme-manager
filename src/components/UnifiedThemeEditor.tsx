@@ -17,6 +17,7 @@ interface UnifiedThemeEditorProps {
   theme: Theme;
   bitwigVersion: BitwigVersion;
   onColorChange: (key: string, value: string) => void;
+  onColorsChange?: (updates: Record<string, string>) => void;
   onVersionChange?: (version: BitwigVersion) => void;
 }
 
@@ -24,6 +25,7 @@ export function UnifiedThemeEditor({
   theme,
   bitwigVersion,
   onColorChange,
+  onColorsChange,
   onVersionChange,
 }: UnifiedThemeEditorProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -144,6 +146,27 @@ export function UnifiedThemeEditor({
     return { totalCount: total, modifiedCount: modified };
   }, [versionProperties, populatedValues]);
 
+  // Handle group color change - applies color to all properties in a category
+  const handleGroupColorChange = (categoryId: string, color: string) => {
+    const props = categorizedProperties.get(categoryId);
+    if (!props) return;
+
+    // Build updates for all properties in the category
+    const updates: Record<string, string> = {};
+    for (const prop of props) {
+      updates[prop.key] = color;
+    }
+
+    // Use batch update if available, otherwise update one by one
+    if (onColorsChange) {
+      onColorsChange(updates);
+    } else {
+      for (const [key, value] of Object.entries(updates)) {
+        onColorChange(key, value);
+      }
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Editor Header */}
@@ -251,6 +274,7 @@ export function UnifiedThemeEditor({
                 values={populatedValues}
                 basePropertyKey={baseKey}
                 onChange={onColorChange}
+                onGroupColorChange={(color) => handleGroupColorChange(category.id, color)}
                 defaultExpanded={HIGH_IMPACT_CATEGORIES.includes(category.id) && !searchQuery}
               />
             );
