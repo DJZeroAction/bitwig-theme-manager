@@ -559,16 +559,6 @@
       "variant_name": "Orange"
     },
     {
-      "id": "workbench",
-      "name": "Workbench",
-      "author": "Claude",
-      "file": "workbench.bte",
-      "preview": "workbench.png",
-      "description": "Amiga Workbench 1.x — blue, white, orange, black",
-      "bundle": "workbench",
-      "variant_name": "Original"
-    },
-    {
       "id": "workbench-refined",
       "name": "Workbench (Refined)",
       "author": "Claude",
@@ -579,13 +569,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "platinum",
-      "name": "Platinum",
+      "id": "workbench",
+      "name": "Workbench",
       "author": "Claude",
-      "file": "platinum.bte",
-      "preview": "platinum.png",
-      "description": "Classic Mac OS 8/9 Platinum — warm grey with rainbow accents",
-      "bundle": "platinum",
+      "file": "workbench.bte",
+      "preview": "workbench.png",
+      "description": "Amiga Workbench 1.x — blue, white, orange, black",
+      "bundle": "workbench",
       "variant_name": "Original"
     },
     {
@@ -599,13 +589,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "turbo",
-      "name": "Turbo",
+      "id": "platinum",
+      "name": "Platinum",
       "author": "Claude",
-      "file": "turbo.bte",
-      "preview": "turbo.png",
-      "description": "Borland Turbo Pascal IDE — deep blue with yellow and cyan",
-      "bundle": "turbo",
+      "file": "platinum.bte",
+      "preview": "platinum.png",
+      "description": "Classic Mac OS 8/9 Platinum — warm grey with rainbow accents",
+      "bundle": "platinum",
       "variant_name": "Original"
     },
     {
@@ -619,13 +609,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "hotdog-stand",
-      "name": "Hotdog Stand",
+      "id": "turbo",
+      "name": "Turbo",
       "author": "Claude",
-      "file": "hotdog-stand.bte",
-      "preview": "hotdog-stand.png",
-      "description": "Windows 3.1's worst color scheme — red and yellow everywhere",
-      "bundle": "hotdog-stand",
+      "file": "turbo.bte",
+      "preview": "turbo.png",
+      "description": "Borland Turbo Pascal IDE — deep blue with yellow and cyan",
+      "bundle": "turbo",
       "variant_name": "Original"
     },
     {
@@ -639,13 +629,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "bebox",
-      "name": "BeBox",
+      "id": "hotdog-stand",
+      "name": "Hotdog Stand",
       "author": "Claude",
-      "file": "bebox.bte",
-      "preview": "bebox.png",
-      "description": "BeOS desktop — clean grey with signature yellow accents",
-      "bundle": "bebox",
+      "file": "hotdog-stand.bte",
+      "preview": "hotdog-stand.png",
+      "description": "Windows 3.1's worst color scheme — red and yellow everywhere",
+      "bundle": "hotdog-stand",
       "variant_name": "Original"
     },
     {
@@ -659,13 +649,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "irix",
-      "name": "IRIX",
+      "id": "bebox",
+      "name": "BeBox",
       "author": "Claude",
-      "file": "irix.bte",
-      "preview": "irix.png",
-      "description": "SGI IRIX workstation — slate blue-purple with teal accents",
-      "bundle": "irix",
+      "file": "bebox.bte",
+      "preview": "bebox.png",
+      "description": "BeOS desktop — clean grey with signature yellow accents",
+      "bundle": "bebox",
       "variant_name": "Original"
     },
     {
@@ -677,6 +667,16 @@
       "description": "SGI IRIX — refined with blue-purple greys and teal/gold accent pairing",
       "bundle": "irix",
       "variant_name": "Refined"
+    },
+    {
+      "id": "irix",
+      "name": "IRIX",
+      "author": "Claude",
+      "file": "irix.bte",
+      "preview": "irix.png",
+      "description": "SGI IRIX workstation — slate blue-purple with teal accents",
+      "bundle": "irix",
+      "variant_name": "Original"
     },
     {
       "id": "ghosty",
@@ -844,16 +844,6 @@
       "repo_url": "https://github.com/sleeplessKomodo/bitwig-dracula-theme"
     },
     {
-      "id": "gameboy",
-      "name": "GameBoy",
-      "author": "Claude",
-      "file": "gameboy.bte",
-      "preview": "gameboy.png",
-      "description": "Nintendo GameBoy LCD — yellow-green monochrome",
-      "bundle": "gameboy",
-      "variant_name": "Original"
-    },
-    {
       "id": "gameboy-refined",
       "name": "GameBoy (Refined)",
       "author": "Claude",
@@ -864,13 +854,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "cga-dos",
-      "name": "CGA DOS",
+      "id": "gameboy",
+      "name": "GameBoy",
       "author": "Claude",
-      "file": "cga-dos.bte",
-      "preview": "cga-dos.png",
-      "description": "Classic CGA 4-color — cyan, magenta, white, black",
-      "bundle": "cga-dos",
+      "file": "gameboy.bte",
+      "preview": "gameboy.png",
+      "description": "Nintendo GameBoy LCD — yellow-green monochrome",
+      "bundle": "gameboy",
       "variant_name": "Original"
     },
     {
@@ -884,13 +874,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "shrek-swamp",
-      "name": "Shrek Swamp",
+      "id": "cga-dos",
+      "name": "CGA DOS",
       "author": "Claude",
-      "file": "shrek-swamp.bte",
-      "preview": "shrek-swamp.png",
-      "description": "Shrek's swamp — ogre green, mud brown, onion layers",
-      "bundle": "shrek-swamp",
+      "file": "cga-dos.bte",
+      "preview": "cga-dos.png",
+      "description": "Classic CGA 4-color — cyan, magenta, white, black",
+      "bundle": "cga-dos",
       "variant_name": "Original"
     },
     {
@@ -904,13 +894,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "barbie",
-      "name": "Barbie",
+      "id": "shrek-swamp",
+      "name": "Shrek Swamp",
       "author": "Claude",
-      "file": "barbie.bte",
-      "preview": "barbie.png",
-      "description": "Barbie Dreamhouse — hot pink, white, gold",
-      "bundle": "barbie",
+      "file": "shrek-swamp.bte",
+      "preview": "shrek-swamp.png",
+      "description": "Shrek's swamp — ogre green, mud brown, onion layers",
+      "bundle": "shrek-swamp",
       "variant_name": "Original"
     },
     {
@@ -924,13 +914,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "hannah-montana",
-      "name": "Hannah Montana",
+      "id": "barbie",
+      "name": "Barbie",
       "author": "Claude",
-      "file": "hannah-montana.bte",
-      "preview": "hannah-montana.png",
-      "description": "Best of Both Worlds — purple, magenta, silver sparkle",
-      "bundle": "hannah-montana",
+      "file": "barbie.bte",
+      "preview": "barbie.png",
+      "description": "Barbie Dreamhouse — hot pink, white, gold",
+      "bundle": "barbie",
       "variant_name": "Original"
     },
     {
@@ -944,13 +934,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "disney-princess",
-      "name": "Disney Princess",
+      "id": "hannah-montana",
+      "name": "Hannah Montana",
       "author": "Claude",
-      "file": "disney-princess.bte",
-      "preview": "disney-princess.png",
-      "description": "Fairytale elegance — lavender, soft purple, blush pink",
-      "bundle": "disney-princess",
+      "file": "hannah-montana.bte",
+      "preview": "hannah-montana.png",
+      "description": "Best of Both Worlds — purple, magenta, silver sparkle",
+      "bundle": "hannah-montana",
       "variant_name": "Original"
     },
     {
@@ -964,13 +954,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "spongebob",
-      "name": "Spongebob",
+      "id": "disney-princess",
+      "name": "Disney Princess",
       "author": "Claude",
-      "file": "spongebob.bte",
-      "preview": "spongebob.png",
-      "description": "Bikini Bottom — yellow, underwater blue, Patrick pink",
-      "bundle": "spongebob",
+      "file": "disney-princess.bte",
+      "preview": "disney-princess.png",
+      "description": "Fairytale elegance — lavender, soft purple, blush pink",
+      "bundle": "disney-princess",
       "variant_name": "Original"
     },
     {
@@ -984,13 +974,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "among-us",
-      "name": "Among Us",
+      "id": "spongebob",
+      "name": "Spongebob",
       "author": "Claude",
-      "file": "among-us.bte",
-      "preview": "among-us.png",
-      "description": "Pretty Sus — spaceship grey, emergency red, vent cyan",
-      "bundle": "among-us",
+      "file": "spongebob.bte",
+      "preview": "spongebob.png",
+      "description": "Bikini Bottom — yellow, underwater blue, Patrick pink",
+      "bundle": "spongebob",
       "variant_name": "Original"
     },
     {
@@ -1004,13 +994,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "stranger-things",
-      "name": "Stranger Things",
+      "id": "among-us",
+      "name": "Among Us",
       "author": "Claude",
-      "file": "stranger-things.bte",
-      "preview": "stranger-things.png",
-      "description": "The Upside Down — dark with Christmas light RGB",
-      "bundle": "stranger-things",
+      "file": "among-us.bte",
+      "preview": "among-us.png",
+      "description": "Pretty Sus — spaceship grey, emergency red, vent cyan",
+      "bundle": "among-us",
       "variant_name": "Original"
     },
     {
@@ -1024,13 +1014,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "taco-bell",
-      "name": "Taco Bell",
+      "id": "stranger-things",
+      "name": "Stranger Things",
       "author": "Claude",
-      "file": "taco-bell.bte",
-      "preview": "taco-bell.png",
-      "description": "Live Más — purple, Baja Blast teal, hot pink",
-      "bundle": "taco-bell",
+      "file": "stranger-things.bte",
+      "preview": "stranger-things.png",
+      "description": "The Upside Down — dark with Christmas light RGB",
+      "bundle": "stranger-things",
       "variant_name": "Original"
     },
     {
@@ -1044,13 +1034,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "lisa-frank",
-      "name": "Lisa Frank",
+      "id": "taco-bell",
+      "name": "Taco Bell",
       "author": "Claude",
-      "file": "lisa-frank.bte",
-      "preview": "lisa-frank.png",
-      "description": "Dolphin Fever Dream — rainbow pastel 90s maximalism",
-      "bundle": "lisa-frank",
+      "file": "taco-bell.bte",
+      "preview": "taco-bell.png",
+      "description": "Live Más — purple, Baja Blast teal, hot pink",
+      "bundle": "taco-bell",
       "variant_name": "Original"
     },
     {
@@ -1064,13 +1054,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "mountain-dew",
-      "name": "Mountain Dew",
+      "id": "lisa-frank",
+      "name": "Lisa Frank",
       "author": "Claude",
-      "file": "mountain-dew.bte",
-      "preview": "mountain-dew.png",
-      "description": "Do the Dew — radioactive green, Dorito orange, gamer black",
-      "bundle": "mountain-dew",
+      "file": "lisa-frank.bte",
+      "preview": "lisa-frank.png",
+      "description": "Dolphin Fever Dream — rainbow pastel 90s maximalism",
+      "bundle": "lisa-frank",
       "variant_name": "Original"
     },
     {
@@ -1084,13 +1074,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "circus",
-      "name": "Circus",
+      "id": "mountain-dew",
+      "name": "Mountain Dew",
       "author": "Claude",
-      "file": "circus.bte",
-      "preview": "circus-clown.png",
-      "description": "Clown College — red, yellow, blue primary chaos",
-      "bundle": "circus",
+      "file": "mountain-dew.bte",
+      "preview": "mountain-dew.png",
+      "description": "Do the Dew — radioactive green, Dorito orange, gamer black",
+      "bundle": "mountain-dew",
       "variant_name": "Original"
     },
     {
@@ -1104,13 +1094,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "naruto",
-      "name": "Naruto",
+      "id": "circus",
+      "name": "Circus",
       "author": "Claude",
-      "file": "naruto.bte",
-      "preview": "naruto.png",
-      "description": "Believe It! — orange ninja, Sharingan red, chakra yellow",
-      "bundle": "naruto",
+      "file": "circus.bte",
+      "preview": "circus-clown.png",
+      "description": "Clown College — red, yellow, blue primary chaos",
+      "bundle": "circus",
       "variant_name": "Original"
     },
     {
@@ -1124,13 +1114,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "pokemon",
-      "name": "Pokemon",
+      "id": "naruto",
+      "name": "Naruto",
       "author": "Claude",
-      "file": "pokemon.bte",
-      "preview": "pokemon.png",
-      "description": "Gotta Catch 'Em All — Pokeball red, Pikachu yellow",
-      "bundle": "pokemon",
+      "file": "naruto.bte",
+      "preview": "naruto.png",
+      "description": "Believe It! — orange ninja, Sharingan red, chakra yellow",
+      "bundle": "naruto",
       "variant_name": "Original"
     },
     {
@@ -1144,13 +1134,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "dragon-ball",
-      "name": "Dragon Ball",
+      "id": "pokemon",
+      "name": "Pokemon",
       "author": "Claude",
-      "file": "dragon-ball.bte",
-      "preview": "dragon-ball.png",
-      "description": "Over 9000! — Goku orange, Super Saiyan yellow",
-      "bundle": "dragon-ball",
+      "file": "pokemon.bte",
+      "preview": "pokemon.png",
+      "description": "Gotta Catch 'Em All — Pokeball red, Pikachu yellow",
+      "bundle": "pokemon",
       "variant_name": "Original"
     },
     {
@@ -1164,13 +1154,13 @@
       "variant_name": "Refined"
     },
     {
-      "id": "yugioh",
-      "name": "Yu-Gi-Oh",
+      "id": "dragon-ball",
+      "name": "Dragon Ball",
       "author": "Claude",
-      "file": "yugioh.bte",
-      "preview": "yugioh.png",
-      "description": "Time to Duel! — Millennium gold, Shadow Realm purple",
-      "bundle": "yugioh",
+      "file": "dragon-ball.bte",
+      "preview": "dragon-ball.png",
+      "description": "Over 9000! — Goku orange, Super Saiyan yellow",
+      "bundle": "dragon-ball",
       "variant_name": "Original"
     },
     {
@@ -1182,6 +1172,16 @@
       "description": "Time to Duel! — purple greys, gold/blue accent pairing",
       "bundle": "yugioh",
       "variant_name": "Refined"
+    },
+    {
+      "id": "yugioh",
+      "name": "Yu-Gi-Oh",
+      "author": "Claude",
+      "file": "yugioh.bte",
+      "preview": "yugioh.png",
+      "description": "Time to Duel! — Millennium gold, Shadow Realm purple",
+      "bundle": "yugioh",
+      "variant_name": "Original"
     },
     {
       "id": "all-red-test",
