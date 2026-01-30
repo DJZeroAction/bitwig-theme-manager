@@ -1327,19 +1327,17 @@ function PatchView() {
                     }
                   </button>
                 )}
-                {install.is_patched && (
-                  <button
-                    onClick={() => handleResetTheme(install.version)}
-                    disabled={actionLoading === install.version + "-reset"}
-                    className="px-4 py-2 rounded-lg disabled:opacity-50 bg-gray-600 hover:bg-gray-500"
-                    title="Remove custom theme (keeps patching)"
-                  >
-                    {actionLoading === install.version + "-reset"
-                      ? "Resetting..."
-                      : "Reset Theme"
-                    }
-                  </button>
-                )}
+                <button
+                  onClick={() => handleResetTheme(install.version)}
+                  disabled={actionLoading === install.version + "-reset"}
+                  className="px-4 py-2 rounded-lg disabled:opacity-50 bg-gray-600 hover:bg-gray-500"
+                  title="Remove theme file (Bitwig will use default colors)"
+                >
+                  {actionLoading === install.version + "-reset"
+                    ? "Removing..."
+                    : "Remove Theme"
+                  }
+                </button>
               </div>
               {install.needs_sudo && !install.is_patched && (
                 <div className="mt-2 text-xs text-yellow-400 flex items-center gap-1">

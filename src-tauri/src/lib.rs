@@ -567,7 +567,8 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
     }
 }
 
-/// Reset to default theme by removing the active theme file
+/// Remove theme by deleting the active theme file
+/// Bitwig will use its default colors when no theme file is present
 #[tauri::command]
 fn reset_theme(bitwig_version: String) -> Result<String, AppError> {
     let theme_path = parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
@@ -577,9 +578,9 @@ fn reset_theme(bitwig_version: String) -> Result<String, AppError> {
     if theme_path.exists() {
         std::fs::remove_file(&theme_path)?;
         log_event(&format!("reset_theme: removed {}", theme_path.display()));
-        Ok("Theme reset to default. Restart Bitwig to see changes.".to_string())
+        Ok("Theme removed. Please restart Bitwig for the removal to take effect.".to_string())
     } else {
-        Ok("No custom theme was active.".to_string())
+        Ok("No theme to remove.".to_string())
     }
 }
 

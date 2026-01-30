@@ -236,6 +236,7 @@ pub fn get_checksum_path(jar_path: &Path) -> PathBuf {
 }
 
 /// Get the patch marker file path (stored in backup directory, not next to JAR)
+/// DEPRECATED: Use get_patched_checksum_path instead for new detection logic
 pub fn get_marker_path(jar_path: &Path) -> PathBuf {
     // Store marker in our backup directory so it doesn't linger after Bitwig updates
     if let Ok(backup_dir) = manager_backup_dir(jar_path) {
@@ -243,6 +244,40 @@ pub fn get_marker_path(jar_path: &Path) -> PathBuf {
     }
     // Fallback to old location (shouldn't happen)
     jar_path.with_extension("patched")
+}
+
+/// Get the path for storing the patched JAR's checksum
+/// This is used to verify the JAR is still in its patched state
+pub fn get_patched_checksum_path(jar_path: &Path) -> Option<PathBuf> {
+    manager_backup_dir(jar_path)
+        .ok()
+        .map(|dir| dir.join("patched.sha256"))
+}
+
+/// Store the checksum of the patched JAR for later detection
+fn store_patched_checksum(jar_path: &Path) -> Result<(), PatchError> {
+    let checksum_path = get_patched_checksum_path(jar_path).ok_or_else(|| {
+        PatchError::Io(io::Error::new(
+            io::ErrorKind::NotFound,
+            "Could not determine patched checksum path",
+        ))
+    })?;
+
+    // Ensure directory exists
+    if let Some(parent) = checksum_path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+
+    let checksum = calculate_checksum(jar_path)?;
+    fs::write(&checksum_path, &checksum)?;
+
+    log_event(&format!(
+        "patcher: stored patched checksum {} at {}",
+        checksum,
+        checksum_path.to_string_lossy()
+    ));
+
+    Ok(())
 }
 
 /// Create a backup of the original JAR file
@@ -333,72 +368,99 @@ pub fn patch_jar(jar_path: &Path) -> Result<(), PatchError> {
 }
 
 /// Check if a JAR file is patched
-/// Only returns true if marker exists AND JAR wasn't replaced since patching
+/// Returns true if the JAR's checksum matches the stored "patched" checksum
 pub fn is_patched(jar_path: &Path) -> bool {
-    let marker_path = get_marker_path(jar_path);
+    // Get the patched checksum file path
+    let checksum_path = match get_patched_checksum_path(jar_path) {
+        Some(p) => p,
+        None => {
+            log_event("patcher: is_patched=false (could not determine checksum path)");
+            return false;
+        }
+    };
 
-    // Must have marker
-    if !marker_path.exists() {
+    log_event(&format!(
+        "patcher: is_patched check -> jar={}, checksum_file={}",
+        jar_path.to_string_lossy(),
+        checksum_path.to_string_lossy()
+    ));
+
+    // Check if we have a stored patched checksum
+    if !checksum_path.exists() {
+        // Fall back to legacy marker detection for backwards compatibility
+        let marker_path = get_marker_path(jar_path);
+        let legacy_marker = jar_path.with_extension("patched");
+
+        if marker_path.exists() || legacy_marker.exists() {
+            log_event("patcher: found legacy marker, migrating to checksum-based detection");
+            // Migrate: create patched checksum from current JAR state
+            if let Ok(checksum) = calculate_checksum(jar_path) {
+                if let Some(parent) = checksum_path.parent() {
+                    let _ = fs::create_dir_all(parent);
+                }
+                if fs::write(&checksum_path, &checksum).is_ok() {
+                    log_event(&format!(
+                        "patcher: migrated to checksum detection, stored {}",
+                        checksum
+                    ));
+                    return true;
+                }
+            }
+        }
+
+        log_event(&format!(
+            "patcher: is_patched=false (no patched checksum at {})",
+            checksum_path.to_string_lossy()
+        ));
         return false;
     }
 
-    // Check if JAR was replaced (up/downgrade) - JAR mtime should be close to marker mtime
-    if let (Ok(jar_meta), Ok(marker_meta)) = (fs::metadata(jar_path), fs::metadata(&marker_path)) {
-        if let (Ok(jar_time), Ok(marker_time)) = (jar_meta.modified(), marker_meta.modified()) {
-            let diff = if jar_time > marker_time {
-                jar_time.duration_since(marker_time).unwrap_or_default()
-            } else {
-                marker_time.duration_since(jar_time).unwrap_or_default()
-            };
-            if diff.as_secs() > 60 {
-                // JAR was replaced after patching
-                log_event(&format!(
-                    "patcher: is_patched=false (JAR mtime differs from marker by {}s, Bitwig was updated)",
-                    diff.as_secs()
-                ));
-                return false;
-            }
+    // Read stored checksum and compare with current JAR
+    let stored_checksum = match fs::read_to_string(&checksum_path) {
+        Ok(s) => s.trim().to_string(),
+        Err(e) => {
+            log_event(&format!(
+                "patcher: is_patched=false (failed to read checksum: {})",
+                e
+            ));
+            return false;
         }
-    }
+    };
 
-    true
+    let current_checksum = match calculate_checksum(jar_path) {
+        Ok(s) => s,
+        Err(e) => {
+            log_event(&format!(
+                "patcher: is_patched=false (failed to calculate JAR checksum: {})",
+                e
+            ));
+            return false;
+        }
+    };
+
+    if stored_checksum == current_checksum {
+        log_event("patcher: is_patched=true (checksum matches)");
+        true
+    } else {
+        log_event(&format!(
+            "patcher: is_patched=false (checksum mismatch: stored={}, current={})",
+            stored_checksum, current_checksum
+        ));
+        false
+    }
 }
 
 /// Check if a backup exists for a JAR file
 ///
 /// Only returns true if:
-/// 1. The JAR was patched by us (marker exists)
-/// 2. The JAR hasn't been replaced since we patched (JAR mtime close to marker mtime)
+/// 1. The JAR is currently patched (checksum matches stored patched checksum)
+/// 2. We have a backup.jar to restore to
 ///
 /// This prevents restoring an old backup to a different Bitwig version
 pub fn has_backup(jar_path: &Path) -> bool {
-    let marker_path = get_marker_path(jar_path);
-
-    // Must have marker (we patched this JAR)
-    if !marker_path.exists() {
+    // Must be currently patched (otherwise backup doesn't belong to this JAR)
+    if !is_patched(jar_path) {
         return false;
-    }
-
-    // Check if JAR was replaced (up/downgrade) - JAR mtime should be close to marker mtime
-    // When we patch, both get modified around the same time (within a few seconds)
-    // If JAR mtime is very different, it was replaced
-    if let (Ok(jar_meta), Ok(marker_meta)) = (fs::metadata(jar_path), fs::metadata(&marker_path)) {
-        if let (Ok(jar_time), Ok(marker_time)) = (jar_meta.modified(), marker_meta.modified()) {
-            // Allow 60 seconds tolerance for patching time
-            let diff = if jar_time > marker_time {
-                jar_time.duration_since(marker_time).unwrap_or_default()
-            } else {
-                marker_time.duration_since(jar_time).unwrap_or_default()
-            };
-            if diff.as_secs() > 60 {
-                // JAR was replaced (different timestamp than when we patched)
-                log_event(&format!(
-                    "patcher: has_backup=false (JAR mtime differs from marker by {}s, Bitwig was replaced)",
-                    diff.as_secs()
-                ));
-                return false;
-            }
-        }
     }
 
     // Check new manager backup location first
@@ -820,19 +882,21 @@ pub fn run_patcher_cli(bitwig_jar_path: &Path) -> Result<(), PatchError> {
     ));
 
     let (stdout, stderr) = run_patcher_process(bitwig_jar_path, &home, &user)?;
-    if !stdout.contains("already patched") && !stderr.contains("already patched") {
-        // Create our marker file for tracking
-        let marker_path = get_marker_path(bitwig_jar_path);
-        // Ensure marker directory exists
-        if let Some(parent) = marker_path.parent() {
+
+    // Store checksum of patched JAR for detection
+    if let Some(checksum_path) = get_patched_checksum_path(bitwig_jar_path) {
+        if let Some(parent) = checksum_path.parent() {
             fs::create_dir_all(parent)?;
         }
-        fs::write(&marker_path, "patched")?;
+        let checksum = calculate_checksum(bitwig_jar_path)?;
+        fs::write(&checksum_path, &checksum)?;
         log_event(&format!(
-            "patcher: marker created at {}",
-            marker_path.to_string_lossy()
+            "patcher: stored patched checksum {} at {}",
+            checksum,
+            checksum_path.to_string_lossy()
         ));
     }
+
     log_event(&format!(
         "patcher: run_patcher_cli ok stdout='{}' stderr='{}'",
         stdout, stderr
@@ -1067,12 +1131,11 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
 
     let java_path = find_java().ok_or(PatchError::JavaNotFound)?;
     let patcher_jar = ensure_patcher_available()?;
-    let marker_path = get_marker_path(jar_path);
 
     // Backup directory in user's cache (writable without elevation)
     let backup_dir = manager_backup_dir(jar_path)?;
     let backup_path = backup_dir.join("backup.jar");
-    let checksum_path = backup_dir.join("backup.jar.sha256");
+    let original_checksum_path = backup_dir.join("backup.jar.sha256");
 
     log_event(&format!(
         "patcher: patch_via_user_temp -> {} (home={}, user={})",
@@ -1087,26 +1150,23 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         let java_path_escaped = java_path.to_string_lossy().replace("'", "''");
         let patcher_jar_escaped = patcher_jar.to_string_lossy().replace("'", "''");
         let jar_path_escaped = jar_path.to_string_lossy().replace("'", "''");
-        let marker_path_escaped = marker_path.to_string_lossy().replace("'", "''");
         let backup_dir_escaped = backup_dir.to_string_lossy().replace("'", "''");
         let backup_path_escaped = backup_path.to_string_lossy().replace("'", "''");
-        let checksum_path_escaped = checksum_path.to_string_lossy().replace("'", "''");
+        let original_checksum_escaped = original_checksum_path.to_string_lossy().replace("'", "''");
         let home_escaped = home.replace("'", "''");
         let user_escaped = user.replace("'", "''");
 
         // PowerShell script that:
         // 1. Sets error action to stop on failures
         // 2. Creates backup directory
-        // 3. Backs up current JAR with checksum
+        // 3. Backs up current JAR with checksum (original, before patching)
         // 4. Runs patcher with proper Java properties (including -Duser.dir)
-        // 5. Only creates marker file if patcher succeeds (checks $LASTEXITCODE)
         let ps_script = format!(
-            r#"$ErrorActionPreference = 'Stop'; New-Item -ItemType Directory -Force -Path '{}' | Out-Null; Copy-Item -Path '{}' -Destination '{}' -Force; (Get-FileHash -Path '{}' -Algorithm SHA256).Hash | Set-Content -Path '{}'; & '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-Duser.dir={}' '-jar' '{}' '{}'; if ($LASTEXITCODE -eq 0) {{ Set-Content -Path '{}' -Value 'patched' }} else {{ throw 'Patcher failed with exit code ' + $LASTEXITCODE }}"#,
+            r#"$ErrorActionPreference = 'Stop'; New-Item -ItemType Directory -Force -Path '{}' | Out-Null; Copy-Item -Path '{}' -Destination '{}' -Force; (Get-FileHash -Path '{}' -Algorithm SHA256).Hash | Set-Content -Path '{}'; & '{}' '-Xmx2g' '-Duser.home={}' '-Duser.name={}' '-Duser.dir={}' '-jar' '{}' '{}'; if ($LASTEXITCODE -ne 0) {{ throw 'Patcher failed with exit code ' + $LASTEXITCODE }}"#,
             backup_dir_escaped,
             jar_path_escaped, backup_path_escaped,
-            jar_path_escaped, checksum_path_escaped,
-            java_path_escaped, home_escaped, user_escaped, home_escaped, patcher_jar_escaped, jar_path_escaped,
-            marker_path_escaped
+            jar_path_escaped, original_checksum_escaped,
+            java_path_escaped, home_escaped, user_escaped, home_escaped, patcher_jar_escaped, jar_path_escaped
         );
 
         let ps_command = format!(
@@ -1121,14 +1181,10 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
             .output()?;
 
         if output.status.success() {
-            // Verify the marker was actually created
-            if marker_path.exists() {
-                log_event("patcher: Windows elevation succeeded, marker created");
-                Ok(())
-            } else {
-                log_event("patcher: Windows elevation ran but marker not found");
-                Err(PatchError::PatcherFailed("Patching completed but marker file was not created".to_string()))
-            }
+            // Store checksum of patched JAR for detection
+            store_patched_checksum(jar_path)?;
+            log_event("patcher: Windows elevation succeeded, patched checksum stored");
+            Ok(())
         } else {
             let stderr = String::from_utf8_lossy(&output.stderr);
             let stdout = String::from_utf8_lossy(&output.stdout);
@@ -1148,27 +1204,30 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         let java_path_safe = sanitize_shell_arg(&java_path.to_string_lossy())?;
         let patcher_jar_safe = sanitize_shell_arg(&patcher_jar.to_string_lossy())?;
         let jar_path_safe = sanitize_shell_arg(&jar_path.to_string_lossy())?;
-        let marker_path_safe = sanitize_shell_arg(&marker_path.to_string_lossy())?;
         let backup_dir_safe = sanitize_shell_arg(&backup_dir.to_string_lossy())?;
         let backup_path_safe = sanitize_shell_arg(&backup_path.to_string_lossy())?;
-        let checksum_path_safe = sanitize_shell_arg(&checksum_path.to_string_lossy())?;
+        let original_checksum_safe = sanitize_shell_arg(&original_checksum_path.to_string_lossy())?;
         let home_safe = sanitize_shell_arg(&home)?;
         let user_safe = sanitize_shell_arg(&user)?;
 
-        // Script: 1) backup current JAR, 2) patch it, 3) create marker
+        // Script: 1) backup current JAR with checksum, 2) patch it, 3) fix ownership
+        // The chown at the end ensures the backup directory is owned by the user, not root
+        // We store the patched checksum AFTER the script completes (from user context)
         let script_content = format!(
-            "#!/bin/bash\nset -e\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\n'{}' -Xmx2g -Duser.home='{}' -Duser.name='{}' -jar '{}' '{}'\necho 'patched' > '{}'\n",
+            "#!/bin/bash\nset -e\nmkdir -p '{}'\ncp '{}' '{}'\nsha256sum '{}' | cut -d' ' -f1 > '{}'\n'{}' -Xmx2g -Duser.home='{}' -Duser.name='{}' -jar '{}' '{}'\nchown -R '{}:{}' '{}' 2>/dev/null || true\n",
             backup_dir_safe,
             jar_path_safe,
             backup_path_safe,
             jar_path_safe,
-            checksum_path_safe,
+            original_checksum_safe,
             java_path_safe,
             home_safe,
             user_safe,
             patcher_jar_safe,
             jar_path_safe,
-            marker_path_safe
+            user_safe,
+            user_safe,
+            backup_dir_safe
         );
 
         let script_path = create_secure_temp_script("patch-direct", &script_content)?;
@@ -1178,7 +1237,16 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
 
         let result = run_with_pkexec("bash", &[script_path_str]);
         let _ = fs::remove_file(&script_path);
-        result
+
+        // After successful patching, store the checksum of the patched JAR
+        match result {
+            Ok(()) => {
+                store_patched_checksum(jar_path)?;
+                log_event("patcher: Linux elevation succeeded, patched checksum stored");
+                Ok(())
+            }
+            Err(e) => Err(e),
+        }
     }
 }
 

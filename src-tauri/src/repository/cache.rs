@@ -190,12 +190,27 @@ pub fn get_cached_preview(theme_name: &str) -> Option<PathBuf> {
     None
 }
 
-/// Clear all cached data
+/// Clear cached theme data (themes and previews)
+/// Note: Does NOT delete backups directory to preserve JAR backups and patch markers
 pub fn clear_cache() -> Result<(), CacheError> {
-    let cache_dir = get_cache_dir().ok_or(CacheError::CacheDirNotFound)?;
+    // Only delete themes and previews, NOT backups
+    if let Some(themes_dir) = get_themes_cache_dir() {
+        if themes_dir.exists() {
+            fs::remove_dir_all(&themes_dir)?;
+        }
+    }
 
-    if cache_dir.exists() {
-        fs::remove_dir_all(&cache_dir)?;
+    if let Some(previews_dir) = get_previews_cache_dir() {
+        if previews_dir.exists() {
+            fs::remove_dir_all(&previews_dir)?;
+        }
+    }
+
+    // Also delete the repository cache file
+    if let Some(cache_file) = get_cache_file() {
+        if cache_file.exists() {
+            fs::remove_file(&cache_file)?;
+        }
     }
 
     Ok(())
