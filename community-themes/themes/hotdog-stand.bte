@@ -27,17 +27,17 @@ Grey 6: #FF0000
 Shadow: #00000080
 Brighter: #FFFF00
 
-// Text
+// Text - BLACK for readability on both red and yellow
 Dark Text: #000000
 Subtle Dark Text: #000000
-Subtle Light Text: #FFFF00
-Subtler Light Text: #FFFF00
-Medium Light Text: #FFFF00
-Light Text: #FFFF00
-Lighter Text: #FFFF00
-Link Text: #FFFF00
-Link Text Rollover: #000000
-Error Text: #FFFF00
+Subtle Light Text: #000000
+Subtler Light Text: #000000
+Medium Light Text: #000000
+Light Text: #000000
+Lighter Text: #000000
+Link Text: #000000
+Link Text Rollover: #FF0000
+Error Text: #FF0000
 
 // Accent & Status
 Accent (default): #FFFF00
@@ -96,16 +96,16 @@ Slider background: #FFFF00
 Emboss Highlight: #FFFF0022
 Emboss Shadow: #00000022
 
-// Toggle Icons
-Normal Toggle Icon: #FFFF00
-Mouse Over Toggle Icon: #000000
-Active Toggle Icon (Playing): #FFFF00
-Pressed Toggle Icon: #000000
-Normal Inverted Toggle Icon: #FFFF00
-Mouse Over Inverted Toggle Icon: #000000
-Active Inverted Toggle Icon (Playing): #FFFF00
-Pressed Inverted Toggle Icon: #000000
-Toggle Icon: #FFFF00
+// Toggle Icons - BLACK for visibility
+Normal Toggle Icon: #000000
+Mouse Over Toggle Icon: #FF0000
+Active Toggle Icon (Playing): #000000
+Pressed Toggle Icon: #FF0000
+Normal Inverted Toggle Icon: #000000
+Mouse Over Inverted Toggle Icon: #FF0000
+Active Inverted Toggle Icon (Playing): #000000
+Pressed Inverted Toggle Icon: #FF0000
+Toggle Icon: #000000
 
 // Menus & Popups
 Menu background: #FF0000
@@ -152,20 +152,20 @@ Modern Dark Scrollbar Handle (inactive): #FFFF00AA
 Tree Item Background: #FF0000
 Selected Tree Item Background: #FFFF00
 Selected Tree Item Background (standby): #FFFF00AA
-Tree Separator: #FFFF00
+Tree Separator: #000000
 List Item Background: #FF0000
-List Separator: #FFFF00
-Selected Dashboard Tree: #FFFF00
+List Separator: #000000
+Selected Dashboard Tree: #000000
 Dark tree background (selected): #FFFF00
 Dark tree selection frame: #000000
 Dark tree background (standby selected): #FFFF00AA
-Dark tree separator: #FFFF00
-Dark tree text: #FFFF00
+Dark tree separator: #000000
+Dark tree text: #000000
 Dark tree text (selected): #000000
-Dark tree hover background change: #FFFF0033
-Frame color of selection cursor in the tree.: #FFFF00
-Frame color of selection cursor in the tree. (standby): #FFFF00AA
-Launcher Mapping Indication: #FFFF00
+Dark tree hover background change: #00000033
+Frame color of selection cursor in the tree.: #000000
+Frame color of selection cursor in the tree. (standby): #000000AA
+Launcher Mapping Indication: #000000
 
 // Panels & Separators
 Panel body: #FF0000
@@ -298,8 +298,8 @@ Send (post) value color: #FFFF00
 Send (pre) value color: #FFFF00
 Dark offset for automation/channel bar: #00000044
 Light offset for automation/channel bar: #FFFF0044
-Unselected Filled Automation Type Icon: #FFFF00
-Unselected Empty Automation Type Icon: #FFFF00AA
+Unselected Filled Automation Type Icon: #000000
+Unselected Empty Automation Type Icon: #00000088
 Selected matrix slot color: #FFFF00
 
 // Modulation Mapping
@@ -335,10 +335,10 @@ Analyzed Beat Color: #FFFF00
 // File Status Indicators
 Missing file icon: #000000
 Missing file text: #000000
-Found file icon: #FFFF00
-Found file text: #FFFF00
-External file icon: #FFFF00
-External file text: #FFFF00
+Found file icon: #000000
+Found file text: #000000
+External file icon: #000000
+External file text: #000000
 
 // Invoke Action (Command Palette)
 Invoke Action Background: #FF0000
