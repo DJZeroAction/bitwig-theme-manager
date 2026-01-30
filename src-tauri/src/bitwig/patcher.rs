@@ -1084,7 +1084,7 @@ pub fn run_with_pkexec(command: &str, args: &[&str]) -> Result<(), PatchError> {
     );
 
     let output = Command::new("powershell")
-        .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+        .args(["-NoProfile", "-Command", &ps_command])
         .output()?;
 
     // Clean up
@@ -1177,7 +1177,7 @@ fn patch_via_user_temp(jar_path: &Path) -> Result<(), PatchError> {
         log_event(&format!("patcher: Windows elevated script:\n{}", ps_script));
 
         let output = Command::new("powershell")
-            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+            .args(["-NoProfile", "-Command", &ps_command])
             .output()?;
 
         if output.status.success() {
@@ -1410,7 +1410,7 @@ fn restore_with_elevation(jar_path: &Path) -> Result<(), PatchError> {
         log_event(&format!("patcher: Windows restore script:\n{}", ps_script));
 
         let output = Command::new("powershell")
-            .args(["-NoProfile", "-NonInteractive", "-Command", &ps_command])
+            .args(["-NoProfile", "-Command", &ps_command])
             .output()?;
 
         if output.status.success() {
