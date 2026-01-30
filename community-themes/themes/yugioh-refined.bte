@@ -1,0 +1,376 @@
+// Yu-Gi-Oh - It's Time to Duel!
+// Primary: GOLD (#FFD700) - Millennium Items, ancient Egyptian treasure
+// Secondary: DEEP PURPLE (#4B0082) - Shadow Realm, dark magic
+// Accents: BLUE (Yugi's jacket), RED (Dark Magician accents)
+// Grey tint: PURPLE - mysterious Shadow Realm aesthetic
+// Gold + Purple is THE iconic Yu-Gi-Oh combination
+// Automation: BLUE - distinct from gold active states
+// Author: Claude
+
+// Core - Purple-tinted grey scale (Shadow Realm mystery)
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FFD700
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #FFD700
+Default text: #F0E8FF
+Window background: #18141E
+Grey 0: #0E0A14
+Grey 1: #140E1A
+Grey 2: #1A1420
+Grey 3: #201828
+Grey 4: #281E30
+Grey 5: #302438
+Grey 6: #382A40
+Shadow: #00000099
+Brighter: #FFE855
+
+// Text - Soft lavender on purple-tinted backgrounds
+Dark Text: #000000
+Subtle Dark Text: #140E1A
+Subtle Light Text: #D8D0E8
+Subtler Light Text: #C8C0D8
+Medium Light Text: #E8E0F8
+Light Text: #F0E8FF
+Lighter Text: #FFF8FF
+Link Text: #5588EE
+Link Text Rollover: #77AAFF
+Error Text: #FF4444
+
+// Accent & Status - MILLENNIUM GOLD primary
+Accent (default): #FFD700
+Accent (hitech): #5588EE
+Implicit On (subtle): #FFD70080
+On (subtle): #FFD70060
+On (subtler): #FFD70040
+Pressed On: #DDAA00
+Mapping: #8844DD
+Selection: #FFD70080
+Standby selection: #FFD70044
+White Selection: #FFD700
+White Selection (standby): #DDAA0044
+Warning: #FFD700
+Activation Green: #8844DD
+Activation Yellow: #FFD700
+Activation Red: #CC2222
+
+// Buttons - Purple Shadow magic
+Button background: #6622AA50
+Button stroke: #8844DD88
+OK Button background: #6622AA
+Pressed button background: #FFD70044
+Checkbox background: #140E1A88
+Button in tree background: #6622AA55
+View button background: #FFD70025
+Pressed view button background: #FFD70055
+Inverted Selected Borderless Button background: #FFD70044
+Selected borderless button background: #FFD70055
+Pressed borderless button background: #FFD70077
+Rubber button stroke: #FFD700
+Rubber highlight button stroke: #5588EE
+Close button mouse over background: #FFD70044
+Close button pressed background: #CC222288
+Abstract Button Stroke: #8844DD66
+Abstract Button Selected Background: #FFD70055
+Abstract Button Unselected Background: #140E1A
+Abstract Button Pressed Background: #FFD70044
+Color bar button fill color: #FFD70044
+
+// Knobs & Sliders - Purple-tinted body, gold Millennium value
+Knob Body: #1A1420
+Knob Body Lighter: #201828
+Knob Body Lightest: #281E30
+Knob Body Darkest: #0E0A14
+Knob Line: #F0E8FF
+Knob Line Dark: #FFD700
+Knob Stroke: #6622AA44
+Knob Emboss Highlight: #FFD70020
+Knob Emboss Shadow: #00000070
+Knob Value Background: #0E0A1466
+Knob Value Background (dark): #0E0A14
+Knob Value Color: #FFD700
+Slider background: #0E0A1466
+Emboss Highlight: #FFD70010
+Emboss Shadow: #00000040
+
+// Toggle Icons - Gold Millennium
+Normal Toggle Icon: #DDAA55
+Mouse Over Toggle Icon: #F0E8FF
+Active Toggle Icon (Playing): #FFD700
+Pressed Toggle Icon: #DDAA00
+Normal Inverted Toggle Icon: #F0E8FF66
+Mouse Over Inverted Toggle Icon: #F0E8FF
+Active Inverted Toggle Icon (Playing): #FFD700
+Pressed Inverted Toggle Icon: #DDAA00
+Toggle Icon: #FFD700
+
+// Menus & Popups - Purple Shadow Realm
+Menu background: #201828
+Menu stroke: #8844DD66
+Menu text: #F0E8FF
+Menu Icon: #FFD700
+Menu description text: #C8C0D8
+Menu separator: #8844DD44
+Popup insert: #140E1A
+Popup overlay background color: #000000CC
+Popup Notification Background: #6622AA
+Notification Background: #6622AA
+Notification Normal: #FFD700
+Notification Error: #FF4444
+Notification Button Background: #140E1A
+Tooltip Background: #FFD700
+Light Tooltip Background: #5588EE
+Tooltip Stroke: #000000
+
+// LEDs & Meters - Gold power, purple success color
+Led On: #FFD700
+Led Off: #201828
+Meter Normal: #8844DD
+Meter Yellow: #FFD700
+Meter Red: #CC2222
+Meter Clipping: #FF0000
+Meter Gain Reduction: #5588EE
+Meter Hitech: #5588EE
+Meter Hitech Background: #00000066
+Meter Muted: #4A4250
+Hitech background: #080610
+Hitech on: #5588EE
+
+// Scrollbars - Purple tinted
+Scrollbar: #6622AA77
+Scrollbar background: #0E0A14
+Modern Scrollbar Handle (active): #FFD700
+Modern Scrollbar Handle (inactive): #6622AA66
+Modern Scrollbar Background (active): #0E0A1466
+Modern Dark Scrollbar Handle (active): #8844DD
+Modern Dark Scrollbar Handle (inactive): #6622AA55
+
+// Tree & List Views - Consistent purple tinted
+Tree Item Background: #1A1420
+Selected Tree Item Background: #FFD70077
+Selected Tree Item Background (standby): #FFD70044
+Tree Separator: #8844DD44
+List Item Background: #140E1A88
+List Separator: #8844DD33
+Selected Dashboard Tree: #FFD700
+Dark tree background (selected): #FFD70077
+Dark tree selection frame: #FFD700
+Dark tree background (standby selected): #FFD70044
+Dark tree separator: #8844DD33
+Dark tree text: #F0E8FF
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #FFD70022
+Frame color of selection cursor in the tree.: #FFD700
+Frame color of selection cursor in the tree. (standby): #DDAA0044
+Launcher Mapping Indication: #8844DD
+
+// Panels & Separators - Purple Shadow Realm panels
+Panel body: #1A1420
+Selected Panel body: #281E30
+Panel stroke: #8844DD55
+Selected Panel stroke: #8844DD
+Selected Panel stroke (standby): #6622AA66
+Active Panel stroke: #5588EE
+Panel Stroke (focused): #8844DD
+Inspector Section Frame: #8844DD44
+Content Background: #5588EE
+Light Separator Line: #8844DD33
+Dark Separator Line: #00000066
+Dark Panel Sub-frame Stroke: #8844DD33
+Dark Panel Sub-frame Fill: #0E0A14
+Field background: #0E0A14
+Number field bar background: #FFD700
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #8844DD33
+
+// Device Chain - Dark purple Shadow Realm
+Device Header: #201828
+Device Header (selected): #302438
+Device Locked Overlay: #FFD70088
+Device Tint Future: #5588EE66
+Device Tint Retro: #CC222266
+Device Tint Military: #8844DD55
+Plugin missing: #FF4444
+
+// Display & Waveforms - Gold waveforms on purple dark
+Display Background: #0E0A14
+Display Background (error): #441111
+Display Waveform: #FFD700
+Display Stroke: #6622AA44
+Display Start/End Markers: #5588EE
+Display Loop Markers: #8844DD
+Grey Display Background: #140E1A
+Audio Event Background: #6622AA66
+Audio Event Boundary: #8844DD44
+Audio Event Waveform: #FFD700
+
+// Grid & Modular Environment - Blue (Blue-Eyes White Dragon area)
+The Grid (background): #141822
+The Grid (stroke): #5588EE33
+Grid Line (Primary): #8844DD44
+Grid Line (Secondary): #8844DD22
+Background color of the modular environment.: #181C28
+Compressed Audio Port in modular environment: #5588EE
+Audio connection in modular environment: #CC2222
+Audio64 connection in modular environment: #FFD700
+Event connection in modular environment: #8844DD
+Polyphonic Desktop Object: #6622AA
+Current Atom Value Color: #FFD700
+
+// Timeline & Arranger - Purple Shadow Realm tinted
+Dark Timeline Background: #0E0A14
+Dark Timeline Header Background: #140E1A
+Light Timeline Background: #140E1A
+Light Timeline Header Background: #1A1420
+Top Level Timeline Background: #120C18
+Top Level Timeline Header Background: #18101E
+Irrelevant Timeline Background: #0A0610
+Irrelevant Timeline Header Background: #0E0A14
+Irrelevant Timeline Overlay: #00000055
+Irrelevant Timeline Header Overlay: #00000055
+Timeline Background Pattern: #1A1420
+Timeline Header Background Pattern: #201828
+Timeline Primary Grid: #6622AA44
+Timeline Secondary Grid: #6622AA22
+Timeline Header Primary Grid: #6622AA44
+Timeline Header Secondary Grid: #6622AA22
+Timeline Playhead: #FFFFFF
+Timeline edit tool chooser background: #201828
+
+// Timeline Selection & Cursors - Gold Millennium
+Time Selection Fill: #FFD70055
+Time Selection Stroke: #FFD700
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FFD700
+Time Selection Standby Fill: #FFFFFF18
+Time Selection Standby Stroke: #DDAA0044
+Time Selection Standby Cursor Stroke: #DDAA0044
+Time Selection Inactive Fill: #DDAA0018
+Time Selection Inactive Stroke: #DDAA0044
+Time Selection Not Selected Fill: #FFFFFF10
+Time Selection Not Selected Stroke: #666666
+Time Selection Across All Lanes Fill: #FFD70077
+Time Selection Across All Lanes Stroke: #F0E8FF
+Header Time Selection Fill: #FFD70077
+Header Time Selection Stroke: #FFD700
+Header Time Selection Standby Fill: #FFFFFF18
+Header Time Selection Standby Stroke: #DDAA0044
+Header Time Selection Across All Lanes Fill: #FFD70099
+Header Time Selection Across All Lanes Stroke: #F0E8FF
+Header Time Selection Cursor Stroke: #FFD700
+Header Time Selection Standby Cursor Stroke: #DDAA0044
+Header Loop Region Background: #6622AA33
+
+// Cue Markers & Tooltips - Blue (Yugi's jacket)
+Timeline Cue Marker: #5588EE
+Timeline Header Cue Marker: #5588EE
+Timeline Tooltip Background: #6622AAEE
+Timeline Tooltip Text: #FFD700
+Timeline Header Tooltip Background: #6622AAEE
+Timeline Header Tooltip Text: #FFD700
+
+// Loop Regions - Purple magic
+Loop Region Background: #8844DD33
+Loop Region Fill: #8844DD44
+Loop Region Stroke: #8844DD
+Loop Region Selected Fill: #8844DD66
+Loop Region Selected Stroke: #AA66EE
+Insert preview time: #FFD70077
+
+// Automation & Modulation - BLUE (distinct from gold active states)
+Automation Chooser Background: #00000000
+Automation Color: #5588EE55
+Automation button glow color: #5588EE55
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #5588EE
+Track Automation Color: #5588EE
+Clip Automation Color: #77AAFF
+Clip Modulation Color: #8844DD
+Add Modulation Button Color: #5588EE
+Multiply Modulation Button Color: #8844DD
+User Automation Override Color: #FFD700
+Note Expression Color: #FFD700
+Send (post) value color: #8844DD
+Send (pre) value color: #5588EE
+Dark offset for automation/channel bar: #00000033
+Light offset for automation/channel bar: #FFD70018
+Unselected Filled Automation Type Icon: #888888
+Unselected Empty Automation Type Icon: #6622AA66
+Selected matrix slot color: #FFD700
+
+// Modulation Mapping - Duel monster colors
+Modulation Mapping Color: #5588EE
+Modulation Mapping Color (subtractive): #CC2222
+Modulation Mapping Color (polyphonic): #8844DD
+Modulation Mapping Background (monophonic): #5588EE55
+Modulation Mapping Background (polyphonic): #8844DD55
+Modulation Mapping Background Color: #5588EE44
+Mapping indication 1: #CC2222
+Mapping indication 2: #FF8800
+Mapping indication 3: #FFD700
+Mapping indication 4: #8844DD
+Mapping indication 5: #5588EE
+Mapping indication 6: #2244AA
+Mapping indication 7: #6622AA
+Mapping indication 8: #AA44DD
+
+// Record & Transport - Red-Eyes attack
+Record button color: #CC2222
+Record button color implicit: #CC222299
+Record button glow color: #CC222255
+Record text color: #CC2222
+Monitoring buttons color: #FFD700
+
+// Onset & Beat Detection
+Onset Color Min: #FFD700
+Onset Color Max: #CC2222
+Onset Marker Color: #CC2222
+Beat Marker Color: #8844DD
+Analyzed Beat Color: #8844DD
+
+// File Status Indicators
+Missing file icon: #CC2222
+Missing file text: #CC2222
+Found file icon: #8844DD
+Found file text: #8844DD
+External file icon: #FFD700
+External file text: #FFD700
+
+// Invoke Action (Command Palette) - Purple Shadow Realm
+Invoke Action Background: #201828
+Invoke Action Category: #FFD700
+Invoke Action Text: #F0E8FF
+User input text: #F0E8FF
+
+// Panel Colors - Duel monster attribute colors
+Panel Red: #CC2222
+Panel Orange: #FF8800
+Panel Yellow: #FFD700
+Panel Lime: #AA66EE
+Panel Green: #8844DD
+Panel Mint: #AA88EE
+Panel Turquoise: #5588EE
+Panel Blue: #2244AA
+Panel Purple: #6622AA
+
+// Bitwig Branding - Yu-Gi-Oh
+Bitwig Red: #CC2222
+Bitwig Mint: #8844DD
+Bitwig CI: #FFD700
+Bitwig Producer: #FFD700
+Bitwig Essentials: #5588EE
+Bitwig 8-Track: #8844DD
+Bitwig 16-Track: #5588EE
+
+// Misc
+Comp fill: #8844DD77
+Drop Indicator: #5588EE
+Progress bar: #FFD700
+Progress background: #140E1A
+Hitcount background: #CC2222
+Hitcount text color: #FFFFFF
+// <end>

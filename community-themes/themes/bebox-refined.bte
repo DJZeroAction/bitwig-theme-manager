@@ -1,0 +1,377 @@
+// BeBox
+// Inspired by the BeOS desktop environment (1995-2001)
+// Clean, modern aesthetic with WARM GREY backgrounds and signature YELLOW tab accents
+// Primary accent: BeOS Yellow #FFD700, Secondary accent: Green #339900 for automation
+// Clean flat/subtle knobs matching BeOS minimalist design
+// Author: Claude
+
+// Core
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FFD700
+White: #1A1A1A
+Black: #F8F8F0
+Same as background: #00000000
+Accent: #00000000
+Default text: #1A1A1A
+Window background: #D8D8CC
+
+// Warm grey scale - signature BeOS warm neutral tones
+Grey 0: #C4C4B8
+Grey 1: #CCCCC0
+Grey 2: #D4D4C8
+Grey 3: #DCDCD0
+Grey 4: #E4E4D8
+Grey 5: #ECECE0
+Grey 6: #D0D0C4
+Shadow: #00000000
+Brighter: #FFFFFF
+
+// Text - Dark text on light warm grey background
+Dark Text: #F8F8F0
+Subtle Dark Text: #909080
+Subtle Light Text: #1A1A1ACC
+Subtler Light Text: #1A1A1A99
+Medium Light Text: #1A1A1ADD
+Light Text: #1A1A1A
+Lighter Text: #333333
+Link Text: #B8860B
+Link Text Rollover: #FFD700
+Error Text: #CC3300
+
+// Accent & Status - BeOS signature yellow, green for secondary
+Accent (default): #FFD700
+Accent (hitech): #FFD700
+Implicit On (subtle): #FFD70060
+On (subtle): #FFD70048
+On (subtler): #FFD70030
+Pressed On: #DAA520
+Mapping: #339900
+Selection: #FFD70070
+Standby selection: #33990038
+White Selection: #FFD700
+White Selection (standby): #90908080
+Warning: #B8860B
+Activation Green: #339900
+Activation Red: #CC3300
+Activation Yellow: #FFD700
+
+// Buttons - Clean BeOS style
+Button background: #DCDCD0
+Button stroke: #00000020
+OK Button background: #FFD700
+Pressed button background: #00000025
+Checkbox background: #ECECE0
+Button in tree background: #E4E4D8
+View button background: #00000018
+Pressed view button background: #00000028
+Inverted Selected Borderless Button background: #00000020
+Selected borderless button background: #FFD70050
+Pressed borderless button background: #FFD70070
+Rubber button stroke: #00000030
+Rubber highlight button stroke: #FFD700
+Close button mouse over background: #00000020
+Close button pressed background: #00000030
+Abstract Button Stroke: #00000020
+Abstract Button Selected Background: #FFD70050
+Abstract Button Unselected Background: #E4E4D8
+Abstract Button Pressed Background: #00000030
+Color bar button fill color: #00000025
+
+// Knobs & Sliders - Clean flat BeOS style (subtle emboss only)
+Knob Body: #D0D0C4
+Knob Body Lighter: #DCDCD0
+Knob Body Lightest: #E4E4D8
+Knob Body Darkest: #C4C4B8
+Knob Line: #1A1A1A
+Knob Line Dark: #1A1A1A
+Knob Stroke: #00000018
+Knob Emboss Highlight: #FFFFFF30
+Knob Emboss Shadow: #00000018
+Knob Value Background: #00000000
+Knob Value Background (dark): #00000000
+Knob Value Color: #FFD700
+Slider background: #00000000
+Emboss Highlight: #FFFFFF28
+Emboss Shadow: #00000018
+
+// Toggle Icons
+Normal Toggle Icon: #505050
+Mouse Over Toggle Icon: #1A1A1ACC
+Active Toggle Icon (Playing): #DAA520
+Pressed Toggle Icon: #808080
+Normal Inverted Toggle Icon: #FFFFFF90
+Mouse Over Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #FFD700
+Pressed Inverted Toggle Icon: #D8D8CC
+
+// Menus & Popups - Clean light BeOS menu
+Menu background: #ECECE0
+Menu stroke: #D4D4C8
+Menu text: #1A1A1A
+Menu Icon: #1A1A1ACC
+Menu description text: #505050
+Menu separator: #00000028
+Popup insert: #E4E4D8
+Popup overlay background color: #000000DD
+Popup Notification Background: #ECECE0
+Notification Background: #DCDCD0
+Notification Normal: #1A1A1A
+Notification Error: #CC3300
+Notification Button Background: #ECECE0
+Tooltip Background: #F8F8F0
+Light Tooltip Background: #1A1A1A
+Tooltip Stroke: #00000020
+
+// LEDs & Meters
+Led On: #CC3300
+Led Off: #909080
+Meter Normal: #339900
+Meter Yellow: #FFD700
+Meter Red: #CC3300
+Meter Clipping: #CC0000
+Meter Gain Reduction: #FFD700
+Meter Hitech: #DAA520
+Meter Hitech Background: #00000028
+Meter Muted: #909080
+Hitech background: #C4C4B8
+Hitech on: #FFD700
+
+// Scrollbars
+Scrollbar: #00000028
+Scrollbar background: #FFFFFF00
+Modern Scrollbar Handle (active): #DAA520
+Modern Scrollbar Handle (inactive): #00000028
+Modern Scrollbar Background (active): #DAA52028
+Modern Dark Scrollbar Handle (active): #00000028
+Modern Dark Scrollbar Handle (inactive): #00000018
+
+// Tree & List Views
+Tree Item Background: #E4E4D8
+Selected Tree Item Background: #FFD70050
+Selected Tree Item Background (standby): #DAA52028
+Tree Separator: #00000018
+List Item Background: #E4E4D8
+List Separator: #00000018
+Selected Dashboard Tree: #DAA520
+Dark tree background (selected): #FFD70050
+Dark tree selection frame: #DAA520
+Dark tree background (standby selected): #D4D4C8
+Dark tree separator: #00000018
+Dark tree text: #1A1A1A
+Dark tree text (selected): #1A1A1A
+Dark tree hover background change: #00000010
+Frame color of selection cursor in the tree.: #DAA520
+Frame color of selection cursor in the tree. (standby): #808080
+Launcher Mapping Indication: #909080
+
+// Panels & Separators
+Panel body: #D4D4C8
+Selected Panel body: #E0E0D4
+Panel stroke: #00000020
+Selected Panel stroke: #FFD700
+Selected Panel stroke (standby): #339900
+Active Panel stroke: #FFD700
+Panel Stroke (focused): #DAA52080
+Inspector Section Frame: #00000020
+Content Background: #CCCCC0
+Light Separator Line: #00000028
+Dark Separator Line: #00000020
+Dark Panel Sub-frame Stroke: #00000018
+Dark Panel Sub-frame Fill: #E4E4D8
+Field background: #C4C4B8
+Number field bar background: #DAA520
+Icon Frame: #00000000
+Color of unselected tabs: #CCCCC0
+Color of stroke between tabs: #00000020
+
+// Device Chain
+Device Header: #DCDCD0
+Device Header (selected): #FFD70040
+Device Locked Overlay: #DAA52080
+Device Tint Future: #DAA52064
+Device Tint Retro: #B8860B55
+Device Tint Military: #33990050
+Plugin missing: #CC3300
+
+// Display & Waveforms
+Display Background: #C4C4B8
+Display Background (error): #F0D8D8
+Display Waveform: #8B7500
+Display Stroke: #00000000
+Display Start/End Markers: #B8860B
+Display Loop Markers: #339900
+Grey Display Background: #CCCCC0
+Audio Event Background: #E8E8DC
+Audio Event Boundary: #00000020
+Audio Event Waveform: #8B7500
+
+// Grid & Modular Environment
+The Grid (background): #CCCCC0
+The Grid (stroke): #00000018
+Grid Line (Primary): #00000070
+Grid Line (Secondary): #00000038
+Background color of the modular environment.: #D4D4C8
+Compressed Audio Port in modular environment: #B8860B
+Audio connection in modular environment: #CC3300
+Audio64 connection in modular environment: #883399
+Event connection in modular environment: #339900
+Polyphonic Desktop Object: #883399
+Current Atom Value Color: #FFD700
+
+// Timeline & Arranger - Warm grey backgrounds
+Dark Timeline Background: #C4C4B8
+Dark Timeline Header Background: #CCCCC0
+Light Timeline Background: #D4D4C8
+Light Timeline Header Background: #DCDCD0
+Top Level Timeline Background: #CCCCC0
+Top Level Timeline Header Background: #D4D4C8
+Irrelevant Timeline Background: #B8B8AC
+Irrelevant Timeline Header Background: #C0C0B4
+Irrelevant Timeline Overlay: #00000018
+Irrelevant Timeline Header Overlay: #00000018
+Timeline Background Pattern: #D4D4C8
+Timeline Header Background Pattern: #DCDCD0
+Timeline Primary Grid: #00000050
+Timeline Secondary Grid: #00000028
+Timeline Header Primary Grid: #00000050
+Timeline Header Secondary Grid: #00000028
+Timeline Playhead: #1A1A1A
+Timeline edit tool chooser background: #ECECE0
+
+// Timeline Selection & Cursors - Yellow active, grey standby
+Time Selection Fill: #FFD70038
+Time Selection Stroke: #DAA520
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #DAA520
+Time Selection Standby Fill: #00000015
+Time Selection Standby Stroke: #909080
+Time Selection Standby Cursor Stroke: #909080
+Time Selection Inactive Fill: #90908008
+Time Selection Inactive Stroke: #909080
+Time Selection Not Selected Fill: #00000028
+Time Selection Not Selected Stroke: #909080
+Time Selection Across All Lanes Fill: #DAA52060
+Time Selection Across All Lanes Stroke: #606060
+Header Time Selection Fill: #FFD70060
+Header Time Selection Stroke: #DAA520
+Header Time Selection Standby Fill: #00000015
+Header Time Selection Standby Stroke: #909080
+Header Time Selection Across All Lanes Fill: #DAA52080
+Header Time Selection Across All Lanes Stroke: #606060
+Header Time Selection Cursor Stroke: #DAA520
+Header Time Selection Standby Cursor Stroke: #909080
+Header Loop Region Background: #FFD70028
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #B8860B
+Timeline Header Cue Marker: #B8860B
+Timeline Tooltip Background: #1A1A1ACC
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #1A1A1ACC
+Timeline Header Tooltip Text: #FFFFFF
+
+// Loop Regions
+Loop Region Background: #FFD70025
+Loop Region Fill: #FFD70038
+Loop Region Stroke: #DAA520
+Loop Region Selected Fill: #FFD70058
+Loop Region Selected Stroke: #000000CC
+Insert preview time: #FFFFFF80
+
+// Automation & Modulation - GREEN for automation (complementary to yellow)
+Automation Chooser Background: #00000000
+Automation Color: #33990060
+Automation button glow color: #33990060
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #339900
+Track Automation Color: #339900
+Clip Automation Color: #339900
+Clip Modulation Color: #339933
+Add Modulation Button Color: #FFD700
+Multiply Modulation Button Color: #883399
+User Automation Override Color: #339900
+Note Expression Color: #B8860B
+Send (post) value color: #339900
+Send (pre) value color: #DAA520
+Dark offset for automation/channel bar: #00000025
+Light offset for automation/channel bar: #FFFFFF50
+Unselected Filled Automation Type Icon: #339900
+Unselected Empty Automation Type Icon: #33990066
+Selected matrix slot color: #FFD700
+
+// Modulation Mapping
+Modulation Mapping Color: #339900
+Modulation Mapping Color (subtractive): #CC3300
+Modulation Mapping Color (polyphonic): #339933
+Modulation Mapping Background (monophonic): #883399
+Modulation Mapping Background (polyphonic): #883399
+Modulation Mapping Background Color: #33990050
+
+// Mapping indication - BeOS-inspired palette
+Mapping indication 1: #CC3300
+Mapping indication 2: #B8860B
+Mapping indication 3: #DAA520
+Mapping indication 4: #339900
+Mapping indication 5: #339933
+Mapping indication 6: #3399AA
+Mapping indication 7: #336699
+Mapping indication 8: #883399
+
+// Panel Colors - Clean BeOS palette
+Panel Red: #DD3333
+Panel Orange: #DD7733
+Panel Yellow: #FFD700
+Panel Lime: #88BB33
+Panel Green: #339933
+Panel Mint: #33AA88
+Panel Turquoise: #3399AA
+Panel Blue: #336699
+Panel Purple: #883399
+
+// Record & Transport
+Record button color: #CC3300
+Record button color implicit: #CC330088
+Record button glow color: #CC330050
+Record text color: #CC3300
+Monitoring buttons color: #B8860B
+
+// Onset & Beat Detection
+Onset Color Min: #B8860B
+Onset Color Max: #DAA520
+Onset Marker Color: #DAA520
+Beat Marker Color: #339900
+Analyzed Beat Color: #339900
+
+// File Status Indicators
+Missing file icon: #CC3300
+Missing file text: #CC3300
+Found file icon: #339900
+Found file text: #2D8500
+External file icon: #B8860B
+External file text: #8B6914
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #ECECE0
+Invoke Action Category: #808080
+Invoke Action Text: #1A1A1A
+User input text: #1A1A1A
+
+// Bitwig Branding
+Bitwig Red: #CC3300
+Bitwig Mint: #339933
+Bitwig CI: #DAA520
+Bitwig Producer: #B8860B
+Bitwig Essentials: #336699
+Bitwig 8-Track: #339933
+Bitwig 16-Track: #336699
+
+// Misc
+Comp fill: #33990080
+Drop Indicator: #FFD700
+Progress bar: #FFD700
+Progress background: #00000028
+Hitcount background: #ECECE090
+Hitcount text color: #505050
+// <end>

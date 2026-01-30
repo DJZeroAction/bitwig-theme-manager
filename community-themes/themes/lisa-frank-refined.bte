@@ -1,0 +1,373 @@
+// Lisa Frank - Dolphin Fever Dream
+// 90s maximalism - Hot pink base with RAINBOW accents
+// Cohesive pink/warm tinted workspace, rainbow in accent elements
+// Different rainbow colors for different states (deliberate chaos)
+// Author: Claude
+
+// Core - HOT PINK tinted greys (warm/pink base)
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FF1493
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #FF1493
+Default text: #FFFFFF
+Window background: #7A2060
+Grey 0: #5A1848
+Grey 1: #682050
+Grey 2: #762858
+Grey 3: #843060
+Grey 4: #923868
+Grey 5: #A04070
+Grey 6: #AE4878
+Shadow: #00000060
+Brighter: #FFFFFF
+
+// Text - WHITE for readability on hot pink
+Dark Text: #000000
+Subtle Dark Text: #4A2040
+Subtle Light Text: #FFC0E0
+Subtler Light Text: #E0A0C0
+Medium Light Text: #FFE0F0
+Light Text: #FFFFFF
+Lighter Text: #FFFFFF
+Link Text: #00FFFF
+Link Text Rollover: #FFFF00
+Error Text: #FF0000
+
+// Accent & Status - HOT PINK primary, CYAN standby
+Accent (default): #FF1493
+Accent (hitech): #00FFFF
+Implicit On (subtle): #FF149366
+On (subtle): #FF149344
+On (subtler): #FF149322
+Pressed On: #CC1177
+Mapping: #FFFF00
+Selection: #FF149366
+Standby selection: #FF149333
+White Selection: #FF1493
+White Selection (standby): #00FFFF
+Warning: #FF6600
+Activation Green: #00FF00
+Activation Yellow: #FFFF00
+Activation Red: #FF0000
+
+// Buttons - Pink tinted with neon accents
+Button background: #84306080
+Button stroke: #00FFFF88
+OK Button background: #FF1493
+Pressed button background: #FFFF0040
+Checkbox background: #682050
+Button in tree background: #762858
+View button background: #FF149330
+Pressed view button background: #00FFFF50
+Inverted Selected Borderless Button background: #FFFF0060
+Selected borderless button background: #FF149360
+Pressed borderless button background: #FF149380
+Rubber button stroke: #00FFFF88
+Rubber highlight button stroke: #FFFF00
+Close button mouse over background: #FFFF0060
+Close button pressed background: #FF149380
+Abstract Button Stroke: #00FFFF80
+Abstract Button Selected Background: #FF149360
+Abstract Button Unselected Background: #762858
+Abstract Button Pressed Background: #FFFF0060
+Color bar button fill color: #00FFFF40
+
+// Knobs & Sliders - Pink body, CYAN value arc
+Knob Body: #762858
+Knob Body Lighter: #843060
+Knob Body Lightest: #923868
+Knob Body Darkest: #5A1848
+Knob Line: #FFFFFF
+Knob Line Dark: #FFC0E0
+Knob Stroke: #00FFFF80
+Knob Emboss Highlight: #FFFFFF40
+Knob Emboss Shadow: #00000040
+Knob Value Background: #5A184880
+Knob Value Background (dark): #5A1848
+Knob Value Color: #00FFFF
+Slider background: #5A184880
+Emboss Highlight: #FFFFFF30
+Emboss Shadow: #00000030
+
+// Toggle Icons - Rainbow states! Each state different
+Normal Toggle Icon: #FFFF00
+Mouse Over Toggle Icon: #FFFFFF
+Active Toggle Icon (Playing): #00FF00
+Pressed Toggle Icon: #00FFFF
+Normal Inverted Toggle Icon: #FFFF0080
+Mouse Over Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #00FF00
+Pressed Inverted Toggle Icon: #00FFFF
+Toggle Icon: #FFFF00
+
+// Menus & Popups - Hot pink base
+Menu background: #762858
+Menu stroke: #00FFFFAA
+Menu text: #FFFFFF
+Menu Icon: #FFFFFFcc
+Menu description text: #FFC0E0
+Menu separator: #00FFFF66
+Popup insert: #843060
+Popup overlay background color: #5A1848DD
+Popup Notification Background: #843060
+Notification Background: #843060
+Notification Normal: #FFFFFF
+Notification Error: #FF0000
+Notification Button Background: #923868
+Tooltip Background: #5A1848
+Light Tooltip Background: #FFFF00
+Tooltip Stroke: #00FFFF
+
+// LEDs & Meters - NEON rainbow
+Led On: #00FF00
+Led Off: #682050
+Meter Normal: #00FF00
+Meter Yellow: #FFFF00
+Meter Red: #FF0080
+Meter Clipping: #FF0000
+Meter Gain Reduction: #00FFFF
+Meter Hitech: #FF1493
+Meter Hitech Background: #5A184880
+Meter Muted: #A06080
+Hitech background: #5A1848
+Hitech on: #00FFFF
+
+// Scrollbars - Cyan handles on pink
+Scrollbar: #00FFFF
+Scrollbar background: #5A1848
+Modern Scrollbar Handle (active): #00FFFF
+Modern Scrollbar Handle (inactive): #FF149380
+Modern Scrollbar Background (active): #5A184860
+Modern Dark Scrollbar Handle (active): #00FFFF
+Modern Dark Scrollbar Handle (inactive): #FF149380
+
+// Tree & List Views - Pink tinted
+Tree Item Background: #762858
+Selected Tree Item Background: #FF149360
+Selected Tree Item Background (standby): #FF149330
+Tree Separator: #00FFFF44
+List Item Background: #762858
+List Separator: #00FFFF44
+Selected Dashboard Tree: #FF1493
+Dark tree background (selected): #FF149360
+Dark tree selection frame: #00FFFF
+Dark tree background (standby selected): #FF149330
+Dark tree separator: #00FFFF44
+Dark tree text: #FFFFFF
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #FFFFFF20
+Frame color of selection cursor in the tree.: #00FFFF
+Frame color of selection cursor in the tree. (standby): #FF1493
+Launcher Mapping Indication: #FFFF00
+
+// Panels & Separators - Pink base
+Panel body: #762858
+Selected Panel body: #923868
+Panel stroke: #00FFFF66
+Selected Panel stroke: #FFFFFF
+Selected Panel stroke (standby): #00FFFF
+Active Panel stroke: #FFFF00
+Panel Stroke (focused): #00FFFF
+Inspector Section Frame: #00FFFF66
+Content Background: #682050
+Light Separator Line: #00FFFF44
+Dark Separator Line: #00000040
+Dark Panel Sub-frame Stroke: #00FFFF33
+Dark Panel Sub-frame Fill: #682050
+Field background: #5A1848
+Number field bar background: #00FFFF
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #00FFFF33
+
+// Device Chain - Pink tinted
+Device Header: #843060
+Device Header (selected): #923868
+Device Locked Overlay: #00FFFF80
+Device Tint Future: #00FFFF80
+Device Tint Retro: #FF880060
+Device Tint Military: #88FF0060
+Plugin missing: #FF0000
+
+// Display & Waveforms - CYAN waveforms on pink
+Display Background: #5A1848
+Display Background (error): #AA0044
+Display Waveform: #00FFFF
+Display Stroke: #00FFFF80
+Display Start/End Markers: #FFFF00
+Display Loop Markers: #00FF00
+Grey Display Background: #682050
+Audio Event Background: #762858
+Audio Event Boundary: #00FFFF80
+Audio Event Waveform: #00FFFF
+
+// Grid & Modular Environment - Pink tinted
+The Grid (background): #682050
+The Grid (stroke): #00FFFF44
+Grid Line (Primary): #00FFFF66
+Grid Line (Secondary): #00FFFF33
+Background color of the modular environment.: #762858
+Compressed Audio Port in modular environment: #00FFFF
+Audio connection in modular environment: #FF1493
+Audio64 connection in modular environment: #FFFF00
+Event connection in modular environment: #00FF00
+Polyphonic Desktop Object: #FF00FF
+Current Atom Value Color: #FFFF00
+
+// Timeline & Arranger - Pink tinted workspace
+Dark Timeline Background: #5A1848
+Dark Timeline Header Background: #682050
+Light Timeline Background: #682050
+Light Timeline Header Background: #762858
+Top Level Timeline Background: #602050
+Top Level Timeline Header Background: #702858
+Irrelevant Timeline Background: #501040
+Irrelevant Timeline Header Background: #5A1848
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #762858
+Timeline Header Background Pattern: #843060
+Timeline Primary Grid: #00FFFF44
+Timeline Secondary Grid: #00FFFF22
+Timeline Header Primary Grid: #00FFFF44
+Timeline Header Secondary Grid: #00FFFF22
+Timeline Playhead: #FFFFFF
+Timeline edit tool chooser background: #762858
+
+// Timeline Selection & Cursors - HOT PINK selection
+Time Selection Fill: #FF149350
+Time Selection Stroke: #FF1493
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FF1493
+Time Selection Standby Fill: #00FFFF30
+Time Selection Standby Stroke: #00FFFF
+Time Selection Standby Cursor Stroke: #00FFFF
+Time Selection Inactive Fill: #FFFFFF20
+Time Selection Inactive Stroke: #FFFFFF
+Time Selection Not Selected Fill: #FFFFFF10
+Time Selection Not Selected Stroke: #FFFFFF
+Time Selection Across All Lanes Fill: #FF149370
+Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Fill: #FF149370
+Header Time Selection Stroke: #FF1493
+Header Time Selection Standby Fill: #00FFFF30
+Header Time Selection Standby Stroke: #00FFFF
+Header Time Selection Across All Lanes Fill: #FF149390
+Header Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Cursor Stroke: #FF1493
+Header Time Selection Standby Cursor Stroke: #00FFFF
+Header Loop Region Background: #00FF0030
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FFFF00
+Timeline Header Cue Marker: #FFFF00
+Timeline Tooltip Background: #5A1848EE
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #5A1848EE
+Timeline Header Tooltip Text: #FFFFFF
+
+// Loop Regions - NEON GREEN loops
+Loop Region Background: #00FF0030
+Loop Region Fill: #00FF0040
+Loop Region Stroke: #00FF00
+Loop Region Selected Fill: #00FF0060
+Loop Region Selected Stroke: #FFFF00
+Insert preview time: #FFFFFF80
+
+// Automation & Modulation - PURPLE for automation (rainbow variety)
+Automation Chooser Background: #00000000
+Automation Color: #9933FF60
+Automation button glow color: #9933FF60
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #9933FF
+Track Automation Color: #9933FF
+Clip Automation Color: #00FFFF
+Clip Modulation Color: #FFFF00
+Add Modulation Button Color: #FF1493
+Multiply Modulation Button Color: #00FF00
+User Automation Override Color: #FF6600
+Note Expression Color: #FF6600
+Send (post) value color: #00FF00
+Send (pre) value color: #00FFFF
+Dark offset for automation/channel bar: #00000030
+Light offset for automation/channel bar: #FFFFFF30
+Unselected Filled Automation Type Icon: #FFC0E0
+Unselected Empty Automation Type Icon: #9933FF80
+Selected matrix slot color: #FF1493
+
+// Modulation Mapping - RAINBOW! Each slot DIFFERENT!
+Modulation Mapping Color: #FF1493
+Modulation Mapping Color (subtractive): #FFFF00
+Modulation Mapping Color (polyphonic): #00FF00
+Modulation Mapping Background (monophonic): #FF149360
+Modulation Mapping Background (polyphonic): #00FF0060
+Modulation Mapping Background Color: #FF149350
+Mapping indication 1: #FF0080
+Mapping indication 2: #FF6600
+Mapping indication 3: #FFFF00
+Mapping indication 4: #00FF00
+Mapping indication 5: #00FFFF
+Mapping indication 6: #0080FF
+Mapping indication 7: #9933FF
+Mapping indication 8: #FF00FF
+
+// Record & Transport - HOT PINK record
+Record button color: #FF0080
+Record button color implicit: #FF008088
+Record button glow color: #FF008060
+Record text color: #FF0080
+Monitoring buttons color: #FFFF00
+
+// Onset & Beat Detection
+Onset Color Min: #FFFF00
+Onset Color Max: #FF0080
+Onset Marker Color: #FF0080
+Beat Marker Color: #00FF00
+Analyzed Beat Color: #00FFFF
+
+// File Status Indicators
+Missing file icon: #FF0080
+Missing file text: #FF0080
+Found file icon: #00FF00
+Found file text: #00FF00
+External file icon: #FFFF00
+External file text: #FFFF00
+
+// Invoke Action (Command Palette) - Pink base
+Invoke Action Background: #762858
+Invoke Action Category: #FFC0E0
+Invoke Action Text: #FFFFFF
+User input text: #FFFFFF
+
+// Panel Colors - FULL NEON RAINBOW!
+Panel Red: #FF0080
+Panel Orange: #FF6600
+Panel Yellow: #FFFF00
+Panel Lime: #80FF00
+Panel Green: #00FF00
+Panel Mint: #00FF80
+Panel Turquoise: #00FFFF
+Panel Blue: #0080FF
+Panel Purple: #FF00FF
+
+// Bitwig Branding
+Bitwig Red: #FF0080
+Bitwig Mint: #00FF80
+Bitwig CI: #FF1493
+Bitwig Producer: #FFFF00
+Bitwig Essentials: #00FFFF
+Bitwig 8-Track: #00FF00
+Bitwig 16-Track: #FF00FF
+
+// Misc
+Comp fill: #FF149360
+Drop Indicator: #FFFF00
+Progress bar: #00FFFF
+Progress background: #5A184880
+Hitcount background: #923868
+Hitcount text color: #FFFFFF
+// <end>

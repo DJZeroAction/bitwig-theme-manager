@@ -1,0 +1,370 @@
+// Shrek Swamp - Get Outta Ma Swamp!
+// A murky, muddy theme that makes you feel like you're IN the swamp
+// Ogre green for active states, mud brown for automation - layered like an onion
+// Author: Claude
+
+// Core - Green-brown tinted greys throughout
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #5B8A32
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #5B8A32
+Default text: #E8DCC0
+Window background: #1E2818
+Grey 0: #1A2416
+Grey 1: #222E1C
+Grey 2: #2A3822
+Grey 3: #344428
+Grey 4: #3E5030
+Grey 5: #485C38
+Grey 6: #526840
+Shadow: #0A150880
+Brighter: #E8DCC0
+
+// Text - Cream/tan like swamp reeds and Shrek's skin
+Dark Text: #E8DCC0
+Subtle Dark Text: #C4B090
+Subtle Light Text: #D4C4A0
+Subtler Light Text: #A89870
+Medium Light Text: #D8C8A8
+Light Text: #E8DCC0
+Lighter Text: #D8C8A8
+Link Text: #7DB035
+Link Text Rollover: #95CC45
+Error Text: #CC5533
+
+// Accent & Status - OGRE GREEN for active, MUD BROWN for secondary
+Accent (default): #5B8A32
+Accent (hitech): #7DB035
+Implicit On (subtle): #5B8A3266
+On (subtle): #5B8A3244
+On (subtler): #5B8A3222
+Pressed On: #4A7023
+Mapping: #7DB035
+Selection: #5B8A3266
+Standby selection: #5B8A3233
+White Selection: #5B8A32
+White Selection (standby): #C4B090
+Warning: #D49025
+Activation Green: #7DB035
+Activation Yellow: #D49025
+Activation Red: #CC5533
+
+// Buttons - Swampy with ogre green strokes
+Button background: #2A382280
+Button stroke: #5B8A3266
+OK Button background: #5B8A32
+Pressed button background: #E8DCC01A
+Checkbox background: #222E1C
+Button in tree background: #2A3822
+View button background: #E8DCC00D
+Pressed view button background: #E8DCC01A
+Inverted Selected Borderless Button background: #E8DCC01A
+Selected borderless button background: #5B8A3240
+Pressed borderless button background: #5B8A3266
+Rubber button stroke: #5B8A3266
+Rubber highlight button stroke: #7DB035
+Close button mouse over background: #E8DCC01A
+Close button pressed background: #CC553366
+Abstract Button Stroke: #5B8A3244
+Abstract Button Selected Background: #5B8A3240
+Abstract Button Unselected Background: #2A3822
+Abstract Button Pressed Background: #E8DCC01A
+Color bar button fill color: #E8DCC020
+
+// Knobs & Sliders - Mud brown bodies with green value arcs
+Knob Body: #4A3828
+Knob Body Lighter: #5A4835
+Knob Body Lightest: #6A5842
+Knob Body Darkest: #3A2818
+Knob Line: #E8DCC0
+Knob Line Dark: #C4B090
+Knob Stroke: #5B8A3244
+Knob Emboss Highlight: #E8DCC020
+Knob Emboss Shadow: #00000040
+Knob Value Background: #1A241680
+Knob Value Background (dark): #1A2416
+Knob Value Color: #5B8A32
+Slider background: #1A241680
+Emboss Highlight: #E8DCC010
+Emboss Shadow: #00000020
+
+// Toggle Icons
+Normal Toggle Icon: #C4B090
+Mouse Over Toggle Icon: #E8DCC0
+Active Toggle Icon (Playing): #7DB035
+Pressed Toggle Icon: #A89870
+Normal Inverted Toggle Icon: #E8DCC080
+Mouse Over Inverted Toggle Icon: #E8DCC0
+Active Inverted Toggle Icon (Playing): #7DB035
+Pressed Inverted Toggle Icon: #D8C8A8
+Toggle Icon: #C4B090
+
+// Menus & Popups - Deep swamp murk
+Menu background: #1E2818
+Menu stroke: #5B8A3266
+Menu text: #E8DCC0
+Menu Icon: #E8DCC0cc
+Menu description text: #D8C8A8
+Menu separator: #5B8A3244
+Popup insert: #2A3822
+Popup overlay background color: #0A1508CC
+Popup Notification Background: #2A3822
+Notification Background: #2A3822
+Notification Normal: #E8DCC0
+Notification Error: #CC5533
+Notification Button Background: #344428
+Tooltip Background: #1A2416
+Light Tooltip Background: #E8DCC0
+Tooltip Stroke: #5B8A3266
+
+// LEDs & Meters - Ogre green glow, standard meter semantics
+Led On: #7DB035
+Led Off: #2A3822
+Meter Normal: #7DB035
+Meter Yellow: #D49025
+Meter Red: #CC5533
+Meter Clipping: #BB3322
+Meter Gain Reduction: #8B7355
+Meter Hitech: #7DB035
+Meter Hitech Background: #1A241680
+Meter Muted: #A89870
+Hitech background: #1A2416
+Hitech on: #7DB035
+
+// Scrollbars - Green accented
+Scrollbar: #5B8A32
+Scrollbar background: #1A2416
+Modern Scrollbar Handle (active): #7DB035
+Modern Scrollbar Handle (inactive): #5B8A3266
+Modern Scrollbar Background (active): #1A241666
+Modern Dark Scrollbar Handle (active): #5B8A3266
+Modern Dark Scrollbar Handle (inactive): #5B8A3233
+
+// Tree & List Views - Layered like onions
+Tree Item Background: #2A3822
+Selected Tree Item Background: #5B8A3240
+Selected Tree Item Background (standby): #5B8A3220
+Tree Separator: #5B8A3222
+List Item Background: #2A3822
+List Separator: #5B8A3222
+Selected Dashboard Tree: #7DB035
+Dark tree background (selected): #5B8A3240
+Dark tree selection frame: #7DB035
+Dark tree background (standby selected): #5B8A3220
+Dark tree separator: #5B8A3222
+Dark tree text: #E8DCC0
+Dark tree text (selected): #E8DCC0
+Dark tree hover background change: #E8DCC008
+Frame color of selection cursor in the tree.: #7DB035
+Frame color of selection cursor in the tree. (standby): #C4B090
+Launcher Mapping Indication: #95CC45
+
+// Panels & Separators - Swampy green tints
+Panel body: #344428
+Selected Panel body: #3E5030
+Panel stroke: #5B8A3244
+Selected Panel stroke: #7DB035
+Selected Panel stroke (standby): #5B8A32
+Active Panel stroke: #7DB035
+Panel Stroke (focused): #7DB035
+Inspector Section Frame: #5B8A3244
+Content Background: #2A3822
+Light Separator Line: #5B8A3222
+Dark Separator Line: #0A150880
+Dark Panel Sub-frame Stroke: #5B8A3222
+Dark Panel Sub-frame Fill: #222E1C
+Field background: #1A2416
+Number field bar background: #7DB035
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #5B8A3222
+
+// Device Chain - Mud brown headers (onion layers)
+Device Header: #4A3828
+Device Header (selected): #5A4835
+Device Locked Overlay: #5B8A3280
+Device Tint Future: #7DB03564
+Device Tint Retro: #8B735552
+Device Tint Military: #5B8A3247
+Plugin missing: #CC5533
+
+// Display & Waveforms - Murky swamp water
+Display Background: #1A2416
+Display Background (error): #402020
+Display Waveform: #7DB035
+Display Stroke: #5B8A3244
+Display Start/End Markers: #D49025
+Display Loop Markers: #8B7355
+Grey Display Background: #222E1C
+Audio Event Background: #2A3822
+Audio Event Boundary: #5B8A3244
+Audio Event Waveform: #7DB035
+
+// Grid & Modular Environment - Deep swamp
+The Grid (background): #1E2818
+The Grid (stroke): #5B8A3222
+Grid Line (Primary): #5B8A3244
+Grid Line (Secondary): #5B8A3222
+Background color of the modular environment.: #2A3822
+Compressed Audio Port in modular environment: #95CC45
+Audio connection in modular environment: #7DB035
+Audio64 connection in modular environment: #D49025
+Event connection in modular environment: #8B7355
+Polyphonic Desktop Object: #7DB035
+Current Atom Value Color: #7DB035
+
+// Timeline & Arranger - Murky swamp water backgrounds (green-brown tints)
+Dark Timeline Background: #1A2416
+Dark Timeline Header Background: #222E1C
+Light Timeline Background: #2A3822
+Light Timeline Header Background: #344428
+Top Level Timeline Background: #1E2818
+Top Level Timeline Header Background: #2A3822
+Irrelevant Timeline Background: #121C10
+Irrelevant Timeline Header Background: #1A2416
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #2A3822
+Timeline Header Background Pattern: #344428
+Timeline Primary Grid: #5B8A3233
+Timeline Secondary Grid: #5B8A321A
+Timeline Header Primary Grid: #5B8A3233
+Timeline Header Secondary Grid: #5B8A321A
+Timeline Playhead: #E8DCC0
+Timeline edit tool chooser background: #2A3822
+
+// Timeline Selection & Cursors - Ogre green selection
+Time Selection Fill: #5B8A3230
+Time Selection Stroke: #7DB035
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #7DB035
+Time Selection Standby Fill: #E8DCC010
+Time Selection Standby Stroke: #C4B090
+Time Selection Standby Cursor Stroke: #C4B090
+Time Selection Inactive Fill: #C4B09008
+Time Selection Inactive Stroke: #C4B090
+Time Selection Not Selected Fill: #E8DCC00D
+Time Selection Not Selected Stroke: #C4B090
+Time Selection Across All Lanes Fill: #5B8A3250
+Time Selection Across All Lanes Stroke: #D8C8A8
+Header Time Selection Fill: #5B8A3250
+Header Time Selection Stroke: #7DB035
+Header Time Selection Standby Fill: #E8DCC010
+Header Time Selection Standby Stroke: #C4B090
+Header Time Selection Across All Lanes Fill: #5B8A3266
+Header Time Selection Across All Lanes Stroke: #D8C8A8
+Header Time Selection Cursor Stroke: #7DB035
+Header Time Selection Standby Cursor Stroke: #C4B090
+Header Loop Region Background: #5B8A3220
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #D49025
+Timeline Header Cue Marker: #D49025
+Timeline Tooltip Background: #1A2416EE
+Timeline Tooltip Text: #E8DCC0
+Timeline Header Tooltip Background: #1A2416EE
+Timeline Header Tooltip Text: #E8DCC0
+
+// Loop Regions - Mud brown (secondary accent)
+Loop Region Background: #8B735520
+Loop Region Fill: #8B735530
+Loop Region Stroke: #8B7355
+Loop Region Selected Fill: #8B735550
+Loop Region Selected Stroke: #A08565
+Insert preview time: #E8DCC080
+
+// Automation & Modulation - MUD BROWN for automation (separated from green active)
+Automation Chooser Background: #00000000
+Automation Color: #8B735580
+Automation button glow color: #8B735540
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #8B7355
+Track Automation Color: #8B7355
+Clip Automation Color: #A08565
+Clip Modulation Color: #95CC45
+Add Modulation Button Color: #7DB035
+Multiply Modulation Button Color: #D49025
+User Automation Override Color: #95CC45
+Note Expression Color: #D49025
+Send (post) value color: #95CC45
+Send (pre) value color: #7DB035
+Dark offset for automation/channel bar: #00000020
+Light offset for automation/channel bar: #E8DCC020
+Unselected Filled Automation Type Icon: #C4B090
+Unselected Empty Automation Type Icon: #5B8A3266
+Selected matrix slot color: #7DB035
+
+// Modulation Mapping - Swamp palette
+Modulation Mapping Color: #7DB035
+Modulation Mapping Color (subtractive): #CC5533
+Modulation Mapping Color (polyphonic): #95CC45
+Modulation Mapping Background (monophonic): #5B8A3240
+Modulation Mapping Background (polyphonic): #95CC4540
+Modulation Mapping Background Color: #5B8A3230
+Mapping indication 1: #CC5533
+Mapping indication 2: #7DB035
+Mapping indication 3: #D49025
+Mapping indication 4: #95CC45
+Mapping indication 5: #8B7355
+Mapping indication 6: #5B8A32
+Mapping indication 7: #C4B090
+Mapping indication 8: #A08565
+
+// Record & Transport
+Record button color: #CC5533
+Record button color implicit: #CC553388
+Record button glow color: #CC553340
+Record text color: #CC5533
+Monitoring buttons color: #D49025
+
+// Onset & Beat Detection
+Onset Color Min: #D49025
+Onset Color Max: #7DB035
+Onset Marker Color: #7DB035
+Beat Marker Color: #95CC45
+Analyzed Beat Color: #95CC45
+
+// File Status Indicators
+Missing file icon: #CC5533
+Missing file text: #CC5533
+Found file icon: #7DB035
+Found file text: #7DB035
+External file icon: #D49025
+External file text: #D49025
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #1E2818
+Invoke Action Category: #C4B090
+Invoke Action Text: #E8DCC0
+User input text: #E8DCC0
+
+// Panel Colors - Swamp-tinted
+Panel Red: #CC5533
+Panel Orange: #B86A35
+Panel Yellow: #D49025
+Panel Lime: #95CC45
+Panel Green: #7DB035
+Panel Mint: #68B065
+Panel Turquoise: #5A9878
+Panel Blue: #5A8868
+Panel Purple: #887088
+
+// Bitwig Branding - Ogre green dominant
+Bitwig Red: #CC5533
+Bitwig Mint: #95CC45
+Bitwig CI: #7DB035
+Bitwig Producer: #D49025
+Bitwig Essentials: #5A8868
+Bitwig 8-Track: #7DB035
+Bitwig 16-Track: #5A8868
+
+// Misc
+Comp fill: #5B8A3250
+Drop Indicator: #7DB035
+Progress bar: #7DB035
+Progress background: #1A2416
+// <end>

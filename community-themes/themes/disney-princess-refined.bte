@@ -1,0 +1,383 @@
+// Disney Princess
+// A LIGHT theme with fairytale elegance - soft cream/ivory base
+// Primary: Cream/ivory (#FFFDD0), Accents: Gold (#FFD700), Soft Blue (#87CEEB), Blush Pink (#FFB6C1)
+// Token inversion: White=#dark, Black=#light for proper light theme behavior
+// Author: Claude
+
+// Core - Light theme setup
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #DAA520
+
+// Token Inversion for Light Theme
+White: #4A3A28
+Black: #FFFEF5
+Light Text: #3A2A1A
+Dark Text: #FFFEF5
+Default text: #3A2A1A
+
+// Window - Warm cream/ivory base
+Window background: #FFF8E8
+
+// Grey Scale - Warm cream-tinted light greys
+Grey 0: #F5ECD8
+Grey 1: #F0E6D0
+Grey 2: #FFF8E8
+Grey 3: #FFF5E0
+Grey 4: #FFF0D8
+Grey 5: #FFFBF0
+Grey 6: #EBE0C8
+Shadow: #8B734020
+Brighter: #FFFFFF
+
+// Text Hierarchy - Dark text on cream backgrounds
+Subtle Dark Text: #B8860B
+Subtle Light Text: #5A4A38
+Subtler Light Text: #6A5A48
+Medium Light Text: #3A2A1A
+Lighter Text: #5A4A38
+Link Text: #B8860B
+Link Text Rollover: #DAA520
+Error Text: #CD5C5C
+
+// Primary Accent - Gold (Royal elegance)
+Accent: #00000000
+Accent (default): #DAA520
+Accent (hitech): #B8860B
+
+// Secondary Accents - Soft Blue and Blush Pink
+Mapping: #87CEEB
+Selection: #DAA52050
+Standby selection: #DAA52030
+White Selection: #DAA520
+White Selection (standby): #87CEEB
+Warning: #CD853F
+Activation Green: #98FB98
+Activation Yellow: #FFD700
+Activation Red: #FFB6C1
+
+// Implicit states
+Implicit On (subtle): #DAA52080
+On (subtle): #DAA52060
+On (subtler): #DAA52040
+Pressed On: #B8860B
+
+// Buttons - Cream with gold accents
+Button background: #F5ECD8
+Button stroke: #DAA52060
+OK Button background: #DAA520
+Pressed button background: #DAA52040
+Checkbox background: #FFF5E0
+Button in tree background: #F5ECD8
+View button background: #DAA52020
+Pressed view button background: #DAA52040
+Inverted Selected Borderless Button background: #3A2A1A20
+Selected borderless button background: #DAA52030
+Pressed borderless button background: #DAA52050
+Rubber button stroke: #B8860B
+Rubber highlight button stroke: #DAA520
+Close button mouse over background: #DAA52030
+Close button pressed background: #DAA52050
+Abstract Button Stroke: #DAA52050
+Abstract Button Selected Background: #DAA52040
+Abstract Button Unselected Background: #F5ECD8
+Abstract Button Pressed Background: #3A2A1A15
+Color bar button fill color: #3A2A1A20
+
+// Knobs & Sliders - Flat cream style
+Knob Body: #F0E6D0
+Knob Body Lighter: #F5ECD8
+Knob Body Lightest: #FFF8E8
+Knob Body Darkest: #EBE0C8
+Knob Line: #3A2A1A
+Knob Line Dark: #5A4A38
+Knob Stroke: #DAA52040
+Knob Emboss Highlight: #FFFFFF60
+Knob Emboss Shadow: #8B734030
+Knob Value Background: #00000000
+Knob Value Background (dark): #00000000
+Knob Value Color: #DAA520
+Slider background: #EBE0C880
+Emboss Highlight: #FFFFFF40
+Emboss Shadow: #8B734020
+
+// Toggle Icons - Dark on light
+Normal Toggle Icon: #5A4A38
+Mouse Over Toggle Icon: #3A2A1A
+Active Toggle Icon (Playing): #DAA520
+Pressed Toggle Icon: #B8860B
+Normal Inverted Toggle Icon: #FFFEF580
+Mouse Over Inverted Toggle Icon: #FFFEF5
+Active Inverted Toggle Icon (Playing): #DAA520
+Pressed Inverted Toggle Icon: #F5ECD8
+Toggle Icon: #5A4A38
+
+// Menus & Popups - Light cream
+Menu background: #FFF8E8
+Menu stroke: #B8860B
+Menu text: #3A2A1A
+Menu Icon: #3A2A1Acc
+Menu description text: #5A4A38
+Menu separator: #DAA52050
+Popup insert: #F5ECD8
+Popup overlay background color: #3A2A1ACC
+Popup Notification Background: #FFF8E8
+Notification Background: #FFF8E8
+Notification Normal: #3A2A1A
+Notification Error: #CD5C5C
+Notification Button Background: #F5ECD8
+Tooltip Background: #3A2A1A
+Light Tooltip Background: #FFFBF0
+Tooltip Stroke: #B8860B
+
+// LEDs & Meters - Gold and soft blue
+Led On: #DAA520
+Led Off: #EBE0C8
+Meter Normal: #98FB98
+Meter Yellow: #FFD700
+Meter Red: #FFB6C1
+Meter Clipping: #CD5C5C
+Meter Gain Reduction: #87CEEB
+Meter Hitech: #DAA520
+Meter Hitech Background: #DAA52030
+Meter Muted: #D2B48C
+Hitech background: #F5ECD8
+Hitech on: #DAA520
+
+// Scrollbars - Gold accents
+Scrollbar: #DAA52060
+Scrollbar background: #EBE0C860
+Modern Scrollbar Handle (active): #DAA520
+Modern Scrollbar Handle (inactive): #B8860B80
+Modern Scrollbar Background (active): #DAA52020
+Modern Dark Scrollbar Handle (active): #DAA52070
+Modern Dark Scrollbar Handle (inactive): #DAA52050
+
+// Tree & List Views - Light backgrounds
+Tree Item Background: #F5ECD8
+Selected Tree Item Background: #DAA52040
+Selected Tree Item Background (standby): #DAA52025
+Tree Separator: #DAA52040
+List Item Background: #F5ECD8
+List Separator: #DAA52040
+Selected Dashboard Tree: #DAA520
+Dark tree background (selected): #DAA52040
+Dark tree selection frame: #DAA520
+Dark tree background (standby selected): #DAA52025
+Dark tree separator: #DAA52040
+Dark tree text: #3A2A1A
+Dark tree text (selected): #3A2A1A
+Dark tree hover background change: #DAA52015
+Frame color of selection cursor in the tree.: #DAA520
+Frame color of selection cursor in the tree. (standby): #87CEEB
+Launcher Mapping Indication: #87CEEB
+
+// Panels & Separators - Cream gradient
+Panel body: #F5ECD8
+Selected Panel body: #FFF5E0
+Panel stroke: #DAA52050
+Selected Panel stroke: #DAA520
+Selected Panel stroke (standby): #87CEEB
+Active Panel stroke: #DAA520
+Panel Stroke (focused): #DAA520
+Inspector Section Frame: #DAA52050
+Content Background: #F5ECD8
+Light Separator Line: #DAA52040
+Dark Separator Line: #8B734030
+Dark Panel Sub-frame Stroke: #DAA52040
+Dark Panel Sub-frame Fill: #F0E6D0
+Field background: #FFF5E0
+Number field bar background: #DAA520
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #DAA52040
+
+// Device Chain - Light cream headers
+Device Header: #FFF5E0
+Device Header (selected): #F5ECD8
+Device Locked Overlay: #DAA52080
+Device Tint Future: #87CEEB50
+Device Tint Military: #98FB9840
+Device Tint Retro: #FFB6C150
+Plugin missing: #CD5C5C
+
+// Display & Waveforms - Darker for contrast
+Display Background: #2A2A3A
+Display Background (error): #4A2030
+Display Waveform: #87CEEB
+Display Stroke: #DAA52060
+Display Start/End Markers: #FFD700
+Display Loop Markers: #FFB6C1
+Grey Display Background: #2A2A3A
+Audio Event Background: #F5ECD8
+Audio Event Boundary: #DAA52060
+Audio Event Waveform: #B8860B
+
+// Grid & Modular Environment
+The Grid (background): #F5ECD8
+The Grid (stroke): #DAA52030
+Grid Line (Primary): #8B734060
+Grid Line (Secondary): #8B734030
+Background color of the modular environment.: #F0E6D0
+Compressed Audio Port in modular environment: #B8860B
+Audio connection in modular environment: #DAA520
+Audio64 connection in modular environment: #CD853F
+Event connection in modular environment: #87CEEB
+Polyphonic Desktop Object: #FFB6C1
+Current Atom Value Color: #DAA520
+
+// Timeline & Arranger - Cream-tinted light backgrounds
+Dark Timeline Background: #F5ECD8
+Dark Timeline Header Background: #F0E6D0
+Light Timeline Background: #FFF8E8
+Light Timeline Header Background: #FFFBF0
+Top Level Timeline Background: #F0E6D0
+Top Level Timeline Header Background: #F5ECD8
+Irrelevant Timeline Background: #EBE0C8
+Irrelevant Timeline Header Background: #F0E6D0
+Irrelevant Timeline Overlay: #3A2A1A15
+Irrelevant Timeline Header Overlay: #3A2A1A15
+Timeline Background Pattern: #F0E6D0
+Timeline Header Background Pattern: #F5ECD8
+Timeline Primary Grid: #8B734040
+Timeline Secondary Grid: #8B734020
+Timeline Header Primary Grid: #8B734040
+Timeline Header Secondary Grid: #8B734020
+Timeline Playhead: #3A2A1A
+Timeline edit tool chooser background: #FFF5E0
+
+// Timeline Selection & Cursors - Gold
+Time Selection Fill: #DAA52035
+Time Selection Stroke: #DAA520
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #DAA520
+Time Selection Standby Fill: #3A2A1A15
+Time Selection Standby Stroke: #5A4A38
+Time Selection Standby Cursor Stroke: #5A4A38
+Time Selection Inactive Fill: #5A4A3810
+Time Selection Inactive Stroke: #5A4A38
+Time Selection Not Selected Fill: #3A2A1A12
+Time Selection Not Selected Stroke: #5A4A38
+Time Selection Across All Lanes Fill: #DAA52050
+Time Selection Across All Lanes Stroke: #B8860B
+Header Time Selection Fill: #DAA52050
+Header Time Selection Stroke: #DAA520
+Header Time Selection Standby Fill: #3A2A1A15
+Header Time Selection Standby Stroke: #5A4A38
+Header Time Selection Across All Lanes Fill: #DAA52060
+Header Time Selection Across All Lanes Stroke: #B8860B
+Header Time Selection Cursor Stroke: #DAA520
+Header Time Selection Standby Cursor Stroke: #5A4A38
+Header Loop Region Background: #FFB6C125
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #CD853F
+Timeline Header Cue Marker: #CD853F
+Timeline Tooltip Background: #3A2A1AEE
+Timeline Tooltip Text: #FFFEF5
+Timeline Header Tooltip Background: #3A2A1AEE
+Timeline Header Tooltip Text: #FFFEF5
+
+// Loop Regions - Blush pink loops
+Loop Region Background: #FFB6C125
+Loop Region Fill: #FFB6C135
+Loop Region Stroke: #FFB6C1
+Loop Region Selected Fill: #FFB6C150
+Loop Region Selected Stroke: #F08080
+Insert preview time: #3A2A1A80
+
+// Automation & Modulation - Soft Blue secondary accent
+Automation Chooser Background: #00000000
+Automation Color: #87CEEB60
+Automation button glow color: #87CEEB50
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #87CEEB
+Track Automation Color: #5F9EA0
+Clip Automation Color: #87CEEB
+Clip Modulation Color: #ADD8E6
+Add Modulation Button Color: #DAA520
+Multiply Modulation Button Color: #FFB6C1
+User Automation Override Color: #87CEEB
+Note Expression Color: #5F9EA0
+Send (post) value color: #DAA520
+Send (pre) value color: #87CEEB
+Dark offset for automation/channel bar: #8B734025
+Light offset for automation/channel bar: #FFFFFF50
+Unselected Filled Automation Type Icon: #5A4A38
+Unselected Empty Automation Type Icon: #87CEEB80
+Selected matrix slot color: #DAA520
+
+// Modulation Mapping - Blue and pink
+Modulation Mapping Color: #87CEEB
+Modulation Mapping Color (subtractive): #FFB6C1
+Modulation Mapping Color (polyphonic): #ADD8E6
+Modulation Mapping Background (monophonic): #87CEEB50
+Modulation Mapping Background (polyphonic): #ADD8E650
+Modulation Mapping Background Color: #87CEEB40
+Mapping indication 1: #DAA520
+Mapping indication 2: #B8860B
+Mapping indication 3: #FFD700
+Mapping indication 4: #87CEEB
+Mapping indication 5: #5F9EA0
+Mapping indication 6: #FFB6C1
+Mapping indication 7: #F08080
+Mapping indication 8: #DDA0DD
+
+// Record & Transport - Blush pink record
+Record button color: #FFB6C1
+Record button color implicit: #FFB6C188
+Record button glow color: #FFB6C150
+Record text color: #FFB6C1
+Monitoring buttons color: #B8860B
+
+// Onset & Beat Detection - Gold and blue
+Onset Color Min: #87CEEB
+Onset Color Max: #DAA520
+Onset Marker Color: #DAA520
+Beat Marker Color: #B8860B
+Analyzed Beat Color: #B8860B
+
+// File Status Indicators
+Missing file icon: #CD5C5C
+Missing file text: #CD5C5C
+Found file icon: #98FB98
+Found file text: #3A8A3A
+External file icon: #B8860B
+External file text: #B8860B
+
+// Invoke Action (Command Palette) - Light background
+Invoke Action Background: #FFF8E8
+Invoke Action Category: #B8860B
+Invoke Action Text: #3A2A1A
+User input text: #3A2A1A
+
+// Panel Colors - Fairytale palette
+Panel Red: #FFB6C1
+Panel Orange: #F4A460
+Panel Yellow: #FFD700
+Panel Lime: #98FB98
+Panel Green: #90EE90
+Panel Mint: #B0E0E6
+Panel Turquoise: #87CEEB
+Panel Blue: #ADD8E6
+Panel Purple: #DDA0DD
+
+// Bitwig Branding - Royal colors
+Bitwig Red: #FFB6C1
+Bitwig Mint: #87CEEB
+Bitwig CI: #DAA520
+Bitwig Producer: #FFD700
+Bitwig Essentials: #F5ECD8
+Bitwig 8-Track: #B8860B
+Bitwig 16-Track: #87CEEB
+
+// Misc
+Comp fill: #87CEEB60
+Drop Indicator: #DAA520
+Progress bar: #DAA520
+Progress background: #EBE0C8
+Hitcount background: #F5ECD880
+Hitcount text color: #3A2A1A
+Same as background: #00000000
+// <end>

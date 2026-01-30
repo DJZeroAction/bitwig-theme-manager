@@ -1,0 +1,373 @@
+// Mountain Dew - DO THE DEW
+// RADIOACTIVE GAMER AESTHETIC - Black base with toxic green tint
+// Radioactive green (#39FF14) primary, Dorito orange (#FF6600) secondary
+// Slight green tint in greys for toxic/radioactive vibe
+// Author: Claude
+
+// Core - BLACK with slight GREEN tint (toxic/radioactive)
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #39FF14
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #39FF14
+Default text: #E8FFE8
+Window background: #0D120D
+Grey 0: #080C08
+Grey 1: #0D120D
+Grey 2: #121812
+Grey 3: #171E17
+Grey 4: #1C241C
+Grey 5: #212A21
+Grey 6: #263026
+Shadow: #000000DD
+Brighter: #39FF14
+
+// Text - Green-tinted white for radioactive vibe
+Dark Text: #FFFFFF
+Subtle Dark Text: #60A060
+Subtle Light Text: #90C090
+Subtler Light Text: #508050
+Medium Light Text: #B0E0B0
+Light Text: #E8FFE8
+Lighter Text: #D0FFD0
+Link Text: #39FF14
+Link Text Rollover: #7FFF00
+Error Text: #FF0000
+
+// Accent & Status - Radioactive green primary
+Accent (default): #39FF14
+Accent (hitech): #39FF14
+Implicit On (subtle): #39FF1466
+On (subtle): #39FF1444
+On (subtler): #39FF1422
+Pressed On: #2BC610
+Mapping: #39FF14
+Selection: #39FF1466
+Standby selection: #39FF1433
+White Selection: #39FF14
+White Selection (standby): #39FF1480
+Warning: #FF6600
+Activation Green: #39FF14
+Activation Yellow: #FFCC00
+Activation Red: #FF0000
+
+// Buttons - Green tinted with radioactive glow
+Button background: #171E17AA
+Button stroke: #39FF1488
+OK Button background: #39FF14
+Pressed button background: #39FF1433
+Checkbox background: #0D120D
+Button in tree background: #121812
+View button background: #39FF140D
+Pressed view button background: #39FF141A
+Inverted Selected Borderless Button background: #39FF141A
+Selected borderless button background: #39FF1440
+Pressed borderless button background: #39FF1466
+Rubber button stroke: #39FF1488
+Rubber highlight button stroke: #7FFF00
+Close button mouse over background: #FF000044
+Close button pressed background: #FF000088
+Abstract Button Stroke: #39FF1444
+Abstract Button Selected Background: #39FF1440
+Abstract Button Unselected Background: #121812
+Abstract Button Pressed Background: #39FF141A
+Color bar button fill color: #39FF1420
+
+// Knobs & Sliders - Dark with radioactive value arc
+Knob Body: #171E17
+Knob Body Lighter: #1C241C
+Knob Body Lightest: #212A21
+Knob Body Darkest: #080C08
+Knob Line: #39FF14
+Knob Line Dark: #2BC610
+Knob Stroke: #39FF1444
+Knob Emboss Highlight: #39FF1430
+Knob Emboss Shadow: #00000080
+Knob Value Background: #080C0880
+Knob Value Background (dark): #080C08
+Knob Value Color: #39FF14
+Slider background: #080C0880
+Emboss Highlight: #39FF1415
+Emboss Shadow: #00000040
+
+// Toggle Icons - Neon green activation
+Normal Toggle Icon: #508050
+Mouse Over Toggle Icon: #39FF14
+Active Toggle Icon (Playing): #39FF14
+Pressed Toggle Icon: #406040
+Normal Inverted Toggle Icon: #B0E0B080
+Mouse Over Inverted Toggle Icon: #39FF14
+Active Inverted Toggle Icon (Playing): #39FF14
+Pressed Inverted Toggle Icon: #90C090
+Toggle Icon: #60A060
+
+// Menus & Popups - Dark with radioactive trim
+Menu background: #0D120D
+Menu stroke: #39FF14AA
+Menu text: #E8FFE8
+Menu Icon: #D0FFD0CC
+Menu description text: #90C090
+Menu separator: #39FF1444
+Popup insert: #121812
+Popup overlay background color: #000000EE
+Popup Notification Background: #121812
+Notification Background: #121812
+Notification Normal: #E8FFE8
+Notification Error: #FF0000
+Notification Button Background: #1C241C
+Tooltip Background: #0D120D
+Light Tooltip Background: #121812
+Tooltip Stroke: #39FF14AA
+
+// LEDs & Meters - RADIOACTIVE green levels
+Led On: #39FF14
+Led Off: #121812
+Meter Normal: #39FF14
+Meter Yellow: #FFCC00
+Meter Red: #FF0000
+Meter Clipping: #FF0000
+Meter Gain Reduction: #FF6600
+Meter Hitech: #39FF14
+Meter Hitech Background: #080C0880
+Meter Muted: #263026
+Hitech background: #080C08
+Hitech on: #39FF14
+
+// Scrollbars - Radioactive green handles
+Scrollbar: #39FF14
+Scrollbar background: #080C08
+Modern Scrollbar Handle (active): #39FF14
+Modern Scrollbar Handle (inactive): #39FF1466
+Modern Scrollbar Background (active): #080C0866
+Modern Dark Scrollbar Handle (active): #39FF1466
+Modern Dark Scrollbar Handle (inactive): #39FF1433
+
+// Tree & List Views - Green tinted
+Tree Item Background: #121812
+Selected Tree Item Background: #39FF1440
+Selected Tree Item Background (standby): #39FF1420
+Tree Separator: #39FF1422
+List Item Background: #121812
+List Separator: #39FF1422
+Selected Dashboard Tree: #39FF14
+Dark tree background (selected): #39FF1440
+Dark tree selection frame: #39FF14
+Dark tree background (standby selected): #39FF1420
+Dark tree separator: #39FF1422
+Dark tree text: #E8FFE8
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #39FF1410
+Frame color of selection cursor in the tree.: #39FF14
+Frame color of selection cursor in the tree. (standby): #39FF1480
+Launcher Mapping Indication: #FF6600
+
+// Panels & Separators - Green-tinted darkness
+Panel body: #121812
+Selected Panel body: #1C241C
+Panel stroke: #39FF1444
+Selected Panel stroke: #39FF14
+Selected Panel stroke (standby): #39FF1480
+Active Panel stroke: #7FFF00
+Panel Stroke (focused): #39FF14
+Inspector Section Frame: #39FF1444
+Content Background: #0D120D
+Light Separator Line: #39FF1422
+Dark Separator Line: #080C0880
+Dark Panel Sub-frame Stroke: #39FF1422
+Dark Panel Sub-frame Fill: #0D120D
+Field background: #080C08
+Number field bar background: #39FF14
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #39FF1422
+
+// Device Chain - Green tinted
+Device Header: #121812
+Device Header (selected): #1C241C
+Device Locked Overlay: #FF660080
+Device Tint Future: #39FF1464
+Device Tint Retro: #FF660052
+Device Tint Military: #39FF1447
+Plugin missing: #FF0000
+
+// Display & Waveforms - RADIOACTIVE visualization
+Display Background: #080C08
+Display Background (error): #330000
+Display Waveform: #39FF14
+Display Stroke: #39FF1444
+Display Start/End Markers: #FF6600
+Display Loop Markers: #39FF14
+Grey Display Background: #0D120D
+Audio Event Background: #121812
+Audio Event Boundary: #39FF1444
+Audio Event Waveform: #39FF14
+
+// Grid & Modular Environment - Green matrix
+The Grid (background): #0D120D
+The Grid (stroke): #39FF1422
+Grid Line (Primary): #39FF1444
+Grid Line (Secondary): #39FF1422
+Background color of the modular environment.: #121812
+Compressed Audio Port in modular environment: #39FF14
+Audio connection in modular environment: #39FF14
+Audio64 connection in modular environment: #FF6600
+Event connection in modular environment: #FF6600
+Polyphonic Desktop Object: #FF6600
+Current Atom Value Color: #39FF14
+
+// Timeline & Arranger - GAMER CAVE (dark green tint)
+Dark Timeline Background: #080C08
+Dark Timeline Header Background: #0D120D
+Light Timeline Background: #0D120D
+Light Timeline Header Background: #121812
+Top Level Timeline Background: #0A0F0A
+Top Level Timeline Header Background: #0D120D
+Irrelevant Timeline Background: #050805
+Irrelevant Timeline Header Background: #080C08
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #0D120D
+Timeline Header Background Pattern: #121812
+Timeline Primary Grid: #39FF1433
+Timeline Secondary Grid: #39FF141A
+Timeline Header Primary Grid: #39FF1433
+Timeline Header Secondary Grid: #39FF141A
+Timeline Playhead: #39FF14
+Timeline edit tool chooser background: #121812
+
+// Timeline Selection & Cursors - Neon green selection
+Time Selection Fill: #39FF1430
+Time Selection Stroke: #39FF14
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #39FF14
+Time Selection Standby Fill: #39FF1410
+Time Selection Standby Stroke: #39FF1480
+Time Selection Standby Cursor Stroke: #39FF1480
+Time Selection Inactive Fill: #39FF1408
+Time Selection Inactive Stroke: #39FF1480
+Time Selection Not Selected Fill: #39FF140D
+Time Selection Not Selected Stroke: #39FF1480
+Time Selection Across All Lanes Fill: #39FF1450
+Time Selection Across All Lanes Stroke: #D0FFD0
+Header Time Selection Fill: #39FF1450
+Header Time Selection Stroke: #39FF14
+Header Time Selection Standby Fill: #39FF1410
+Header Time Selection Standby Stroke: #39FF1480
+Header Time Selection Across All Lanes Fill: #39FF1466
+Header Time Selection Across All Lanes Stroke: #D0FFD0
+Header Time Selection Cursor Stroke: #39FF14
+Header Time Selection Standby Cursor Stroke: #39FF1480
+Header Loop Region Background: #39FF1420
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FF6600
+Timeline Header Cue Marker: #FF6600
+Timeline Tooltip Background: #0D120DEE
+Timeline Tooltip Text: #E8FFE8
+Timeline Header Tooltip Background: #0D120DEE
+Timeline Header Tooltip Text: #E8FFE8
+
+// Loop Regions - Radioactive green loops
+Loop Region Background: #39FF1420
+Loop Region Fill: #39FF1430
+Loop Region Stroke: #39FF14
+Loop Region Selected Fill: #39FF1450
+Loop Region Selected Stroke: #7FFF00
+Insert preview time: #D0FFD080
+
+// Automation & Modulation - DORITO ORANGE (complement to green)
+Automation Chooser Background: #00000000
+Automation Color: #FF660066
+Automation button glow color: #FF660050
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #FF6600
+Track Automation Color: #FF6600
+Clip Automation Color: #FF6600
+Clip Modulation Color: #FF9933
+Add Modulation Button Color: #FF6600
+Multiply Modulation Button Color: #FF9933
+User Automation Override Color: #FFCC00
+Note Expression Color: #FF6600
+Send (post) value color: #39FF14
+Send (pre) value color: #FF6600
+Dark offset for automation/channel bar: #00000040
+Light offset for automation/channel bar: #39FF1420
+Unselected Filled Automation Type Icon: #508050
+Unselected Empty Automation Type Icon: #FF660066
+Selected matrix slot color: #39FF14
+
+// Modulation Mapping - Orange modulation
+Modulation Mapping Color: #FF6600
+Modulation Mapping Color (subtractive): #FF0000
+Modulation Mapping Color (polyphonic): #39FF14
+Modulation Mapping Background (monophonic): #FF660040
+Modulation Mapping Background (polyphonic): #39FF1440
+Modulation Mapping Background Color: #FF660030
+Mapping indication 1: #FF0000
+Mapping indication 2: #FF6600
+Mapping indication 3: #39FF14
+Mapping indication 4: #7FFF00
+Mapping indication 5: #FFCC00
+Mapping indication 6: #39FF14
+Mapping indication 7: #FF0000
+Mapping indication 8: #FF6600
+
+// Record & Transport - CODE RED
+Record button color: #FF0000
+Record button color implicit: #FF000088
+Record button glow color: #FF000050
+Record text color: #FF0000
+Monitoring buttons color: #FF6600
+
+// Onset & Beat Detection - Radioactive beats
+Onset Color Min: #FF6600
+Onset Color Max: #39FF14
+Onset Marker Color: #39FF14
+Beat Marker Color: #39FF14
+Analyzed Beat Color: #39FF14
+
+// File Status Indicators
+Missing file icon: #FF0000
+Missing file text: #FF0000
+Found file icon: #39FF14
+Found file text: #39FF14
+External file icon: #FF6600
+External file text: #FF6600
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #0D120D
+Invoke Action Category: #508050
+Invoke Action Text: #E8FFE8
+User input text: #E8FFE8
+
+// Panel Colors - GAMER RGB
+Panel Red: #FF0000
+Panel Orange: #FF6600
+Panel Yellow: #FFCC00
+Panel Lime: #39FF14
+Panel Green: #7FFF00
+Panel Mint: #00FF88
+Panel Turquoise: #00FFCC
+Panel Blue: #0088FF
+Panel Purple: #9933FF
+
+// Bitwig Branding - MOUNTAIN DEW EDITION
+Bitwig Red: #FF0000
+Bitwig Mint: #39FF14
+Bitwig CI: #39FF14
+Bitwig Producer: #FF6600
+Bitwig Essentials: #39FF14
+Bitwig 8-Track: #7FFF00
+Bitwig 16-Track: #39FF14
+
+// Misc
+Comp fill: #39FF1450
+Drop Indicator: #39FF14
+Progress bar: #39FF14
+Progress background: #080C0880
+Hitcount background: #1C241C
+Hitcount text color: #E8FFE8
+// <end>

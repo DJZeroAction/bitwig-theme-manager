@@ -1,0 +1,370 @@
+// Among Us - THE SKELD
+// Dark metallic spaceship hull with emergency red and vent cyan
+// Red for active/emergency states, Cyan for automation/secondary - pretty sus
+// Author: Claude
+
+// Core - Cool spaceship grey (blue-grey metallic hull)
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FF0000
+White: #C8E0E8
+Black: #0A1018
+Same as background: #00000000
+Accent: #FF0000
+Default text: #C8E0E8
+Window background: #101820
+Grey 0: #0C1418
+Grey 1: #121C24
+Grey 2: #18242E
+Grey 3: #1E2C38
+Grey 4: #243444
+Grey 5: #2C3E50
+Grey 6: #34485C
+Shadow: #00000099
+Brighter: #C8E0E8
+
+// Text - Cool spaceship display green-white
+Dark Text: #C8E0E8
+Subtle Dark Text: #8AA8B8
+Subtle Light Text: #A8C4D0
+Subtler Light Text: #6A8898
+Medium Light Text: #B8D4E0
+Light Text: #C8E0E8
+Lighter Text: #B8D4E0
+Link Text: #00FFFF
+Link Text Rollover: #66FFFF
+Error Text: #FF0000
+
+// Accent & Status - EMERGENCY RED for active, CYAN for secondary
+Accent (default): #FF0000
+Accent (hitech): #FF4444
+Implicit On (subtle): #FF000066
+On (subtle): #FF000044
+On (subtler): #FF000022
+Pressed On: #C50000
+Mapping: #00FFFF
+Selection: #FF000066
+Standby selection: #FF000033
+White Selection: #FF0000
+White Selection (standby): #A8C4D0
+Warning: #FF8800
+Activation Green: #00FF00
+Activation Yellow: #FF8800
+Activation Red: #FF0000
+
+// Buttons - Spaceship control panel with hull grey
+Button background: #1E2C3880
+Button stroke: #34485C66
+OK Button background: #C50000
+Pressed button background: #00FFFF22
+Checkbox background: #121C24
+Button in tree background: #18242E
+View button background: #C8E0E80D
+Pressed view button background: #00FFFF22
+Inverted Selected Borderless Button background: #00FFFF22
+Selected borderless button background: #FF000044
+Pressed borderless button background: #FF000066
+Rubber button stroke: #34485C66
+Rubber highlight button stroke: #FF0000
+Close button mouse over background: #FF000044
+Close button pressed background: #FF000088
+Abstract Button Stroke: #34485C44
+Abstract Button Selected Background: #FF000044
+Abstract Button Unselected Background: #18242E
+Abstract Button Pressed Background: #00FFFF22
+Color bar button fill color: #00FFFF20
+
+// Knobs & Sliders - Metallic hull controls
+Knob Body: #1E2C38
+Knob Body Lighter: #243444
+Knob Body Lightest: #2C3E50
+Knob Body Darkest: #121C24
+Knob Line: #C8E0E8
+Knob Line Dark: #A8C4D0
+Knob Stroke: #34485C66
+Knob Emboss Highlight: #00FFFF20
+Knob Emboss Shadow: #00000066
+Knob Value Background: #0C141880
+Knob Value Background (dark): #0C1418
+Knob Value Color: #FF0000
+Slider background: #0C141880
+Emboss Highlight: #00FFFF10
+Emboss Shadow: #00000033
+
+// Toggle Icons - Red when active
+Normal Toggle Icon: #A8C4D0
+Mouse Over Toggle Icon: #C8E0E8
+Active Toggle Icon (Playing): #FF0000
+Pressed Toggle Icon: #6A8898
+Normal Inverted Toggle Icon: #C8E0E880
+Mouse Over Inverted Toggle Icon: #C8E0E8
+Active Inverted Toggle Icon (Playing): #FF0000
+Pressed Inverted Toggle Icon: #B8D4E0
+Toggle Icon: #A8C4D0
+
+// Menus & Popups - Spaceship console
+Menu background: #101820
+Menu stroke: #34485C66
+Menu text: #C8E0E8
+Menu Icon: #C8E0E8CC
+Menu description text: #B8D4E0
+Menu separator: #34485C44
+Popup insert: #18242E
+Popup overlay background color: #000000DD
+Popup Notification Background: #121C24
+Notification Background: #121C24
+Notification Normal: #C8E0E8
+Notification Error: #FF0000
+Notification Button Background: #18242E
+Tooltip Background: #0C1418
+Light Tooltip Background: #C8E0E8
+Tooltip Stroke: #00FFFF66
+
+// LEDs & Meters - Cyan meters, red danger
+Led On: #FF0000
+Led Off: #18242E
+Meter Normal: #00FFFF
+Meter Yellow: #FF8800
+Meter Red: #FF0000
+Meter Clipping: #FF0000
+Meter Gain Reduction: #00FFFF
+Meter Hitech: #00FFFF
+Meter Hitech Background: #0C141880
+Meter Muted: #6A8898
+Hitech background: #0C1418
+Hitech on: #00FFFF
+
+// Scrollbars - Hull grey with cyan accent
+Scrollbar: #34485C
+Scrollbar background: #0C1418
+Modern Scrollbar Handle (active): #00FFFF
+Modern Scrollbar Handle (inactive): #34485C88
+Modern Scrollbar Background (active): #0C141888
+Modern Dark Scrollbar Handle (active): #34485C88
+Modern Dark Scrollbar Handle (inactive): #34485C44
+
+// Tree & List Views - Task list interface
+Tree Item Background: #121C24
+Selected Tree Item Background: #FF000044
+Selected Tree Item Background (standby): #FF000022
+Tree Separator: #34485C33
+List Item Background: #121C24
+List Separator: #34485C33
+Selected Dashboard Tree: #FF0000
+Dark tree background (selected): #FF000044
+Dark tree selection frame: #FF0000
+Dark tree background (standby selected): #FF000022
+Dark tree separator: #34485C33
+Dark tree text: #C8E0E8
+Dark tree text (selected): #C8E0E8
+Dark tree hover background change: #00FFFF11
+Frame color of selection cursor in the tree.: #FF0000
+Frame color of selection cursor in the tree. (standby): #6A8898
+Launcher Mapping Indication: #00FFFF
+
+// Panels & Separators - Spaceship hull panels
+Panel body: #1E2C38
+Selected Panel body: #243444
+Panel stroke: #34485C66
+Selected Panel stroke: #FF0000
+Selected Panel stroke (standby): #34485C
+Active Panel stroke: #FF0000
+Panel Stroke (focused): #00FFFF
+Inspector Section Frame: #34485C66
+Content Background: #121C24
+Light Separator Line: #34485C33
+Dark Separator Line: #0C141899
+Dark Panel Sub-frame Stroke: #34485C33
+Dark Panel Sub-frame Fill: #101820
+Field background: #0C1418
+Number field bar background: #FF0000
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #34485C33
+
+// Device Chain - Hull grey with colored tints
+Device Header: #1E2C38
+Device Header (selected): #243444
+Device Locked Overlay: #FF000088
+Device Tint Future: #00FFFF66
+Device Tint Retro: #FF000055
+Device Tint Military: #00FF0044
+Plugin missing: #FF0000
+
+// Display & Waveforms - Cyan ship monitors
+Display Background: #0C1418
+Display Background (error): #500000
+Display Waveform: #00FFFF
+Display Stroke: #34485C66
+Display Start/End Markers: #FF8800
+Display Loop Markers: #00FFFF
+Grey Display Background: #101820
+Audio Event Background: #121C24
+Audio Event Boundary: #34485C66
+Audio Event Waveform: #00FFFF
+
+// Grid & Modular Environment - THE SKELD
+The Grid (background): #101820
+The Grid (stroke): #34485C33
+Grid Line (Primary): #34485C55
+Grid Line (Secondary): #34485C33
+Background color of the modular environment.: #121C24
+Compressed Audio Port in modular environment: #00FFFF
+Audio connection in modular environment: #FF0000
+Audio64 connection in modular environment: #FF8800
+Event connection in modular environment: #00FF00
+Polyphonic Desktop Object: #FF4444
+Current Atom Value Color: #FF0000
+
+// Timeline & Arranger - Spaceship interior
+Dark Timeline Background: #0C1418
+Dark Timeline Header Background: #101820
+Light Timeline Background: #121C24
+Light Timeline Header Background: #18242E
+Top Level Timeline Background: #101820
+Top Level Timeline Header Background: #121C24
+Irrelevant Timeline Background: #080C10
+Irrelevant Timeline Header Background: #0C1418
+Irrelevant Timeline Overlay: #00000055
+Irrelevant Timeline Header Overlay: #00000055
+Timeline Background Pattern: #121C24
+Timeline Header Background Pattern: #18242E
+Timeline Primary Grid: #34485C44
+Timeline Secondary Grid: #34485C22
+Timeline Header Primary Grid: #34485C44
+Timeline Header Secondary Grid: #34485C22
+Timeline Playhead: #C8E0E8
+Timeline edit tool chooser background: #121C24
+
+// Timeline Selection & Cursors - Emergency red selection
+Time Selection Fill: #FF000033
+Time Selection Stroke: #FF0000
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FF0000
+Time Selection Standby Fill: #00FFFF11
+Time Selection Standby Stroke: #6A8898
+Time Selection Standby Cursor Stroke: #6A8898
+Time Selection Inactive Fill: #6A889811
+Time Selection Inactive Stroke: #6A8898
+Time Selection Not Selected Fill: #00FFFF0D
+Time Selection Not Selected Stroke: #6A8898
+Time Selection Across All Lanes Fill: #FF000055
+Time Selection Across All Lanes Stroke: #B8D4E0
+Header Time Selection Fill: #FF000055
+Header Time Selection Stroke: #FF0000
+Header Time Selection Standby Fill: #00FFFF11
+Header Time Selection Standby Stroke: #6A8898
+Header Time Selection Across All Lanes Fill: #FF000066
+Header Time Selection Across All Lanes Stroke: #B8D4E0
+Header Time Selection Cursor Stroke: #FF0000
+Header Time Selection Standby Cursor Stroke: #6A8898
+Header Loop Region Background: #00FFFF22
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FF8800
+Timeline Header Cue Marker: #FF8800
+Timeline Tooltip Background: #0C1418EE
+Timeline Tooltip Text: #C8E0E8
+Timeline Header Tooltip Background: #0C1418EE
+Timeline Header Tooltip Text: #C8E0E8
+
+// Loop Regions - VENT CYAN (secondary accent)
+Loop Region Background: #00FFFF22
+Loop Region Fill: #00FFFF33
+Loop Region Stroke: #00FFFF
+Loop Region Selected Fill: #00FFFF55
+Loop Region Selected Stroke: #66FFFF
+Insert preview time: #C8E0E888
+
+// Automation & Modulation - VENT CYAN for automation (separated from red active)
+Automation Chooser Background: #00000000
+Automation Color: #00FFFF80
+Automation button glow color: #00FFFF44
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #00FFFF
+Track Automation Color: #00FFFF
+Clip Automation Color: #66FFFF
+Clip Modulation Color: #00FF00
+Add Modulation Button Color: #FF0000
+Multiply Modulation Button Color: #FF8800
+User Automation Override Color: #00FF00
+Note Expression Color: #FF8800
+Send (post) value color: #00FF00
+Send (pre) value color: #00FFFF
+Dark offset for automation/channel bar: #00000033
+Light offset for automation/channel bar: #00FFFF22
+Unselected Filled Automation Type Icon: #6A8898
+Unselected Empty Automation Type Icon: #34485C88
+Selected matrix slot color: #FF0000
+
+// Modulation Mapping - Crewmate color palette
+Modulation Mapping Color: #00FFFF
+Modulation Mapping Color (subtractive): #FF0000
+Modulation Mapping Color (polyphonic): #00FF00
+Modulation Mapping Background (monophonic): #00FFFF44
+Modulation Mapping Background (polyphonic): #00FF0044
+Modulation Mapping Background Color: #00FFFF33
+Mapping indication 1: #FF0000
+Mapping indication 2: #00FFFF
+Mapping indication 3: #FF8800
+Mapping indication 4: #00FF00
+Mapping indication 5: #FFDD00
+Mapping indication 6: #0088FF
+Mapping indication 7: #FF4444
+Mapping indication 8: #66FFFF
+
+// Record & Transport - EMERGENCY BUTTON!
+Record button color: #FF0000
+Record button color implicit: #FF000088
+Record button glow color: #FF000055
+Record text color: #FF0000
+Monitoring buttons color: #FF8800
+
+// Onset & Beat Detection
+Onset Color Min: #FF8800
+Onset Color Max: #FF0000
+Onset Marker Color: #FF0000
+Beat Marker Color: #00FFFF
+Analyzed Beat Color: #00FFFF
+
+// File Status Indicators
+Missing file icon: #FF0000
+Missing file text: #FF0000
+Found file icon: #00FF00
+Found file text: #00FF00
+External file icon: #FF8800
+External file text: #FF8800
+
+// Invoke Action - Ship Computer Interface
+Invoke Action Background: #101820
+Invoke Action Category: #6A8898
+Invoke Action Text: #C8E0E8
+User input text: #C8E0E8
+
+// Panel Colors - CREWMATE COLORS!
+Panel Red: #FF0000
+Panel Orange: #FF8800
+Panel Yellow: #FFDD00
+Panel Lime: #88FF00
+Panel Green: #00FF00
+Panel Mint: #00FFAA
+Panel Turquoise: #00FFFF
+Panel Blue: #0088FF
+Panel Purple: #AA44FF
+
+// Bitwig Branding - Among Us Style
+Bitwig Red: #FF0000
+Bitwig Mint: #00FFFF
+Bitwig CI: #FF0000
+Bitwig Producer: #FF8800
+Bitwig Essentials: #00FFFF
+Bitwig 8-Track: #00FF00
+Bitwig 16-Track: #00FFFF
+
+// Misc
+Comp fill: #FF000055
+Drop Indicator: #FF0000
+Progress bar: #FF0000
+Progress background: #0C1418
+// <end>

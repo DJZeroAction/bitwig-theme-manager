@@ -1,0 +1,370 @@
+// Spongebob Bikini Bottom
+// Underwater blue-tinted greys with Spongebob yellow and Patrick pink
+// Yellow for active states, Pink for automation/secondary - complementary pair
+// Author: Claude
+
+// Core - Underwater blue-tinted greys
+Gradient: false
+Transparent: #00000000
+Image Source: #00000000
+Inherited: #FFE135
+White: #FFFFFF
+Black: #000000
+Same as background: #00000000
+Accent: #FFE135
+Default text: #F0F8FF
+Window background: #0C3448
+Grey 0: #082838
+Grey 1: #0A3040
+Grey 2: #0E3C50
+Grey 3: #124858
+Grey 4: #165468
+Grey 5: #1A6078
+Grey 6: #1E6C88
+Shadow: #00000080
+Brighter: #F0F8FF
+
+// Text - Light blue-white (underwater light)
+Dark Text: #F0F8FF
+Subtle Dark Text: #A0C8D8
+Subtle Light Text: #C0E0F0
+Subtler Light Text: #80A8B8
+Medium Light Text: #D0E8F8
+Light Text: #F0F8FF
+Lighter Text: #D0E8F8
+Link Text: #FF69B4
+Link Text Rollover: #FF8DC7
+Error Text: #FF4444
+
+// Accent & Status - Spongebob YELLOW active, Patrick PINK secondary
+Accent (default): #FFE135
+Accent (hitech): #FFE878
+Implicit On (subtle): #FFE13566
+On (subtle): #FFE13544
+On (subtler): #FFE13522
+Pressed On: #FFD700
+Mapping: #FF69B4
+Selection: #FFE13566
+Standby selection: #FFE13533
+White Selection: #FFE135
+White Selection (standby): #A0C8D8
+Warning: #FF8C00
+Activation Green: #20B2AA
+Activation Yellow: #FFE135
+Activation Red: #FF69B4
+
+// Buttons - Underwater blue with yellow strokes
+Button background: #0E3C5080
+Button stroke: #1E6C8866
+OK Button background: #FFD700
+Pressed button background: #FF69B422
+Checkbox background: #0A3040
+Button in tree background: #0E3C50
+View button background: #F0F8FF0D
+Pressed view button background: #FF69B422
+Inverted Selected Borderless Button background: #FF69B422
+Selected borderless button background: #FFE13540
+Pressed borderless button background: #FFE13566
+Rubber button stroke: #1E6C8866
+Rubber highlight button stroke: #FFE135
+Close button mouse over background: #FF69B440
+Close button pressed background: #FF69B466
+Abstract Button Stroke: #1E6C8844
+Abstract Button Selected Background: #FFE13540
+Abstract Button Unselected Background: #0E3C50
+Abstract Button Pressed Background: #FF69B422
+Color bar button fill color: #F0F8FF20
+
+// Knobs & Sliders - Ocean blue tinted
+Knob Body: #0E3C50
+Knob Body Lighter: #165468
+Knob Body Lightest: #1A6078
+Knob Body Darkest: #082838
+Knob Line: #F0F8FF
+Knob Line Dark: #C0E0F0
+Knob Stroke: #1E6C8844
+Knob Emboss Highlight: #F0F8FF20
+Knob Emboss Shadow: #00000040
+Knob Value Background: #08283880
+Knob Value Background (dark): #082838
+Knob Value Color: #FFE135
+Slider background: #08283880
+Emboss Highlight: #F0F8FF10
+Emboss Shadow: #00000020
+
+// Toggle Icons - Yellow when active
+Normal Toggle Icon: #C0E0F0
+Mouse Over Toggle Icon: #F0F8FF
+Active Toggle Icon (Playing): #FFE135
+Pressed Toggle Icon: #80A8B8
+Normal Inverted Toggle Icon: #F0F8FF80
+Mouse Over Inverted Toggle Icon: #F0F8FF
+Active Inverted Toggle Icon (Playing): #FFE135
+Pressed Inverted Toggle Icon: #D0E8F8
+Toggle Icon: #C0E0F0
+
+// Menus & Popups - Deep underwater
+Menu background: #0A3040
+Menu stroke: #1E6C8866
+Menu text: #F0F8FF
+Menu Icon: #F0F8FFcc
+Menu description text: #D0E8F8
+Menu separator: #1E6C8844
+Popup insert: #0E3C50
+Popup overlay background color: #000000CC
+Popup Notification Background: #0E3C50
+Notification Background: #0E3C50
+Notification Normal: #F0F8FF
+Notification Error: #FF4444
+Notification Button Background: #124858
+Tooltip Background: #082838
+Light Tooltip Background: #F0F8FF
+Tooltip Stroke: #1E6C8866
+
+// LEDs & Meters - Teal normal, yellow caution, pink danger
+Led On: #FFE135
+Led Off: #0E3C50
+Meter Normal: #20B2AA
+Meter Yellow: #FFE135
+Meter Red: #FF69B4
+Meter Clipping: #FF0000
+Meter Gain Reduction: #FF8C00
+Meter Hitech: #FFE135
+Meter Hitech Background: #08283880
+Meter Muted: #80A8B8
+Hitech background: #082838
+Hitech on: #FFE135
+
+// Scrollbars - Ocean teal
+Scrollbar: #1E6C88
+Scrollbar background: #082838
+Modern Scrollbar Handle (active): #FFE135
+Modern Scrollbar Handle (inactive): #1E6C8866
+Modern Scrollbar Background (active): #08283866
+Modern Dark Scrollbar Handle (active): #1E6C8866
+Modern Dark Scrollbar Handle (inactive): #1E6C8833
+
+// Tree & List Views - Underwater depths
+Tree Item Background: #0A3040
+Selected Tree Item Background: #FFE13540
+Selected Tree Item Background (standby): #FFE13520
+Tree Separator: #1E6C8822
+List Item Background: #0A3040
+List Separator: #1E6C8822
+Selected Dashboard Tree: #FFE135
+Dark tree background (selected): #FFE13540
+Dark tree selection frame: #FFE135
+Dark tree background (standby selected): #FFE13520
+Dark tree separator: #1E6C8822
+Dark tree text: #F0F8FF
+Dark tree text (selected): #F0F8FF
+Dark tree hover background change: #FF69B411
+Frame color of selection cursor in the tree.: #FFE135
+Frame color of selection cursor in the tree. (standby): #A0C8D8
+Launcher Mapping Indication: #FF69B4
+
+// Panels & Separators - Underwater blue panels
+Panel body: #0E3C50
+Selected Panel body: #165468
+Panel stroke: #1E6C8844
+Selected Panel stroke: #FFE135
+Selected Panel stroke (standby): #1E6C88
+Active Panel stroke: #FFE135
+Panel Stroke (focused): #FFE135
+Inspector Section Frame: #1E6C8844
+Content Background: #0A3040
+Light Separator Line: #1E6C8822
+Dark Separator Line: #08283880
+Dark Panel Sub-frame Stroke: #1E6C8822
+Dark Panel Sub-frame Fill: #0A3040
+Field background: #082838
+Number field bar background: #FFE135
+Icon Frame: #00000000
+Color of unselected tabs: #00000000
+Color of stroke between tabs: #1E6C8822
+
+// Device Chain - Ocean blue with character tints
+Device Header: #0E3C50
+Device Header (selected): #165468
+Device Locked Overlay: #FFE13580
+Device Tint Future: #20B2AA64
+Device Tint Retro: #FF69B452
+Device Tint Military: #20B2AA47
+Plugin missing: #FF4444
+
+// Display & Waveforms - Yellow waveforms
+Display Background: #082838
+Display Background (error): #400000
+Display Waveform: #FFE135
+Display Stroke: #1E6C8844
+Display Start/End Markers: #FF69B4
+Display Loop Markers: #FF69B4
+Grey Display Background: #0A3040
+Audio Event Background: #0A3040
+Audio Event Boundary: #1E6C8844
+Audio Event Waveform: #FFE135
+
+// Grid & Modular Environment - Bikini Bottom
+The Grid (background): #0A3040
+The Grid (stroke): #1E6C8822
+Grid Line (Primary): #1E6C8844
+Grid Line (Secondary): #1E6C8822
+Background color of the modular environment.: #0E3C50
+Compressed Audio Port in modular environment: #20B2AA
+Audio connection in modular environment: #FFE135
+Audio64 connection in modular environment: #FF8C00
+Event connection in modular environment: #FF69B4
+Polyphonic Desktop Object: #FF69B4
+Current Atom Value Color: #FFE135
+
+// Timeline & Arranger - Underwater blue gradation
+Dark Timeline Background: #082838
+Dark Timeline Header Background: #0A3040
+Light Timeline Background: #0C3C4C
+Light Timeline Header Background: #0E4858
+Top Level Timeline Background: #0A3040
+Top Level Timeline Header Background: #0E3C50
+Irrelevant Timeline Background: #061C28
+Irrelevant Timeline Header Background: #082838
+Irrelevant Timeline Overlay: #00000040
+Irrelevant Timeline Header Overlay: #00000040
+Timeline Background Pattern: #0C3C4C
+Timeline Header Background Pattern: #0E4858
+Timeline Primary Grid: #1E6C8833
+Timeline Secondary Grid: #1E6C881A
+Timeline Header Primary Grid: #1E6C8833
+Timeline Header Secondary Grid: #1E6C881A
+Timeline Playhead: #F0F8FF
+Timeline edit tool chooser background: #0E3C50
+
+// Timeline Selection & Cursors - Spongebob yellow selection
+Time Selection Fill: #FFE13530
+Time Selection Stroke: #FFE135
+Time Selection Implicit Fill: #00000000
+Time Selection Cursor Stroke: #FFE135
+Time Selection Standby Fill: #F0F8FF10
+Time Selection Standby Stroke: #A0C8D8
+Time Selection Standby Cursor Stroke: #A0C8D8
+Time Selection Inactive Fill: #A0C8D808
+Time Selection Inactive Stroke: #A0C8D8
+Time Selection Not Selected Fill: #F0F8FF0D
+Time Selection Not Selected Stroke: #A0C8D8
+Time Selection Across All Lanes Fill: #FFE13550
+Time Selection Across All Lanes Stroke: #D0E8F8
+Header Time Selection Fill: #FFE13550
+Header Time Selection Stroke: #FFE135
+Header Time Selection Standby Fill: #F0F8FF10
+Header Time Selection Standby Stroke: #A0C8D8
+Header Time Selection Across All Lanes Fill: #FFE13566
+Header Time Selection Across All Lanes Stroke: #D0E8F8
+Header Time Selection Cursor Stroke: #FFE135
+Header Time Selection Standby Cursor Stroke: #A0C8D8
+Header Loop Region Background: #FF69B420
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FF69B4
+Timeline Header Cue Marker: #FF69B4
+Timeline Tooltip Background: #082838EE
+Timeline Tooltip Text: #F0F8FF
+Timeline Header Tooltip Background: #082838EE
+Timeline Header Tooltip Text: #F0F8FF
+
+// Loop Regions - Patrick PINK (secondary accent)
+Loop Region Background: #FF69B420
+Loop Region Fill: #FF69B430
+Loop Region Stroke: #FF69B4
+Loop Region Selected Fill: #FF69B450
+Loop Region Selected Stroke: #FF8DC7
+Insert preview time: #F0F8FF80
+
+// Automation & Modulation - Patrick PINK for automation (complementary to yellow)
+Automation Chooser Background: #00000000
+Automation Color: #FF69B480
+Automation button glow color: #FF69B440
+Arranger Automation Curve Fill Color: #00000000
+Track Automation Button Color: #FF69B4
+Track Automation Color: #FF69B4
+Clip Automation Color: #FF8DC7
+Clip Modulation Color: #20B2AA
+Add Modulation Button Color: #FFE135
+Multiply Modulation Button Color: #FF8C00
+User Automation Override Color: #20B2AA
+Note Expression Color: #FF8C00
+Send (post) value color: #20B2AA
+Send (pre) value color: #40E0D0
+Dark offset for automation/channel bar: #00000020
+Light offset for automation/channel bar: #F0F8FF20
+Unselected Filled Automation Type Icon: #A0C8D8
+Unselected Empty Automation Type Icon: #1E6C8866
+Selected matrix slot color: #FFE135
+
+// Modulation Mapping - Bikini Bottom palette
+Modulation Mapping Color: #FF69B4
+Modulation Mapping Color (subtractive): #FF4444
+Modulation Mapping Color (polyphonic): #20B2AA
+Modulation Mapping Background (monophonic): #FF69B440
+Modulation Mapping Background (polyphonic): #20B2AA40
+Modulation Mapping Background Color: #FF69B430
+Mapping indication 1: #FF69B4
+Mapping indication 2: #FFE135
+Mapping indication 3: #FF8C00
+Mapping indication 4: #20B2AA
+Mapping indication 5: #40E0D0
+Mapping indication 6: #165468
+Mapping indication 7: #FF8DC7
+Mapping indication 8: #FFE878
+
+// Record & Transport - Patrick pink for record!
+Record button color: #FF69B4
+Record button color implicit: #FF69B488
+Record button glow color: #FF69B440
+Record text color: #FF69B4
+Monitoring buttons color: #FFE135
+
+// Onset & Beat Detection
+Onset Color Min: #FF8C00
+Onset Color Max: #FFE135
+Onset Marker Color: #FFE135
+Beat Marker Color: #20B2AA
+Analyzed Beat Color: #20B2AA
+
+// File Status Indicators
+Missing file icon: #FF69B4
+Missing file text: #FF69B4
+Found file icon: #20B2AA
+Found file text: #20B2AA
+External file icon: #FF8C00
+External file text: #FF8C00
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #0A3040
+Invoke Action Category: #A0C8D8
+Invoke Action Text: #F0F8FF
+User input text: #F0F8FF
+
+// Panel Colors - Bikini Bottom palette!
+Panel Red: #FF69B4
+Panel Orange: #FF8C00
+Panel Yellow: #FFE135
+Panel Lime: #98FB98
+Panel Green: #20B2AA
+Panel Mint: #40E0D0
+Panel Turquoise: #48D1CC
+Panel Blue: #40A0FF
+Panel Purple: #9370DB
+
+// Bitwig Branding - Spongebob style
+Bitwig Red: #FF69B4
+Bitwig Mint: #40E0D0
+Bitwig CI: #FFE135
+Bitwig Producer: #FF8C00
+Bitwig Essentials: #40E0D0
+Bitwig 8-Track: #20B2AA
+Bitwig 16-Track: #40E0D0
+
+// Misc
+Comp fill: #FFE13550
+Drop Indicator: #FFE135
+Progress bar: #FFE135
+Progress background: #082838
+// <end>
