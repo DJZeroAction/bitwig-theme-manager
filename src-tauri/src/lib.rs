@@ -567,6 +567,82 @@ fn apply_theme(theme_path: String, bitwig_version: String) -> Result<String, App
     }
 }
 
+/// Preview a theme by applying content directly without saving to a theme file
+/// This allows testing changes before committing them
+///
+/// Takes theme content (BTE format) directly and writes to the active theme location
+#[tauri::command]
+fn preview_theme(content: String, bitwig_version: String) -> Result<String, AppError> {
+    // Target is always theme.bte - bitwig-theme-editor 2.x uses BTE format for all versions
+    let target = parser::get_active_theme_path(&bitwig_version).ok_or_else(|| AppError {
+        message: "Could not determine active theme path".to_string(),
+    })?;
+
+    log_event(&format!(
+        "preview_theme start: version={}, target={}",
+        bitwig_version,
+        target.to_string_lossy()
+    ));
+
+    // Create theme directory if it doesn't exist
+    if let Some(parent) = target.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+
+    // Check if content is JSON and convert to BTE if needed
+    let is_json = parser::is_json_content(&content);
+    let bte_content = if is_json {
+        parser::convert_json_to_bte(&content, Some("Preview"))?
+    } else {
+        content.clone()
+    };
+
+    // Check if theme needs Bitwig 5 → 6 property conversion
+    let is_bitwig_6_target = !is_bitwig_5(&bitwig_version);
+    let is_bw5_theme = bte_content.lines().any(|line| {
+        let trimmed = line.trim();
+        trimmed.starts_with("On:")
+            || trimmed.starts_with("Selection:")
+            || trimmed.starts_with("Panel body:")
+            || trimmed.starts_with("Hitech on:")
+            || trimmed.starts_with("Dark Timeline Background:")
+    });
+
+    let final_content = if is_bitwig_6_target && is_bw5_theme {
+        log_event("preview_theme converting bw5 theme to bw6 format");
+        parser::convert_bw5_to_bw6(&bte_content)
+    } else {
+        bte_content
+    };
+
+    // Clear old theme files from target directory
+    if let Some(parent) = target.parent() {
+        if parent.exists() {
+            for entry in std::fs::read_dir(parent).into_iter().flatten().flatten() {
+                let path = entry.path();
+                if path.is_file() {
+                    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                        if name == "theme.bte" || name == "theme.json" {
+                            let _ = std::fs::remove_file(&path);
+                            log_event(&format!("preview_theme removed old theme file: {}", name));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    std::fs::write(&target, &final_content).map_err(|e| {
+        log_event(&format!("preview_theme write failed: {}", e));
+        AppError {
+            message: format!("Failed to write preview theme: {}", e),
+        }
+    })?;
+
+    log_event("preview_theme done");
+    Ok("Theme preview applied! Restart Bitwig to see changes.".to_string())
+}
+
 /// Remove theme by deleting the active theme file
 /// Bitwig will use its default colors when no theme file is present
 #[tauri::command]
@@ -869,6 +945,7 @@ pub fn run() {
             save_theme,
             get_active_theme_path,
             apply_theme,
+            preview_theme,
             reset_theme,
             create_theme,
             import_theme,

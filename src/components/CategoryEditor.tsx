@@ -2,6 +2,11 @@ import { useState, useMemo } from "react";
 import { ColorPicker } from "./ColorPicker";
 import type { PropertyDefinition } from "../data/properties";
 
+interface ModeToggleConfig {
+  modes: { id: string; name: string; description: string }[];
+  defaultMode: string;
+}
+
 interface CategoryEditorProps {
   categoryName: string;
   description: string;
@@ -11,6 +16,9 @@ interface CategoryEditorProps {
   onChange: (key: string, value: string) => void;
   onGroupColorChange?: (color: string) => void;
   defaultExpanded?: boolean;
+  modeToggle?: ModeToggleConfig;
+  currentMode?: string;
+  onModeChange?: (mode: string) => void;
 }
 
 export function CategoryEditor({
@@ -22,6 +30,9 @@ export function CategoryEditor({
   onChange,
   onGroupColorChange,
   defaultExpanded = false,
+  modeToggle,
+  currentMode,
+  onModeChange,
 }: CategoryEditorProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
@@ -119,6 +130,27 @@ export function CategoryEditor({
         <div className="px-4 pb-4 border-t border-gray-700">
           {/* Description */}
           <p className="text-sm text-gray-400 py-2">{description}</p>
+
+          {/* Mode Toggle (for knobs and meters) */}
+          {modeToggle && onModeChange && (
+            <div className="flex items-center gap-2 mb-4 p-2 bg-gray-900 rounded-lg">
+              <span className="text-xs text-gray-400 mr-2">Style:</span>
+              {modeToggle.modes.map((mode) => (
+                <button
+                  key={mode.id}
+                  onClick={() => onModeChange(mode.id)}
+                  className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
+                    currentMode === mode.id
+                      ? "bg-purple-600 text-white"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  }`}
+                  title={mode.description}
+                >
+                  {mode.name}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Property Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">

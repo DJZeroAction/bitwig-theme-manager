@@ -401,3 +401,367 @@ export function deriveColorForProperty(baseColor: string, propertyKey: string): 
   // Default: return base color as-is
   return baseColor;
 }
+
+// ============================================================================
+// Bundle-Specific Derivation Functions
+// ============================================================================
+
+import type { DerivationMode } from '../data/properties/categories';
+
+/**
+ * Derive all colors for a grey scale bundle from a base color
+ * Creates graduated lightness steps from dark (0) to light (6)
+ */
+export function deriveGreyScale(baseColor: string): Record<string, string> {
+  const color = parseHex(baseColor);
+  if (!color) return {};
+
+  const { h, s, l } = rgbToHsl(color.r, color.g, color.b);
+
+  // Calculate step size - go from base lightness to about 50% lighter
+  // But cap the maximum lightness at ~40% for dark themes
+  const targetL = Math.min(l + 35, 45);
+  const stepSize = (targetL - l) / 7;
+
+  const result: Record<string, string> = {
+    "Window background": baseColor,
+    "Black": "#000000",
+  };
+
+  // Generate Grey 0-6
+  for (let i = 0; i <= 6; i++) {
+    const newL = l + (i * stepSize);
+    const { r, g, b } = hslToRgb(h, s, newL);
+
+    if (i === 6) {
+      // Grey 6 typically has alpha for overlay effect
+      result[`Grey ${i}`] = toHex(r, g, b, Math.round(255 * 0.2));
+    } else {
+      result[`Grey ${i}`] = toHex(r, g, b);
+    }
+  }
+
+  // Brighter is typically around step 4-5
+  const brighterL = l + (5 * stepSize);
+  const { r: br, g: bg, b: bb } = hslToRgb(h, s, brighterL);
+  result["Brighter"] = toHex(br, bg, bb);
+
+  // Grey Display Background - similar to Grey 2 with alpha
+  const greyDispL = l + (2 * stepSize);
+  const { r: gdr, g: gdg, b: gdb } = hslToRgb(h, s, greyDispL);
+  result["Grey Display Background"] = toHex(gdr, gdg, gdb, Math.round(255 * 0.4));
+
+  return result;
+}
+
+/**
+ * Derive all colors for the primary accent bundle
+ * Creates variants: subtle, subtler, pressed, standby, etc.
+ */
+export function derivePrimaryAccent(baseColor: string): Record<string, string> {
+  return {
+    "Accent": setAlpha(baseColor, 0), // Often transparent in BW6
+    "Accent (default)": baseColor,
+    "On": baseColor,
+    "On (subtle)": setAlpha(baseColor, 27),
+    "On (subtler)": setAlpha(baseColor, 13),
+    "Pressed On": darken(baseColor, 20),
+    "Hitech on": baseColor,
+    "Accent (hitech)": "#FFFFFF",
+    // Cross-category properties that use accent
+    "Knob Value Color": baseColor,
+    "Led On": baseColor,
+    "Progress bar": baseColor,
+    "Link Text": baseColor,
+    "Link Text Rollover": setAlpha(baseColor, 0),
+    // Selection colors
+    "White Selection": "#FFFFFF",
+    "White Selection (standby)": setAlpha("#E6E6E6", 47),
+    "Selection": setAlpha(baseColor, 40),
+    "Standby selection": setAlpha(baseColor, 20),
+    // Panel strokes
+    "Active Panel stroke": baseColor,
+    "Selected Panel stroke": baseColor,
+    "Rubber highlight button stroke": baseColor,
+    // Other accent uses
+    "Current Atom Value Color": baseColor,
+    "Selected matrix slot color": baseColor,
+    "Onset Marker Color": baseColor,
+    "Record text color": baseColor,
+    "Number field bar background": baseColor,
+  };
+}
+
+/**
+ * Derive all colors for the secondary accent (automation) bundle
+ */
+export function deriveSecondaryAccent(baseColor: string): Record<string, string> {
+  return {
+    "Automation Color": baseColor,
+    "Track Automation Color": baseColor,
+    "Track Automation Button Color": baseColor,
+    "Clip Automation Color": lighten(baseColor, 10),
+    "Clip Automation Button Color": darken(baseColor, 10),
+    "Arranger Automation Curve Fill Color": setAlpha(baseColor, 0),
+    "Automation button glow color": setAlpha(baseColor, 25),
+    "Automation Chooser Background": setAlpha(baseColor, 0),
+    "User Automation Override Color": mix(baseColor, "#00FF00", 50),
+    "Dark offset for automation/channel bar": setAlpha("#000000", 20),
+    "Light offset for automation/channel bar": setAlpha("#FFFFFF", 30),
+  };
+}
+
+/**
+ * Derive knob colors in 3D embossed style
+ */
+export function deriveKnob3D(baseColor: string): Record<string, string> {
+  return {
+    "Knob Body": baseColor,
+    "Knob Body Lighter": lighten(baseColor, 10),
+    "Knob Body Lightest": lighten(baseColor, 20),
+    "Knob Body Darkest": darken(baseColor, 15),
+    "Knob Emboss Highlight": setAlpha("#FFFFFF", 25),
+    "Knob Emboss Shadow": setAlpha("#000000", 50),
+    "Knob Stroke": darken(baseColor, 20),
+    "Knob Line": "#FFFFFF",
+    "Knob Line Dark": "#FFFFFF",
+    "Knob Value Background": baseColor,
+    "Knob Value Background (dark)": darken(baseColor, 5),
+    "Emboss Highlight": setAlpha("#FFFFFF", 6),
+    "Emboss Shadow": setAlpha("#000000", 12),
+    "Slider background": setAlpha(baseColor, 0),
+  };
+}
+
+/**
+ * Derive knob colors in flat modern style
+ */
+export function deriveKnobFlat(baseColor: string): Record<string, string> {
+  return {
+    "Knob Body": baseColor,
+    "Knob Body Lighter": baseColor,
+    "Knob Body Lightest": baseColor,
+    "Knob Body Darkest": baseColor,
+    "Knob Emboss Highlight": "#00000000",
+    "Knob Emboss Shadow": "#00000000",
+    "Knob Stroke": darken(baseColor, 10),
+    "Knob Line": "#FFFFFF",
+    "Knob Line Dark": "#FFFFFF",
+    "Knob Value Background": baseColor,
+    "Knob Value Background (dark)": baseColor,
+    "Emboss Highlight": "#00000000",
+    "Emboss Shadow": "#00000000",
+    "Slider background": setAlpha(baseColor, 0),
+  };
+}
+
+/**
+ * Derive meter colors in traditional green/yellow/red style
+ */
+export function deriveMetersTraditional(_baseColor: string): Record<string, string> {
+  // baseColor is ignored for traditional style - we use standard colors
+  return {
+    "Meter Normal": "#57E389",
+    "Meter Yellow": "#F9F06B",
+    "Meter Red": "#F66151",
+    "Meter Clipping": "#ED333B",
+    "Meter Muted": "#979797",
+    "Meter Gain Reduction": "#5386B6",
+    "Meter Hitech": "#3EBAFF",
+    "Meter Hitech Background": setAlpha("#3EBAFF", 8),
+    "Led Off": "#545454",
+    "Hitech background": "#0A0608",
+    "Unselected Filled Automation Type Icon": "#969696",
+    "Unselected Empty Automation Type Icon": "#969696",
+  };
+}
+
+/**
+ * Derive meter colors using the accent color
+ */
+export function deriveMetersThemed(accentColor: string): Record<string, string> {
+  return {
+    "Meter Normal": accentColor,
+    "Meter Yellow": "#F9F06B",
+    "Meter Red": "#F66151",
+    "Meter Clipping": "#ED333B",
+    "Meter Muted": desaturate(accentColor, 60),
+    "Meter Gain Reduction": mix(accentColor, "#5386B6", 30),
+    "Meter Hitech": accentColor,
+    "Meter Hitech Background": setAlpha(accentColor, 8),
+    "Led Off": desaturate(darken(accentColor, 30), 50),
+    "Hitech background": "#0A0608",
+    "Unselected Filled Automation Type Icon": "#969696",
+    "Unselected Empty Automation Type Icon": "#969696",
+  };
+}
+
+/**
+ * Derive surface colors (buttons, menus, tooltips)
+ */
+export function deriveSurfaceColors(baseColor: string): Record<string, string> {
+  return {
+    "Button background": baseColor,
+    "Button stroke": setAlpha(darken(baseColor, 30), 13),
+    "Pressed button background": setAlpha(darken(baseColor, 10), 50),
+    "Button in tree background": lighten(baseColor, 5),
+    "OK Button background": lighten(baseColor, 15),
+    "View button background": setAlpha(baseColor, 0),
+    "Pressed view button background": darken(baseColor, 5),
+    "Abstract Button Unselected Background": darken(baseColor, 15),
+    "Abstract Button Selected Background": lighten(baseColor, 5),
+    "Abstract Button Pressed Background": darken(baseColor, 5),
+    "Abstract Button Stroke": setAlpha(lighten(baseColor, 20), 0),
+    "Checkbox background": setAlpha(baseColor, 50),
+    "Close button mouse over background": setAlpha("#000000", 35),
+    "Close button pressed background": setAlpha("#000000", 65),
+    "Inverted Selected Borderless Button background": lighten(baseColor, 20),
+    "Rubber button stroke": darken(baseColor, 20),
+    "Notification Button Background": setAlpha("#000000", 50),
+    "Pressed borderless button background": "#00000000",
+    "Selected borderless button background": "#00000000",
+    "Color bar button fill color": setAlpha("#000000", 24),
+    "Menu background": baseColor,
+    "Menu stroke": setAlpha(lighten(baseColor, 10), 0),
+    "Menu separator": lighten(baseColor, 30),
+    "Tooltip Background": lighten(baseColor, 10),
+    "Tooltip Stroke": setAlpha(lighten(baseColor, 30), 0),
+    "Light Tooltip Background": "#D7D7D7",
+    "Timeline Header Tooltip Background": setAlpha(baseColor, 78),
+    "Timeline Tooltip Background": setAlpha(lighten(baseColor, 40), 78),
+    "Notification Background": "#FFFFFF",
+    "Notification Normal": "#000000",
+    "Notification Error": "#F66151",
+    "Popup Notification Background": setAlpha("#000000", 71),
+    "Popup insert": lighten(baseColor, 25),
+    "Popup overlay background color": setAlpha(baseColor, 86),
+    "Invoke Action Background": "#D8D8D8",
+    "Invoke Action Category": "#000000",
+  };
+}
+
+/**
+ * Derive timeline background colors
+ */
+export function deriveTimelineColors(baseColor: string): Record<string, string> {
+  const color = parseHex(baseColor);
+  if (!color) return {};
+
+  const { h, s } = rgbToHsl(color.r, color.g, color.b);
+
+  // Create a set of graduated backgrounds
+  const darkestRgb = hslToRgb(h, s, 3);
+  const darkRgb = hslToRgb(h, s, 5);
+  const mediumRgb = hslToRgb(h, s, 7);
+  const lightRgb = hslToRgb(h, s, 10);
+
+  const darkest = toHex(darkestRgb.r, darkestRgb.g, darkestRgb.b);
+  const dark = toHex(darkRgb.r, darkRgb.g, darkRgb.b);
+  const medium = toHex(mediumRgb.r, mediumRgb.g, mediumRgb.b);
+  const light = toHex(lightRgb.r, lightRgb.g, lightRgb.b);
+
+  return {
+    "Top Level Timeline Background": dark,
+    "Top Level Timeline Header Background": medium,
+    "Dark Timeline Background": darkest,
+    "Dark Timeline Header Background": dark,
+    "Light Timeline Background": medium,
+    "Light Timeline Header Background": light,
+    "Irrelevant Timeline Background": darken(darkest, 2),
+    "Irrelevant Timeline Header Background": darkest,
+    "Irrelevant Timeline Overlay": setAlpha("#000000", 25),
+    "Irrelevant Timeline Header Overlay": setAlpha("#000000", 25),
+    "Timeline Background Pattern": medium,
+    "Timeline Header Background Pattern": setAlpha("#FFFFFF", 4),
+    "Timeline Primary Grid": setAlpha(lighten(baseColor, 20), 20),
+    "Timeline Secondary Grid": setAlpha(lighten(baseColor, 20), 10),
+    "Timeline Header Primary Grid": setAlpha(lighten(baseColor, 20), 20),
+    "Timeline Header Secondary Grid": setAlpha(lighten(baseColor, 20), 10),
+    "Timeline Playhead": "#E8DDD0",
+    "Timeline Cue Marker": "#535353",
+    "Timeline Header Cue Marker": "#545454",
+    "Timeline edit tool chooser background": light,
+  };
+}
+
+/**
+ * Derive selection colors based on accent
+ */
+export function deriveSelectionColors(accentColor: string): Record<string, string> {
+  return {
+    "Time Selection Fill": setAlpha(accentColor, 36),
+    "Time Selection Stroke": "#F7F7F7",
+    "Time Selection Standby Fill": setAlpha("#FFFFFF", 28),
+    "Time Selection Standby Stroke": setAlpha("#CECECE", 0),
+    "Time Selection Cursor Stroke": "#FFFFFF",
+    "Time Selection Standby Cursor Stroke": "#F7F7F7",
+    "Time Selection Inactive Fill": setAlpha("#FFFFFF", 6),
+    "Time Selection Inactive Stroke": setAlpha("#FFFFFF", 12),
+    "Time Selection Not Selected Fill": "#00000000",
+    "Time Selection Not Selected Stroke": setAlpha("#CECECE", 0),
+    "Time Selection Implicit Fill": "#00000000",
+    "Time Selection Across All Lanes Fill": setAlpha(mix(accentColor, "#98C8C8", 50), 78),
+    "Time Selection Across All Lanes Stroke": "#F7F7F7",
+    "Header Time Selection Fill": setAlpha(accentColor, 78),
+    "Header Time Selection Stroke": "#F7F7F7",
+    "Header Time Selection Standby Fill": setAlpha("#FFFFFF", 2),
+    "Header Time Selection Standby Stroke": "#A7A7A7",
+    "Header Time Selection Cursor Stroke": "#DEDEDE",
+    "Header Time Selection Standby Cursor Stroke": "#B0B0B0",
+    "Header Time Selection Across All Lanes Fill": setAlpha(mix(accentColor, "#98C8C8", 30), 78),
+    "Header Time Selection Across All Lanes Stroke": "#DEDEDE",
+  };
+}
+
+/**
+ * Master derivation function that applies the appropriate strategy based on bundle type
+ */
+export function deriveBundleColors(
+  _bundleId: string,
+  derivationMode: DerivationMode,
+  baseColor: string,
+  options?: { knobStyle?: "3d" | "flat"; meterStyle?: "traditional" | "themed"; accentColor?: string }
+): Record<string, string> {
+  switch (derivationMode) {
+    case "graduated-lightness":
+      return deriveGreyScale(baseColor);
+
+    case "accent-variants":
+      return derivePrimaryAccent(baseColor);
+
+    case "secondary-accent":
+      return deriveSecondaryAccent(baseColor);
+
+    case "knob-3d":
+      return options?.knobStyle === "flat" ? deriveKnobFlat(baseColor) : deriveKnob3D(baseColor);
+
+    case "knob-flat":
+      return deriveKnobFlat(baseColor);
+
+    case "meters-traditional":
+      return options?.meterStyle === "themed" && options?.accentColor
+        ? deriveMetersThemed(options.accentColor)
+        : deriveMetersTraditional(baseColor);
+
+    case "meters-themed":
+      return deriveMetersThemed(options?.accentColor || baseColor);
+
+    case "surface-colors":
+      return deriveSurfaceColors(baseColor);
+
+    case "timeline-colors":
+      return deriveTimelineColors(baseColor);
+
+    case "selection-colors":
+      return deriveSelectionColors(options?.accentColor || baseColor);
+
+    case "text-colors":
+    case "palette-9":
+    case "palette-8":
+    case "static":
+    case "advanced":
+    default:
+      // For these modes, use the generic property-based derivation
+      return {};
+  }
+}

@@ -88,6 +88,44 @@ export function useThemes(bitwigVersion: string = "5.2") {
     }
   }, [bitwigVersion]);
 
+  // Preview a theme without saving - applies current in-memory theme state
+  const previewTheme = useCallback(async (theme: Theme): Promise<string | null> => {
+    setError(null);
+    try {
+      // Serialize theme to BTE format
+      let content = "";
+
+      // Add metadata comments
+      if (theme.metadata.name) {
+        content += `/ Theme: ${theme.metadata.name}\n`;
+      }
+      if (theme.metadata.author) {
+        content += `/ Author: ${theme.metadata.author}\n`;
+      }
+      if (theme.metadata.description) {
+        content += `/ Description: ${theme.metadata.description}\n`;
+      }
+      if (theme.metadata.version) {
+        content += `/ Version: ${theme.metadata.version}\n`;
+      }
+      if (content) {
+        content += "\n";
+      }
+
+      // Sort colors by key and add them
+      const sortedKeys = Object.keys(theme.colors).sort();
+      for (const key of sortedKeys) {
+        content += `${key}: ${theme.colors[key]}\n`;
+      }
+
+      const message = await api.previewTheme(content, bitwigVersion);
+      return message;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      return null;
+    }
+  }, [bitwigVersion]);
+
   const updateColor = useCallback((key: string, value: string) => {
     if (!currentTheme) return;
     setCurrentTheme({
@@ -231,6 +269,7 @@ export function useThemes(bitwigVersion: string = "5.2") {
     createTheme,
     createThemeFromTemplate,
     applyTheme,
+    previewTheme,
     updateColor,
     updateColors,
     updateMetadata,

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { CategoryEditor } from "./CategoryEditor";
 import {
   getPropertiesForVersion,
@@ -7,11 +7,11 @@ import {
   type PropertyDefinition,
 } from "../data/properties";
 import {
-  CATEGORIES,
-  getCategoryBaseProperty,
-  HIGH_IMPACT_CATEGORIES,
+  SEMANTIC_BUNDLES,
+  getBundleBaseProperty,
+  type SemanticBundle,
 } from "../data/properties/categories";
-import { deriveColorForProperty } from "../utils/colorUtils";
+import { deriveColorForProperty, deriveBundleColors } from "../utils/colorUtils";
 import type { Theme } from "../api/types";
 
 interface UnifiedThemeEditorProps {
@@ -20,6 +20,12 @@ interface UnifiedThemeEditorProps {
   onColorChange: (key: string, value: string) => void;
   onColorsChange?: (updates: Record<string, string>) => void;
   onVersionChange?: (version: BitwigVersion) => void;
+}
+
+// Store bundle mode states
+interface BundleModes {
+  "knob-styling": "3d" | "flat";
+  "meters-leds": "traditional" | "themed";
 }
 
 export function UnifiedThemeEditor({
@@ -31,6 +37,10 @@ export function UnifiedThemeEditor({
 }: UnifiedThemeEditorProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyModified, setShowOnlyModified] = useState(false);
+  const [bundleModes, setBundleModes] = useState<BundleModes>({
+    "knob-styling": "3d",
+    "meters-leds": "traditional",
+  });
 
   // Get all properties for the current version
   const versionProperties = useMemo(() => {
@@ -61,37 +71,44 @@ export function UnifiedThemeEditor({
     return result;
   }, [theme.colors, defaultValues]);
 
-  // Group properties by category
-  const categorizedProperties = useMemo(() => {
-    const byCategory = new Map<string, PropertyDefinition[]>();
+  // Get primary accent color for use in other bundle derivations
+  const primaryAccentColor = useMemo(() => {
+    const accentKey = bitwigVersion === "5" ? "On" : "Accent (default)";
+    return populatedValues[accentKey] || "#FF0040";
+  }, [populatedValues, bitwigVersion]);
+
+  // Group properties by bundle (category)
+  const bundledProperties = useMemo(() => {
+    const byBundle = new Map<string, PropertyDefinition[]>();
 
     for (const prop of versionProperties) {
-      const existing = byCategory.get(prop.category) || [];
+      const existing = byBundle.get(prop.category) || [];
       existing.push(prop);
-      byCategory.set(prop.category, existing);
+      byBundle.set(prop.category, existing);
     }
 
-    return byCategory;
+    return byBundle;
   }, [versionProperties]);
 
-  // Filter properties by search query
-  const filteredCategories = useMemo(() => {
+  // Filter bundles by search query
+  const filteredBundles = useMemo(() => {
     if (!searchQuery && !showOnlyModified) {
-      return CATEGORIES.filter(cat => categorizedProperties.has(cat.id));
+      return SEMANTIC_BUNDLES.filter(bundle => bundledProperties.has(bundle.id));
     }
 
     const query = searchQuery.toLowerCase();
-    const result: typeof CATEGORIES = [];
+    const result: SemanticBundle[] = [];
 
-    for (const category of CATEGORIES) {
-      const props = categorizedProperties.get(category.id);
+    for (const bundle of SEMANTIC_BUNDLES) {
+      const props = bundledProperties.get(bundle.id);
       if (!props) continue;
 
       const filteredProps = props.filter(p => {
         // Search filter
         const matchesSearch = !query ||
           p.key.toLowerCase().includes(query) ||
-          (p.description?.toLowerCase().includes(query) ?? false);
+          (p.description?.toLowerCase().includes(query) ?? false) ||
+          bundle.name.toLowerCase().includes(query);
 
         // Modified filter
         const isModified = showOnlyModified
@@ -102,26 +119,29 @@ export function UnifiedThemeEditor({
       });
 
       if (filteredProps.length > 0) {
-        result.push(category);
+        result.push(bundle);
       }
     }
 
     return result;
-  }, [searchQuery, showOnlyModified, categorizedProperties, populatedValues]);
+  }, [searchQuery, showOnlyModified, bundledProperties, populatedValues]);
 
-  // Get filtered properties for a category
-  const getFilteredPropertiesForCategory = (categoryId: string): PropertyDefinition[] => {
-    const props = categorizedProperties.get(categoryId) || [];
+  // Get filtered properties for a bundle
+  const getFilteredPropertiesForBundle = useCallback((bundleId: string): PropertyDefinition[] => {
+    const props = bundledProperties.get(bundleId) || [];
 
     if (!searchQuery && !showOnlyModified) {
       return props;
     }
 
     const query = searchQuery.toLowerCase();
+    const bundle = SEMANTIC_BUNDLES.find(b => b.id === bundleId);
+
     return props.filter(p => {
       const matchesSearch = !query ||
         p.key.toLowerCase().includes(query) ||
-        (p.description?.toLowerCase().includes(query) ?? false);
+        (p.description?.toLowerCase().includes(query) ?? false) ||
+        (bundle?.name.toLowerCase().includes(query) ?? false);
 
       const isModified = showOnlyModified
         ? (populatedValues[p.key] || "").toUpperCase() !== (p.defaultValue || "").toUpperCase()
@@ -129,7 +149,7 @@ export function UnifiedThemeEditor({
 
       return matchesSearch && isModified;
     });
-  };
+  }, [searchQuery, showOnlyModified, bundledProperties, populatedValues]);
 
   // Count total and modified properties
   const { totalCount, modifiedCount } = useMemo(() => {
@@ -147,20 +167,37 @@ export function UnifiedThemeEditor({
     return { totalCount: total, modifiedCount: modified };
   }, [versionProperties, populatedValues]);
 
-  // Handle group color change - applies intelligently derived colors to all properties in a category
-  const handleGroupColorChange = (categoryId: string, color: string) => {
-    const props = categorizedProperties.get(categoryId);
+  // Handle bundle color change - applies intelligently derived colors
+  const handleBundleColorChange = useCallback((bundle: SemanticBundle, color: string) => {
+    const props = bundledProperties.get(bundle.id);
     if (!props) return;
 
-    // Build updates with intelligently derived colors based on property names
+    // Try bundle-specific derivation first
+    const bundleDerived = deriveBundleColors(
+      bundle.id,
+      bundle.derivationMode,
+      color,
+      {
+        knobStyle: bundleModes["knob-styling"],
+        meterStyle: bundleModes["meters-leds"],
+        accentColor: bundle.id === "primary-accent" ? color : primaryAccentColor,
+      }
+    );
+
+    // Build updates
     const updates: Record<string, string> = {};
+
     for (const prop of props) {
-      // Derive a color variation based on the property name patterns
-      // (e.g., "Pressed" gets darker, "Hover" gets lighter, "subtle" gets alpha)
-      updates[prop.key] = deriveColorForProperty(color, prop.key);
+      if (bundleDerived[prop.key]) {
+        // Use bundle-specific derivation
+        updates[prop.key] = bundleDerived[prop.key];
+      } else {
+        // Fall back to property name-based derivation
+        updates[prop.key] = deriveColorForProperty(color, prop.key);
+      }
     }
 
-    // Use batch update if available, otherwise update one by one
+    // Use batch update if available
     if (onColorsChange) {
       onColorsChange(updates);
     } else {
@@ -168,7 +205,48 @@ export function UnifiedThemeEditor({
         onColorChange(key, value);
       }
     }
-  };
+  }, [bundledProperties, bundleModes, primaryAccentColor, onColorsChange, onColorChange]);
+
+  // Handle bundle mode change (e.g., 3D vs Flat knobs)
+  const handleBundleModeChange = useCallback((bundleId: keyof BundleModes, mode: string) => {
+    setBundleModes(prev => ({
+      ...prev,
+      [bundleId]: mode,
+    }));
+
+    // Re-derive colors with new mode
+    const bundle = SEMANTIC_BUNDLES.find(b => b.id === bundleId);
+    if (bundle) {
+      const baseKey = getBundleBaseProperty(bundleId, bitwigVersion);
+      const baseColor = populatedValues[baseKey] || "#808080";
+
+      const newModes = {
+        ...bundleModes,
+        [bundleId]: mode,
+      };
+
+      const bundleDerived = deriveBundleColors(
+        bundle.id,
+        bundle.derivationMode,
+        baseColor,
+        {
+          knobStyle: newModes["knob-styling"] as "3d" | "flat",
+          meterStyle: newModes["meters-leds"] as "traditional" | "themed",
+          accentColor: primaryAccentColor,
+        }
+      );
+
+      if (Object.keys(bundleDerived).length > 0) {
+        if (onColorsChange) {
+          onColorsChange(bundleDerived);
+        } else {
+          for (const [key, value] of Object.entries(bundleDerived)) {
+            onColorChange(key, value);
+          }
+        }
+      }
+    }
+  }, [bitwigVersion, bundleModes, populatedValues, primaryAccentColor, onColorsChange, onColorChange]);
 
   return (
     <div className="space-y-4">
@@ -228,7 +306,7 @@ export function UnifiedThemeEditor({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search properties..."
+              placeholder="Search properties or bundles..."
               className="w-full bg-gray-700 border border-gray-600 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-purple-500"
             />
             {searchQuery && (
@@ -255,39 +333,52 @@ export function UnifiedThemeEditor({
         </div>
       </div>
 
-      {/* Category List */}
+      {/* Bundle List */}
       <div className="space-y-2">
-        {filteredCategories.length === 0 ? (
+        {filteredBundles.length === 0 ? (
           <div className="bg-gray-800 rounded-lg p-8 text-center text-gray-400">
             {searchQuery || showOnlyModified
               ? "No properties match your filters"
               : "No properties available"}
           </div>
         ) : (
-          filteredCategories.map((category) => {
-            const props = getFilteredPropertiesForCategory(category.id);
-            const baseKey = getCategoryBaseProperty(category.id, bitwigVersion);
+          filteredBundles.map((bundle) => {
+            const props = getFilteredPropertiesForBundle(bundle.id);
+            const baseKey = getBundleBaseProperty(bundle.id, bitwigVersion);
 
             return (
               <CategoryEditor
-                key={category.id}
-                categoryName={category.name}
-                description={category.description}
+                key={bundle.id}
+                categoryName={bundle.name}
+                description={bundle.description}
                 properties={props}
                 values={populatedValues}
                 basePropertyKey={baseKey}
                 onChange={onColorChange}
-                onGroupColorChange={(color) => handleGroupColorChange(category.id, color)}
-                defaultExpanded={HIGH_IMPACT_CATEGORIES.includes(category.id) && !searchQuery}
+                onGroupColorChange={(color) => handleBundleColorChange(bundle, color)}
+                defaultExpanded={false}
+                modeToggle={bundle.modeToggle}
+                currentMode={
+                  bundle.id === "knob-styling"
+                    ? bundleModes["knob-styling"]
+                    : bundle.id === "meters-leds"
+                    ? bundleModes["meters-leds"]
+                    : undefined
+                }
+                onModeChange={
+                  bundle.modeToggle
+                    ? (mode) => handleBundleModeChange(bundle.id as keyof BundleModes, mode)
+                    : undefined
+                }
               />
             );
           })
         )}
       </div>
 
-      {/* Keyboard Shortcuts Help */}
+      {/* Help Text */}
       <div className="text-xs text-gray-500 text-center py-2">
-        Click category headers to expand/collapse • Click reset button to restore defaults
+        Click bundle headers to expand/collapse. Use the color picker to set base colors - related properties derive automatically.
       </div>
     </div>
   );

@@ -808,6 +808,7 @@ function EditorView() {
     createTheme,
     createThemeFromTemplate,
     applyTheme,
+    previewTheme,
     updateColor,
     updateColors,
     importTheme,
@@ -822,6 +823,7 @@ function EditorView() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>("none");
   const [saving, setSaving] = useState(false);
   const [applying, setApplying] = useState(false);
+  const [previewing, setPreviewing] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [applyMessage, setApplyMessage] = useState<string | null>(null);
   const [editorVersion, setEditorVersion] = useState<BitwigVersion>(majorVersion);
@@ -867,6 +869,18 @@ function EditorView() {
       setTimeout(() => setApplyMessage(null), 5000);
     }
     setApplying(false);
+  };
+
+  const handlePreview = async () => {
+    if (!populatedTheme) return;
+    setPreviewing(true);
+    setApplyMessage(null);
+    const message = await previewTheme(populatedTheme);
+    if (message) {
+      setApplyMessage(message);
+      setTimeout(() => setApplyMessage(null), 5000);
+    }
+    setPreviewing(false);
   };
 
   const handleCreate = async () => {
@@ -1037,12 +1051,20 @@ function EditorView() {
                   {saving ? "Saving..." : "Save"}
                 </button>
                 <button
-                  onClick={handleApply}
-                  disabled={applying || isActiveTheme}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg"
-                  title={isActiveTheme ? "This theme is already active" : "Apply theme to Bitwig"}
+                  onClick={handlePreview}
+                  disabled={previewing}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 rounded-lg"
+                  title="Preview current changes without saving (restart Bitwig to see changes)"
                 >
-                  {applying ? "Applying..." : isActiveTheme ? "Active" : "Apply to Bitwig"}
+                  {previewing ? "Previewing..." : "Preview"}
+                </button>
+                <button
+                  onClick={handleApply}
+                  disabled={applying || isActiveTheme || hasUnsavedChanges}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 rounded-lg"
+                  title={hasUnsavedChanges ? "Save changes first to apply" : isActiveTheme ? "This theme is already active" : "Apply saved theme to Bitwig"}
+                >
+                  {applying ? "Applying..." : isActiveTheme ? "Active" : "Apply"}
                 </button>
               </div>
             </div>
