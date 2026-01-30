@@ -3,7 +3,7 @@
 // Unicorn dreams, dolphin sunsets, rainbow everything
 // Author: Claude
 
-// Core
+// Core - HOT PINK base, rainbow in details!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -13,14 +13,14 @@ Black: #000000
 Same as background: #00000000
 Accent: #00FFFF
 Default text: #FFFFFF
-Window background: #00AAAA
-Grey 0: #CC44AA
-Grey 1: #4488DD
-Grey 2: #44BB88
-Grey 3: #DDAA44
-Grey 4: #DD6644
-Grey 5: #AA44CC
-Grey 6: #44AADD
+Window background: #AA3388
+Grey 0: #882266
+Grey 1: #993377
+Grey 2: #AA4488
+Grey 3: #BB5599
+Grey 4: #CC66AA
+Grey 5: #DD77BB
+Grey 6: #EE88CC
 Shadow: #00000060
 Brighter: #FFFFFF
 
@@ -53,42 +53,42 @@ Activation Green: #00FF00
 Activation Yellow: #FFFF00
 Activation Red: #FF0080
 
-// Buttons - COLORFUL!
-Button background: #FF69B480
+// Buttons - Pink base with neon accents!
+Button background: #CC66AA80
 Button stroke: #FFFF00
 OK Button background: #FF1493
 Pressed button background: #00FFFF60
-Checkbox background: #9944CC
-Button in tree background: #DD6644
-View button background: #FF00FF30
+Checkbox background: #993377
+Button in tree background: #CC773388
+View button background: #FF149330
 Pressed view button background: #00FFFF50
 Inverted Selected Borderless Button background: #FFFF0060
-Selected borderless button background: #FF149360
+Selected borderless button background: #00FFFF60
 Pressed borderless button background: #00FFFF80
 Rubber button stroke: #FFFF00
 Rubber highlight button stroke: #00FFFF
 Close button mouse over background: #FF00FF60
 Close button pressed background: #FF149380
 Abstract Button Stroke: #FFFF0080
-Abstract Button Selected Background: #FF149360
-Abstract Button Unselected Background: #BB55AA
+Abstract Button Selected Background: #00FFFF60
+Abstract Button Unselected Background: #993377
 Abstract Button Pressed Background: #00FFFF60
 Color bar button fill color: #FFFF0040
 
-// Knobs & Sliders - NEON colors
-Knob Body: #DD55AA
-Knob Body Lighter: #EE77BB
-Knob Body Lightest: #FF99CC
-Knob Body Darkest: #AA3388
+// Knobs & Sliders - Pink body, neon accents
+Knob Body: #AA4488
+Knob Body Lighter: #BB5599
+Knob Body Lightest: #CC66AA
+Knob Body Darkest: #882266
 Knob Line: #FFFF00
 Knob Line Dark: #00FFFF
 Knob Stroke: #FFFF0080
 Knob Emboss Highlight: #FFFFFF40
 Knob Emboss Shadow: #00000040
-Knob Value Background: #88008880
-Knob Value Background (dark): #660066
+Knob Value Background: #88226680
+Knob Value Background (dark): #882266
 Knob Value Color: #00FFFF
-Slider background: #88008880
+Slider background: #88226680
 Emboss Highlight: #FFFFFF30
 Emboss Shadow: #00000030
 
@@ -104,20 +104,20 @@ Pressed Inverted Toggle Icon: #00FFFF
 Toggle Icon: #FFFF00
 
 // Menus & Popups - HOT PINK background!
-Menu background: #DD4488
+Menu background: #AA4488
 Menu stroke: #FFFF00
 Menu text: #FFFFFF
 Menu Icon: #FFFFFFcc
 Menu description text: #FFFF00
 Menu separator: #FFFF0066
 Popup insert: #44AADD
-Popup overlay background color: #AA44AADD
+Popup overlay background color: #882266DD
 Popup Notification Background: #44BB88
 Notification Background: #44BB88
 Notification Normal: #FFFFFF
 Notification Error: #FF0000
-Notification Button Background: #DD6644
-Tooltip Background: #DDAA44
+Notification Button Background: #CC7733
+Tooltip Background: #FFFF00
 Light Tooltip Background: #FF69B4
 Tooltip Stroke: #FF00FF
 
@@ -135,54 +135,54 @@ Meter Muted: #888888
 Hitech background: #333333
 Hitech on: #00FFFF
 
-// Scrollbars - CYAN AND PINK
+// Scrollbars - Pink base, neon handles
 Scrollbar: #00FFFF
-Scrollbar background: #880088
-Modern Scrollbar Handle (active): #FF1493
-Modern Scrollbar Handle (inactive): #00FFFF80
-Modern Scrollbar Background (active): #88008860
+Scrollbar background: #882266
+Modern Scrollbar Handle (active): #00FFFF
+Modern Scrollbar Handle (inactive): #FF149380
+Modern Scrollbar Background (active): #88226660
 Modern Dark Scrollbar Handle (active): #00FFFF
-Modern Dark Scrollbar Handle (inactive): #FF00FF80
+Modern Dark Scrollbar Handle (inactive): #FF149380
 
-// Tree & List Views - ORANGE backgrounds!
-Tree Item Background: #DD8844
-Selected Tree Item Background: #FF149380
-Selected Tree Item Background (standby): #FF149340
+// Tree & List Views - ORANGE sunset! (secondary color)
+Tree Item Background: #CC7733
+Selected Tree Item Background: #00FFFF80
+Selected Tree Item Background (standby): #00FFFF40
 Tree Separator: #FFFF0044
-List Item Background: #DD8844
+List Item Background: #BB6622
 List Separator: #FFFF0044
 Selected Dashboard Tree: #00FFFF
-Dark tree background (selected): #FF149380
+Dark tree background (selected): #00FFFF80
 Dark tree selection frame: #FFFF00
-Dark tree background (standby selected): #FF149340
+Dark tree background (standby selected): #00FFFF40
 Dark tree separator: #FFFF0044
 Dark tree text: #FFFFFF
-Dark tree text (selected): #FFFFFF
+Dark tree text (selected): #000000
 Dark tree hover background change: #FFFFFF20
 Frame color of selection cursor in the tree.: #FFFF00
 Frame color of selection cursor in the tree. (standby): #00FFFF
 Launcher Mapping Indication: #FFFF00
 
-// Panels & Separators - COLORFUL PANELS!
-Panel body: #BB55AA
-Selected Panel body: #55AADD
+// Panels & Separators - Pink base panels!
+Panel body: #AA4488
+Selected Panel body: #CC66AA
 Panel stroke: #FFFF0080
 Selected Panel stroke: #FFFFFF
 Selected Panel stroke (standby): #00FFFF
 Active Panel stroke: #FFFF00
 Panel Stroke (focused): #FFFF00
 Inspector Section Frame: #FFFF0066
-Content Background: #55AA88
+Content Background: #44BBAA
 Light Separator Line: #FFFF0066
 Dark Separator Line: #00000040
 Dark Panel Sub-frame Stroke: #FFFF0044
-Dark Panel Sub-frame Fill: #AA5588
-Field background: #DDAA44
+Dark Panel Sub-frame Fill: #993377
+Field background: #882266
 Number field bar background: #00FFFF
 
-// Device Chain - DIFFERENT COLOR TINTS!
-Device Header: #55AA88
-Device Header (selected): #DDAA44
+// Device Chain - TEAL tropical! (secondary color)
+Device Header: #339999
+Device Header (selected): #44BBAA
 Device Locked Overlay: #FF149380
 Device Tint Future: #00FFFF80
 Device Tint Retro: #FF880060
@@ -190,23 +190,23 @@ Device Tint Military: #88FF0060
 Plugin missing: #FF0000
 
 // Display & Waveforms - CYAN waveforms on PINK
-Display Background: #AA4488
+Display Background: #882266
 Display Background (error): #FF0000
 Display Waveform: #00FFFF
 Display Stroke: #FFFF0080
 Display Start/End Markers: #FFFF00
 Display Loop Markers: #00FF00
-Grey Display Background: #8844AA
-Audio Event Background: #55AADD
+Grey Display Background: #993377
+Audio Event Background: #FF1493
 Audio Event Boundary: #FFFF0080
-Audio Event Waveform: #FF1493
+Audio Event Waveform: #00FFFF
 
-// Grid & Modular Environment - Rainbow cables!
-The Grid (background): #5588AA
+// Grid & Modular Environment - BLUE ocean! (secondary color)
+The Grid (background): #3366AA
 The Grid (stroke): #FFFF0044
 Grid Line (Primary): #FFFF0066
 Grid Line (Secondary): #FFFF0033
-Background color of the modular environment.: #AA5588
+Background color of the modular environment.: #4477BB
 Compressed Audio Port in modular environment: #00FFFF
 Audio connection in modular environment: #FF1493
 Audio64 connection in modular environment: #FFFF00
@@ -214,25 +214,25 @@ Event connection in modular environment: #00FF00
 Polyphonic Desktop Object: #FF00FF
 Current Atom Value Color: #FFFF00
 
-// Timeline & Arranger - TEAL AND GREEN!
-Dark Timeline Background: #448888
-Dark Timeline Header Background: #55AAAA
-Light Timeline Background: #55AA88
-Light Timeline Header Background: #66BB99
-Top Level Timeline Background: #448888
-Top Level Timeline Header Background: #55AA88
-Irrelevant Timeline Background: #336666
-Irrelevant Timeline Header Background: #448888
+// Timeline & Arranger - Pink tinted!
+Dark Timeline Background: #772255
+Dark Timeline Header Background: #883366
+Light Timeline Background: #883366
+Light Timeline Header Background: #994477
+Top Level Timeline Background: #7A2860
+Top Level Timeline Header Background: #8B3970
+Irrelevant Timeline Background: #661144
+Irrelevant Timeline Header Background: #772255
 Irrelevant Timeline Overlay: #00000040
 Irrelevant Timeline Header Overlay: #00000040
-Timeline Background Pattern: #55AA88
-Timeline Header Background Pattern: #66BB99
+Timeline Background Pattern: #994477
+Timeline Header Background Pattern: #AA5588
 Timeline Primary Grid: #FFFF0044
 Timeline Secondary Grid: #FFFF0022
 Timeline Header Primary Grid: #FFFF0044
 Timeline Header Secondary Grid: #FFFF0022
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #DD6644
+Timeline edit tool chooser background: #AA4488
 
 // Timeline Selection & Cursors - HOT PINK!
 Time Selection Fill: #FF149350
@@ -333,9 +333,9 @@ Found file text: #00FF00
 External file icon: #FFFF00
 External file text: #FFFF00
 
-// Invoke Action (Command Palette) - ORANGE!
-Invoke Action Background: #DD8844
-Invoke Action Category: #FFFFFF
+// Invoke Action (Command Palette) - Pink base!
+Invoke Action Background: #AA4488
+Invoke Action Category: #FFFF00
 Invoke Action Text: #FFFFFF
 User input text: #FFFFFF
 
