@@ -307,7 +307,12 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   // Get the currently selected variant for a bundle
   const getSelectedVariant = (bundle: ThemeBundle): RepositoryTheme => {
     const selectedName = selectedVariants[bundle.id];
-    return bundle.themes.find(t => t.name === selectedName) || bundle.themes[0];
+    if (selectedName) {
+      const selected = bundle.themes.find(t => t.name === selectedName);
+      if (selected) return selected;
+    }
+    // Check for a variant marked as default, otherwise use first theme
+    return bundle.themes.find(t => t.default) || bundle.themes[0];
   };
 
   // Set the selected variant for a bundle

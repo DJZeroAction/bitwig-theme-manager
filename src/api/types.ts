@@ -42,6 +42,7 @@ export interface RepositoryTheme {
   download_url?: string;
   bundle?: string;        // Bundle ID for grouping variants
   variant_name?: string;  // Display name for this variant within bundle
+  default?: boolean;      // If true, this variant is selected by default in bundle
 }
 
 // A theme bundle groups multiple theme variants together
