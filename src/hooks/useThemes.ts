@@ -1,6 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Theme } from "../api/types";
 import * as api from "../api/bitwig";
+import {
+  getDefaultValues,
+  type BitwigVersion,
+} from "../data/properties";
+import { TEMPLATES } from "../data/properties/templates";
+
+// Helper to get Bitwig major version ("5" or "6") from full version string
+function getMajorVersion(version: string): BitwigVersion {
+  return version.startsWith("6") ? "6" : "5";
+}
 
 export function useThemes(bitwigVersion: string = "5.2") {
   const [themes, setThemes] = useState<string[]>([]);
@@ -138,21 +148,96 @@ export function useThemes(bitwigVersion: string = "5.2") {
     }
   }, [currentTheme?.path, loadThemeList]);
 
+  // Update multiple colors at once (for group/bulk updates)
+  const updateColors = useCallback((updates: Record<string, string>) => {
+    if (!currentTheme) return;
+    setCurrentTheme({
+      ...currentTheme,
+      colors: {
+        ...currentTheme.colors,
+        ...updates,
+      },
+    });
+  }, [currentTheme]);
+
+  // Create a theme from a template
+  const createThemeFromTemplate = useCallback(async (name: string, templateId: string) => {
+    setError(null);
+    try {
+      const template = TEMPLATES.find(t => t.id === templateId);
+      if (!template) {
+        throw new Error(`Template not found: ${templateId}`);
+      }
+
+      // Create base theme first
+      const theme = await api.createTheme(name, bitwigVersion);
+
+      // Merge template colors into the theme
+      const updatedTheme: Theme = {
+        ...theme,
+        colors: {
+          ...theme.colors,
+          ...template.colors,
+        },
+      };
+
+      // Save the updated theme
+      if (theme.path) {
+        await api.saveTheme(updatedTheme, theme.path);
+      }
+
+      setCurrentTheme(updatedTheme);
+      await loadThemeList();
+      return updatedTheme;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      return null;
+    }
+  }, [bitwigVersion, loadThemeList]);
+
+  // Populate a theme with all properties for the current version
+  // This ensures new themes have all 265 properties visible
+  const populateTheme = useCallback((theme: Theme): Theme => {
+    const majorVersion = getMajorVersion(bitwigVersion);
+    const defaults = getDefaultValues(majorVersion);
+
+    const populatedColors = { ...defaults };
+
+    // Override defaults with existing theme values
+    for (const [key, value] of Object.entries(theme.colors)) {
+      if (key in populatedColors) {
+        populatedColors[key] = value;
+      }
+    }
+
+    return {
+      ...theme,
+      colors: populatedColors,
+    };
+  }, [bitwigVersion]);
+
+  // Get the major version for use in components
+  const majorVersion = getMajorVersion(bitwigVersion);
+
   return {
     themes,
     currentTheme,
     activeThemePath,
     loading,
     error,
+    majorVersion,
     loadTheme,
     saveTheme,
     createTheme,
+    createThemeFromTemplate,
     applyTheme,
     updateColor,
+    updateColors,
     updateMetadata,
     importTheme,
     exportTheme,
     deleteTheme,
+    populateTheme,
     refresh: loadThemeList,
   };
 }

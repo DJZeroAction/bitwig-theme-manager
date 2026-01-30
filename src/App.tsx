@@ -6,8 +6,10 @@ import { useRepositoryThemes } from "./hooks/useRepository";
 import { useThemes } from "./hooks/useThemes";
 import { useSettings } from "./hooks/useSettings";
 import { useUpdater } from "./hooks/useUpdater";
-import { ColorGroup } from "./components/ColorPicker";
 import { UpdateNotification } from "./components/UpdateNotification";
+import { UnifiedThemeEditor } from "./components/UnifiedThemeEditor";
+import { TEMPLATES } from "./data/properties/templates";
+import type { BitwigVersion } from "./data/properties";
 import * as api from "./api/bitwig";
 import type { BitwigInstallation, RepositoryTheme, ThemeBundle } from "./api/types";
 
@@ -800,53 +802,41 @@ function EditorView() {
     activeThemePath,
     loading,
     error,
+    majorVersion,
     loadTheme,
     saveTheme,
     createTheme,
+    createThemeFromTemplate,
     applyTheme,
     updateColor,
     importTheme,
     exportTheme,
     deleteTheme,
+    populateTheme,
   } = useThemes(selectedVersion);
 
   const [showNewDialog, setShowNewDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [newThemeName, setNewThemeName] = useState("");
+  const [selectedTemplate, setSelectedTemplate] = useState<string>("none");
   const [saving, setSaving] = useState(false);
   const [applying, setApplying] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [applyMessage, setApplyMessage] = useState<string | null>(null);
+  const [editorVersion, setEditorVersion] = useState<BitwigVersion>(majorVersion);
+
+  // Sync editor version with hook's major version
+  useEffect(() => {
+    setEditorVersion(majorVersion);
+  }, [majorVersion]);
 
   const isActiveTheme = currentTheme?.path === activeThemePath;
 
-  // Group colors by their inferred category
-  const colorGroups = useMemo(() => {
-    if (!currentTheme) return [];
-
-    const groups: Record<string, Array<{ key: string; value: string; label: string }>> = {};
-
-    Object.entries(currentTheme.colors).forEach(([key, value]) => {
-      // Infer group from key name
-      let groupName = "Other";
-      const lowerKey = key.toLowerCase();
-      if (lowerKey.includes("background") || lowerKey.includes("bg")) groupName = "Background";
-      else if (lowerKey.includes("text") || lowerKey.includes("font")) groupName = "Text";
-      else if (lowerKey.includes("accent") || lowerKey.includes("primary")) groupName = "Accent";
-      else if (lowerKey.includes("border") || lowerKey.includes("outline")) groupName = "Borders";
-      else if (lowerKey.includes("button") || lowerKey.includes("btn")) groupName = "Buttons";
-      else if (lowerKey.includes("header") || lowerKey.includes("title")) groupName = "Headers";
-
-      if (!groups[groupName]) groups[groupName] = [];
-      groups[groupName].push({
-        key,
-        value,
-        label: key.replace(/_/g, " ").replace(/([A-Z])/g, " $1").trim(),
-      });
-    });
-
-    return Object.entries(groups).map(([name, colors]) => ({ name, colors }));
-  }, [currentTheme]);
+  // Populate current theme with all properties for the editor
+  const populatedTheme = useMemo(() => {
+    if (!currentTheme) return null;
+    return populateTheme(currentTheme);
+  }, [currentTheme, populateTheme]);
 
   const handleColorChange = (key: string, value: string) => {
     updateColor(key, value);
@@ -875,8 +865,15 @@ function EditorView() {
 
   const handleCreate = async () => {
     if (!newThemeName.trim()) return;
-    await createTheme(newThemeName.trim());
+
+    if (selectedTemplate && selectedTemplate !== "none") {
+      await createThemeFromTemplate(newThemeName.trim(), selectedTemplate);
+    } else {
+      await createTheme(newThemeName.trim());
+    }
+
     setNewThemeName("");
+    setSelectedTemplate("none");
     setShowNewDialog(false);
     setHasUnsavedChanges(false);
   };
@@ -990,7 +987,7 @@ function EditorView() {
 
       {/* Color Editor */}
       <div className="flex-1 overflow-y-auto space-y-4">
-        {!currentTheme ? (
+        {!populatedTheme ? (
           <div className="flex items-center justify-center h-64 text-gray-400">
             Select a theme to edit or create a new one
           </div>
@@ -999,9 +996,9 @@ function EditorView() {
             {/* Theme Header */}
             <div className="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold">{currentTheme.metadata.name || "Untitled Theme"}</h2>
-                {currentTheme.metadata.author && (
-                  <p className="text-sm text-gray-400">by {currentTheme.metadata.author}</p>
+                <h2 className="text-lg font-semibold">{populatedTheme.metadata.name || "Untitled Theme"}</h2>
+                {populatedTheme.metadata.author && (
+                  <p className="text-sm text-gray-400">by {populatedTheme.metadata.author}</p>
                 )}
               </div>
               <div className="flex gap-2">
@@ -1044,48 +1041,81 @@ function EditorView() {
               </div>
             </div>
 
-            {/* Color Groups */}
-            {colorGroups.map((group) => (
-              <ColorGroup
-                key={group.name}
-                name={group.name}
-                colors={group.colors}
-                onChange={handleColorChange}
-              />
-            ))}
+            {/* Unified Theme Editor */}
+            <UnifiedThemeEditor
+              theme={populatedTheme}
+              bitwigVersion={editorVersion}
+              onColorChange={handleColorChange}
+              onVersionChange={setEditorVersion}
+            />
           </>
         )}
       </div>
 
       {/* Preview Panel */}
-      <div className="w-80 bg-gray-800 rounded-lg p-4 h-fit sticky top-0">
+      <div className="w-80 bg-gray-800 rounded-lg p-4 h-fit sticky top-0 flex-shrink-0">
         <h3 className="font-semibold mb-4">Live Preview</h3>
         <div
           className="rounded-lg p-4 space-y-2"
-          style={{ background: currentTheme?.colors?.["background"] || "#1a1a2e" }}
+          style={{ background: populatedTheme?.colors?.["Window background"] || "#1e2228" }}
         >
           <div
-            className="h-8 rounded"
-            style={{ background: currentTheme?.colors?.["header_background"] || "#2d2d3a" }}
-          />
+            className="h-8 rounded flex items-center px-2"
+            style={{ background: populatedTheme?.colors?.["Grey 3"] || "#262c38" }}
+          >
+            <div
+              className="h-2 w-16 rounded"
+              style={{ background: populatedTheme?.colors?.["Default text"] || "#e0e4ea" }}
+            />
+          </div>
           <div className="flex gap-2">
             <div
-              className="h-20 flex-1 rounded"
-              style={{ background: currentTheme?.colors?.["accent"] || "#e94560" }}
-            />
+              className="h-20 flex-1 rounded flex items-center justify-center"
+              style={{ background: populatedTheme?.colors?.["Accent (default)"] || populatedTheme?.colors?.["On"] || "#e94560" }}
+            >
+              <div
+                className="w-8 h-8 rounded-full border-4"
+                style={{
+                  background: populatedTheme?.colors?.["Knob Body"] || "#2a2a2a",
+                  borderColor: populatedTheme?.colors?.["Knob Value Color"] || "#e94560"
+                }}
+              />
+            </div>
             <div
               className="h-20 flex-1 rounded"
-              style={{ background: currentTheme?.colors?.["secondary_background"] || "#16213e" }}
-            />
+              style={{ background: populatedTheme?.colors?.["Grey 1"] || "#1a1e24" }}
+            >
+              {/* Mini meter */}
+              <div className="h-full flex flex-col justify-end p-1 gap-0.5">
+                <div className="h-2 rounded" style={{ background: populatedTheme?.colors?.["Meter Clipping"] || "#ff0000" }} />
+                <div className="h-2 rounded" style={{ background: populatedTheme?.colors?.["Meter Red"] || "#ff4444" }} />
+                <div className="h-2 rounded" style={{ background: populatedTheme?.colors?.["Meter Yellow"] || "#ffcc00" }} />
+                <div className="h-4 rounded" style={{ background: populatedTheme?.colors?.["Meter Normal"] || "#00cc66" }} />
+              </div>
+            </div>
           </div>
           <div
             className="h-4 rounded w-3/4"
-            style={{ background: currentTheme?.colors?.["text"] || "#ffffff" }}
+            style={{ background: populatedTheme?.colors?.["Light Text"] || "#ffffff" }}
           />
           <div
             className="h-4 rounded w-1/2"
-            style={{ background: currentTheme?.colors?.["text_secondary"] || "#a0a0a0" }}
+            style={{ background: populatedTheme?.colors?.["Lighter Text"] || "#a0a8b0" }}
           />
+          {/* Button row */}
+          <div className="flex gap-1 mt-2">
+            <div
+              className="h-6 flex-1 rounded border"
+              style={{
+                background: populatedTheme?.colors?.["Button background"] || "#2d3340",
+                borderColor: populatedTheme?.colors?.["Button stroke"] || "#404854"
+              }}
+            />
+            <div
+              className="h-6 w-6 rounded"
+              style={{ background: populatedTheme?.colors?.["Led On"] || "#e94560" }}
+            />
+          </div>
         </div>
         <p className="text-xs text-gray-500 mt-4 text-center">
           Preview updates as you change colors
@@ -1099,21 +1129,88 @@ function EditorView() {
           onClick={() => setShowNewDialog(false)}
         >
           <div
-            className="bg-gray-800 rounded-lg p-6 w-96"
+            className="bg-gray-800 rounded-lg p-6 w-[28rem]"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-lg font-semibold mb-4">Create New Theme</h3>
-            <input
-              type="text"
-              value={newThemeName}
-              onChange={(e) => setNewThemeName(e.target.value)}
-              placeholder="Theme name"
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:border-purple-500"
-              autoFocus
-            />
+
+            {/* Theme Name */}
+            <div className="mb-4">
+              <label className="block text-sm text-gray-400 mb-1">Theme Name</label>
+              <input
+                type="text"
+                value={newThemeName}
+                onChange={(e) => setNewThemeName(e.target.value)}
+                placeholder="My Awesome Theme"
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500"
+                autoFocus
+              />
+            </div>
+
+            {/* Template Selection */}
+            <div className="mb-4">
+              <label className="block text-sm text-gray-400 mb-1">Start From Template</label>
+              <select
+                value={selectedTemplate}
+                onChange={(e) => setSelectedTemplate(e.target.value)}
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500"
+              >
+                <option value="none">Blank (empty theme)</option>
+                {TEMPLATES.filter(t => t.bitwigVersions.includes(majorVersion)).map((template) => (
+                  <option key={template.id} value={template.id}>
+                    {template.name}
+                  </option>
+                ))}
+              </select>
+              {selectedTemplate && selectedTemplate !== "none" && (
+                <p className="text-xs text-gray-500 mt-1">
+                  {TEMPLATES.find(t => t.id === selectedTemplate)?.description}
+                </p>
+              )}
+            </div>
+
+            {/* Template Preview */}
+            {selectedTemplate && selectedTemplate !== "none" && (() => {
+              const template = TEMPLATES.find(t => t.id === selectedTemplate);
+              if (!template) return null;
+              return (
+                <div className="mb-4 p-3 rounded-lg" style={{ background: template.colors["Window background"] || "#1e2228" }}>
+                  <div className="flex gap-2 mb-2">
+                    <div
+                      className="w-6 h-6 rounded"
+                      style={{ background: template.colors["Grey 0"] || "#14181e" }}
+                      title="Grey 0"
+                    />
+                    <div
+                      className="w-6 h-6 rounded"
+                      style={{ background: template.colors["Grey 3"] || "#262c38" }}
+                      title="Grey 3"
+                    />
+                    <div
+                      className="w-6 h-6 rounded"
+                      style={{ background: template.colors["Accent (default)"] || template.colors["On"] || "#e94560" }}
+                      title="Accent"
+                    />
+                    <div
+                      className="w-6 h-6 rounded"
+                      style={{ background: template.colors["Meter Normal"] || "#00cc66" }}
+                      title="Meter Normal"
+                    />
+                  </div>
+                  <div
+                    className="h-2 w-3/4 rounded"
+                    style={{ background: template.colors["Default text"] || "#e0e4ea" }}
+                  />
+                </div>
+              );
+            })()}
+
             <div className="flex gap-3 justify-end">
               <button
-                onClick={() => setShowNewDialog(false)}
+                onClick={() => {
+                  setShowNewDialog(false);
+                  setSelectedTemplate("none");
+                }}
                 className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg"
               >
                 Cancel
