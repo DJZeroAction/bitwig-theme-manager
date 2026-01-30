@@ -563,6 +563,7 @@
       "name": "Workbench",
       "author": "Claude",
       "file": "workbench.bte",
+      "preview": "workbench.png",
       "description": "Amiga Workbench 1.x \u2014 blue, white, orange, black"
     },
     {
@@ -570,6 +571,7 @@
       "name": "Platinum",
       "author": "Claude",
       "file": "platinum.bte",
+      "preview": "platinum.png",
       "description": "Classic Mac OS 8/9 Platinum \u2014 warm grey with rainbow accents"
     },
     {
@@ -577,6 +579,7 @@
       "name": "Turbo",
       "author": "Claude",
       "file": "turbo.bte",
+      "preview": "turbo.png",
       "description": "Borland Turbo Pascal IDE \u2014 deep blue with yellow and cyan"
     },
     {
@@ -584,6 +587,7 @@
       "name": "Hotdog Stand",
       "author": "Claude",
       "file": "hotdog-stand.bte",
+      "preview": "hotdog-stand.png",
       "description": "Windows 3.1's worst color scheme \u2014 red and yellow everywhere"
     },
     {
@@ -591,6 +595,7 @@
       "name": "BeBox",
       "author": "Claude",
       "file": "bebox.bte",
+      "preview": "bebox.png",
       "description": "BeOS desktop \u2014 clean grey with signature yellow accents"
     },
     {
@@ -598,6 +603,7 @@
       "name": "IRIX",
       "author": "Claude",
       "file": "irix.bte",
+      "preview": "irix.png",
       "description": "SGI IRIX workstation \u2014 slate blue-purple with teal accents"
     },
     {
@@ -770,6 +776,7 @@
       "name": "GameBoy",
       "author": "Claude",
       "file": "gameboy.bte",
+      "preview": "gameboy.png",
       "description": "Nintendo GameBoy LCD \u2014 yellow-green monochrome"
     },
     {
@@ -777,6 +784,7 @@
       "name": "CGA DOS",
       "author": "Claude",
       "file": "cga-dos.bte",
+      "preview": "cga-dos.png",
       "description": "Classic CGA 4-color \u2014 cyan, magenta, white, black"
     },
     {
@@ -784,6 +792,7 @@
       "name": "Shrek Swamp",
       "author": "Claude",
       "file": "shrek-swamp.bte",
+      "preview": "shrek-swamp.png",
       "description": "Shrek's swamp \u2014 ogre green, mud brown, onion layers"
     },
     {
@@ -791,6 +800,7 @@
       "name": "Barbie",
       "author": "Claude",
       "file": "barbie.bte",
+      "preview": "barbie.png",
       "description": "Barbie Dreamhouse \u2014 hot pink, white, gold"
     },
     {
@@ -798,6 +808,7 @@
       "name": "Hannah Montana",
       "author": "Claude",
       "file": "hannah-montana.bte",
+      "preview": "hannah-montana.png",
       "description": "Best of Both Worlds \u2014 purple, magenta, silver sparkle"
     },
     {
@@ -805,6 +816,7 @@
       "name": "Disney Princess",
       "author": "Claude",
       "file": "disney-princess.bte",
+      "preview": "disney-princess.png",
       "description": "Fairytale elegance \u2014 cream, gold, soft blue, blush pink"
     },
     {
@@ -812,6 +824,7 @@
       "name": "Spongebob",
       "author": "Claude",
       "file": "spongebob.bte",
+      "preview": "spongebob.png",
       "description": "Bikini Bottom \u2014 yellow, underwater blue, Patrick pink"
     },
     {
@@ -819,6 +832,7 @@
       "name": "Among Us",
       "author": "Claude",
       "file": "among-us.bte",
+      "preview": "among-us.png",
       "description": "Pretty Sus \u2014 spaceship grey, emergency red, vent cyan"
     },
     {
@@ -826,6 +840,7 @@
       "name": "Stranger Things",
       "author": "Claude",
       "file": "stranger-things.bte",
+      "preview": "stranger-things.png",
       "description": "The Upside Down \u2014 dark with Christmas light RGB"
     },
     {
@@ -833,6 +848,7 @@
       "name": "Taco Bell",
       "author": "Claude",
       "file": "taco-bell.bte",
+      "preview": "taco-bell.png",
       "description": "Live M\u00e1s \u2014 purple, Baja Blast teal, hot pink"
     },
     {
@@ -840,6 +856,7 @@
       "name": "Lisa Frank",
       "author": "Claude",
       "file": "lisa-frank.bte",
+      "preview": "lisa-frank.png",
       "description": "Dolphin Fever Dream \u2014 rainbow pastel 90s maximalism"
     },
     {
@@ -847,6 +864,7 @@
       "name": "Mountain Dew",
       "author": "Claude",
       "file": "mountain-dew.bte",
+      "preview": "mountain-dew.png",
       "description": "Do the Dew \u2014 radioactive green, Dorito orange, gamer black"
     },
     {
@@ -854,6 +872,7 @@
       "name": "Circus",
       "author": "Claude",
       "file": "circus.bte",
+      "preview": "circus-clown.png",
       "description": "Clown College \u2014 red, yellow, blue primary chaos"
     },
     {
@@ -861,6 +880,7 @@
       "name": "Naruto",
       "author": "Claude",
       "file": "naruto.bte",
+      "preview": "naruto.png",
       "description": "Believe It! \u2014 orange ninja, Sharingan red, chakra yellow"
     },
     {
@@ -868,6 +888,7 @@
       "name": "Pokemon",
       "author": "Claude",
       "file": "pokemon.bte",
+      "preview": "pokemon.png",
       "description": "Gotta Catch 'Em All \u2014 Pokeball red, Pikachu yellow"
     },
     {
@@ -875,6 +896,7 @@
       "name": "Dragon Ball",
       "author": "Claude",
       "file": "dragon-ball.bte",
+      "preview": "dragon-ball.png",
       "description": "Over 9000! \u2014 Goku orange, Super Saiyan yellow"
     },
     {
@@ -882,7 +904,15 @@
       "name": "Yu-Gi-Oh",
       "author": "Claude",
       "file": "yugioh.bte",
+      "preview": "yugioh.png",
       "description": "Time to Duel! \u2014 Millennium gold, Shadow Realm purple"
+    },
+    {
+      "id": "all-red-test",
+      "name": "ALL RED TEST",
+      "author": "Claude",
+      "file": "all-red-test.bte",
+      "description": "DEBUG: Every property set to #FF0000"
     }
   ]
 }

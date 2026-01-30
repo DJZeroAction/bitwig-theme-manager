@@ -1,0 +1,371 @@
+// All Red Test
+// Every single color property set to #FF0000 to find what controls device knobs
+// Author: Claude
+
+// Core
+Gradient: false
+Transparent: #FF000000
+Image Source: #FF0000
+Inherited: #FF0000
+White: #FF0000
+Black: #FF0000
+Same as background: #FF0000
+Accent: #FF0000
+Default text: #FF0000
+Window background: #FF0000
+Grey 0: #FF0000
+Grey 1: #FF0000
+Grey 2: #FF0000
+Grey 3: #FF0000
+Grey 4: #FF0000
+Grey 5: #FF0000
+Grey 6: #FF0000
+Shadow: #FF0000
+Brighter: #FF0000
+
+// Text
+Dark Text: #FF0000
+Subtle Dark Text: #FF0000
+Subtle Light Text: #FF0000
+Subtler Light Text: #FF0000
+Medium Light Text: #FF0000
+Light Text: #FF0000
+Lighter Text: #FF0000
+Link Text: #FF0000
+Link Text Rollover: #FF0000
+Error Text: #FF0000
+
+// Accent & Status
+Accent (default): #FF0000
+Accent (hitech): #FF0000
+Implicit On (subtle): #FF0000
+On (subtle): #FF0000
+On (subtler): #FF0000
+Pressed On: #FF0000
+Mapping: #FF0000
+Selection: #FF0000
+Standby selection: #FF0000
+White Selection: #FF0000
+White Selection (standby): #FF0000
+Warning: #FF0000
+Activation Green: #FF0000
+Activation Yellow: #FF0000
+Activation Red: #FF0000
+
+// Buttons
+Button background: #FF0000
+Button stroke: #FF0000
+OK Button background: #FF0000
+Pressed button background: #FF0000
+Checkbox background: #FF0000
+Button in tree background: #FF0000
+View button background: #FF0000
+Pressed view button background: #FF0000
+Inverted Selected Borderless Button background: #FF0000
+Selected borderless button background: #FF0000
+Pressed borderless button background: #FF0000
+Rubber button stroke: #FF0000
+Rubber highlight button stroke: #FF0000
+Close button mouse over background: #FF0000
+Close button pressed background: #FF0000
+Abstract Button Stroke: #FF0000
+Abstract Button Selected Background: #FF0000
+Abstract Button Unselected Background: #FF0000
+Abstract Button Pressed Background: #FF0000
+Color bar button fill color: #FF0000
+
+// Knobs & Sliders
+Knob Body: #FF0000
+Knob Body Lighter: #FF0000
+Knob Body Lightest: #FF0000
+Knob Body Darkest: #FF0000
+Knob Line: #FF0000
+Knob Line Dark: #FF0000
+Knob Stroke: #FF0000
+Knob Emboss Highlight: #FF0000
+Knob Emboss Shadow: #FF0000
+Knob Value Background: #FF0000
+Knob Value Background (dark): #FF0000
+Knob Value Color: #FF0000
+Slider background: #FF0000
+Emboss Highlight: #FF0000
+Emboss Shadow: #FF0000
+
+// Toggle Icons
+Normal Toggle Icon: #FF0000
+Mouse Over Toggle Icon: #FF0000
+Active Toggle Icon (Playing): #FF0000
+Pressed Toggle Icon: #FF0000
+Normal Inverted Toggle Icon: #FF0000
+Mouse Over Inverted Toggle Icon: #FF0000
+Active Inverted Toggle Icon (Playing): #FF0000
+Pressed Inverted Toggle Icon: #FF0000
+Toggle Icon: #FF0000
+
+// Menus & Popups
+Menu background: #FF0000
+Menu stroke: #FF0000
+Menu text: #FF0000
+Menu Icon: #FF0000
+Menu description text: #FF0000
+Menu separator: #FF0000
+Popup insert: #FF0000
+Popup overlay background color: #FF0000
+Popup Notification Background: #FF0000
+Notification Background: #FF0000
+Notification Normal: #FF0000
+Notification Error: #FF0000
+Notification Button Background: #FF0000
+Tooltip Background: #FF0000
+Light Tooltip Background: #FF0000
+Tooltip Stroke: #FF0000
+
+// LEDs & Meters
+Led On: #FF0000
+Led Off: #FF0000
+Meter Normal: #FF0000
+Meter Yellow: #FF0000
+Meter Red: #FF0000
+Meter Clipping: #FF0000
+Meter Gain Reduction: #FF0000
+Meter Hitech: #FF0000
+Meter Hitech Background: #FF0000
+Meter Muted: #FF0000
+Hitech background: #FF0000
+Hitech on: #FF0000
+
+// Scrollbars
+Scrollbar: #FF0000
+Scrollbar background: #FF0000
+Modern Scrollbar Handle (active): #FF0000
+Modern Scrollbar Handle (inactive): #FF0000
+Modern Scrollbar Background (active): #FF0000
+Modern Dark Scrollbar Handle (active): #FF0000
+Modern Dark Scrollbar Handle (inactive): #FF0000
+
+// Tree & List Views
+Tree Item Background: #FF0000
+Selected Tree Item Background: #FF0000
+Selected Tree Item Background (standby): #FF0000
+Tree Separator: #FF0000
+List Item Background: #FF0000
+List Separator: #FF0000
+Selected Dashboard Tree: #FF0000
+Dark tree background (selected): #FF0000
+Dark tree selection frame: #FF0000
+Dark tree background (standby selected): #FF0000
+Dark tree separator: #FF0000
+Dark tree text: #FF0000
+Dark tree text (selected): #FF0000
+Dark tree hover background change: #FF0000
+Frame color of selection cursor in the tree.: #FF0000
+Frame color of selection cursor in the tree. (standby): #FF0000
+Launcher Mapping Indication: #FF0000
+
+// Panels & Separators
+Panel body: #FF0000
+Selected Panel body: #FF0000
+Panel stroke: #FF0000
+Selected Panel stroke: #FF0000
+Selected Panel stroke (standby): #FF0000
+Active Panel stroke: #FF0000
+Panel Stroke (focused): #FF0000
+Inspector Section Frame: #FF0000
+Content Background: #FF0000
+Light Separator Line: #FF0000
+Dark Separator Line: #FF0000
+Dark Panel Sub-frame Stroke: #FF0000
+Dark Panel Sub-frame Fill: #FF0000
+Field background: #FF0000
+Number field bar background: #FF0000
+Icon Frame: #FF0000
+Color of unselected tabs: #FF0000
+Color of stroke between tabs: #FF0000
+
+// Device Chain
+Device Header: #FF0000
+Device Header (selected): #FF0000
+Device Locked Overlay: #FF0000
+Device Tint Future: #FF0000
+Device Tint Retro: #FF0000
+Device Tint Military: #FF0000
+Plugin missing: #FF0000
+
+// Display & Waveforms
+Display Background: #FF0000
+Display Background (error): #FF0000
+Display Waveform: #FF0000
+Display Stroke: #FF0000
+Display Start/End Markers: #FF0000
+Display Loop Markers: #FF0000
+Grey Display Background: #FF0000
+Audio Event Background: #FF0000
+Audio Event Boundary: #FF0000
+Audio Event Waveform: #FF0000
+
+// Grid & Modular Environment
+The Grid (background): #FF0000
+The Grid (stroke): #FF0000
+Grid Line (Primary): #FF0000
+Grid Line (Secondary): #FF0000
+Background color of the modular environment.: #FF0000
+Compressed Audio Port in modular environment: #FF0000
+Audio connection in modular environment: #FF0000
+Audio64 connection in modular environment: #FF0000
+Event connection in modular environment: #FF0000
+Polyphonic Desktop Object: #FF0000
+Current Atom Value Color: #FF0000
+
+// Timeline & Arranger
+Dark Timeline Background: #FF0000
+Dark Timeline Header Background: #FF0000
+Light Timeline Background: #FF0000
+Light Timeline Header Background: #FF0000
+Top Level Timeline Background: #FF0000
+Top Level Timeline Header Background: #FF0000
+Irrelevant Timeline Background: #FF0000
+Irrelevant Timeline Header Background: #FF0000
+Irrelevant Timeline Overlay: #FF0000
+Irrelevant Timeline Header Overlay: #FF0000
+Timeline Background Pattern: #FF0000
+Timeline Header Background Pattern: #FF0000
+Timeline Primary Grid: #FF0000
+Timeline Secondary Grid: #FF0000
+Timeline Header Primary Grid: #FF0000
+Timeline Header Secondary Grid: #FF0000
+Timeline Playhead: #FF0000
+Timeline edit tool chooser background: #FF0000
+
+// Timeline Selection & Cursors
+Time Selection Fill: #FF0000
+Time Selection Stroke: #FF0000
+Time Selection Implicit Fill: #FF0000
+Time Selection Cursor Stroke: #FF0000
+Time Selection Standby Fill: #FF0000
+Time Selection Standby Stroke: #FF0000
+Time Selection Standby Cursor Stroke: #FF0000
+Time Selection Inactive Fill: #FF0000
+Time Selection Inactive Stroke: #FF0000
+Time Selection Not Selected Fill: #FF0000
+Time Selection Not Selected Stroke: #FF0000
+Time Selection Across All Lanes Fill: #FF0000
+Time Selection Across All Lanes Stroke: #FF0000
+Header Time Selection Fill: #FF0000
+Header Time Selection Stroke: #FF0000
+Header Time Selection Standby Fill: #FF0000
+Header Time Selection Standby Stroke: #FF0000
+Header Time Selection Across All Lanes Fill: #FF0000
+Header Time Selection Across All Lanes Stroke: #FF0000
+Header Time Selection Cursor Stroke: #FF0000
+Header Time Selection Standby Cursor Stroke: #FF0000
+Header Loop Region Background: #FF0000
+
+// Cue Markers & Tooltips
+Timeline Cue Marker: #FF0000
+Timeline Header Cue Marker: #FF0000
+Timeline Tooltip Background: #FF0000
+Timeline Tooltip Text: #FF0000
+Timeline Header Tooltip Background: #FF0000
+Timeline Header Tooltip Text: #FF0000
+
+// Loop Regions
+Loop Region Background: #FF0000
+Loop Region Fill: #FF0000
+Loop Region Stroke: #FF0000
+Loop Region Selected Fill: #FF0000
+Loop Region Selected Stroke: #FF0000
+Insert preview time: #FF0000
+
+// Automation & Modulation
+Automation Chooser Background: #FF0000
+Automation Color: #FF0000
+Automation button glow color: #FF0000
+Arranger Automation Curve Fill Color: #FF0000
+Track Automation Button Color: #FF0000
+Track Automation Color: #FF0000
+Clip Automation Color: #FF0000
+Clip Modulation Color: #FF0000
+Add Modulation Button Color: #FF0000
+Multiply Modulation Button Color: #FF0000
+User Automation Override Color: #FF0000
+Note Expression Color: #FF0000
+Send (post) value color: #FF0000
+Send (pre) value color: #FF0000
+Dark offset for automation/channel bar: #FF0000
+Light offset for automation/channel bar: #FF0000
+Unselected Filled Automation Type Icon: #FF0000
+Unselected Empty Automation Type Icon: #FF0000
+Selected matrix slot color: #FF0000
+
+// Modulation Mapping
+Modulation Mapping Color: #FF0000
+Modulation Mapping Color (subtractive): #FF0000
+Modulation Mapping Color (polyphonic): #FF0000
+Modulation Mapping Background (monophonic): #FF0000
+Modulation Mapping Background (polyphonic): #FF0000
+Modulation Mapping Background Color: #FF0000
+Mapping indication 1: #FF0000
+Mapping indication 2: #FF0000
+Mapping indication 3: #FF0000
+Mapping indication 4: #FF0000
+Mapping indication 5: #FF0000
+Mapping indication 6: #FF0000
+Mapping indication 7: #FF0000
+Mapping indication 8: #FF0000
+
+// Record & Transport
+Record button color: #FF0000
+Record button color implicit: #FF0000
+Record button glow color: #FF0000
+Record text color: #FF0000
+Monitoring buttons color: #FF0000
+
+// Onset & Beat Detection
+Onset Color Min: #FF0000
+Onset Color Max: #FF0000
+Onset Marker Color: #FF0000
+Beat Marker Color: #FF0000
+Analyzed Beat Color: #FF0000
+
+// File Status Indicators
+Missing file icon: #FF0000
+Missing file text: #FF0000
+Found file icon: #FF0000
+Found file text: #FF0000
+External file icon: #FF0000
+External file text: #FF0000
+
+// Invoke Action (Command Palette)
+Invoke Action Background: #FF0000
+Invoke Action Category: #FF0000
+Invoke Action Text: #FF0000
+User input text: #FF0000
+
+// Panel Colors
+Panel Red: #FF0000
+Panel Orange: #FF0000
+Panel Yellow: #FF0000
+Panel Lime: #FF0000
+Panel Green: #FF0000
+Panel Mint: #FF0000
+Panel Turquoise: #FF0000
+Panel Blue: #FF0000
+Panel Purple: #FF0000
+
+// Bitwig Branding
+Bitwig Red: #FF0000
+Bitwig Mint: #FF0000
+Bitwig CI: #FF0000
+Bitwig Producer: #FF0000
+Bitwig Essentials: #FF0000
+Bitwig 8-Track: #FF0000
+Bitwig 16-Track: #FF0000
+
+// Misc
+Comp fill: #FF0000
+Drop Indicator: #FF0000
+Progress bar: #FF0000
+Progress background: #FF0000
+Hitcount background: #FF0000
+Hitcount text color: #FF0000
+// <end>

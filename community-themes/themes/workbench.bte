@@ -27,11 +27,11 @@ Brighter: #FFFFFF
 // Text
 Dark Text: #000000
 Subtle Dark Text: #003366
-Subtle Light Text: #FFFFFF
-Subtler Light Text: #DDDDDD
-Medium Light Text: #FFFFFF
-Light Text: #FFFFFF
-Lighter Text: #FFFFFF
+Subtle Light Text: #FF8800
+Subtler Light Text: #CC6600
+Medium Light Text: #FF8800
+Light Text: #FF8800
+Lighter Text: #FFAA44
 Link Text: #FF8800
 Link Text Rollover: #FFAA44
 Error Text: #FF4444
@@ -49,9 +49,9 @@ Standby selection: #FF880066
 White Selection: #FF8800
 White Selection (standby): #FFFFFF
 Warning: #FF8800
-Activation Green: #FFFFFF
-Activation Yellow: #FF8800
-Activation Red: #FF8800
+Activation Green: #00AA00
+Activation Yellow: #FFAA00
+Activation Red: #FF4444
 
 // Buttons
 Button background: #FFFFFF
@@ -92,15 +92,15 @@ Slider background: #003366
 Emboss Highlight: #FFFFFF40
 Emboss Shadow: #00000040
 
-// Toggle Icons
+// Toggle Icons - Black icons, orange only on hover
 Normal Toggle Icon: #000000
 Mouse Over Toggle Icon: #FF8800
-Active Toggle Icon (Playing): #FF8800
+Active Toggle Icon (Playing): #000000
 Pressed Toggle Icon: #000000
-Normal Inverted Toggle Icon: #FFFFFF
+Normal Inverted Toggle Icon: #000000
 Mouse Over Inverted Toggle Icon: #FF8800
-Active Inverted Toggle Icon (Playing): #FF8800
-Pressed Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #000000
+Pressed Inverted Toggle Icon: #000000
 Toggle Icon: #000000
 
 // Menus & Popups
@@ -124,14 +124,14 @@ Tooltip Stroke: #000000
 // LEDs & Meters
 Led On: #FF8800
 Led Off: #003366
-Meter Normal: #FF8800
-Meter Yellow: #FF8800
-Meter Red: #FF8800
-Meter Clipping: #FF8800
-Meter Gain Reduction: #FF8800
+Meter Normal: #00AA00
+Meter Yellow: #FFAA00
+Meter Red: #FF4444
+Meter Clipping: #FF0000
+Meter Gain Reduction: #0055AA
 Meter Hitech: #FF8800
 Meter Hitech Background: #003366
-Meter Muted: #FFFFFF66
+Meter Muted: #00336666
 Hitech background: #003366
 Hitech on: #FF8800
 
@@ -294,8 +294,8 @@ Send (post) value color: #FFFFFF
 Send (pre) value color: #FFFFFF
 Dark offset for automation/channel bar: #00000033
 Light offset for automation/channel bar: #FFFFFF33
-Unselected Filled Automation Type Icon: #FFFFFF
-Unselected Empty Automation Type Icon: #FFFFFF66
+Unselected Filled Automation Type Icon: #000000
+Unselected Empty Automation Type Icon: #00000066
 Selected matrix slot color: #FF8800
 
 // Modulation Mapping
@@ -318,8 +318,8 @@ Mapping indication 8: #FFFFFF
 Record button color: #FF8800
 Record button color implicit: #FF880088
 Record button glow color: #FF880066
-Record text color: #FF8800
-Monitoring buttons color: #FF8800
+Record text color: #000000
+Monitoring buttons color: #000000
 
 // Onset & Beat Detection
 Onset Color Min: #FF8800

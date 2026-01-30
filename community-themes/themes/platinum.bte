@@ -83,13 +83,13 @@ Lighter Text: #2A252F // near-black for classic Mac look
 Light Separator Line: #8E899430
 Dark Panel Sub-frame Stroke: #8E899420
 Dark Panel Sub-frame Fill: #F2EDF4
-Knob Body: #D4CFD600
+Knob Body: #D4CFD6
 Knob Body Lighter: #E0DBE2
 Knob Body Lightest: #E8E3EA
 Knob Body Darkest: #ADA8B0
 Knob Line: #000000
 Knob Line Dark: #000000
-Knob Stroke: #8E899400
+Knob Stroke: #8E899420
 Knob Emboss Highlight: #ffffff60 // 3D highlight
 Knob Emboss Shadow: #7A757F60 // 3D shadow
 Knob Value Background: #00000000

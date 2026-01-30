@@ -112,10 +112,10 @@ Inverted Selected Borderless Button background: #ffffff1a
 Invoke Action Background: #353560
 Invoke Action Category: #9999FF
 Invoke Action Text: #E8E0FF
-Knob Body: #cccccc00
+Knob Body: #3A3A68
 Knob Body Darkest: #2A2A4A
-Knob Body Lighter: #353560
-Knob Body Lightest: #404075
+Knob Body Lighter: #404075
+Knob Body Lightest: #4A4A88
 Knob Emboss Highlight: #cccccc00
 Knob Emboss Shadow: #cccccc00
 Knob Line: #FFD700
