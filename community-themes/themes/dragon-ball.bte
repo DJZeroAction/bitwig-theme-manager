@@ -1,370 +1,372 @@
 // Dragon Ball - Over 9000!
-// ORANGE and YELLOW - Goku's gi, Super Saiyan aura, Kamehameha energy!
-// Power level: OVER 9000!!!
+// BRIGHT ORANGE Goku gi, YELLOW Super Saiyan, BLUE Kamehameha!
+// Different areas = different DBZ iconic elements
 // Author: Claude
 
-// Core
+// Core - ORANGE Goku gi primary!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
-Inherited: #FF6B00
-White: #FFF5E6
-Black: #1A0A00
+Inherited: #FF6600
+White: #FFFFFF
+Black: #000000
 Same as background: #00000000
-Accent: #FF6B00
-Default text: #FFF5E6
-Window background: #2A1508
-Grey 0: #1A0A00
-Grey 1: #221006
-Grey 2: #2A1508
-Grey 3: #35200E
-Grey 4: #402A14
-Grey 5: #4A3520
-Grey 6: #55402A
+Accent: #FF6600
+Default text: #FFFFFF
+Window background: #DD5500
+Grey 0: #1A1A1A
+Grey 1: #EE6600
+Grey 2: #222222
+Grey 3: #DD5500
+Grey 4: #2A2A2A
+Grey 5: #CC4400
+Grey 6: #333333
 Shadow: #00000099
-Brighter: #FFE4C4
+Brighter: #FFDD00
 
-// Text - Cream/light orange tones for Dragon Ball energy
-Dark Text: #FFF5E6
-Subtle Dark Text: #D4A574
-Subtle Light Text: #E8C8A8
-Subtler Light Text: #C49A6C
-Medium Light Text: #F0D8B8
-Light Text: #FFF5E6
-Lighter Text: #F0D8B8
-Link Text: #FF6B00
-Link Text Rollover: #FFD700
-Error Text: #FF3030
-Accent (hitech): #FF6B00
+// Text - White on orange, yellow highlights
+Dark Text: #000000
+Subtle Dark Text: #222222
+Subtle Light Text: #FFFFFF
+Subtler Light Text: #FFEECC
+Medium Light Text: #FFFFFF
+Light Text: #FFFFFF
+Lighter Text: #FFFFFF
+Link Text: #4477DD
+Link Text Rollover: #66AAFF
+Error Text: #FF3333
 
-// Accent & Status - GOKU ORANGE is the heart of Dragon Ball!
-Accent (default): #FF6B00
-Implicit On (subtle): #FF6B0066
-On (subtle): #FF6B0044
-On (subtler): #FF6B0022
-Pressed On: #E65A00
-Mapping: #FFD700
-Selection: #FF6B0066
-Standby selection: #FF6B0033
-White Selection: #FF6B00
-White Selection (standby): #D4A574
-Warning: #FFD700
-Activation Green: #32CD32
-Activation Yellow: #FFD700
-Activation Red: #FF3030
+// Accent & Status - Super Saiyan Yellow!
+Accent (default): #FFDD00
+Accent (hitech): #4477DD
+Implicit On (subtle): #FFDD0088
+On (subtle): #FFDD0066
+On (subtler): #FFDD0044
+Pressed On: #DDBB00
+Mapping: #4477DD
+Selection: #FFDD0088
+Standby selection: #FFDD0044
+White Selection: #FFDD00
+White Selection (standby): #DDBB00
+Warning: #FFDD00
+Activation Green: #44DD44
+Activation Yellow: #FFDD00
+Activation Red: #FF3333
 
-// Buttons - Super Saiyan Yellow glow with Kamehameha Blue accents!
-Button background: #4169E180
-Button stroke: #4169E1
-OK Button background: #FF6B00
-Pressed button background: #FFD70030
-Checkbox background: #2A1508
-Button in tree background: #35200E
-View button background: #FF6B000D
-Pressed view button background: #FFD70020
-Inverted Selected Borderless Button background: #FFD70020
-Selected borderless button background: #FF6B0040
-Pressed borderless button background: #FF6B0066
-Rubber button stroke: #4169E1
-Rubber highlight button stroke: #FF6B00
-Close button mouse over background: #FFD70020
-Close button pressed background: #FF303066
-Abstract Button Stroke: #4169E144
-Abstract Button Selected Background: #FF6B0040
-Abstract Button Unselected Background: #35200E
-Abstract Button Pressed Background: #FFD70020
-Color bar button fill color: #FFD70020
+// Buttons - Blue Kamehameha!
+Button background: #4477DD80
+Button stroke: #FFDD00
+OK Button background: #4477DD
+Pressed button background: #FFDD0044
+Checkbox background: #222222
+Button in tree background: #4477DD88
+View button background: #FF660040
+Pressed view button background: #FFDD0060
+Inverted Selected Borderless Button background: #FFDD0044
+Selected borderless button background: #FFDD0066
+Pressed borderless button background: #FFDD0088
+Rubber button stroke: #FFDD00
+Rubber highlight button stroke: #4477DD
+Close button mouse over background: #FFDD0044
+Close button pressed background: #FF333388
+Abstract Button Stroke: #FFDD0088
+Abstract Button Selected Background: #FFDD0066
+Abstract Button Unselected Background: #222222
+Abstract Button Pressed Background: #FFDD0044
+Color bar button fill color: #FFDD0044
 
-// Knobs & Sliders - Goku Orange power arcs!
-Knob Body: #35200E
-Knob Body Lighter: #402A14
-Knob Body Lightest: #4A3520
-Knob Body Darkest: #1A0A00
-Knob Line: #FFF5E6
-Knob Line Dark: #E8C8A8
-Knob Stroke: #4169E144
-Knob Emboss Highlight: #FFD70020
-Knob Emboss Shadow: #00000040
-Knob Value Background: #1A0A0080
-Knob Value Background (dark): #1A0A00
-Knob Value Color: #FF6B00
-Slider background: #1A0A0080
-Emboss Highlight: #FFD70010
-Emboss Shadow: #00000020
+// Knobs & Sliders - Dark body, yellow Super Saiyan glow
+Knob Body: #1A1A1A
+Knob Body Lighter: #2A2A2A
+Knob Body Lightest: #3A3A3A
+Knob Body Darkest: #0A0A0A
+Knob Line: #FFFFFF
+Knob Line Dark: #FFDD00
+Knob Stroke: #FFDD0066
+Knob Emboss Highlight: #FFDD0030
+Knob Emboss Shadow: #00000080
+Knob Value Background: #00000088
+Knob Value Background (dark): #000000
+Knob Value Color: #FFDD00
+Slider background: #00000088
+Emboss Highlight: #FFDD0015
+Emboss Shadow: #00000050
 
-// Toggle Icons - Orange and Yellow Super Saiyan power!
-Normal Toggle Icon: #D4A574
-Mouse Over Toggle Icon: #FFF5E6
-Active Toggle Icon (Playing): #FFD700
-Pressed Toggle Icon: #C49A6C
-Normal Inverted Toggle Icon: #FFF5E680
-Mouse Over Inverted Toggle Icon: #FFF5E6
-Active Inverted Toggle Icon (Playing): #FFD700
-Pressed Inverted Toggle Icon: #F0D8B8
-Toggle Icon: #D4A574
+// Toggle Icons - Yellow Super Saiyan
+Normal Toggle Icon: #FFDD00
+Mouse Over Toggle Icon: #FFFFFF
+Active Toggle Icon (Playing): #FFDD00
+Pressed Toggle Icon: #DDBB00
+Normal Inverted Toggle Icon: #FFFFFF88
+Mouse Over Inverted Toggle Icon: #FFFFFF
+Active Inverted Toggle Icon (Playing): #FFDD00
+Pressed Inverted Toggle Icon: #FFEE66
+Toggle Icon: #FFDD00
 
-// Menus & Popups - Dark orange gi background
-Menu background: #221006
-Menu stroke: #FF6B00
-Menu text: #FFF5E6
-Menu Icon: #FFF5E6cc
-Menu description text: #E8C8A8
-Menu separator: #FF6B0044
-Popup insert: #2A1508
-Popup overlay background color: #1A0A00CC
-Popup Notification Background: #35200E
-Notification Background: #35200E
-Notification Normal: #FFF5E6
-Notification Error: #FF3030
-Notification Button Background: #2A1508
-Tooltip Background: #1A0A00
-Light Tooltip Background: #FFF5E6
-Tooltip Stroke: #FF6B00
+// Menus & Popups - ORANGE Goku gi!
+Menu background: #DD5500
+Menu stroke: #FFDD00
+Menu text: #FFFFFF
+Menu Icon: #FFFFFF
+Menu description text: #FFEECC
+Menu separator: #FFDD0066
+Popup insert: #222222
+Popup overlay background color: #000000DD
+Popup Notification Background: #FF6600
+Notification Background: #FF6600
+Notification Normal: #FFFFFF
+Notification Error: #FFFFFF
+Notification Button Background: #222222
+Tooltip Background: #FFDD00
+Light Tooltip Background: #4477DD
+Tooltip Stroke: #000000
 
-// LEDs & Meters - Super Saiyan Yellow power levels ascending!
-Led On: #FFD700
-Led Off: #2A1508
-Meter Normal: #FFD700
-Meter Yellow: #FF6B00
-Meter Red: #FF3030
+// LEDs & Meters - Super Saiyan Yellow power!
+Led On: #FFDD00
+Led Off: #333333
+Meter Normal: #FFDD00
+Meter Yellow: #FF8800
+Meter Red: #FF3333
 Meter Clipping: #FF0000
-Meter Gain Reduction: #FF6B00
-Meter Hitech: #FFD700
-Meter Hitech Background: #1A0A0080
-Meter Muted: #8B7355
-Hitech background: #1A0A00
-Hitech on: #FFD700
+Meter Gain Reduction: #4477DD
+Meter Hitech: #4477DD
+Meter Hitech Background: #00000088
+Meter Muted: #666666
+Hitech background: #111111
+Hitech on: #4477DD
 
-// Scrollbars - Kamehameha Blue energy!
-Scrollbar: #4169E1
-Scrollbar background: #1A0A00
-Modern Scrollbar Handle (active): #FF6B00
-Modern Scrollbar Handle (inactive): #4169E166
-Modern Scrollbar Background (active): #1A0A0066
-Modern Dark Scrollbar Handle (active): #4169E166
-Modern Dark Scrollbar Handle (inactive): #4169E133
+// Scrollbars - Orange on dark
+Scrollbar: #FF6600
+Scrollbar background: #111111
+Modern Scrollbar Handle (active): #FFDD00
+Modern Scrollbar Handle (inactive): #FF660088
+Modern Scrollbar Background (active): #00000088
+Modern Dark Scrollbar Handle (active): #FF8800
+Modern Dark Scrollbar Handle (inactive): #FF660066
 
-// Tree & List Views - Orange selection like ki aura
-Tree Item Background: #35200E
-Selected Tree Item Background: #FF6B0040
-Selected Tree Item Background (standby): #FF6B0020
-Tree Separator: #FF6B0022
-List Item Background: #35200E
-List Separator: #FF6B0022
-Selected Dashboard Tree: #FFD700
-Dark tree background (selected): #FF6B0040
-Dark tree selection frame: #FFD700
-Dark tree background (standby selected): #FF6B0020
-Dark tree separator: #FF6B0022
-Dark tree text: #FFF5E6
-Dark tree text (selected): #FFF5E6
-Dark tree hover background change: #FFD70008
-Frame color of selection cursor in the tree.: #FFD700
-Frame color of selection cursor in the tree. (standby): #8B7355
-Launcher Mapping Indication: #4169E1
+// Tree & List Views - BLUE Kamehameha area!
+Tree Item Background: #335588
+Selected Tree Item Background: #FFDD0088
+Selected Tree Item Background (standby): #FFDD0044
+Tree Separator: #4477DD66
+List Item Background: #2A4477
+List Separator: #4477DD44
+Selected Dashboard Tree: #FFDD00
+Dark tree background (selected): #FFDD0088
+Dark tree selection frame: #FFDD00
+Dark tree background (standby selected): #FFDD0044
+Dark tree separator: #FFDD0044
+Dark tree text: #FFFFFF
+Dark tree text (selected): #FFFFFF
+Dark tree hover background change: #FFDD0033
+Frame color of selection cursor in the tree.: #FFDD00
+Frame color of selection cursor in the tree. (standby): #DDBB00
+Launcher Mapping Indication: #4477DD
 
-// Panels & Separators - Orange tinted panels
-Panel body: #35200E
-Selected Panel body: #402A14
-Panel stroke: #FF6B0044
-Selected Panel stroke: #FFD700
-Selected Panel stroke (standby): #4169E1
-Active Panel stroke: #FFD700
-Panel Stroke (focused): #FFD700
-Inspector Section Frame: #FF6B0044
-Content Background: #35200E
-Light Separator Line: #FF6B0022
-Dark Separator Line: #1A0A0080
-Dark Panel Sub-frame Stroke: #FF6B0022
-Dark Panel Sub-frame Fill: #221006
-Field background: #1A0A00
-Number field bar background: #FF6B00
+// Panels & Separators - BRIGHT ORANGE Goku gi panels!
+Panel body: #CC5500
+Selected Panel body: #DD6600
+Panel stroke: #FFDD0088
+Selected Panel stroke: #FFDD00
+Selected Panel stroke (standby): #DDBB00
+Active Panel stroke: #4477DD
+Panel Stroke (focused): #FFDD00
+Inspector Section Frame: #FFDD0066
+Content Background: #44AA44
+Light Separator Line: #FFDD0044
+Dark Separator Line: #00000088
+Dark Panel Sub-frame Stroke: #FFDD0044
+Dark Panel Sub-frame Fill: #222222
+Field background: #111111
+Number field bar background: #FFDD00
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
-Color of stroke between tabs: #FF6B0022
+Color of stroke between tabs: #FFDD0044
 
-// Device Chain - Super Saiyan aura effects!
-Device Header: #35200E
-Device Header (selected): #2A1508
-Device Locked Overlay: #FFD70080
-Device Tint Future: #4169E164
-Device Tint Retro: #FF6B0052
-Device Tint Military: #32CD3247
-Plugin missing: #FF3030
+// Device Chain - YELLOW Super Saiyan aura!
+Device Header: #CCAA00
+Device Header (selected): #DDBB00
+Device Locked Overlay: #FFDD0099
+Device Tint Future: #4477DD88
+Device Tint Retro: #FF660088
+Device Tint Military: #44AA4466
+Plugin missing: #FF3333
 
-// Display & Waveforms - Orange ki energy waveforms!
-Display Background: #1A0A00
-Display Background (error): #400000
-Display Waveform: #FF6B00
-Display Stroke: #4169E144
-Display Start/End Markers: #FFD700
-Display Loop Markers: #32CD32
-Grey Display Background: #221006
-Audio Event Background: #35200E
-Audio Event Boundary: #FF6B0044
-Audio Event Waveform: #FF6B00
+// Display & Waveforms - Yellow waveforms on dark
+Display Background: #111111
+Display Background (error): #441111
+Display Waveform: #FFDD00
+Display Stroke: #FF660066
+Display Start/End Markers: #4477DD
+Display Loop Markers: #44AA44
+Grey Display Background: #1A1A1A
+Audio Event Background: #DD5500
+Audio Event Boundary: #FFDD0066
+Audio Event Waveform: #FFDD00
 
-// Grid & Modular Environment - Ki energy connections
-The Grid (background): #221006
-The Grid (stroke): #FF6B0022
-Grid Line (Primary): #FF6B0044
-Grid Line (Secondary): #FF6B0022
-Background color of the modular environment.: #35200E
-Compressed Audio Port in modular environment: #4169E1
-Audio connection in modular environment: #FF6B00
-Audio64 connection in modular environment: #FFD700
-Event connection in modular environment: #32CD32
-Polyphonic Desktop Object: #FFD700
-Current Atom Value Color: #FF6B00
+// Grid & Modular Environment - Green Namek
+The Grid (background): #224422
+The Grid (stroke): #44AA4444
+Grid Line (Primary): #FFDD0066
+Grid Line (Secondary): #FFDD0033
+Background color of the modular environment.: #336633
+Compressed Audio Port in modular environment: #4477DD
+Audio connection in modular environment: #FF6600
+Audio64 connection in modular environment: #FFDD00
+Event connection in modular environment: #44AA44
+Polyphonic Desktop Object: #FF3333
+Current Atom Value Color: #FFDD00
 
-// Timeline & Arranger - Orange tinted backgrounds
-Dark Timeline Background: #1A0A00
-Dark Timeline Header Background: #221006
-Light Timeline Background: #35200E
-Light Timeline Header Background: #35200E
-Top Level Timeline Background: #221006
-Top Level Timeline Header Background: #2A1508
-Irrelevant Timeline Background: #140800
-Irrelevant Timeline Header Background: #1A0A00
-Irrelevant Timeline Overlay: #00000040
-Irrelevant Timeline Header Overlay: #00000040
-Timeline Background Pattern: #35200E
-Timeline Header Background Pattern: #35200E
-Timeline Primary Grid: #FF6B0033
-Timeline Secondary Grid: #FF6B001A
-Timeline Header Primary Grid: #FF6B0033
-Timeline Header Secondary Grid: #FF6B001A
-Timeline Playhead: #FFD700
-Timeline edit tool chooser background: #35200E
+// Timeline & Arranger - Dark for contrast with orange clips!
+Dark Timeline Background: #0A0A0A
+Dark Timeline Header Background: #111111
+Light Timeline Background: #151515
+Light Timeline Header Background: #1A1A1A
+Top Level Timeline Background: #0D0D0D
+Top Level Timeline Header Background: #141414
+Irrelevant Timeline Background: #080808
+Irrelevant Timeline Header Background: #0A0A0A
+Irrelevant Timeline Overlay: #00000066
+Irrelevant Timeline Header Overlay: #00000066
+Timeline Background Pattern: #181818
+Timeline Header Background Pattern: #222222
+Timeline Primary Grid: #FF660044
+Timeline Secondary Grid: #FF660022
+Timeline Header Primary Grid: #FF880044
+Timeline Header Secondary Grid: #FF880022
+Timeline Playhead: #FFFFFF
+Timeline edit tool chooser background: #DD5500
 
-// Timeline Selection & Cursors - Super Saiyan Yellow power!
-Time Selection Fill: #FFD70030
-Time Selection Stroke: #FFD700
+// Timeline Selection & Cursors - Yellow Super Saiyan!
+Time Selection Fill: #FFDD0066
+Time Selection Stroke: #FFDD00
 Time Selection Implicit Fill: #00000000
-Time Selection Cursor Stroke: #FFD700
-Time Selection Standby Fill: #FFF5E610
-Time Selection Standby Stroke: #8B7355
-Time Selection Standby Cursor Stroke: #8B7355
-Time Selection Inactive Fill: #8B735508
-Time Selection Inactive Stroke: #8B7355
-Time Selection Not Selected Fill: #FFF5E60D
-Time Selection Not Selected Stroke: #8B7355
-Time Selection Across All Lanes Fill: #FFD70050
-Time Selection Across All Lanes Stroke: #E8C8A8
-Header Time Selection Fill: #FFD70050
-Header Time Selection Stroke: #FFD700
-Header Time Selection Standby Fill: #FFF5E610
-Header Time Selection Standby Stroke: #8B7355
-Header Time Selection Across All Lanes Fill: #FFD70066
-Header Time Selection Across All Lanes Stroke: #E8C8A8
-Header Time Selection Cursor Stroke: #FFD700
-Header Time Selection Standby Cursor Stroke: #8B7355
-Header Loop Region Background: #FF6B0020
+Time Selection Cursor Stroke: #FFDD00
+Time Selection Standby Fill: #FFFFFF22
+Time Selection Standby Stroke: #DDBB00
+Time Selection Standby Cursor Stroke: #DDBB00
+Time Selection Inactive Fill: #DDBB0022
+Time Selection Inactive Stroke: #DDBB00
+Time Selection Not Selected Fill: #FFFFFF15
+Time Selection Not Selected Stroke: #888888
+Time Selection Across All Lanes Fill: #FFDD0088
+Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Fill: #FFDD0088
+Header Time Selection Stroke: #FFDD00
+Header Time Selection Standby Fill: #FFFFFF22
+Header Time Selection Standby Stroke: #DDBB00
+Header Time Selection Across All Lanes Fill: #FFDD00AA
+Header Time Selection Across All Lanes Stroke: #FFFFFF
+Header Time Selection Cursor Stroke: #FFDD00
+Header Time Selection Standby Cursor Stroke: #DDBB00
+Header Loop Region Background: #FF660044
 
 // Cue Markers & Tooltips
-Timeline Cue Marker: #FFD700
-Timeline Header Cue Marker: #FFD700
-Timeline Tooltip Background: #1A0A00EE
-Timeline Tooltip Text: #FFF5E6
-Timeline Header Tooltip Background: #1A0A00EE
-Timeline Header Tooltip Text: #FFF5E6
+Timeline Cue Marker: #4477DD
+Timeline Header Cue Marker: #4477DD
+Timeline Tooltip Background: #DD5500EE
+Timeline Tooltip Text: #FFFFFF
+Timeline Header Tooltip Background: #DD5500EE
+Timeline Header Tooltip Text: #FFFFFF
 
-// Loop Regions - Orange ki aura
-Loop Region Background: #FF6B0020
-Loop Region Fill: #FF6B0030
-Loop Region Stroke: #FF6B00
-Loop Region Selected Fill: #FFD70050
-Loop Region Selected Stroke: #FFD700
-Insert preview time: #FFF5E680
+// Loop Regions - Green Namek
+Loop Region Background: #44AA4444
+Loop Region Fill: #44AA4455
+Loop Region Stroke: #44AA44
+Loop Region Selected Fill: #44AA4477
+Loop Region Selected Stroke: #88DD88
+Insert preview time: #FFFFFF88
 
-// Automation & Modulation - Super Saiyan power control!
+// Automation & Modulation - Blue Kamehameha
 Automation Chooser Background: #00000000
-Automation Color: #FFD70040
-Automation button glow color: #FFD70040
+Automation Color: #4477DD66
+Automation button glow color: #4477DD66
 Arranger Automation Curve Fill Color: #00000000
-Track Automation Button Color: #FFD700
-Track Automation Color: #FFD700
-Clip Automation Color: #FF6B00
-Clip Modulation Color: #32CD32
-Add Modulation Button Color: #FF6B00
-Multiply Modulation Button Color: #FFD700
-User Automation Override Color: #32CD32
-Note Expression Color: #FFD700
-Send (post) value color: #32CD32
-Send (pre) value color: #4169E1
-Dark offset for automation/channel bar: #00000020
-Light offset for automation/channel bar: #FFD70020
-Unselected Filled Automation Type Icon: #8B7355
-Unselected Empty Automation Type Icon: #4169E166
-Selected matrix slot color: #FFD700
+Track Automation Button Color: #4477DD
+Track Automation Color: #4477DD
+Clip Automation Color: #66AAFF
+Clip Modulation Color: #44AA44
+Add Modulation Button Color: #4477DD
+Multiply Modulation Button Color: #44AA44
+User Automation Override Color: #FFDD00
+Note Expression Color: #FFDD00
+Send (post) value color: #44AA44
+Send (pre) value color: #4477DD
+Dark offset for automation/channel bar: #00000044
+Light offset for automation/channel bar: #FFFFFF22
+Unselected Filled Automation Type Icon: #AAAAAA
+Unselected Empty Automation Type Icon: #FFDD0088
+Selected matrix slot color: #FFDD00
 
-// Modulation Mapping - Dragon Ball character power colors!
-Modulation Mapping Color: #FFD700
-Modulation Mapping Color (subtractive): #FF3030
-Modulation Mapping Color (polyphonic): #32CD32
-Modulation Mapping Background (monophonic): #FF6B0040
-Modulation Mapping Background (polyphonic): #32CD3240
-Modulation Mapping Background Color: #FF6B0030
-Mapping indication 1: #FF3030
-Mapping indication 2: #FF6B00
-Mapping indication 3: #FFD700
-Mapping indication 4: #32CD32
-Mapping indication 5: #4169E1
-Mapping indication 6: #1E3A8A
-Mapping indication 7: #DAA520
-Mapping indication 8: #E65A00
+// Modulation Mapping - DBZ power colors!
+Modulation Mapping Color: #4477DD
+Modulation Mapping Color (subtractive): #FF3333
+Modulation Mapping Color (polyphonic): #44AA44
+Modulation Mapping Background (monophonic): #4477DD66
+Modulation Mapping Background (polyphonic): #44AA4466
+Modulation Mapping Background Color: #4477DD55
+Mapping indication 1: #FF3333
+Mapping indication 2: #FF6600
+Mapping indication 3: #FFDD00
+Mapping indication 4: #44AA44
+Mapping indication 5: #4477DD
+Mapping indication 6: #2255AA
+Mapping indication 7: #FF8800
+Mapping indication 8: #CC4400
 
-// Record & Transport - Red like power-up glow!
-Record button color: #FF3030
-Record button color implicit: #FF303088
-Record button glow color: #FF303040
-Record text color: #FF3030
-Monitoring buttons color: #FFD700
+// Record & Transport - Red Ki blast!
+Record button color: #FF3333
+Record button color implicit: #FF3333AA
+Record button glow color: #FF333366
+Record text color: #FF3333
+Monitoring buttons color: #FFDD00
 
-// Onset & Beat Detection - Ki energy detection!
-Onset Color Min: #FFD700
-Onset Color Max: #FF6B00
-Onset Marker Color: #FF6B00
-Beat Marker Color: #32CD32
-Analyzed Beat Color: #32CD32
+// Onset & Beat Detection
+Onset Color Min: #FFDD00
+Onset Color Max: #FF6600
+Onset Marker Color: #FF6600
+Beat Marker Color: #44AA44
+Analyzed Beat Color: #44AA44
 
 // File Status Indicators
-Missing file icon: #FF3030
-Missing file text: #FF3030
-Found file icon: #32CD32
-Found file text: #32CD32
-External file icon: #FFD700
-External file text: #DAA520
+Missing file icon: #FF3333
+Missing file text: #FF3333
+Found file icon: #44AA44
+Found file text: #44AA44
+External file icon: #FFDD00
+External file text: #FFDD00
 
-// Invoke Action (Command Palette)
-Invoke Action Background: #221006
-Invoke Action Category: #8B7355
-Invoke Action Text: #FFF5E6
-User input text: #FFF5E6
+// Invoke Action (Command Palette) - Orange Goku
+Invoke Action Background: #DD5500
+Invoke Action Category: #FFEECC
+Invoke Action Text: #FFFFFF
+User input text: #FFFFFF
 
-// Panel Colors - Dragon Ball character power palette!
-Panel Red: #FF3030
-Panel Orange: #FF6B00
-Panel Yellow: #FFD700
-Panel Lime: #90EE90
-Panel Green: #32CD32
-Panel Mint: #40E0D0
-Panel Turquoise: #4AAFDC
-Panel Blue: #4169E1
-Panel Purple: #9370DB
+// Panel Colors - DBZ character colors!
+Panel Red: #FF3333
+Panel Orange: #FF6600
+Panel Yellow: #FFDD00
+Panel Lime: #88DD44
+Panel Green: #44AA44
+Panel Mint: #44DDAA
+Panel Turquoise: #44AADD
+Panel Blue: #4477DD
+Panel Purple: #AA66DD
 
-// Bitwig Branding - Dragon Ball themed!
-Bitwig Red: #FF3030
-Bitwig Mint: #40E0D0
-Bitwig CI: #FF6B00
-Bitwig Producer: #FFD700
-Bitwig Essentials: #4169E1
-Bitwig 8-Track: #32CD32
-Bitwig 16-Track: #4169E1
+// Bitwig Branding - Dragon Ball!
+Bitwig Red: #FF3333
+Bitwig Mint: #44DDAA
+Bitwig CI: #FF6600
+Bitwig Producer: #FFDD00
+Bitwig Essentials: #4477DD
+Bitwig 8-Track: #44AA44
+Bitwig 16-Track: #4477DD
 
 // Misc
-Comp fill: #FF6B0050
-Selected Panel stroke (standby): #4169E1
-Popup insert: #2A1508
-Selected Dashboard Tree: #FFD700
+Comp fill: #FFDD0088
+Drop Indicator: #4477DD
+Progress bar: #FFDD00
+Progress background: #222222
+Hitcount background: #FF3333
+Hitcount text color: #FFFFFF
 // <end>
