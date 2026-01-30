@@ -3,7 +3,7 @@
 // Different areas = different duel elements
 // Author: Claude
 
-// Core - PURPLE Shadow Realm!
+// Core - PURPLE Shadow Realm tinted workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #FFD700
-Default text: #FFD700
+Default text: #EEDDFF
 Window background: #2A1144
-Grey 0: #3366BB
-Grey 1: #331155
-Grey 2: #CC2222
-Grey 3: #2A1144
-Grey 4: #AA1111
-Grey 5: #220E3A
-Grey 6: #4422AA
+Grey 0: #1A0A2E
+Grey 1: #221040
+Grey 2: #2A1450
+Grey 3: #321860
+Grey 4: #3A1C70
+Grey 5: #422080
+Grey 6: #4A2490
 Shadow: #00000099
 Brighter: #FFD700
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #220E3A
 Abstract Button Pressed Background: #FFD70044
 Color bar button fill color: #FFD70044
 
-// Knobs & Sliders - Dark purple, gold value
-Knob Body: #220E3A
-Knob Body Lighter: #2A1144
-Knob Body Lightest: #331155
-Knob Body Darkest: #110722
+// Knobs & Sliders - Purple tinted, gold value
+Knob Body: #2A1450
+Knob Body Lighter: #321860
+Knob Body Lightest: #3A1C70
+Knob Body Darkest: #1A0A2E
 Knob Line: #FFD700
 Knob Line Dark: #DDAA00
 Knob Stroke: #FFD70066
 Knob Emboss Highlight: #FFD70030
 Knob Emboss Shadow: #00000080
-Knob Value Background: #11072288
-Knob Value Background (dark): #110722
+Knob Value Background: #1A0A2E88
+Knob Value Background (dark): #1A0A2E
 Knob Value Color: #FFD700
-Slider background: #11072288
+Slider background: #1A0A2E88
 Emboss Highlight: #FFD70015
 Emboss Shadow: #00000050
 
@@ -104,11 +104,11 @@ Pressed Inverted Toggle Icon: #FFEE55
 Toggle Icon: #FFD700
 
 // Menus & Popups - PURPLE Shadow Realm!
-Menu background: #331155
+Menu background: #2A1450
 Menu stroke: #FFD700
-Menu text: #FFD700
+Menu text: #EEDDFF
 Menu Icon: #FFD700
-Menu description text: #DDAA00
+Menu description text: #CCAADD
 Menu separator: #FFD70066
 Popup insert: #220E3A
 Popup overlay background color: #000000DD
@@ -135,12 +135,12 @@ Meter Muted: #666666
 Hitech background: #110722
 Hitech on: #5588EE
 
-// Scrollbars - Purple on dark
+// Scrollbars - Purple tinted
 Scrollbar: #6622AA
-Scrollbar background: #110722
+Scrollbar background: #1A0A2E
 Modern Scrollbar Handle (active): #FFD700
 Modern Scrollbar Handle (inactive): #6622AA88
-Modern Scrollbar Background (active): #11072288
+Modern Scrollbar Background (active): #1A0A2E88
 Modern Dark Scrollbar Handle (active): #8833DD
 Modern Dark Scrollbar Handle (inactive): #6622AA66
 
@@ -164,20 +164,20 @@ Frame color of selection cursor in the tree. (standby): #DDAA00
 Launcher Mapping Indication: #5588EE
 
 // Panels & Separators - PURPLE Shadow Realm panels!
-Panel body: #3A1566
-Selected Panel body: #4A2277
+Panel body: #321860
+Selected Panel body: #422080
 Panel stroke: #FFD70088
 Selected Panel stroke: #FFD700
 Selected Panel stroke (standby): #DDAA00
 Active Panel stroke: #5588EE
 Panel Stroke (focused): #FFD700
 Inspector Section Frame: #FFD70066
-Content Background: #CC2222
+Content Background: #5588EE
 Light Separator Line: #FFD70044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FFD70044
-Dark Panel Sub-frame Fill: #220E3A
-Field background: #110722
+Dark Panel Sub-frame Fill: #1A0A2E
+Field background: #1A0A2E
 Number field bar background: #FFD700
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -193,18 +193,18 @@ Device Tint Military: #8822DD66
 Plugin missing: #FF4444
 
 // Display & Waveforms - Gold waveforms on purple
-Display Background: #110722
+Display Background: #1A0A2E
 Display Background (error): #441111
 Display Waveform: #FFD700
 Display Stroke: #6622AA66
 Display Start/End Markers: #5588EE
 Display Loop Markers: #8822DD
-Grey Display Background: #1A0E30
-Audio Event Background: #3A1566
+Grey Display Background: #221040
+Audio Event Background: #321860
 Audio Event Boundary: #FFD70066
 Audio Event Waveform: #FFD700
 
-// Grid & Modular Environment - Blue-Eyes domain
+// Grid & Modular Environment - Blue-Eyes domain (secondary color)
 The Grid (background): #223377
 The Grid (stroke): #5588EE44
 Grid Line (Primary): #FFD70066
@@ -217,25 +217,25 @@ Event connection in modular environment: #8822DD
 Polyphonic Desktop Object: #6622AA
 Current Atom Value Color: #FFD700
 
-// Timeline & Arranger - Dark Shadow Realm!
-Dark Timeline Background: #0D0618
-Dark Timeline Header Background: #110722
-Light Timeline Background: #140A28
-Light Timeline Header Background: #1A0E30
-Top Level Timeline Background: #100820
-Top Level Timeline Header Background: #130B28
-Irrelevant Timeline Background: #0A0510
-Irrelevant Timeline Header Background: #0D0618
+// Timeline & Arranger - Purple tinted Shadow Realm!
+Dark Timeline Background: #140A28
+Dark Timeline Header Background: #1A0C30
+Light Timeline Background: #1A0E30
+Light Timeline Header Background: #201038
+Top Level Timeline Background: #180C2C
+Top Level Timeline Header Background: #1C0E34
+Irrelevant Timeline Background: #100820
+Irrelevant Timeline Header Background: #140A28
 Irrelevant Timeline Overlay: #00000066
 Irrelevant Timeline Header Overlay: #00000066
-Timeline Background Pattern: #180D2E
-Timeline Header Background Pattern: #1E1038
+Timeline Background Pattern: #1E1038
+Timeline Header Background Pattern: #241440
 Timeline Primary Grid: #6622AA55
 Timeline Secondary Grid: #6622AA33
 Timeline Header Primary Grid: #6622AA55
 Timeline Header Secondary Grid: #6622AA33
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #3A1566
+Timeline edit tool chooser background: #321860
 
 // Timeline Selection & Cursors - Gold!
 Time Selection Fill: #FFD70066
@@ -337,10 +337,10 @@ External file icon: #FFD700
 External file text: #FFD700
 
 // Invoke Action (Command Palette) - Purple Shadow Realm
-Invoke Action Background: #331155
+Invoke Action Background: #321860
 Invoke Action Category: #DDAA00
-Invoke Action Text: #FFD700
-User input text: #FFD700
+Invoke Action Text: #EEDDFF
+User input text: #EEDDFF
 
 // Panel Colors - Duel monster types!
 Panel Red: #CC2222

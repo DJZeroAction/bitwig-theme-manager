@@ -3,7 +3,7 @@
 // Different areas = different DBZ iconic elements
 // Author: Claude
 
-// Core - ORANGE Goku gi primary!
+// Core - WARM ORANGE Goku gi tinted workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #FF6600
-Default text: #FFFFFF
-Window background: #DD5500
-Grey 0: #1A1A1A
-Grey 1: #EE6600
-Grey 2: #222222
-Grey 3: #DD5500
-Grey 4: #2A2A2A
-Grey 5: #CC4400
-Grey 6: #333333
+Default text: #FFEECC
+Window background: #3A2010
+Grey 0: #281408
+Grey 1: #30180C
+Grey 2: #381C10
+Grey 3: #402014
+Grey 4: #482418
+Grey 5: #50281C
+Grey 6: #582C20
 Shadow: #00000099
 Brighter: #FFDD00
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #222222
 Abstract Button Pressed Background: #FFDD0044
 Color bar button fill color: #FFDD0044
 
-// Knobs & Sliders - Dark body, yellow Super Saiyan glow
-Knob Body: #1A1A1A
-Knob Body Lighter: #2A2A2A
-Knob Body Lightest: #3A3A3A
-Knob Body Darkest: #0A0A0A
+// Knobs & Sliders - Warm orange tint, yellow glow
+Knob Body: #30180C
+Knob Body Lighter: #381C10
+Knob Body Lightest: #402014
+Knob Body Darkest: #201008
 Knob Line: #FFFFFF
 Knob Line Dark: #FFDD00
 Knob Stroke: #FFDD0066
 Knob Emboss Highlight: #FFDD0030
 Knob Emboss Shadow: #00000080
-Knob Value Background: #00000088
-Knob Value Background (dark): #000000
+Knob Value Background: #20100888
+Knob Value Background (dark): #201008
 Knob Value Color: #FFDD00
-Slider background: #00000088
+Slider background: #20100888
 Emboss Highlight: #FFDD0015
 Emboss Shadow: #00000050
 
@@ -103,12 +103,12 @@ Active Inverted Toggle Icon (Playing): #FFDD00
 Pressed Inverted Toggle Icon: #FFEE66
 Toggle Icon: #FFDD00
 
-// Menus & Popups - ORANGE Goku gi!
-Menu background: #DD5500
+// Menus & Popups - Warm orange!
+Menu background: #402014
 Menu stroke: #FFDD00
-Menu text: #FFFFFF
-Menu Icon: #FFFFFF
-Menu description text: #FFEECC
+Menu text: #FFEECC
+Menu Icon: #FFDD00
+Menu description text: #DDBB88
 Menu separator: #FFDD0066
 Popup insert: #222222
 Popup overlay background color: #000000DD
@@ -135,12 +135,12 @@ Meter Muted: #666666
 Hitech background: #111111
 Hitech on: #4477DD
 
-// Scrollbars - Orange on dark
+// Scrollbars - Orange tinted
 Scrollbar: #FF6600
-Scrollbar background: #111111
+Scrollbar background: #281408
 Modern Scrollbar Handle (active): #FFDD00
 Modern Scrollbar Handle (inactive): #FF660088
-Modern Scrollbar Background (active): #00000088
+Modern Scrollbar Background (active): #20100888
 Modern Dark Scrollbar Handle (active): #FF8800
 Modern Dark Scrollbar Handle (inactive): #FF660066
 
@@ -163,9 +163,9 @@ Frame color of selection cursor in the tree.: #FFDD00
 Frame color of selection cursor in the tree. (standby): #DDBB00
 Launcher Mapping Indication: #4477DD
 
-// Panels & Separators - BRIGHT ORANGE Goku gi panels!
-Panel body: #CC5500
-Selected Panel body: #DD6600
+// Panels & Separators - Warm orange panels!
+Panel body: #402014
+Selected Panel body: #582C20
 Panel stroke: #FFDD0088
 Selected Panel stroke: #FFDD00
 Selected Panel stroke (standby): #DDBB00
@@ -176,8 +176,8 @@ Content Background: #44AA44
 Light Separator Line: #FFDD0044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FFDD0044
-Dark Panel Sub-frame Fill: #222222
-Field background: #111111
+Dark Panel Sub-frame Fill: #281408
+Field background: #281408
 Number field bar background: #FFDD00
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -192,19 +192,19 @@ Device Tint Retro: #FF660088
 Device Tint Military: #44AA4466
 Plugin missing: #FF3333
 
-// Display & Waveforms - Yellow waveforms on dark
-Display Background: #111111
+// Display & Waveforms - Yellow waveforms on warm
+Display Background: #281408
 Display Background (error): #441111
 Display Waveform: #FFDD00
 Display Stroke: #FF660066
 Display Start/End Markers: #4477DD
 Display Loop Markers: #44AA44
-Grey Display Background: #1A1A1A
-Audio Event Background: #DD5500
+Grey Display Background: #30180C
+Audio Event Background: #FF6600
 Audio Event Boundary: #FFDD0066
 Audio Event Waveform: #FFDD00
 
-// Grid & Modular Environment - Green Namek
+// Grid & Modular Environment - Green Namek (secondary color)
 The Grid (background): #224422
 The Grid (stroke): #44AA4444
 Grid Line (Primary): #FFDD0066
@@ -217,25 +217,25 @@ Event connection in modular environment: #44AA44
 Polyphonic Desktop Object: #FF3333
 Current Atom Value Color: #FFDD00
 
-// Timeline & Arranger - Dark for contrast with orange clips!
-Dark Timeline Background: #0A0A0A
-Dark Timeline Header Background: #111111
-Light Timeline Background: #151515
-Light Timeline Header Background: #1A1A1A
-Top Level Timeline Background: #0D0D0D
-Top Level Timeline Header Background: #141414
-Irrelevant Timeline Background: #080808
-Irrelevant Timeline Header Background: #0A0A0A
+// Timeline & Arranger - Warm orange tinted!
+Dark Timeline Background: #201008
+Dark Timeline Header Background: #28140C
+Light Timeline Background: #2C160E
+Light Timeline Header Background: #341A10
+Top Level Timeline Background: #24120A
+Top Level Timeline Header Background: #30180C
+Irrelevant Timeline Background: #1C0E06
+Irrelevant Timeline Header Background: #201008
 Irrelevant Timeline Overlay: #00000066
 Irrelevant Timeline Header Overlay: #00000066
-Timeline Background Pattern: #181818
-Timeline Header Background Pattern: #222222
+Timeline Background Pattern: #341A10
+Timeline Header Background Pattern: #402014
 Timeline Primary Grid: #FF660044
 Timeline Secondary Grid: #FF660022
 Timeline Header Primary Grid: #FF880044
 Timeline Header Secondary Grid: #FF880022
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #DD5500
+Timeline edit tool chooser background: #402014
 
 // Timeline Selection & Cursors - Yellow Super Saiyan!
 Time Selection Fill: #FFDD0066
@@ -336,11 +336,11 @@ Found file text: #44AA44
 External file icon: #FFDD00
 External file text: #FFDD00
 
-// Invoke Action (Command Palette) - Orange Goku
-Invoke Action Background: #DD5500
-Invoke Action Category: #FFEECC
-Invoke Action Text: #FFFFFF
-User input text: #FFFFFF
+// Invoke Action (Command Palette) - Warm orange
+Invoke Action Background: #402014
+Invoke Action Category: #FFDD00
+Invoke Action Text: #FFEECC
+User input text: #FFEECC
 
 // Panel Colors - DBZ character colors!
 Panel Red: #FF3333

@@ -3,7 +3,7 @@
 // Different areas = different Pokeball parts
 // Author: Claude
 
-// Core - RED primary like Pokeball top!
+// Core - RED Pokeball tinted workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #DD0000
-Default text: #FFFFFF
-Window background: #CC0000
-Grey 0: #1A1A1A
-Grey 1: #DD0000
-Grey 2: #222222
-Grey 3: #CC0000
-Grey 4: #2A2A2A
-Grey 5: #BB0000
-Grey 6: #333333
+Default text: #FFEEEE
+Window background: #3A1010
+Grey 0: #280808
+Grey 1: #300C0C
+Grey 2: #381010
+Grey 3: #401414
+Grey 4: #481818
+Grey 5: #501C1C
+Grey 6: #582020
 Shadow: #00000099
 Brighter: #FFDE00
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #222222
 Abstract Button Pressed Background: #FFDE0044
 Color bar button fill color: #FFDE0044
 
-// Knobs & Sliders - Black body (Pokeball button), yellow value
-Knob Body: #1A1A1A
-Knob Body Lighter: #2A2A2A
-Knob Body Lightest: #3A3A3A
-Knob Body Darkest: #0A0A0A
+// Knobs & Sliders - Red tinted body, yellow value
+Knob Body: #300C0C
+Knob Body Lighter: #381010
+Knob Body Lightest: #401414
+Knob Body Darkest: #200808
 Knob Line: #FFFFFF
 Knob Line Dark: #FFDE00
 Knob Stroke: #FFDE0066
 Knob Emboss Highlight: #FFFFFF30
 Knob Emboss Shadow: #00000080
-Knob Value Background: #00000088
-Knob Value Background (dark): #000000
+Knob Value Background: #20080888
+Knob Value Background (dark): #200808
 Knob Value Color: #FFDE00
-Slider background: #00000088
+Slider background: #20080888
 Emboss Highlight: #FFFFFF15
 Emboss Shadow: #00000050
 
@@ -103,12 +103,12 @@ Active Inverted Toggle Icon (Playing): #FFDE00
 Pressed Inverted Toggle Icon: #FFEE66
 Toggle Icon: #FFDE00
 
-// Menus & Popups - RED Pokeball top!
-Menu background: #CC0000
+// Menus & Popups - Red tinted!
+Menu background: #401414
 Menu stroke: #FFDE00
-Menu text: #FFFFFF
-Menu Icon: #FFFFFF
-Menu description text: #FFEECC
+Menu text: #FFEEEE
+Menu Icon: #FFDE00
+Menu description text: #DDBBBB
 Menu separator: #FFDE0066
 Popup insert: #222222
 Popup overlay background color: #000000DD
@@ -135,14 +135,14 @@ Meter Muted: #666666
 Hitech background: #111111
 Hitech on: #3B4CCA
 
-// Scrollbars - Blue Pokemon
-Scrollbar: #3B4CCA
-Scrollbar background: #111111
+// Scrollbars - Red tinted
+Scrollbar: #DD0000
+Scrollbar background: #280808
 Modern Scrollbar Handle (active): #FFDE00
-Modern Scrollbar Handle (inactive): #3B4CCA88
-Modern Scrollbar Background (active): #00000088
-Modern Dark Scrollbar Handle (active): #3B4CCA
-Modern Dark Scrollbar Handle (inactive): #3B4CCA66
+Modern Scrollbar Handle (inactive): #DD000088
+Modern Scrollbar Background (active): #20080888
+Modern Dark Scrollbar Handle (active): #DD0000
+Modern Dark Scrollbar Handle (inactive): #DD000066
 
 // Tree & List Views - BLUE Pokemon logo area!
 Tree Item Background: #2A3A88
@@ -163,21 +163,21 @@ Frame color of selection cursor in the tree.: #FFDE00
 Frame color of selection cursor in the tree. (standby): #DDBB00
 Launcher Mapping Indication: #3B4CCA
 
-// Panels & Separators - RED Pokeball panels!
-Panel body: #BB0000
-Selected Panel body: #CC0000
+// Panels & Separators - Red tinted panels!
+Panel body: #401414
+Selected Panel body: #582020
 Panel stroke: #FFDE0088
 Selected Panel stroke: #FFDE00
 Selected Panel stroke (standby): #DDBB00
 Active Panel stroke: #3B4CCA
 Panel Stroke (focused): #FFDE00
 Inspector Section Frame: #FFDE0066
-Content Background: #EEEEEE
+Content Background: #DDDDDD
 Light Separator Line: #FFDE0044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FFDE0044
-Dark Panel Sub-frame Fill: #222222
-Field background: #111111
+Dark Panel Sub-frame Fill: #280808
+Field background: #280808
 Number field bar background: #FFDE00
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -192,19 +192,19 @@ Device Tint Retro: #DD000088
 Device Tint Military: #44DD4466
 Plugin missing: #DD0000
 
-// Display & Waveforms - Yellow waveforms on black
-Display Background: #111111
+// Display & Waveforms - Yellow waveforms on red-tinted
+Display Background: #280808
 Display Background (error): #441111
 Display Waveform: #FFDE00
 Display Stroke: #FFDE0066
 Display Start/End Markers: #3B4CCA
 Display Loop Markers: #44DD44
-Grey Display Background: #1A1A1A
-Audio Event Background: #CC0000
+Grey Display Background: #300C0C
+Audio Event Background: #DD0000
 Audio Event Boundary: #FFDE0066
 Audio Event Waveform: #FFDE00
 
-// Grid & Modular Environment - Blue Pokemon world
+// Grid & Modular Environment - Blue Pokemon world (secondary color)
 The Grid (background): #223366
 The Grid (stroke): #3B4CCA44
 Grid Line (Primary): #FFDE0066
@@ -217,25 +217,25 @@ Event connection in modular environment: #44DD44
 Polyphonic Desktop Object: #3B4CCA
 Current Atom Value Color: #FFDE00
 
-// Timeline & Arranger - BLACK Pokeball center!
-Dark Timeline Background: #0A0A0A
-Dark Timeline Header Background: #111111
-Light Timeline Background: #151515
-Light Timeline Header Background: #1A1A1A
-Top Level Timeline Background: #0D0D0D
-Top Level Timeline Header Background: #141414
-Irrelevant Timeline Background: #080808
-Irrelevant Timeline Header Background: #0A0A0A
+// Timeline & Arranger - Red tinted!
+Dark Timeline Background: #200808
+Dark Timeline Header Background: #280A0A
+Light Timeline Background: #2C0C0C
+Light Timeline Header Background: #340E0E
+Top Level Timeline Background: #24090A
+Top Level Timeline Header Background: #300B0C
+Irrelevant Timeline Background: #1C0606
+Irrelevant Timeline Header Background: #200808
 Irrelevant Timeline Overlay: #00000066
 Irrelevant Timeline Header Overlay: #00000066
-Timeline Background Pattern: #181818
-Timeline Header Background Pattern: #222222
+Timeline Background Pattern: #340E0E
+Timeline Header Background Pattern: #401212
 Timeline Primary Grid: #DD000044
 Timeline Secondary Grid: #DD000022
 Timeline Header Primary Grid: #DD000044
 Timeline Header Secondary Grid: #DD000022
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #CC0000
+Timeline edit tool chooser background: #401414
 
 // Timeline Selection & Cursors - Yellow!
 Time Selection Fill: #FFDE0066
@@ -336,11 +336,11 @@ Found file text: #44DD44
 External file icon: #FFDE00
 External file text: #FFDE00
 
-// Invoke Action (Command Palette) - Red Pokeball
-Invoke Action Background: #CC0000
-Invoke Action Category: #FFEECC
-Invoke Action Text: #FFFFFF
-User input text: #FFFFFF
+// Invoke Action (Command Palette) - Red tinted
+Invoke Action Background: #401414
+Invoke Action Category: #FFDE00
+Invoke Action Text: #FFEEEE
+User input text: #FFEEEE
 
 // Panel Colors - Pokemon types!
 Panel Red: #DD0000

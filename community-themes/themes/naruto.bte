@@ -3,7 +3,7 @@
 // Different areas = different iconic colors so you KNOW it's Naruto
 // Author: Claude
 
-// Core - BLACK base to make ORANGE pop!
+// Core - WARM ORANGE ninja tinted workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #FF6600
-Default text: #FFFFFF
-Window background: #111111
-Grey 0: #FF6600
-Grey 1: #1A1A1A
-Grey 2: #CC5500
-Grey 3: #222222
-Grey 4: #DD5500
-Grey 5: #2A2A2A
-Grey 6: #EE6600
+Default text: #FFEECC
+Window background: #2E1808
+Grey 0: #1C0E04
+Grey 1: #241208
+Grey 2: #2C160C
+Grey 3: #341A10
+Grey 4: #3C1E14
+Grey 5: #442218
+Grey 6: #4C261C
 Shadow: #00000099
 Brighter: #FFCC00
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #1A1A1A
 Abstract Button Pressed Background: #FF880044
 Color bar button fill color: #FF660044
 
-// Knobs & Sliders - Black body, orange value
-Knob Body: #1A1A1A
-Knob Body Lighter: #2A2A2A
-Knob Body Lightest: #3A3A3A
-Knob Body Darkest: #0A0A0A
+// Knobs & Sliders - Orange tinted body
+Knob Body: #2C160C
+Knob Body Lighter: #341A10
+Knob Body Lightest: #3C1E14
+Knob Body Darkest: #1C0E04
 Knob Line: #FFFFFF
 Knob Line Dark: #FFCC00
 Knob Stroke: #FF660066
 Knob Emboss Highlight: #FFFFFF30
 Knob Emboss Shadow: #00000080
-Knob Value Background: #00000088
-Knob Value Background (dark): #000000
+Knob Value Background: #1C0E0488
+Knob Value Background (dark): #1C0E04
 Knob Value Color: #FF6600
-Slider background: #00000088
+Slider background: #1C0E0488
 Emboss Highlight: #FFFFFF15
 Emboss Shadow: #00000050
 
@@ -103,12 +103,12 @@ Active Inverted Toggle Icon (Playing): #FF6600
 Pressed Inverted Toggle Icon: #FFCC88
 Toggle Icon: #FFCC00
 
-// Menus & Popups - ORANGE background!
-Menu background: #DD5500
+// Menus & Popups - Warm orange!
+Menu background: #341A10
 Menu stroke: #FFCC00
-Menu text: #FFFFFF
-Menu Icon: #FFFFFF
-Menu description text: #FFEECC
+Menu text: #FFEECC
+Menu Icon: #FFCC00
+Menu description text: #DDBB88
 Menu separator: #FFCC0066
 Popup insert: #222222
 Popup overlay background color: #000000DD
@@ -135,12 +135,12 @@ Meter Muted: #666666
 Hitech background: #111111
 Hitech on: #4488DD
 
-// Scrollbars - Orange on black
+// Scrollbars - Orange tinted
 Scrollbar: #FF6600
-Scrollbar background: #111111
+Scrollbar background: #1C0E04
 Modern Scrollbar Handle (active): #FF6600
 Modern Scrollbar Handle (inactive): #FF660088
-Modern Scrollbar Background (active): #00000088
+Modern Scrollbar Background (active): #1C0E0488
 Modern Dark Scrollbar Handle (active): #FF8800
 Modern Dark Scrollbar Handle (inactive): #FF660066
 
@@ -163,9 +163,9 @@ Frame color of selection cursor in the tree.: #FF8800
 Frame color of selection cursor in the tree. (standby): #FFAA44
 Launcher Mapping Indication: #4488DD
 
-// Panels & Separators - BRIGHT ORANGE panels!
-Panel body: #CC5500
-Selected Panel body: #DD6600
+// Panels & Separators - Warm orange panels!
+Panel body: #341A10
+Selected Panel body: #4C261C
 Panel stroke: #FFAA0088
 Selected Panel stroke: #FFCC00
 Selected Panel stroke (standby): #FF8800
@@ -176,8 +176,8 @@ Content Background: #44AA44
 Light Separator Line: #FFAA0044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FF880044
-Dark Panel Sub-frame Fill: #222222
-Field background: #111111
+Dark Panel Sub-frame Fill: #1C0E04
+Field background: #1C0E04
 Number field bar background: #FF6600
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -192,19 +192,19 @@ Device Tint Retro: #FF660088
 Device Tint Military: #44884466
 Plugin missing: #DD2200
 
-// Display & Waveforms - Orange waveforms on black
-Display Background: #111111
+// Display & Waveforms - Orange waveforms on warm
+Display Background: #1C0E04
 Display Background (error): #441111
 Display Waveform: #FF6600
 Display Stroke: #FF880066
 Display Start/End Markers: #FFCC00
 Display Loop Markers: #44AA44
-Grey Display Background: #1A1A1A
-Audio Event Background: #CC5500
+Grey Display Background: #241208
+Audio Event Background: #FF6600
 Audio Event Boundary: #FFCC0066
 Audio Event Waveform: #FFCC00
 
-// Grid & Modular Environment - Hidden Leaf green
+// Grid & Modular Environment - Hidden Leaf green (secondary color)
 The Grid (background): #224422
 The Grid (stroke): #44AA4444
 Grid Line (Primary): #44AA4466
@@ -217,25 +217,25 @@ Event connection in modular environment: #44AA44
 Polyphonic Desktop Object: #DD2200
 Current Atom Value Color: #FF8800
 
-// Timeline & Arranger - BLACK with ORANGE clips!
-Dark Timeline Background: #0A0A0A
-Dark Timeline Header Background: #111111
-Light Timeline Background: #151515
-Light Timeline Header Background: #1A1A1A
-Top Level Timeline Background: #0D0D0D
-Top Level Timeline Header Background: #141414
-Irrelevant Timeline Background: #080808
-Irrelevant Timeline Header Background: #0A0A0A
+// Timeline & Arranger - Orange tinted!
+Dark Timeline Background: #1C0E04
+Dark Timeline Header Background: #241208
+Light Timeline Background: #2C160C
+Light Timeline Header Background: #341A10
+Top Level Timeline Background: #201008
+Top Level Timeline Header Background: #2C160C
+Irrelevant Timeline Background: #180C04
+Irrelevant Timeline Header Background: #1C0E04
 Irrelevant Timeline Overlay: #00000066
 Irrelevant Timeline Header Overlay: #00000066
-Timeline Background Pattern: #181818
-Timeline Header Background Pattern: #222222
+Timeline Background Pattern: #301810
+Timeline Header Background Pattern: #3C1E14
 Timeline Primary Grid: #FF660044
 Timeline Secondary Grid: #FF660022
 Timeline Header Primary Grid: #FF880044
 Timeline Header Secondary Grid: #FF880022
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #DD5500
+Timeline edit tool chooser background: #341A10
 
 // Timeline Selection & Cursors - Bold orange!
 Time Selection Fill: #FF660066
@@ -336,11 +336,11 @@ Found file text: #44AA44
 External file icon: #FFCC00
 External file text: #FFCC00
 
-// Invoke Action (Command Palette) - ORANGE!
-Invoke Action Background: #DD5500
-Invoke Action Category: #FFCC88
-Invoke Action Text: #FFFFFF
-User input text: #FFFFFF
+// Invoke Action (Command Palette) - Orange tinted
+Invoke Action Background: #341A10
+Invoke Action Category: #FFCC00
+Invoke Action Text: #FFEECC
+User input text: #FFEECC
 
 // Panel Colors - Ninja palette!
 Panel Red: #DD2200

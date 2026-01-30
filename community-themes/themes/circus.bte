@@ -3,7 +3,7 @@
 // Not Spider-Man primaries - actual circus/carnival variety
 // Author: Claude
 
-// Core
+// Core - MAGENTA/PURPLE carnival tent tinted workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #FFAA00
-Default text: #FFFFFF
-Window background: #882266
-Grey 0: #CC5500
-Grey 1: #2288AA
-Grey 2: #AA2266
-Grey 3: #339966
-Grey 4: #CC7700
-Grey 5: #6633AA
-Grey 6: #DD4477
+Default text: #FFEEEE
+Window background: #4A1840
+Grey 0: #2E0E28
+Grey 1: #381230
+Grey 2: #421638
+Grey 3: #4C1A40
+Grey 4: #561E48
+Grey 5: #602250
+Grey 6: #6A2658
 Shadow: #00000099
 Brighter: #FFDD00
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #773355
 Abstract Button Pressed Background: #FFCC0066
 Color bar button fill color: #FFCC0044
 
-// Knobs & Sliders - Purple body, gold accents
-Knob Body: #7744AA
-Knob Body Lighter: #8855BB
-Knob Body Lightest: #9966CC
-Knob Body Darkest: #553388
+// Knobs & Sliders - Magenta tinted body
+Knob Body: #421638
+Knob Body Lighter: #4C1A40
+Knob Body Lightest: #561E48
+Knob Body Darkest: #2E0E28
 Knob Line: #FFDD00
 Knob Line Dark: #DDAA00
 Knob Stroke: #FFCC0066
 Knob Emboss Highlight: #FFFFFF44
 Knob Emboss Shadow: #00000066
-Knob Value Background: #AA336688
-Knob Value Background (dark): #882255
+Knob Value Background: #2E0E2888
+Knob Value Background (dark): #2E0E28
 Knob Value Color: #44DDDD
-Slider background: #77335599
+Slider background: #2E0E2899
 Emboss Highlight: #FFFFFF22
 Emboss Shadow: #00000044
 
@@ -103,12 +103,12 @@ Active Inverted Toggle Icon (Playing): #44FF88
 Pressed Inverted Toggle Icon: #FFEEAA
 Toggle Icon: #FFCC00
 
-// Menus & Popups - Deep purple tent
-Menu background: #662255
+// Menus & Popups - Magenta carnival!
+Menu background: #4C1A40
 Menu stroke: #FFAA00
-Menu text: #FFFFFF
-Menu Icon: #FFDDAA
-Menu description text: #FFEECC
+Menu text: #FFEEEE
+Menu Icon: #FFAA00
+Menu description text: #DDBBCC
 Menu separator: #FFAA0066
 Popup insert: #2288AA
 Popup overlay background color: #000000DD
@@ -135,13 +135,13 @@ Meter Muted: #888888
 Hitech background: #442244
 Hitech on: #44DDDD
 
-// Scrollbars - Orange and teal
+// Scrollbars - Magenta tinted
 Scrollbar: #FFAA00
-Scrollbar background: #553366
+Scrollbar background: #2E0E28
 Modern Scrollbar Handle (active): #44DDDD
-Modern Scrollbar Handle (inactive): #44AABB99
-Modern Scrollbar Background (active): #44228888
-Modern Dark Scrollbar Handle (active): #FFAA00AA
+Modern Scrollbar Handle (inactive): #FFAA0088
+Modern Scrollbar Background (active): #2E0E2888
+Modern Dark Scrollbar Handle (active): #FFAA00
 Modern Dark Scrollbar Handle (inactive): #DD880077
 
 // Tree & List Views - Orange and teal backgrounds
@@ -163,9 +163,9 @@ Frame color of selection cursor in the tree.: #FFCC00
 Frame color of selection cursor in the tree. (standby): #FFBB66
 Launcher Mapping Indication: #44FF88
 
-// Panels & Separators - Purple and orange
-Panel body: #773366
-Selected Panel body: #CC6600
+// Panels & Separators - Magenta carnival!
+Panel body: #4C1A40
+Selected Panel body: #602250
 Panel stroke: #FFAA0066
 Selected Panel stroke: #FFCC00
 Selected Panel stroke (standby): #FFBB00
@@ -176,8 +176,8 @@ Content Background: #339966
 Light Separator Line: #FFAA0044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FFAA0044
-Dark Panel Sub-frame Fill: #2288AA
-Field background: #553377
+Dark Panel Sub-frame Fill: #2E0E28
+Field background: #2E0E28
 Number field bar background: #44DDDD
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -192,21 +192,21 @@ Device Tint Retro: #FF668888
 Device Tint Military: #66FF8866
 Plugin missing: #FF6688
 
-// Display & Waveforms - Teal waveforms on purple
-Display Background: #553366
+// Display & Waveforms - Teal waveforms on magenta
+Display Background: #2E0E28
 Display Background (error): #AA3355
 Display Waveform: #44DDDD
 Display Stroke: #FFAA0066
 Display Start/End Markers: #FFCC00
 Display Loop Markers: #44FF88
-Grey Display Background: #664477
-Audio Event Background: #CC5500
+Grey Display Background: #381230
+Audio Event Background: #FFAA00
 Audio Event Boundary: #FFCC0066
 Audio Event Waveform: #44DDDD
 
-// Grid & Modular Environment - Full carnival
-The Grid (background): #664455
-The Grid (stroke): #FFAA0044
+// Grid & Modular Environment - Teal carnival (secondary color)
+The Grid (background): #1A4455
+The Grid (stroke): #44DDDD44
 Grid Line (Primary): #FFCC0066
 Grid Line (Secondary): #FFCC0033
 Background color of the modular environment.: #2288AA
@@ -217,25 +217,25 @@ Event connection in modular environment: #44FF88
 Polyphonic Desktop Object: #DD66AA
 Current Atom Value Color: #FFDD00
 
-// Timeline & Arranger - Purple/teal/orange rotation
-Dark Timeline Background: #553355
-Dark Timeline Header Background: #227788
-Light Timeline Background: #664466
-Light Timeline Header Background: #2288AA
-Top Level Timeline Background: #604060
-Top Level Timeline Header Background: #1E7080
-Irrelevant Timeline Background: #443344
-Irrelevant Timeline Header Background: #1A6066
+// Timeline & Arranger - Magenta tinted
+Dark Timeline Background: #2E0E28
+Dark Timeline Header Background: #381230
+Light Timeline Background: #381230
+Light Timeline Header Background: #421638
+Top Level Timeline Background: #341030
+Top Level Timeline Header Background: #3E1436
+Irrelevant Timeline Background: #280C24
+Irrelevant Timeline Header Background: #2E0E28
 Irrelevant Timeline Overlay: #00000055
 Irrelevant Timeline Header Overlay: #00000055
-Timeline Background Pattern: #775577
-Timeline Header Background Pattern: #339999
+Timeline Background Pattern: #421638
+Timeline Header Background Pattern: #4C1A40
 Timeline Primary Grid: #FFCC0055
 Timeline Secondary Grid: #FFCC0033
 Timeline Header Primary Grid: #FFDD0055
 Timeline Header Secondary Grid: #FFDD0033
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #CC5500
+Timeline edit tool chooser background: #4C1A40
 
 // Timeline Selection & Cursors
 Time Selection Fill: #44DDDD55
@@ -336,11 +336,11 @@ Found file text: #44FF88
 External file icon: #FFCC00
 External file text: #FFCC00
 
-// Invoke Action (Command Palette) - Orange carnival
-Invoke Action Background: #CC5500
+// Invoke Action (Command Palette) - Magenta carnival
+Invoke Action Background: #4C1A40
 Invoke Action Category: #44DDDD
-Invoke Action Text: #FFFFFF
-User input text: #FFFFFF
+Invoke Action Text: #FFEEEE
+User input text: #FFEEEE
 
 // Panel Colors - Full carnival rainbow
 Panel Red: #FF4466
