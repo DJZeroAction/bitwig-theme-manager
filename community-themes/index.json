@@ -40,7 +40,8 @@
       "description": "DSNVS Dark v2 for Bitwig 6",
       "repo_url": "https://github.com/Berikai/awesome-bitwig-themes",
       "bundle": "dsnvs",
-      "variant_name": "Dark v2"
+      "variant_name": "Dark v2",
+      "default": true
     },
     {
       "id": "dsnvs-light",
@@ -108,7 +109,8 @@
       "preview": "darkred-2025.png",
       "description": "Updated version with more contrast and visibility",
       "bundle": "dark-red",
-      "variant_name": "2025"
+      "variant_name": "2025",
+      "default": true
     },
     {
       "id": "halloween",
@@ -231,7 +233,8 @@
       "preview": "uad-converted.png",
       "description": "UAD inspired theme converted for Bitwig 6 Beta",
       "bundle": "uad",
-      "variant_name": "BW6"
+      "variant_name": "BW6",
+      "default": true
     },
     {
       "id": "dark-one",
@@ -312,7 +315,8 @@
       "preview": "serum2.png",
       "description": "Serum inspired theme v3",
       "bundle": "serum",
-      "variant_name": "v3"
+      "variant_name": "v3",
+      "default": true
     },
     {
       "id": "april-2025",
@@ -798,7 +802,8 @@
       "description": "Horizon theme for Bitwig 6",
       "repo_url": "https://github.com/PatrickWulfe/horizon-bitwig-theme",
       "bundle": "horizon",
-      "variant_name": "BW6"
+      "variant_name": "BW6",
+      "default": true
     },
     {
       "id": "light-cat",
@@ -838,7 +843,8 @@
       "description": "Light Nordish for Bitwig 6",
       "repo_url": "https://codeberg.org/pmhn/bitwig-light-nordish",
       "bundle": "light-nordish",
-      "variant_name": "BW6"
+      "variant_name": "BW6",
+      "default": true
     },
     {
       "id": "dracula",
