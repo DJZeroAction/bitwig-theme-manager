@@ -271,3 +271,133 @@ export function normalizeHex(hex: string): string {
   if (!color) return hex;
   return toHex(color.r, color.g, color.b, color.a < 255 ? color.a : undefined);
 }
+
+/**
+ * Intelligently derive a color for a property based on its name patterns
+ * This creates variations (pressed, hover, subtle, etc.) from a base color
+ */
+export function deriveColorForProperty(baseColor: string, propertyKey: string): string {
+  const key = propertyKey.toLowerCase();
+
+  // Pressed states - darken
+  if (key.includes('pressed')) {
+    return darken(baseColor, 15);
+  }
+
+  // Hover/Mouse over states - lighten slightly
+  if (key.includes('mouse over') || key.includes('hover')) {
+    return lighten(baseColor, 10);
+  }
+
+  // Standby/Inactive states - reduce alpha and desaturate
+  if (key.includes('standby') || key.includes('inactive')) {
+    return setAlpha(desaturate(baseColor, 20), 50);
+  }
+
+  // Subtle/Subtler variations - reduce alpha
+  if (key.includes('subtler')) {
+    return setAlpha(baseColor, 15);
+  }
+  if (key.includes('subtle')) {
+    return setAlpha(baseColor, 30);
+  }
+
+  // Shadow - darken significantly with alpha
+  if (key.includes('shadow')) {
+    return setAlpha(darken(baseColor, 40), 50);
+  }
+
+  // Highlight/Emboss highlight - lighten with some transparency
+  if (key.includes('highlight') || key.includes('emboss')) {
+    return setAlpha(lighten(baseColor, 30), 60);
+  }
+
+  // Glow - add transparency
+  if (key.includes('glow')) {
+    return setAlpha(baseColor, 40);
+  }
+
+  // Background properties - slightly darker or with alpha
+  if (key.endsWith('background')) {
+    // Check if it's a fill/overlay type
+    if (key.includes('overlay') || key.includes('fill')) {
+      return setAlpha(baseColor, 40);
+    }
+    return darken(baseColor, 5);
+  }
+
+  // Fill properties - add some transparency
+  if (key.includes('fill') && !key.includes('unfill')) {
+    return setAlpha(baseColor, 60);
+  }
+
+  // Stroke/Border/Frame - slightly darker
+  if (key.includes('stroke') || key.includes('border') || key.includes('frame')) {
+    return darken(baseColor, 10);
+  }
+
+  // Separator/Divider - darker with some transparency
+  if (key.includes('separator') || key.includes('divider')) {
+    return setAlpha(darken(baseColor, 20), 70);
+  }
+
+  // Selected states - keep similar but might slightly adjust
+  if (key.includes('selected') && !key.includes('unselected')) {
+    return lighten(baseColor, 5);
+  }
+
+  // Active/Playing states - keep vibrant
+  if (key.includes('active') || key.includes('playing')) {
+    return saturate(baseColor, 10);
+  }
+
+  // Off/Disabled states - desaturate
+  if (key.includes(' off') || key.includes('disabled') || key.includes('muted')) {
+    return desaturate(baseColor, 40);
+  }
+
+  // Normal/Default - return as-is
+  if (key.includes('normal') || key.includes('default')) {
+    return baseColor;
+  }
+
+  // Inverted - this is tricky, just return as-is (user should set manually)
+  if (key.includes('inverted')) {
+    return baseColor;
+  }
+
+  // Grey scale steps (Grey 0-6) - create graduated steps
+  const greyMatch = key.match(/grey\s*(\d)/);
+  if (greyMatch) {
+    const step = parseInt(greyMatch[1]);
+    return createGreyStep(baseColor, step);
+  }
+
+  // Dark/Light prefixes
+  if (key.startsWith('dark ') || key.startsWith('dark_')) {
+    return darken(baseColor, 15);
+  }
+  if (key.startsWith('light ') || key.startsWith('light_')) {
+    return lighten(baseColor, 15);
+  }
+
+  // Darker/Lighter/Lightest/Darkest suffixes
+  if (key.includes('darkest')) {
+    return darken(baseColor, 25);
+  }
+  if (key.includes('darker')) {
+    return darken(baseColor, 15);
+  }
+  if (key.includes('lightest')) {
+    return lighten(baseColor, 25);
+  }
+  if (key.includes('lighter')) {
+    return lighten(baseColor, 15);
+  }
+  if (key.includes('brighter')) {
+    return lighten(baseColor, 20);
+  }
+
+  // Default: return base color as-is
+  return baseColor;
+}

@@ -11,6 +11,7 @@ import {
   getCategoryBaseProperty,
   HIGH_IMPACT_CATEGORIES,
 } from "../data/properties/categories";
+import { deriveColorForProperty } from "../utils/colorUtils";
 import type { Theme } from "../api/types";
 
 interface UnifiedThemeEditorProps {
@@ -146,15 +147,17 @@ export function UnifiedThemeEditor({
     return { totalCount: total, modifiedCount: modified };
   }, [versionProperties, populatedValues]);
 
-  // Handle group color change - applies color to all properties in a category
+  // Handle group color change - applies intelligently derived colors to all properties in a category
   const handleGroupColorChange = (categoryId: string, color: string) => {
     const props = categorizedProperties.get(categoryId);
     if (!props) return;
 
-    // Build updates for all properties in the category
+    // Build updates with intelligently derived colors based on property names
     const updates: Record<string, string> = {};
     for (const prop of props) {
-      updates[prop.key] = color;
+      // Derive a color variation based on the property name patterns
+      // (e.g., "Pressed" gets darker, "Hover" gets lighter, "subtle" gets alpha)
+      updates[prop.key] = deriveColorForProperty(color, prop.key);
     }
 
     // Use batch update if available, otherwise update one by one
