@@ -3,7 +3,7 @@
 // ONLY 4 colors: #9BBC0F (lightest), #8BAC0F (light), #306230 (dark), #0F380F (darkest)
 // Author: Claude
 
-// Core
+// Core - Smooth gradient from lightest to darkest
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -13,14 +13,14 @@ Black: #0F380F
 Same as background: #00000000
 Accent: #306230
 Default text: #0F380F
-Window background: #9BBC0F
-Grey 0: #9BBC0F
-Grey 1: #8BAC0F
-Grey 2: #8BAC0F
-Grey 3: #306230
-Grey 4: #306230
-Grey 5: #0F380F
-Grey 6: #0F380F
+Window background: #8BAC0F
+Grey 0: #7A9C0A
+Grey 1: #6A8C08
+Grey 2: #5A7C06
+Grey 3: #4A6C04
+Grey 4: #3A5C03
+Grey 5: #2A4C02
+Grey 6: #1A3C01
 Shadow: #0F380F80
 Brighter: #9BBC0F
 
@@ -76,19 +76,19 @@ Abstract Button Pressed Background: #30623066
 Color bar button fill color: #30623040
 
 // Knobs & Sliders
-Knob Body: #8BAC0F
-Knob Body Lighter: #9BBC0F
-Knob Body Lightest: #9BBC0F
-Knob Body Darkest: #306230
-Knob Line: #0F380F
-Knob Line Dark: #306230
+Knob Body: #5A7C06
+Knob Body Lighter: #6A8C08
+Knob Body Lightest: #7A9C0A
+Knob Body Darkest: #3A5C03
+Knob Line: #9BBC0F
+Knob Line Dark: #8BAC0F
 Knob Stroke: #306230
 Knob Emboss Highlight: #9BBC0F80
 Knob Emboss Shadow: #30623040
-Knob Value Background: #306230
-Knob Value Background (dark): #0F380F
+Knob Value Background: #2A4C02
+Knob Value Background (dark): #1A3C01
 Knob Value Color: #9BBC0F
-Slider background: #306230
+Slider background: #2A4C02
 Emboss Highlight: #9BBC0F40
 Emboss Shadow: #30623040
 
@@ -104,20 +104,20 @@ Pressed Inverted Toggle Icon: #306230
 Toggle Icon: #306230
 
 // Menus & Popups
-Menu background: #9BBC0F
+Menu background: #7A9C0A
 Menu stroke: #306230
 Menu text: #0F380F
 Menu Icon: #0F380F
 Menu description text: #306230
 Menu separator: #306230
-Popup insert: #8BAC0F
-Popup overlay background color: #8BAC0FCC
-Popup Notification Background: #8BAC0F
-Notification Background: #8BAC0F
+Popup insert: #5A7C06
+Popup overlay background color: #4A6C04CC
+Popup Notification Background: #6A8C08
+Notification Background: #6A8C08
 Notification Normal: #0F380F
 Notification Error: #0F380F
-Notification Button Background: #306230
-Tooltip Background: #8BAC0F
+Notification Button Background: #3A5C03
+Tooltip Background: #9BBC0F
 Light Tooltip Background: #9BBC0F
 Tooltip Stroke: #306230
 
@@ -164,21 +164,21 @@ Frame color of selection cursor in the tree. (standby): #306230
 Launcher Mapping Indication: #0F380F
 
 // Panels & Separators
-Panel body: #8BAC0F
-Selected Panel body: #306230
+Panel body: #6A8C08
+Selected Panel body: #4A6C04
 Panel stroke: #306230
-Selected Panel stroke: #0F380F
-Selected Panel stroke (standby): #306230
-Active Panel stroke: #0F380F
-Panel Stroke (focused): #0F380F
+Selected Panel stroke: #9BBC0F
+Selected Panel stroke (standby): #8BAC0F
+Active Panel stroke: #9BBC0F
+Panel Stroke (focused): #9BBC0F
 Inspector Section Frame: #30623044
 Content Background: #8BAC0F
 Light Separator Line: #30623044
 Dark Separator Line: #306230
 Dark Panel Sub-frame Stroke: #306230
-Dark Panel Sub-frame Fill: #8BAC0F
-Field background: #8BAC0F
-Number field bar background: #306230
+Dark Panel Sub-frame Fill: #5A7C06
+Field background: #4A6C04
+Number field bar background: #9BBC0F
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
 Color of stroke between tabs: #30623044
@@ -218,17 +218,17 @@ Polyphonic Desktop Object: #306230
 Current Atom Value Color: #0F380F
 
 // Timeline & Arranger
-Dark Timeline Background: #9BBC0F
-Dark Timeline Header Background: #8BAC0F
-Light Timeline Background: #8BAC0F
-Light Timeline Header Background: #8BAC0F
-Top Level Timeline Background: #9BBC0F
-Top Level Timeline Header Background: #8BAC0F
-Irrelevant Timeline Background: #8BAC0F
-Irrelevant Timeline Header Background: #8BAC0F
-Irrelevant Timeline Overlay: #8BAC0F40
-Irrelevant Timeline Header Overlay: #8BAC0F40
-Timeline Background Pattern: #8BAC0F
+Dark Timeline Background: #5A7C06
+Dark Timeline Header Background: #6A8C08
+Light Timeline Background: #6A8C08
+Light Timeline Header Background: #7A9C0A
+Top Level Timeline Background: #5A7C06
+Top Level Timeline Header Background: #6A8C08
+Irrelevant Timeline Background: #4A6C04
+Irrelevant Timeline Header Background: #5A7C06
+Irrelevant Timeline Overlay: #0F380F40
+Irrelevant Timeline Header Overlay: #0F380F40
+Timeline Background Pattern: #7A9C0A
 Timeline Header Background Pattern: #8BAC0F
 Timeline Primary Grid: #30623066
 Timeline Secondary Grid: #30623033

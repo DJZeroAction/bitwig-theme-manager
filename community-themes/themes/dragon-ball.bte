@@ -3,7 +3,7 @@
 // Different areas = different DBZ iconic elements
 // Author: Claude
 
-// Core - WARM ORANGE Goku gi tinted workspace!
+// Core - BRIGHT ORANGE Goku gi workspace!
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,15 +12,15 @@ White: #FFFFFF
 Black: #000000
 Same as background: #00000000
 Accent: #FF6600
-Default text: #FFEECC
-Window background: #3A2010
-Grey 0: #281408
-Grey 1: #30180C
-Grey 2: #381C10
-Grey 3: #402014
-Grey 4: #482418
-Grey 5: #50281C
-Grey 6: #582C20
+Default text: #FFFFFF
+Window background: #884410
+Grey 0: #663308
+Grey 1: #77440C
+Grey 2: #885510
+Grey 3: #996614
+Grey 4: #AA7718
+Grey 5: #BB881C
+Grey 6: #CC9920
 Shadow: #00000099
 Brighter: #FFDD00
 
@@ -75,20 +75,20 @@ Abstract Button Unselected Background: #222222
 Abstract Button Pressed Background: #FFDD0044
 Color bar button fill color: #FFDD0044
 
-// Knobs & Sliders - Warm orange tint, yellow glow
-Knob Body: #30180C
-Knob Body Lighter: #381C10
-Knob Body Lightest: #402014
-Knob Body Darkest: #201008
+// Knobs & Sliders - Bright orange, yellow glow
+Knob Body: #885510
+Knob Body Lighter: #996614
+Knob Body Lightest: #AA7718
+Knob Body Darkest: #663308
 Knob Line: #FFFFFF
 Knob Line Dark: #FFDD00
 Knob Stroke: #FFDD0066
 Knob Emboss Highlight: #FFDD0030
 Knob Emboss Shadow: #00000080
-Knob Value Background: #20100888
-Knob Value Background (dark): #201008
+Knob Value Background: #66330888
+Knob Value Background (dark): #663308
 Knob Value Color: #FFDD00
-Slider background: #20100888
+Slider background: #66330888
 Emboss Highlight: #FFDD0015
 Emboss Shadow: #00000050
 
@@ -103,12 +103,12 @@ Active Inverted Toggle Icon (Playing): #FFDD00
 Pressed Inverted Toggle Icon: #FFEE66
 Toggle Icon: #FFDD00
 
-// Menus & Popups - Warm orange!
-Menu background: #402014
+// Menus & Popups - Bright orange!
+Menu background: #996614
 Menu stroke: #FFDD00
-Menu text: #FFEECC
+Menu text: #FFFFFF
 Menu Icon: #FFDD00
-Menu description text: #DDBB88
+Menu description text: #FFEECC
 Menu separator: #FFDD0066
 Popup insert: #222222
 Popup overlay background color: #000000DD
@@ -135,12 +135,12 @@ Meter Muted: #666666
 Hitech background: #111111
 Hitech on: #4477DD
 
-// Scrollbars - Orange tinted
+// Scrollbars - Bright orange
 Scrollbar: #FF6600
-Scrollbar background: #281408
+Scrollbar background: #663308
 Modern Scrollbar Handle (active): #FFDD00
 Modern Scrollbar Handle (inactive): #FF660088
-Modern Scrollbar Background (active): #20100888
+Modern Scrollbar Background (active): #66330888
 Modern Dark Scrollbar Handle (active): #FF8800
 Modern Dark Scrollbar Handle (inactive): #FF660066
 
@@ -163,9 +163,9 @@ Frame color of selection cursor in the tree.: #FFDD00
 Frame color of selection cursor in the tree. (standby): #DDBB00
 Launcher Mapping Indication: #4477DD
 
-// Panels & Separators - Warm orange panels!
-Panel body: #402014
-Selected Panel body: #582C20
+// Panels & Separators - Bright orange panels!
+Panel body: #885510
+Selected Panel body: #AA7718
 Panel stroke: #FFDD0088
 Selected Panel stroke: #FFDD00
 Selected Panel stroke (standby): #DDBB00
@@ -176,8 +176,8 @@ Content Background: #44AA44
 Light Separator Line: #FFDD0044
 Dark Separator Line: #00000088
 Dark Panel Sub-frame Stroke: #FFDD0044
-Dark Panel Sub-frame Fill: #281408
-Field background: #281408
+Dark Panel Sub-frame Fill: #663308
+Field background: #663308
 Number field bar background: #FFDD00
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -192,14 +192,14 @@ Device Tint Retro: #FF660088
 Device Tint Military: #44AA4466
 Plugin missing: #FF3333
 
-// Display & Waveforms - Yellow waveforms on warm
-Display Background: #281408
-Display Background (error): #441111
+// Display & Waveforms - Yellow waveforms on orange
+Display Background: #663308
+Display Background (error): #661111
 Display Waveform: #FFDD00
 Display Stroke: #FF660066
 Display Start/End Markers: #4477DD
 Display Loop Markers: #44AA44
-Grey Display Background: #30180C
+Grey Display Background: #77440C
 Audio Event Background: #FF6600
 Audio Event Boundary: #FFDD0066
 Audio Event Waveform: #FFDD00
@@ -217,25 +217,25 @@ Event connection in modular environment: #44AA44
 Polyphonic Desktop Object: #FF3333
 Current Atom Value Color: #FFDD00
 
-// Timeline & Arranger - Warm orange tinted!
-Dark Timeline Background: #201008
-Dark Timeline Header Background: #28140C
-Light Timeline Background: #2C160E
-Light Timeline Header Background: #341A10
-Top Level Timeline Background: #24120A
-Top Level Timeline Header Background: #30180C
-Irrelevant Timeline Background: #1C0E06
-Irrelevant Timeline Header Background: #201008
+// Timeline & Arranger - Bright orange!
+Dark Timeline Background: #663308
+Dark Timeline Header Background: #77440C
+Light Timeline Background: #77440C
+Light Timeline Header Background: #885510
+Top Level Timeline Background: #6E3A0A
+Top Level Timeline Header Background: #804C0E
+Irrelevant Timeline Background: #552A06
+Irrelevant Timeline Header Background: #663308
 Irrelevant Timeline Overlay: #00000066
 Irrelevant Timeline Header Overlay: #00000066
-Timeline Background Pattern: #341A10
-Timeline Header Background Pattern: #402014
+Timeline Background Pattern: #885510
+Timeline Header Background Pattern: #996614
 Timeline Primary Grid: #FF660044
 Timeline Secondary Grid: #FF660022
 Timeline Header Primary Grid: #FF880044
 Timeline Header Secondary Grid: #FF880022
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #402014
+Timeline edit tool chooser background: #996614
 
 // Timeline Selection & Cursors - Yellow Super Saiyan!
 Time Selection Fill: #FFDD0066
@@ -336,11 +336,11 @@ Found file text: #44AA44
 External file icon: #FFDD00
 External file text: #FFDD00
 
-// Invoke Action (Command Palette) - Warm orange
-Invoke Action Background: #402014
+// Invoke Action (Command Palette) - Bright orange
+Invoke Action Background: #996614
 Invoke Action Category: #FFDD00
-Invoke Action Text: #FFEECC
-User input text: #FFEECC
+Invoke Action Text: #FFFFFF
+User input text: #FFFFFF
 
 // Panel Colors - DBZ character colors!
 Panel Red: #FF3333

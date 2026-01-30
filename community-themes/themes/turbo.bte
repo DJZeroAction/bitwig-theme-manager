@@ -4,7 +4,7 @@
 // The unmistakable DOS IDE look from the early 1990s
 // Author: Claude
 
-// Core
+// Core - Deep blue DOS IDE
 Gradient: false
 Transparent: #00000000
 Image Source: #00000000
@@ -12,16 +12,16 @@ Inherited: #FFFF00
 White: #FFFFFF
 Black: #000000
 Same as background: #00000000
-Accent: #00000000
+Accent: #FFFF00
 Default text: #FFFF00
-Window background: #0000AA
-Grey 0: #000080
-Grey 1: #000090
-Grey 2: #0000A0
-Grey 3: #0000AA
-Grey 4: #0000B8
-Grey 5: #0000CC
-Grey 6: #0000DD
+Window background: #000088
+Grey 0: #000055
+Grey 1: #000066
+Grey 2: #000077
+Grey 3: #000088
+Grey 4: #000099
+Grey 5: #0000AA
+Grey 6: #0000BB
 Shadow: #00000080
 Brighter: #00FFFF
 
@@ -77,19 +77,19 @@ Abstract Button Pressed Background: #FFFFFF1A
 Color bar button fill color: #FFFFFF20
 
 // Knobs & Sliders
-Knob Body: #0000AA
-Knob Body Lighter: #0000CC
-Knob Body Lightest: #0000DD
-Knob Body Darkest: #000080
+Knob Body: #000077
+Knob Body Lighter: #000088
+Knob Body Lightest: #000099
+Knob Body Darkest: #000055
 Knob Line: #FFFF00
 Knob Line Dark: #CCCC00
 Knob Stroke: #00FFFF44
 Knob Emboss Highlight: #FFFFFF20
 Knob Emboss Shadow: #00000040
-Knob Value Background: #00008080
-Knob Value Background (dark): #000080
+Knob Value Background: #00005580
+Knob Value Background (dark): #000055
 Knob Value Color: #FFFF00
-Slider background: #00008080
+Slider background: #00005580
 Emboss Highlight: #FFFFFF10
 Emboss Shadow: #00000020
 
@@ -165,20 +165,20 @@ Frame color of selection cursor in the tree. (standby): #00AAAA
 Launcher Mapping Indication: #008080
 
 // Panels & Separators
-Panel body: #0000AA
-Selected Panel body: #0000B8
+Panel body: #000077
+Selected Panel body: #000099
 Panel stroke: #00FFFF44
 Selected Panel stroke: #FFFF00
 Selected Panel stroke (standby): #00FFFF
 Active Panel stroke: #FFFF00
 Panel Stroke (focused): #00FFFF
 Inspector Section Frame: #00FFFF44
-Content Background: #0000A0
+Content Background: #000077
 Light Separator Line: #00FFFF44
-Dark Separator Line: #00008080
+Dark Separator Line: #00005580
 Dark Panel Sub-frame Stroke: #00FFFF22
-Dark Panel Sub-frame Fill: #000090
-Field background: #000080
+Dark Panel Sub-frame Fill: #000066
+Field background: #000055
 Number field bar background: #FFFF00
 Icon Frame: #00000000
 Color of unselected tabs: #00000000
@@ -194,23 +194,23 @@ Device Tint Military: #00AA0047
 Plugin missing: #FF0000
 
 // Display & Waveforms
-Display Background: #000080
+Display Background: #000055
 Display Background (error): #800000
 Display Waveform: #00FFFF
 Display Stroke: #00FFFF44
 Display Start/End Markers: #FFFF00
 Display Loop Markers: #00FF00
-Grey Display Background: #00009055
-Audio Event Background: #000090
+Grey Display Background: #00006655
+Audio Event Background: #000077
 Audio Event Boundary: #00FFFF44
 Audio Event Waveform: #FFFF00
 
 // Grid & Modular Environment
-The Grid (background): #000080
-The Grid (stroke): #000090
+The Grid (background): #000055
+The Grid (stroke): #000066
 Grid Line (Primary): #00FFFF44
 Grid Line (Secondary): #00FFFF22
-Background color of the modular environment.: #000090
+Background color of the modular environment.: #000066
 Compressed Audio Port in modular environment: #0000FF
 Audio connection in modular environment: #FFFF00
 Audio64 connection in modular environment: #FF00FF
@@ -219,24 +219,24 @@ Polyphonic Desktop Object: #00FFFF
 Current Atom Value Color: #FFFF00
 
 // Timeline & Arranger
-Dark Timeline Background: #000080
-Dark Timeline Header Background: #000090
-Light Timeline Background: #0000A0
-Light Timeline Header Background: #0000AA
-Top Level Timeline Background: #000090
-Top Level Timeline Header Background: #0000A0
-Irrelevant Timeline Background: #000060
-Irrelevant Timeline Header Background: #000080
+Dark Timeline Background: #000055
+Dark Timeline Header Background: #000066
+Light Timeline Background: #000066
+Light Timeline Header Background: #000077
+Top Level Timeline Background: #00005D
+Top Level Timeline Header Background: #00006E
+Irrelevant Timeline Background: #000044
+Irrelevant Timeline Header Background: #000055
 Irrelevant Timeline Overlay: #00000040
 Irrelevant Timeline Header Overlay: #00000040
-Timeline Background Pattern: #0000A0
-Timeline Header Background Pattern: #FFFFFF0A
+Timeline Background Pattern: #000077
+Timeline Header Background Pattern: #000088
 Timeline Primary Grid: #00FFFF33
 Timeline Secondary Grid: #00FFFF1A
 Timeline Header Primary Grid: #00FFFF33
 Timeline Header Secondary Grid: #00FFFF1A
 Timeline Playhead: #FFFFFF
-Timeline edit tool chooser background: #0000A0
+Timeline edit tool chooser background: #000088
 
 // Timeline Selection & Cursors
 Time Selection Fill: #FFFF0030
@@ -338,7 +338,7 @@ External file icon: #FFFF00
 External file text: #FFFF00
 
 // Invoke Action (Command Palette)
-Invoke Action Background: #000090
+Invoke Action Background: #000077
 Invoke Action Category: #00FFFF
 Invoke Action Text: #FFFF00
 User input text: #FFFFFF
