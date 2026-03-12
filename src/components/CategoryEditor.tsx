@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo, useCallback } from "react";
 import { ColorPicker } from "./ColorPicker";
 import { addGlobalRecentColor } from "../hooks/useRecentColors";
 import type { PropertyDefinition } from "../data/properties";
@@ -22,7 +22,7 @@ interface CategoryEditorProps {
   onModeChange?: (mode: string) => void;
 }
 
-export function CategoryEditor({
+export const CategoryEditor = memo(function CategoryEditor({
   categoryName,
   description,
   properties,
@@ -55,7 +55,7 @@ export function CategoryEditor({
     return properties.slice(0, 4).map(p => values[p.key] || p.defaultValue);
   }, [properties, values]);
 
-  const handleGroupColorChange = (color: string) => {
+  const handleGroupColorChange = useCallback((color: string) => {
     // Add to recent colors
     addGlobalRecentColor(color);
 
@@ -65,13 +65,17 @@ export function CategoryEditor({
       // Default: just update the base property
       onChange(basePropertyKey, color);
     }
-  };
+  }, [onGroupColorChange, onChange, basePropertyKey]);
+
+  const toggleExpanded = useCallback(() => {
+    setIsExpanded(prev => !prev);
+  }, []);
 
   return (
     <div className="bg-gray-800 rounded-lg overflow-hidden">
       {/* Category Header */}
       <button
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={toggleExpanded}
         className="w-full px-4 py-3 flex items-center gap-3 hover:bg-gray-750 transition-colors"
       >
         {/* Expand/Collapse Arrow */}
@@ -198,4 +202,4 @@ export function CategoryEditor({
       )}
     </div>
   );
-}
+});

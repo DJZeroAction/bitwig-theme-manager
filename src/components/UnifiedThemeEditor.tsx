@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useDeferredValue } from "react";
 import { CategoryEditor } from "./CategoryEditor";
 import {
   getPropertiesForVersion,
@@ -36,6 +36,8 @@ export function UnifiedThemeEditor({
   onVersionChange,
 }: UnifiedThemeEditorProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  // Defer the search query to keep input responsive during filtering
+  const deferredSearchQuery = useDeferredValue(searchQuery);
   const [showOnlyModified, setShowOnlyModified] = useState(false);
   const [bundleModes, setBundleModes] = useState<BundleModes>({
     "knob-styling": "3d",
@@ -90,13 +92,13 @@ export function UnifiedThemeEditor({
     return byBundle;
   }, [versionProperties]);
 
-  // Filter bundles by search query
+  // Filter bundles by search query (uses deferred query for responsive input)
   const filteredBundles = useMemo(() => {
-    if (!searchQuery && !showOnlyModified) {
+    if (!deferredSearchQuery && !showOnlyModified) {
       return SEMANTIC_BUNDLES.filter(bundle => bundledProperties.has(bundle.id));
     }
 
-    const query = searchQuery.toLowerCase();
+    const query = deferredSearchQuery.toLowerCase();
     const result: SemanticBundle[] = [];
 
     for (const bundle of SEMANTIC_BUNDLES) {
@@ -124,17 +126,17 @@ export function UnifiedThemeEditor({
     }
 
     return result;
-  }, [searchQuery, showOnlyModified, bundledProperties, populatedValues]);
+  }, [deferredSearchQuery, showOnlyModified, bundledProperties, populatedValues]);
 
   // Get filtered properties for a bundle
   const getFilteredPropertiesForBundle = useCallback((bundleId: string): PropertyDefinition[] => {
     const props = bundledProperties.get(bundleId) || [];
 
-    if (!searchQuery && !showOnlyModified) {
+    if (!deferredSearchQuery && !showOnlyModified) {
       return props;
     }
 
-    const query = searchQuery.toLowerCase();
+    const query = deferredSearchQuery.toLowerCase();
     const bundle = SEMANTIC_BUNDLES.find(b => b.id === bundleId);
 
     return props.filter(p => {
@@ -149,7 +151,7 @@ export function UnifiedThemeEditor({
 
       return matchesSearch && isModified;
     });
-  }, [searchQuery, showOnlyModified, bundledProperties, populatedValues]);
+  }, [deferredSearchQuery, showOnlyModified, bundledProperties, populatedValues]);
 
   // Count total and modified properties
   const { totalCount, modifiedCount } = useMemo(() => {

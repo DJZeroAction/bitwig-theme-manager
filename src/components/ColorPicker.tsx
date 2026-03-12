@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo, useCallback } from "react";
 import {
   addGlobalRecentColor,
   getGlobalRecentColors,
@@ -11,22 +11,29 @@ interface ColorPickerProps {
   label: string;
 }
 
-export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
+export const ColorPicker = memo(function ColorPicker({ value, onChange, label }: ColorPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(value);
-  const [recentColors, setRecentColors] = useState<string[]>(getGlobalRecentColors);
+  // Only load recent colors when picker is opened (lazy load)
+  const [recentColors, setRecentColors] = useState<string[]>([]);
   const pickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setInputValue(value);
   }, [value]);
 
-  // Subscribe to recent colors updates
+  // Only subscribe to recent colors when picker is open - prevents 265+ subscriptions
   useEffect(() => {
+    if (!isOpen) return;
+
+    // Load current colors when opening
+    setRecentColors(getGlobalRecentColors());
+
+    // Subscribe for updates while open
     return subscribeToRecentColors(() => {
       setRecentColors(getGlobalRecentColors());
     });
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -38,33 +45,37 @@ export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleInputChange = (newValue: string) => {
+  const handleInputChange = useCallback((newValue: string) => {
     setInputValue(newValue);
     // Validate hex color
     if (/^#[0-9A-Fa-f]{6}$/.test(newValue)) {
       onChange(newValue);
     }
-  };
+  }, [onChange]);
 
-  const handleNativeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNativeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.toUpperCase();
     setInputValue(newValue);
     onChange(newValue);
     // Add to recent colors when picker is closed or color is selected
     addGlobalRecentColor(newValue);
-  };
+  }, [onChange]);
 
-  const handleRecentColorClick = (color: string) => {
+  const handleRecentColorClick = useCallback((color: string) => {
     setInputValue(color);
     onChange(color);
     setIsOpen(false);
-  };
+  }, [onChange]);
+
+  const toggleOpen = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
 
   return (
     <div ref={pickerRef} className="relative">
       <div className="flex items-center gap-3">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleOpen}
           className="w-10 h-10 rounded-lg border-2 border-gray-600 hover:border-purple-500 transition-colors cursor-pointer shadow-inner"
           style={{ background: value }}
           title={`${label}: ${value}`}
@@ -112,7 +123,7 @@ export function ColorPicker({ value, onChange, label }: ColorPickerProps) {
       )}
     </div>
   );
-}
+});
 
 interface ColorGroupProps {
   name: string;

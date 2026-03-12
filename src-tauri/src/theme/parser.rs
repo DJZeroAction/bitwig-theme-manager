@@ -707,7 +707,7 @@ pub fn convert_bw5_to_bw6(content: &str) -> String {
         ("Audio Event Background", "White"),
         ("Audio Event Waveform", "Bitwig Essentials"),
         ("Clip Expression Background Color", "Button stroke"),
-        ("Grey 4", "Knob Line"),
+        ("Grey 4", "Grey 3"),
         ("Modulation Mapping Background (monophonic)", "Clip Modulation Color Point Fill"),
         ("Muted by Audition", "Knob Body Darkest"),
         ("Onset Color Max", "Compressed Audio Port in modular environment"),
@@ -716,6 +716,14 @@ pub fn convert_bw5_to_bw6(content: &str) -> String {
         ("Record text color", "Record button color"),
         ("White Selection", "Active Toggle Icon (Playing)"),
         ("White Selection (standby)", "Active Toggle Icon (Playing)"),
+        // Text properties new in BW6 - derive from closest BW5 text properties
+        ("Text", "Default text"),
+        ("User input text", "Default text"),
+        ("Invoke Action Text", "Dark Text"),
+        ("Missing file text", "Subtle Dark Text"),
+        ("Found file text", "Default text"),
+        ("External file text", "Default text"),
+        ("Link Text Rollover", "Link Text"),
     ];
 
     // Apply BW6-from-BW5 mappings: use BW5 color for new BW6 property

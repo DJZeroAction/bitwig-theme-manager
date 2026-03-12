@@ -2,6 +2,13 @@
 # Bitwig Theme Manager Dev Launcher
 # Handles killing old processes and waiting for server to be ready
 
+# Source shell profile for PATH (nvm, cargo, etc.) when launched from desktop entry
+if [ -z "$NVM_DIR" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 PROJECT_DIR="/home/user/Programs/Claude Projects/bitwig-theme-manager"
 VITE_PORT=1420
 WS_PORT=1421
@@ -15,8 +22,5 @@ fuser -k $WS_PORT/tcp 2>/dev/null
 # Wait for ports to be released
 sleep 1
 
-# Required for WebKit on some systems
-export WEBKIT_DISABLE_COMPOSITING_MODE=1
-
-# Run in foreground so KDE knows when the app closes
+# Run in foreground so the desktop knows when the app closes
 exec npm run tauri dev

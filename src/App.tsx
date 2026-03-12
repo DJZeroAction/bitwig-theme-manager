@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useDeferredValue } from "react";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { useBitwigInstallations } from "./hooks/useBitwig";
@@ -29,7 +29,11 @@ const NavIcon = ({ children, active, onClick }: { children: React.ReactNode; act
 function App() {
   const [currentView, setCurrentView] = useState<View>("browse");
   const [searchQuery, setSearchQuery] = useState("");
-  const { settings, updateSetting } = useSettings();
+  const { settings, updateSetting, loading: settingsLoading, saving: settingsSaving, resetToDefaults } = useSettings();
+
+  // Lift shared data to App level to prevent re-fetching on view switch
+  const bitwigData = useBitwigInstallations();
+  const repositoryData = useRepositoryThemes();
 
   // Initialize updater
   const {
@@ -124,10 +128,34 @@ function App() {
 
         {/* Content Area */}
         <div className="flex-1 overflow-auto p-6">
-          {currentView === "browse" && <BrowseView searchQuery={searchQuery} />}
-          {currentView === "editor" && <EditorView />}
-          {currentView === "patch" && <PatchView />}
-          {currentView === "settings" && <SettingsView />}
+          {currentView === "browse" && (
+            <BrowseView
+              searchQuery={searchQuery}
+              repositoryData={repositoryData}
+              bitwigData={bitwigData}
+              settings={settings}
+              updateSetting={updateSetting}
+            />
+          )}
+          {currentView === "editor" && (
+            <EditorView
+              bitwigData={bitwigData}
+              settings={settings}
+            />
+          )}
+          {currentView === "patch" && (
+            <PatchView bitwigData={bitwigData} />
+          )}
+          {currentView === "settings" && (
+            <SettingsView
+              bitwigData={bitwigData}
+              settings={settings}
+              settingsLoading={settingsLoading}
+              settingsSaving={settingsSaving}
+              updateSetting={updateSetting}
+              resetToDefaults={resetToDefaults}
+            />
+          )}
         </div>
       </main>
       </div>
@@ -137,12 +165,17 @@ function App() {
 
 interface BrowseViewProps {
   searchQuery: string;
+  repositoryData: ReturnType<typeof useRepositoryThemes>;
+  bitwigData: ReturnType<typeof useBitwigInstallations>;
+  settings: ReturnType<typeof useSettings>["settings"];
+  updateSetting: ReturnType<typeof useSettings>["updateSetting"];
 }
 
-function BrowseView({ searchQuery }: BrowseViewProps) {
-  const { themes, loading, error, refresh, downloadAndInstallTheme } = useRepositoryThemes();
-  const { installations } = useBitwigInstallations();
-  const { settings, updateSetting } = useSettings();
+function BrowseView({ searchQuery, repositoryData, bitwigData, settings, updateSetting }: BrowseViewProps) {
+  // Defer the search query to keep input responsive during filtering
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const { themes, loading, error, refresh, downloadAndInstallTheme } = repositoryData;
+  const { installations } = bitwigData;
   const [selectedTheme, setSelectedTheme] = useState<RepositoryTheme | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [downloadStatus, setDownloadStatus] = useState<string | null>(null);
@@ -183,46 +216,26 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
       .map(([name, count]) => ({ name, count }));
   }, [themes]);
 
-  // Get available Bitwig versions from installations
-  const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
-
-  useEffect(() => {
-    api.getLatestBitwigVersion().then(setDetectedVersion);
-  }, []);
-
-  // Only use detected installations, fall back to detectedVersion or "5.2" only if no installations
-  const availableVersions = installations.length > 0
-    ? [...new Set(installations.map((i) => i.version))]
-    : detectedVersion ? [detectedVersion] : ["5.2"];
-
-  // Initialize to first available, but update when installations load
-  const [selectedVersion, setSelectedVersion] = useState<string>("");
-
-  // Update selected version when installations load or change
-  useEffect(() => {
-    // If we have installations and current selection is not valid, pick the first one
+  // Get available Bitwig versions from installations (memoized to avoid recalculation)
+  const availableVersions = useMemo(() => {
     if (installations.length > 0) {
-      const validVersions = installations.map(i => i.version);
-      if (!validVersions.includes(selectedVersion)) {
-        // Check if settings has a valid version
-        if (settings?.selected_bitwig_version && validVersions.includes(settings.selected_bitwig_version)) {
-          setSelectedVersion(settings.selected_bitwig_version);
-        } else {
-          setSelectedVersion(validVersions[0]);
-        }
-      }
-    } else if (detectedVersion && !selectedVersion) {
-      setSelectedVersion(detectedVersion);
-    } else if (!selectedVersion) {
-      setSelectedVersion("5.2");
+      return [...new Set(installations.map((i) => i.version))];
     }
-  }, [installations, detectedVersion, settings?.selected_bitwig_version, selectedVersion]);
+    return ["5.2"];
+  }, [installations]);
+
+  // Use settings version if valid, otherwise first available
+  const selectedVersion = useMemo(() => {
+    if (settings?.selected_bitwig_version && availableVersions.includes(settings.selected_bitwig_version)) {
+      return settings.selected_bitwig_version;
+    }
+    return availableVersions[0];
+  }, [settings?.selected_bitwig_version, availableVersions]);
 
   // Save selection to settings when user changes it
-  const handleVersionChange = (version: string) => {
-    setSelectedVersion(version);
+  const handleVersionChange = useCallback((version: string) => {
     updateSetting("selected_bitwig_version", version);
-  };
+  }, [updateSetting]);
 
   useEffect(() => {
     setFailedImages(new Set());
@@ -256,30 +269,33 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   };
 
   // Filter themes based on search query, author filter, and favorites
-  const filteredThemes = themes
-    .filter((theme) => {
-      // Handle favorites filter
-      if (authorFilter === "favorites" && !favorites.has(theme.name)) return false;
-      // Handle author filter
-      if (authorFilter !== "all" && authorFilter !== "favorites" && theme.author !== authorFilter) return false;
-      if (!searchQuery) return true;
-      const query = searchQuery.toLowerCase();
-      return (
-        theme.name.toLowerCase().includes(query) ||
-        theme.author.toLowerCase().includes(query) ||
-        (theme.description?.toLowerCase().includes(query) ?? false)
-      );
-    })
-    // Sort favorites to top when showing "All" with no search query
-    .sort((a, b) => {
-      if (authorFilter === "all" && !searchQuery) {
-        const aFav = favorites.has(a.name);
-        const bFav = favorites.has(b.name);
-        if (aFav && !bFav) return -1;
-        if (!aFav && bFav) return 1;
-      }
-      return 0;
-    });
+  // Uses deferredSearchQuery to keep input responsive
+  const filteredThemes = useMemo(() => {
+    const query = deferredSearchQuery.toLowerCase();
+    return themes
+      .filter((theme) => {
+        // Handle favorites filter
+        if (authorFilter === "favorites" && !favorites.has(theme.name)) return false;
+        // Handle author filter
+        if (authorFilter !== "all" && authorFilter !== "favorites" && theme.author !== authorFilter) return false;
+        if (!deferredSearchQuery) return true;
+        return (
+          theme.name.toLowerCase().includes(query) ||
+          theme.author.toLowerCase().includes(query) ||
+          (theme.description?.toLowerCase().includes(query) ?? false)
+        );
+      })
+      // Sort favorites to top when showing "All" with no search query
+      .sort((a, b) => {
+        if (authorFilter === "all" && !deferredSearchQuery) {
+          const aFav = favorites.has(a.name);
+          const bFav = favorites.has(b.name);
+          if (aFav && !bFav) return -1;
+          if (!aFav && bFav) return 1;
+        }
+        return 0;
+      });
+  }, [themes, deferredSearchQuery, authorFilter, favorites]);
 
   // Group themes by bundle - bundles show as single cards with variant dropdown
   const { bundledThemes, standalonethemes } = useMemo(() => {
@@ -324,7 +340,8 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   };
 
   // Generate a color palette from the theme name for placeholder preview
-  const getThemeColors = (name: string): string[] => {
+  // Memoized with useCallback to prevent recreation on each render
+  const getThemeColors = useCallback((name: string): string[] => {
     const hash = name.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const hue1 = hash % 360;
     const hue2 = (hash * 2) % 360;
@@ -333,7 +350,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
       `hsl(${hue1}, 60%, 50%)`,
       `hsl(${hue2}, 50%, 45%)`,
     ];
-  };
+  }, []);
 
   const handleApply = async (theme: RepositoryTheme) => {
     setDownloading(true);
@@ -462,6 +479,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
                     src={theme.preview_url}
                     alt={`${theme.name} preview`}
                     className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
                     onError={() => handleImageError(theme.name)}
                   />
                 ) : (
@@ -572,6 +590,7 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
                     src={theme.preview_url}
                     alt={`${theme.name} preview`}
                     className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
                     onError={() => handleImageError(theme.name)}
                   />
                 ) : (
@@ -782,18 +801,21 @@ function BrowseView({ searchQuery }: BrowseViewProps) {
   );
 }
 
-function EditorView() {
-  const { settings } = useSettings();
-  const { installations } = useBitwigInstallations();
-  const [detectedVersion, setDetectedVersion] = useState<string | null>(null);
+interface EditorViewProps {
+  bitwigData: ReturnType<typeof useBitwigInstallations>;
+  settings: ReturnType<typeof useSettings>["settings"];
+}
 
-  useEffect(() => {
-    api.getLatestBitwigVersion().then(setDetectedVersion);
-  }, []);
+function EditorView({ bitwigData, settings }: EditorViewProps) {
+  const { installations } = bitwigData;
 
-  const availableVersions = installations.length > 0
-    ? [...new Set(installations.map((i) => i.version))]
-    : detectedVersion ? [detectedVersion] : ["5.2"];
+  const availableVersions = useMemo(() => {
+    if (installations.length > 0) {
+      return [...new Set(installations.map((i) => i.version))];
+    }
+    return ["5.2"];
+  }, [installations]);
+
   const selectedVersion = settings?.selected_bitwig_version || availableVersions[0];
 
   const {
@@ -1293,8 +1315,12 @@ function EditorView() {
   );
 }
 
-function PatchView() {
-  const { installations, loading, error, javaAvailable, backups, addManualPath, patchInstallation, restoreInstallation, refresh } = useBitwigInstallations();
+interface PatchViewProps {
+  bitwigData: ReturnType<typeof useBitwigInstallations>;
+}
+
+function PatchView({ bitwigData }: PatchViewProps) {
+  const { installations, loading, error, javaAvailable, backups, addManualPath, patchInstallation, restoreInstallation, refresh } = bitwigData;
   const [manualPath, setManualPath] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [patchResult, setPatchResult] = useState<{ success: boolean; message: string } | null>(null);
@@ -1511,9 +1537,19 @@ function PatchView() {
   );
 }
 
-function SettingsView() {
-  const { settings, loading, saving, updateSetting, resetToDefaults } = useSettings();
-  const { installations } = useBitwigInstallations();
+interface SettingsViewProps {
+  bitwigData: ReturnType<typeof useBitwigInstallations>;
+  settings: ReturnType<typeof useSettings>["settings"];
+  settingsLoading: boolean;
+  settingsSaving: boolean;
+  updateSetting: ReturnType<typeof useSettings>["updateSetting"];
+  resetToDefaults: ReturnType<typeof useSettings>["resetToDefaults"];
+}
+
+function SettingsView({ bitwigData, settings, settingsLoading, settingsSaving, updateSetting, resetToDefaults }: SettingsViewProps) {
+  const { installations } = bitwigData;
+  const loading = settingsLoading;
+  const saving = settingsSaving;
   const [themeDir, setThemeDir] = useState<string | null>(null);
   const [logPath, setLogPath] = useState<string | null>(null);
   const [manualVersion, setManualVersion] = useState("");
